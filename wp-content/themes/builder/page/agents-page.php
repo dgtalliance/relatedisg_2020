@@ -102,7 +102,7 @@ $offices = empty($agents_data['offices']) ? [] : $agents_data['offices'];
                         <?php if (!empty($offices)) : ?>
                             <li class="form-item">
                                 <span>Search by office</span>
-                                <select name="agent_office">
+                                <select name="agent_office" class="medium">
                                     <option value="">Search by office</option>
                                     <?php foreach ($offices as $office) : ?>
                                         <option <?php if ($office['id'] == $query_agent_office) : ?> selected <?php endif; ?> value="<?php echo $office['id']; ?>"><?php echo $office['name']; ?></option>

@@ -1308,16 +1308,16 @@ body{
 					width: 100%;
 					margin-bottom: 20px !important;
 					@media screen and (min-width: 640px){
-						width: 50%;
+						width: 50% !important;
 						padding: 0 15px;
 					}
 
 					@media screen and (min-width: 991px){
-						width: 33.33%;
+						width: 33.33% !important;
 					}
 
 					@media screen and (min-width: 1360px){
-						width: 25%;
+						width: 25% !important;
 					}
 				}
 			}
@@ -1330,4 +1330,8 @@ body{
 	white-space: unset !important;
 	margin-bottom: 5px !important;
 	line-height: 1.2 !important;
+}
+
+select.medium{
+	background: url("../images/select.png") center right no-repeat;
 }
