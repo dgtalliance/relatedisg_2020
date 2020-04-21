@@ -1344,7 +1344,7 @@ select.medium{
 				.ms-agent-detail{
 					.ms-agent-detail-wrapper{
 						.ms-min-info{
-							display: none;
+							display: none !important;
 						}
 					}
 				}
