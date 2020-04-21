@@ -168,12 +168,14 @@ $offices = empty($agents_data['offices']) ? [] : $agents_data['offices'];
                                 <a href="<?php echo $agent['agent_slug']; ?>" class="ms-wrap-img">
                                     <img class="ms-lazy_" data-real-type="image" data-img="<?php echo $agent['agent_photo_file']; ?>" src="<?php echo $agent['agent_photo_file']; ?>" alt="First Last">
                                 </a>
+                                <?php if(!wp_is_mobile()){ ?>
                                 <div class="ms-min-info">
                                     <span><?php echo $agent['first_name']; ?> <?php echo $agent['last_name']; ?></span>
                                     <span>Office <?php echo $agent['office_name']; ?></span>
                                     <a href="tel:+1<?php echo preg_replace('/[^\d+]/', '', $agent['contact_phone']); ?>" class="ms-phone">C <?php echo flex_agent_format_phone_number($agent['contact_phone']); ?></a>
                                     <a href="<?php echo $agent['agent_slug']; ?>" class="ms-email">Visit my website</a>
                                 </div>
+                                <?php } ?>
                             </div>
                             <h3 class="ms-sb-title"><a href="<?php echo $agent['agent_slug']; ?>"><?php echo $agent['first_name']; ?> <?php echo $agent['last_name']; ?></a></h3>
                         </div>
