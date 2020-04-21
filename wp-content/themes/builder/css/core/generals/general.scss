@@ -1335,3 +1335,20 @@ body{
 select.medium{
 	background: url("../images/select.png") center right no-repeat;
 }
+
+
+@media (max-width: 767px){
+	#agents-page{
+		#list-agent{
+			.list-agent{
+				.ms-agent-detail{
+					.ms-agent-detail-wrapper{
+						.ms-min-info{
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
