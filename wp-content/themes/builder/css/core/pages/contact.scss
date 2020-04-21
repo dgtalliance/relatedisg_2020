@@ -1,0 +1,443 @@
+/*----------------------------------------------------------------------------------*/
+/* CONTACT - PAGE
+/*----------------------------------------------------------------------------------*/
+#contact-page{
+  #main-banner{
+    @extend .main-banner;
+
+    .ms-mt-title {
+      letter-spacing: 1.25px;
+      @media screen and (min-width: 1024px) {
+        letter-spacing: 2.25px;
+      }
+
+      span {
+        font-weight: 300;
+      }
+    }
+  }
+
+  #contact-form{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px 0;
+    max-width: 798px;
+
+    @media screen and (min-width: 991px) {
+      padding: 50px 0;
+    }
+
+    .ms-st-title{
+      color: #000;
+      @extend .ms-st-title;
+    }
+
+    >p{
+      @extend .ms-paragraph;
+    }
+
+    .ms-wrap-contat-page{
+      >h3, label, span{
+        display: none;
+      }
+
+      .form-search{
+        h3, label, span{
+          display: none;
+        }
+      }
+
+      .form-item{
+        .medium{
+          font-family: $avenir;
+          font-size: 15px;
+          font-size: 15/16*1rem;
+          border-radius: 0;
+          border: 0;
+          border-bottom: 1px solid #000;
+          &.textarea{
+            border: 1px solid #000;
+            padding: 15px;
+            height: 180px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+          } 
+        }
+
+        .clidxboost-btn-link{
+          border: 1px solid #000;
+          height: 40px;
+          width: 100%;
+          background-color: #000;
+          font-family: $avenir;
+          transition: all .4s;
+          span{
+            background-color: transparent !important;
+            letter-spacing: 1.5px;
+            font-size: 13px;
+            font-size: 13/16*1rem;
+            font-weight: normal;
+            color: #FFF;
+            display: flex;
+            border: 0;
+            transition: all .4s;
+          }
+
+          &:hover,
+          &:focus {
+            background-color: transparent;
+            span {
+              color: #000;
+            }
+          }
+
+          @media screen and (min-width: 640px) {
+            width: auto;
+            height: 50px;
+            span{
+              padding: 0 30px;
+            }
+          }
+
+          @media screen and (min-width: 1440px) {
+            font-size: 15px;
+            font-size: 15/16*1rem;
+            height: 55px;
+          }
+        }
+
+        &:nth-child(6){
+          display: none;
+        }
+      }
+
+      @media screen and (min-width: 991px) {
+        .flex-content-form{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          .form-item{
+            width: 48%;
+            &.full-item{
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #need-agent{
+    @extend .ms-special-banner;
+  }
+
+  
+  #list-agents{
+    width: 90%;
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 30px 0 120px 0;
+    display: none;
+    .ms-slider{
+      width: auto;
+      margin-left: -20px;
+      margin-right: -20px;
+      position: relative;
+      .ms-item{
+        padding: 0 20px;
+        .ms-wrap-img{
+          width: 100%;
+          position: relative;
+          margin-bottom: 30px;
+          background-color: #333;
+          &:after{
+            content: "";
+            display: block;
+            padding-bottom: 60%;
+          }
+
+          iframe,
+          img{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+
+          img{
+            object-fit: cover;
+          }
+        }
+
+        .ms-info{
+          max-width: 255px;
+          margin: 0 auto;
+          .ms-item-title,
+          .ms-address,
+          .ms-phone{
+            color: #000;
+            font-size: 17px;
+            font-size: 17/16*1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-family: $tiempos;
+            letter-spacing: 1.2px;
+            font-style: normal;
+            span{
+              display: block;
+            }
+          }
+
+          .ms-phone{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+          }
+
+          .ms-item-title{
+            margin-bottom: 20px;
+          }
+
+          .ms-separator{
+            width: 15px;
+            height: 1px;
+            background-color: #000;
+            display: block;
+            margin: 20px 0;
+          }
+
+          .ms-wrap-btn{
+            width: 100%;
+            text-align: left;
+            margin-top: 20px;
+            .ms-link{
+              font-family: $tiempos;
+              font-size: 17px;
+              font-size: 17/16*1rem;
+              font-style: italic;
+              position: relative;
+              display: inline-block;
+              background-color: transparent;
+              font-weight: 100;
+              &:after{
+                content: "";
+                display: block;
+                width: 0;
+                position: absolute;
+                bottom: 0;
+                height: 1px;
+                background-color: #000;
+                transition: all .4s;
+              }
+
+              &:hover{
+                &:after{
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+
+        .ms-agent-detail{
+          display: flex;
+          align-items: flex-start;
+          .ms-wrap-img{
+            width: 60px;
+            height: 81px;
+            position: relative;
+            margin-right: 15px;
+            flex-shrink: 0;
+            background-color: #333;
+            img{
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              object-fit: cover;
+            }
+          }
+
+          .ms-min-info{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            .ms-sb-title,
+            .ms-phone,
+            .ms-email{
+              color: #000;
+              font-size: 17px;
+              font-size: 17/16*1rem;
+              font-weight: normal;
+              margin-bottom: 5px;
+              font-family: $tiempos;
+              letter-spacing: 1.2px;
+              font-style: normal;
+              span{
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .gs-wrapper-items{
+      &.gs-transition-swipe{
+        align-items: flex-start;
+      }
+    }
+
+    .gs-wrapper-arrows{
+      &.gs-style-arrow{
+        .gs-prev-arrow,
+        .gs-next-arrow{
+          background-color: transparent;
+          opacity: 1;
+          text-indent: -999999px;
+          right: -15px;
+          &:before{
+            background-image: none;
+            font-family: "idx-icons"!important;
+            text-indent: 0;
+            font-size: 30px;
+            color: #000;
+            content: "\e932" !important;
+            transform: rotate(-90deg);
+            width: 30px;
+            height: 30px;
+            top: 50%;
+            left: 50%;
+            margin: 0;
+            margin-top: -15px;
+            margin-left: -15px;
+            position: absolute;
+          }
+        }
+
+        .gs-prev-arrow{
+          right: auto;
+          left: -15px;
+          &:before{
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+
+    .clidxboost-gs-wrapper-bullets{
+      margin: 15px auto 20px auto;
+      .gs-bullet{
+        width: 20px;
+        height: 20px;
+        text-indent: -999999px;
+        overflow: hidden;
+        display: block;
+        position: relative;
+        &:before{
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          transform: translate(-50%, -50%);
+          top: 50%;
+          left: 50%;
+        } 
+      }
+
+      @media screen and (min-width: 1440px) {
+        margin: 30px auto;
+      }
+    }
+
+
+    @media screen and (min-width: 640px) {
+      .gs-container-items {
+        width: auto;
+        margin: 0 -10px;
+        .gs-item-slider{
+          padding: 0 10px;
+        }
+      }
+
+      .ms-slider{
+        .ms-item{
+          .ms-wrap-img{
+            img{
+              object-fit: cover;
+            }
+          }
+
+          .ms-info{
+            max-width: 355px;
+          }
+
+          .ms-agent-detail{
+            align-items: center;
+            .ms-wrap-img {
+              width: 90px;
+              height: 120px;
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 991px) {
+      .ms-slider{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin: 0 auto;
+        .ms-item{
+          flex-grow: 1;
+          width: 33.33%;
+          padding: 0;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-top: 40px;
+          padding-top: 60px;
+          border-top: 3px solid #000;
+
+          .ms-info{
+            margin: 0;
+          }
+
+          .ms-wrap-img{
+            width: 49%;
+            max-width: 700px;
+            margin-bottom: 0;
+            margin-right: 40px;
+            &:after{
+              padding-bottom: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      display: block;
+    }
+
+    @media screen and (min-width: 1440px) {
+      .ms-slider{
+        .ms-item{
+          width: 16.66%;
+          .ms-wrap-img{
+            &:after{
+              padding-bottom: 70%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

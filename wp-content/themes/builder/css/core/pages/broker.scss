@@ -1,0 +1,382 @@
+/*----------------------------------------------------------------------------------*/
+/* BROKER - PAGE
+/*----------------------------------------------------------------------------------*/
+#broker-page{
+  #welcome{
+    padding: 70px 0;
+    height: auto;
+    min-height: auto;
+    @media screen and (min-width: 640px) {
+      padding: 100px 0;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 30px 0;
+      min-height: calc(100vh - 110px);
+    }
+
+    .ms-st-title{
+      color: #fff;
+      font-family: $tiempos;
+      font-size: 18/16*1rem;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
+      position: relative;
+      text-align: center;
+      z-index: 2;
+      span{
+        font-style: italic;
+        font-weight: normal;
+      }
+
+      @media screen and (min-width: 640px) {
+        font-size: 25px;
+        font-size: 25/16*1rem;
+      }
+
+      @media screen and (min-width: 1024px) {
+        font-size: 40px;
+        font-size: 40/16*1rem;
+        margin-bottom: 20px;
+      }      
+    }
+  
+    p {
+      color: #FFF;
+      font-family: $tiempos;
+      font-size: 15/16*1rem;
+      font-size: 15px;
+      font-weight: normal;
+      letter-spacing: 1.2px;
+      line-height: 1.4;
+      margin-bottom: 15px;
+      max-width: 100%;
+      position: relative;
+      z-index: 2;
+      span{
+        display: block;
+      }
+
+      @media screen and (min-width: 640px) {
+        font-size: 20px;
+        font-size: 20/16*1rem;
+        margin-bottom: 30px;
+      }
+
+      @media screen and (min-width: 1024px) {
+        font-size: 28px;
+        font-size: 28/16*1rem;
+        margin-bottom: 50px;
+        span{
+          display: inline;
+        }
+      }
+    }
+
+    .ms-wrap-img {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 0;
+
+      &::before {
+        content: "";
+        background: rgba(0,0,0,0.5);
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+      }
+
+      img {
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+    }
+
+    .ms-wrap-items{
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: 330px;
+      margin: 0 -5px;
+      width: 90%;
+      z-index: 2;
+      position: relative;
+      .ms-item{
+        padding: 0 5px;
+        width: 25%;
+        .ms-bt-item{
+          width: 100%;
+          .ms-icon-item{
+            border-radius: 10px;
+            background-color: #f9f7f7;
+            width: 100%;
+            height: 71px;
+            position: relative;
+            overflow: hidden;
+            display: block;
+
+            &:before {
+              background: url('../images/broker/sprite-broker.png') no-repeat;
+              background-size: cover;
+              content: "";
+              height: 60px;
+              left: 50%;
+              position: absolute;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              width: 60px;
+              z-index: 2;
+
+              @media screen and (min-width: 1024px) {
+                background-size: auto;
+                height: 80px;
+                width: 84px;
+              }
+            }
+
+            &:after{
+              content: "";
+              display: block;
+              position: absolute;
+              bottom: -100%;
+              right: -100%;
+              border-radius: 100%;
+              background-color: #f2f0f0;
+              width: 200%;
+              height: 200%;
+              margin-bottom: -3px;
+            }
+
+            &.ms-icon-sumo {
+              &:before {
+                background-position: 4px 6px;
+                @media screen and (min-width: 1024px) {
+                  background-position: 4px 5px;
+                }
+              }
+            }
+
+            &.ms-icon-app {
+              &:before {
+                background-position: 7px -50px;
+                height: 48px;
+                @media screen and (min-width: 1024px) {
+                  background-position: 5px -69px;
+                  height: 70px; 
+                }                
+              }
+            }
+
+            &.ms-icon-studio {              
+              &:before {
+                background-position: 2px -94px;
+                @media screen and (min-width: 1024px) {
+                  background-position: 2px -135px;
+                }
+              }
+            }
+
+            &.ms-icon-crm {              
+              &:before {
+                background-position: 0px -121px;
+                height: 40px;
+                width: 48px;
+                @media screen and (min-width: 1024px) {
+                  background-position: 0 -212px;
+                  height: 72px;
+                  width: 84px;
+                }
+              }
+            }
+
+          }
+        }
+        
+        .ms-item-title{
+          font-family: "Tiempos Headline";
+          color: #FFF;
+          letter-spacing: 1px;
+          margin-top: 10px;
+          font-size: 12px;
+          font-size: 12/16*1rem;
+          span{
+            display: block;
+            font-style: italic;
+            font-weight: 100;
+            font-size: 10px;
+            font-size: 10/16*1rem;
+          }
+        }
+      }
+
+      @media screen and (min-width: 640px) {
+        max-width: 500px;
+        margin: 0 -15px;
+        .ms-item{
+          padding: 0 15px;
+          .ms-bt-item{
+            .ms-icon-item{
+              height: 90px;
+              border-radius: 15px;
+            }
+          }
+
+          .ms-item-title{
+            font-size: 14px;
+            font-size: 14/16*1rem;
+            span{
+              font-size: 14px;
+              font-size: 14/16*1rem;
+            }
+          }
+        }
+      }
+
+      @media screen and (min-width: 1024px) {
+        max-width: 670px;
+        .ms-item{
+          .ms-bt-item{
+            .ms-icon-item{
+              height: 136px;
+              border-radius: 20px;
+            }
+          }
+
+          .ms-item-title{
+            margin-top: 20px;
+            font-size: 17px;
+            font-size: 17/16*1rem;
+            span{
+              font-size: 17px;
+              font-size: 17/16*1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #info-dashboard{
+    padding: 30px 0;
+    width: 90%;
+    max-width: 1560px;
+    margin: 0 auto;
+    @media screen and (min-width: 640px) {
+      padding: 50px 0;
+    }
+    @media screen and (min-width: 1024px) {
+      padding: 70px 0;
+    }
+
+    p {
+      @extend .ms-paragraph;
+
+      &:nth-of-type(2) {
+        margin-bottom: 15px;
+        @media screen and (min-width: 1440px) {
+          margin-bottom: 30px;
+        }
+      }
+
+      strong{
+        font-weight: 600;
+      }
+    }
+
+    .ms-wrap-store {
+      display: flex;
+      margin: 15px 0;
+
+      @media screen and (min-width: 1440px) {
+        margin: 30px 0;
+      }      
+
+      .ms-store-link {
+        color: #58595b;
+
+        &:last-of-type {
+          margin-left: 10px;          
+        }
+
+        span {
+          font-size: 40px;
+          @media screen and (min-width: 1440px) {
+            font-size: 50px;
+          }          
+        }
+      }
+    }
+
+  }
+}
+
+/*----------------------------------------------------------------------------------*/
+/* ANIMACIONES
+/*----------------------------------------------------------------------------------*/
+#broker-page {
+  #welcome {
+    .ms-st-title {
+			opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .3s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }
+
+    p {
+			opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .4s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }
+    
+    .ms-item {
+      opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .5s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }
+    
+    &.ms-loaded-animate {
+      p,
+      .ms-st-title,
+      .ms-item {
+				opacity: 1;
+				transform: matrix(1, 0, 0, 1, 0, 0);
+			}
+		}
+  }
+
+  #info-dashboard {
+    p,
+    .ms-wrap-store {
+			opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .4s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }    
+
+    &.ms-loaded-animate {
+      p,
+      .ms-wrap-store {
+        opacity: 1;
+				transform: matrix(1, 0, 0, 1, 0, 0);
+      }
+    }
+  }
+}

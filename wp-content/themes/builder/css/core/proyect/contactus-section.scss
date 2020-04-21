@@ -1,0 +1,156 @@
+/*----------------------------------------------------------------------------------*/
+/* CONTACT US - SECTION
+/*----------------------------------------------------------------------------------*/
+
+#contactUs{
+  display: none;
+  padding: 40px 0 120px 0;
+  overflow: hidden;
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 60px 0 150px 0;
+  }
+
+  .ms-title{
+    color: #000;
+    font-size: 24px;
+    font-size: 24/16*1rem;
+    font-weight: 600;
+    margin: 15px 0 20px 0;
+    text-align: center;
+    font-family: $tiempos;
+    letter-spacing: 1.2px;
+    @media screen and (min-width: 1440px) {
+      font-size: 28px;
+      font-size: 28/16*1rem;
+      margin-bottom: 50px;
+    }
+  }
+
+  .ms-wrap-section{
+    width: 90%;
+    max-width: 1480px;
+    margin: 50px auto 0 auto;
+    position: relative;
+
+    .ms-wrap-title{
+      font-family: $tiempos;
+      font-style: italic;
+      font-size: 17px;
+      font-size: 17/16*1rem;
+      margin-bottom: 10px;
+      letter-spacing: 1.1px;
+
+      @media screen and (min-width: 1440px) {
+        font-size: 22px;
+        font-size: 22/16*1rem;
+      }
+    }
+
+    >p{
+      line-height: 1.8;
+      font-size: 15px;
+      font-size: 15/16*1rem;
+      max-width: 410px;
+      font-family: $avenir;
+      letter-spacing: 1.1px;
+
+      @media screen and (min-width: 1440px) {
+        font-size: 18px;
+        font-size: 18/16*1rem;
+        max-width: 500px;
+      }
+    }
+
+    .form-search{
+      padding-right: 55%;
+      margin-top: 20px;
+
+      >h3{
+        display: none;
+      }
+
+      .form-item{
+        margin-bottom: 0;
+        &:nth-child(6){
+          display: none;
+        }
+
+        &:nth-child(5){
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 50%;
+          height: 100%;
+        }
+
+        label,
+        span{
+          display: none;
+        }
+        
+        .medium,
+        textarea.medium{
+          font-family: $avenir;
+          font-size: 15px;
+          font-size: 15/16*1rem;
+          letter-spacing: 1px;
+          border: 0;
+          border-radius: 0;
+          border-bottom: 2px solid #000;
+          height: 45px;
+        }
+
+        textarea.medium{
+          border: 2px solid #000;
+          height: 100%;
+          padding: 20px;
+        }
+      }
+
+      .flex-content-form{
+        .form-item{
+          .clidxboost-btn-link {
+            background-color: #000;            
+            height: 50px;
+            margin: 30px 0 0;
+            min-width: 250px;
+            transition: all .4s;
+            width: auto;
+            span {
+              background-color: transparent;
+              border-color: #000;
+              display: flex;
+              font-family: $avenir;
+              font-size: 13px;
+              font-size: 13/16*1rem;
+              font-weight: normal;
+              letter-spacing: 1px;
+              padding: 0 30px;
+              transition: all .4s;
+            }
+
+            &:hover,
+            &:focus {              
+              background: transparent;
+              span {
+                color: #000;
+              }
+            }
+
+            @media screen and (min-width: 1440px) {
+              height: 55px;
+              span{
+                font-size: 15px;
+                font-size: 15/16*1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,320 @@
+/*----------------------------------------------------------------------------------*/
+/* AGENTS - PAGE
+/*----------------------------------------------------------------------------------*/
+#agents-page {
+  #main-banner {
+    @extend .main-banner;
+
+    .ms-wrap-img {
+      &:before {
+        background: linear-gradient(270deg, rgba(238,238,238,0) 0%, #D8D8D8 100%);
+        content: "";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+      }
+    }
+
+    .ms-mt-title {
+      letter-spacing: 1.25px;
+      line-height: 1.325;
+
+      @media screen and (min-width: 640px) {
+        max-width: 1560px;
+        text-align: left;
+        width: 90%;
+      }
+
+      span {
+        display: block;
+        font-style: normal;
+        font-weight: bold;
+      }
+
+      i {
+        font-weight: 300;
+      }
+    }
+  }
+
+  #find-agent {
+    width: 90%;
+    padding: 30px 0;
+    max-width: 1560px;
+    @media screen and (min-width: 640px) {
+      padding: 50px 0;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 70px 0;
+    }
+
+    .ms-pr-title {
+      color: #000;
+      font-size: 14/16*1rem;
+      font-family: $avenir;
+      letter-spacing: 1.25px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .ms-st-title {
+      @extend .ms-st-title;
+			text-align: left;
+			text-transform: uppercase;
+    }
+
+    .ms-wrap-search {
+      margin-bottom: 30px;
+
+      @media screen and (min-width: 1440px) {
+        margin-bottom: 40px;
+      }
+
+      .flex-content-form {
+        margin-bottom: 30px;
+
+        @media screen and (min-width: 991px) {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+
+        .form-item {
+          margin-bottom: 10px;
+
+          @media screen and (min-width: 991px) {
+            width: 48%;
+          }
+
+          @media screen and (min-width: 1440px) {
+            width: 24%;
+          }
+
+          span {
+            display: none;
+          }
+
+          .medium {
+            border: 0;
+            border-bottom: 1px solid #000;
+            border-radius: 0;
+            font-family: $avenir;
+            font-size: 15px;
+            font-size: 0.9375rem;
+            height: 40px;
+            padding: 0 1rem;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+		@media screen and (min-width: 1024px) {
+	    &#about-us{
+	    	.ms-st-title{
+					margin-bottom: 40px;
+	    	}
+	    }
+	  }
+
+    .ms-sb-title {
+      @extend .ms-sb-title;
+    }
+
+    p {
+      @extend .ms-paragraph;
+    }
+  }
+
+  #list-agent {
+    width: 90%;
+    padding: 30px 0;
+    max-width: 1560px;
+    @media screen and (min-width: 640px) {
+      padding: 50px 0;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 70px 0;
+    }
+
+    .ms-st-title {
+      @extend .ms-st-title;
+			text-align: left;
+			text-transform: uppercase;
+    }
+
+    .alphabet {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+
+      @media screen and (min-width: 1440px) {
+        margin-bottom: 40px;
+      }
+
+      a {
+        font-family: $avenir;
+        font-size: 15px;
+        font-size: 15/16*1rem;
+        letter-spacing: 1.2px;
+        line-height: 1.8;
+        padding: 0 4px;
+        position: relative;
+        text-transform: uppercase;
+
+        &:before {
+          content: "";
+          display: block;
+          width: 0;
+          height: 1px;
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          background-color: #000;
+          transition: all .4s;
+        }
+
+        &.active,
+        &:hover {
+          &::before {
+            width: 100%;
+          }
+        }
+
+        @media screen and (min-width: 1440px) {
+          font-size: 18px;
+          font-size: 18/16*1rem;
+        }
+      }
+    }
+
+    .list-agent {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin: 0 -10px;
+
+      .ms-agent-detail {
+        width: 50%;
+        padding: 0 10px;
+
+        @media screen and (min-width: 768px) {
+          width: 33%;
+        }
+
+        @media screen and (min-width: 1440px) {
+          width: 20%;
+        }
+        
+        .ms-agent-detail-wrapper {
+          position: relative;
+
+          .ms-wrap-img {
+            width: 100%;
+            position: relative;
+            background-color: #333;
+            display: block;
+            &::before {
+              background-color: rgba(0,0,0,0.75);
+              content: "";
+              display: block;
+              height: 100%;
+              left: 0;
+              opacity: 0;
+              position: absolute;
+              top: 0;
+              transition: 0.5s;
+              width: 100%;
+              z-index: 1;
+            }
+
+            &:after {
+              content: "";
+              display: block;
+              padding-bottom: 112.5%;
+            }
+            
+            img {
+              height: 100%;
+              left: 0;
+              object-fit: cover;
+              object-position: top;
+              position: absolute;
+              top: 0;
+              width: 100%;
+            }
+          }
+
+          .ms-min-info {
+            align-items: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            font-family: $avenir;
+            font-size: 15/16*1rem;
+            font-size: 15px;
+            height: 100%;
+            justify-content: center;
+            left: 0;
+            letter-spacing: 1.2px;
+            line-height: 1.5;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            transform: translateY(30px);
+            transition: 0.5s;
+            width: 100%;
+            z-index: 2;
+
+            .ms-phone {
+              margin-bottom: 10px;
+            }
+
+            .ms-email {
+              background: #d8d8d8;
+              color: #000;
+              line-height: 1;
+              padding: 4px 10px;
+            }
+          }
+        }
+
+        .ms-sb-title {
+          padding: 10px 15px;
+          text-align: center;
+          text-transform: capitalize;
+        }
+
+        &:hover {
+          .ms-wrap-img {
+            &::before {
+              opacity: 1;
+            }
+          }
+          .ms-min-info {
+            transform: translateY(0px);
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+#agent{
+  #profile{
+    .ms-section{
+      .ms-wrap-img{
+        height: 90%;
+        @media screen and (min-width: 1440px){
+          width: 730px;
+          height: 826px;
+        }
+      }
+    }
+  }
+}

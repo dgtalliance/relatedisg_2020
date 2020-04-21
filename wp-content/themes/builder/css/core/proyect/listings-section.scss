@@ -1,0 +1,99 @@
+/*----------------------------------------------------------------------------------*/
+/* LISTINGS - SECTION
+/*----------------------------------------------------------------------------------*/
+#listings{
+  padding: 15px 0;
+  @media screen and (min-width: 640px) {
+	  padding: 30px 0;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 50px 0;
+  }
+
+  .ms-title{
+    @extend .basicTitle;
+  }
+
+  .ms-wrap-btn{
+    @extend .basicButton;
+  }
+
+  .ms-wrap-slider{
+    width: 90%;
+    margin: 0 auto;
+    .clidxboost-properties-slider{
+      .gs-wrapper-arrows{
+        margin: 15px 0;
+        justify-content: center;
+        display: none;
+        .gs-next-arrow,
+        .gs-prev-arrow{
+          background-color: transparent;
+          border: 0;
+          height: auto;
+          width: auto;
+          color: #000;
+          font-family: $avenir;
+          font-size: 12px;
+          font-size: 12/16*1rem;
+          padding: 0 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &:before{
+            content: "\e944";
+            display: block;
+            font-family: 'idx-icons';
+            font-size: 22px;
+            margin-right: 5px;
+          }
+        }
+
+        .gs-next-arrow{
+          flex-direction: row-reverse;
+          &:before{
+            margin-right: 0;
+            margin-left: 5px;
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    .clidxboost-gs-wrapper-bullets{
+      margin: 15px auto 20px auto;
+      .gs-bullet{
+        width: 20px;
+        height: 20px;
+        text-indent: -999999px;
+        overflow: hidden;
+        display: block;
+        position: relative;
+        &:before{
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          transform: translate(-50%, -50%);
+          top: 50%;
+          left: 50%;
+        } 
+      }
+
+      @media screen and (min-width: 1440px) {
+        margin: 30px auto;
+      }
+    }
+
+    .clidxboost-btn-link {
+      display: none;
+    }
+
+    @media screen and (min-width: 640px) {
+      .gs-container-items {
+        width: auto;
+        margin: 0 -10px;
+      }
+    }
+  }
+}

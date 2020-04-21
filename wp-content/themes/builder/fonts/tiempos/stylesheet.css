@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-Semibold.eot');
+    src: url('TiemposHeadline-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-Semibold.woff2') format('woff2'),
+        url('TiemposHeadline-Semibold.woff') format('woff'),
+        url('TiemposHeadline-Semibold.ttf') format('truetype'),
+        url('TiemposHeadline-Semibold.svg#TiemposHeadline-Semibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-BlackItalic.eot');
+    src: url('TiemposHeadline-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-BlackItalic.woff2') format('woff2'),
+        url('TiemposHeadline-BlackItalic.woff') format('woff'),
+        url('TiemposHeadline-BlackItalic.ttf') format('truetype'),
+        url('TiemposHeadline-BlackItalic.svg#TiemposHeadline-BlackItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-MediumItalic.eot');
+    src: url('TiemposHeadline-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-MediumItalic.woff2') format('woff2'),
+        url('TiemposHeadline-MediumItalic.woff') format('woff'),
+        url('TiemposHeadline-MediumItalic.ttf') format('truetype'),
+        url('TiemposHeadline-MediumItalic.svg#TiemposHeadline-MediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline Regular';
+    src: url('TiemposHeadline-RegularItalic.eot');
+    src: url('TiemposHeadline-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-RegularItalic.woff2') format('woff2'),
+        url('TiemposHeadline-RegularItalic.woff') format('woff'),
+        url('TiemposHeadline-RegularItalic.ttf') format('truetype'),
+        url('TiemposHeadline-RegularItalic.svg#TiemposHeadline-RegularItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-Black.eot');
+    src: url('TiemposHeadline-Black.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-Black.woff2') format('woff2'),
+        url('TiemposHeadline-Black.woff') format('woff'),
+        url('TiemposHeadline-Black.ttf') format('truetype'),
+        url('TiemposHeadline-Black.svg#TiemposHeadline-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-SemiboldItalic.eot');
+    src: url('TiemposHeadline-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-SemiboldItalic.woff2') format('woff2'),
+        url('TiemposHeadline-SemiboldItalic.woff') format('woff'),
+        url('TiemposHeadline-SemiboldItalic.ttf') format('truetype'),
+        url('TiemposHeadline-SemiboldItalic.svg#TiemposHeadline-SemiboldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-Light.eot');
+    src: url('TiemposHeadline-Light.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-Light.woff2') format('woff2'),
+        url('TiemposHeadline-Light.woff') format('woff'),
+        url('TiemposHeadline-Light.ttf') format('truetype'),
+        url('TiemposHeadline-Light.svg#TiemposHeadline-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-BoldItalic.eot');
+    src: url('TiemposHeadline-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-BoldItalic.woff2') format('woff2'),
+        url('TiemposHeadline-BoldItalic.woff') format('woff'),
+        url('TiemposHeadline-BoldItalic.ttf') format('truetype'),
+        url('TiemposHeadline-BoldItalic.svg#TiemposHeadline-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-Bold.eot');
+    src: url('TiemposHeadline-Bold.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-Bold.woff2') format('woff2'),
+        url('TiemposHeadline-Bold.woff') format('woff'),
+        url('TiemposHeadline-Bold.ttf') format('truetype'),
+        url('TiemposHeadline-Bold.svg#TiemposHeadline-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-Medium.eot');
+    src: url('TiemposHeadline-Medium.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-Medium.woff2') format('woff2'),
+        url('TiemposHeadline-Medium.woff') format('woff'),
+        url('TiemposHeadline-Medium.ttf') format('truetype'),
+        url('TiemposHeadline-Medium.svg#TiemposHeadline-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-LightItalic.eot');
+    src: url('TiemposHeadline-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-LightItalic.woff2') format('woff2'),
+        url('TiemposHeadline-LightItalic.woff') format('woff'),
+        url('TiemposHeadline-LightItalic.ttf') format('truetype'),
+        url('TiemposHeadline-LightItalic.svg#TiemposHeadline-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Tiempos Headline';
+    src: url('TiemposHeadline-Regular.eot');
+    src: url('TiemposHeadline-Regular.eot?#iefix') format('embedded-opentype'),
+        url('TiemposHeadline-Regular.woff2') format('woff2'),
+        url('TiemposHeadline-Regular.woff') format('woff'),
+        url('TiemposHeadline-Regular.ttf') format('truetype'),
+        url('TiemposHeadline-Regular.svg#TiemposHeadline-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

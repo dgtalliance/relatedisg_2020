@@ -1,0 +1,22 @@
+.ib-form-buyandsell {
+  .ib-fstitle {
+    font-family: $tiempos;
+    letter-spacing: 1.2px;
+
+    @media screen and (min-width: 1024px) {
+      font-size: 40px;
+      font-size: 40/16*1rem;
+    }
+  }
+
+  .ib-filabel {
+    font-family: $avenir;
+    font-weight: normal;
+    letter-spacing: 1.1px;
+  }
+
+  .ib-ftext {
+    font-family: $avenir;
+    letter-spacing: 1.1px;
+  }
+}
