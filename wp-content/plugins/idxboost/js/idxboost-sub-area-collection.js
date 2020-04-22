@@ -332,9 +332,9 @@ function ib_init_script(){
                   idxboostCollecBuil=response;
                  },complete: function() {
                   status_xhmr.xhr1=true;
-                  if (idxboostCollecBuil.payload.type_filter !='2') {
+                  if (idxboostCollecBuil.payload.type_filter =='0' || idxboostCollecBuil.payload.type_filter =='1') {
                     $('.js-ms-price').html("From "+idxboostCollecBuil.payload.meta.sale_min_max_price.min+' - '+idxboostCollecBuil.payload.meta.sale_min_max_price.max);
-                  }                  
+                  }                                 
                   ib_generate_struct(idxboostCollecBuil);
                  }
              });
