@@ -779,7 +779,7 @@ var moreFilterHidden = {};
 
     function getGallery(mls, counter) {
         // ejemplo: http://retsimages.s3.amazonaws.com/34/A10172834_2.jpg
-        var cdn = 'https://retsimages.s3.amazonaws.com';
+        var cdn = '//retsimages.s3.amazonaws.com';
         var folder = mls.substring((mls.length) - 2); // 34
         var list = [];
         var img = '';
@@ -1151,7 +1151,7 @@ var moreFilterHidden = {};
             }
         });
     
-        if ('undefined' !== typeof style_map_idxboost && ('' !== style_map_idxboost)) {
+        if(style_map_idxboost != undefined && style_map_idxboost != '') {
           style_map=JSON.parse(style_map_idxboost);
         }
 

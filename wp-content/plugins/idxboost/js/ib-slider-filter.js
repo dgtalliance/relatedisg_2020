@@ -110,8 +110,7 @@ function get_data_info(){
 					html_listing.push(idx_slider_html(item,'exclusve'));
 				});	
 
-        //console.log(html_listing);
-        
+				console.log(html_listing);
 				if (html_listing.length>0){
 					$(itemFilter.obj_container).html(html_listing.join(' ')).ready(function(){ idxboostTypeIcon(); });
 

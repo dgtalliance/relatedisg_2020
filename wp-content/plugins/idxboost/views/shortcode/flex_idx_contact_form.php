@@ -1,7 +1,4 @@
 <form id="<?php echo $atts['id_form']; ?>" class="form-search gtm_general_contact_form iboost-secured-recaptcha-form" method="post">
-  <?php if (isset($atts["registration_key"]) && !empty($atts["registration_key"])): ?>
-  <input type="hidden" name="registration_key" value="<?php echo strip_tags($atts["registration_key"]); ?>">
-  <?php endif; ?>
   <input type="hidden" name="ib_tags" value="">
   <input type="hidden" name="action" value="idxboost_contact_inquiry">
   <h3><?php echo __("Email Us", IDXBOOST_DOMAIN_THEME_LANG); ?></h3>

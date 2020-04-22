@@ -124,20 +124,6 @@ function ib_change_view(view,tab){
   
   idxboosttabview();
 }
-/*
-function ib_hide_type_empty(){
-
-      if (tot_sale>0){
-        $('.sale-count-uni-cons').parent('.sale').show();
-        avg_price_listing.sale.avg=response.payload.properties.sale.items.map(function(item){ return parseFloat(item.price); }).reduce(function(tot,itera){ return tot+itera })/tot_sale;
-      }else{
-        $('#flex_filter_sort').find('option').each(function(keys_option){
-          if($(this).val()=='sale')
-            $(this).hide();
-        });                                          
-      }  
-}
-*/
 
 function ib_generate_struct(response){
   
@@ -253,19 +239,19 @@ function ib_generate_struct(response){
     $('.flex-open-tb-sold button, #sold-count-uni-cons').html(' '+tot_sold+'<span>'+word_translate.sold+'</span>');
     
     if (response.payload.properties.sale.count==0){
-      $('#flex_tab_sale, .flex-open-tb-sale').hide();
+      $('#flex_tab_sale, #sale-count-uni-cons').hide();
     }
-    
+
     if (response.payload.properties.rent.count==0){
-      $('#flex_tab_rent, .flex-open-tb-rent').hide();
+      $('#flex_tab_rent, #rent-count-uni-cons').hide();
     }
     
     if (response.payload.properties.pending.count==0){
-      $('#flex_tab_pending, .flex-open-tb-pending').hide();
+      $('#flex_tab_pending, #pending-count-uni-cons').hide();
     }                  
     
     if (data_mls_sold.count==0){
-      $('#flex_tab_sold, .flex-open-tb-sold').hide();
+      $('#flex_tab_sold, #sold-count-uni-cons').hide();
     }
     
     if(response.payload.meta != undefined && ( (tot_sale>0|| tot_rent>0) && response.payload.type_building =='0' ) ){
@@ -317,7 +303,6 @@ $('#paginator-cnt').on('click', '.pagfilajax', function() {
 
 });
 
-
 function ib_init_script(){ 
   var tot_sale=0, tot_rent=0,tot_sold=0,tot_porc=0,tot_porc_label=0,label_price='';
   $('.aside .property-information .price, .wp-statisticss, .condo-statics, .idxboost-collection-show-desktop, .fbc-group, #filter-views, .ib_content_views_building').hide();
@@ -347,6 +332,9 @@ function ib_init_script(){
                   idxboostCollecBuil=response;
                  },complete: function() {
                   status_xhmr.xhr1=true;
+                  if (idxboostCollecBuil.payload.type_filter !='2') {
+                    $('.js-ms-price').html("From "+idxboostCollecBuil.payload.meta.sale_min_max_price.min+' - '+idxboostCollecBuil.payload.meta.sale_min_max_price.max);
+                  }                  
                   ib_generate_struct(idxboostCollecBuil);
                  }
              });
@@ -461,6 +449,7 @@ $(function() {
             var elementPosition = $(".idxboost-collection-show-desktop").offset();
             var positionMove = (elementPosition.top) - 300;
             $("html, body").animate({scrollTop:positionMove},'slow');
+
           }
                     
         });                
@@ -574,11 +563,9 @@ function idxboostListobj(response_data,list_bed,name_table,type){
       '<thead>'+
         '<tr><th class="dt-center sorting">'+word_translate.address+'</th>'+
           '<th class="dt-center sorting class_asking_prince">'+'<span class="ms-mb-text">List Price</span>'+'<span class="ms-pc-text">'+txtnameprice+'</span>'+'</th>'+
-          '<th class="dt-center sorting">%/$</th>'+
           '<th class="dt-center sorting">'+'<span class="ms-mb-text">B/B</span>'+'<span class="ms-pc-text">'+word_translate.sbeds+'/'+word_translate.sbaths+'</span>'+'</th>'+
           '<th class="dt-center sorting show-desktop">'+'<span class="ms-mb-text">Size</span>'+'<span class="ms-pc-text">'+word_translate.living_size+'</span>'+'</th>'+
           '<th class="dt-center sorting show-desktop">'+'<span class="ms-mb-text">$/sqft</span>'+'<span class="ms-pc-text">'+word_translate.price+'/'+word_translate.sqft+'</span>'+'</th>'+
-          '<th class="dt-center sorting show-desktop">'+'<span class="ms-mb-text">'+txtdom+'</span>'+'<span class="ms-pc-text">'+txtnamefoot+'</span>'+'</th>'+
           '</tr>'+
         '</thead>'+
         '<tbody>';
@@ -651,8 +638,8 @@ responseitemsalegrid='';
                         if (listbedsale.indexOf(parseFloat(bedfil) )==-1) {
                             listbedsale.push(parseFloat(bedfil));
                         }
-                        responseitemsale.push(idxboostListCollection(element,ib_sale));
-                        responseitemsalegrid +=idxboostListCollectionGrid(element,index,'sale');
+                        responseitemsale.push(idxboostListCollection(element,ib_sale,idxboostCollecBuil.payload.type_filter));
+                        responseitemsalegrid +=idxboostListCollectionGrid(element,index,'sale',idxboostCollecBuil.payload.type_filter);
                        });
 
                        //sale list print
@@ -692,8 +679,8 @@ responseitemsalegrid='';
                         if (listbedpending.indexOf(parseFloat(bedfil))==-1) {
                           listbedpending.push(parseFloat(bedfil));
                         }
-                        responseitempending.push(idxboostListCollection(element,ib_pending));
-                        responseitemsoldpending +=idxboostListCollectionGrid(element,index,'pending');
+                        responseitempending.push(idxboostListCollection(element,ib_pending,idxboostCollecBuil.payload.type_filter));
+                        responseitemsoldpending +=idxboostListCollectionGrid(element,index,'pending',idxboostCollecBuil.payload.type_filter);
                        });
 
                        var htmlpending=idxboostListobj(responseitempending,listbedpending,'pending','pending');
@@ -729,8 +716,8 @@ responseitemsalegrid='';
                         if (listbedrent.indexOf(parseFloat(bedfil))==-1) {
                           listbedrent.push(parseFloat(bedfil));
                         }
-                        responseitemrent.push(idxboostListCollection(element,ib_rent));
-                        responseitemrentgrid +=idxboostListCollectionGrid(element,index,'rent');
+                        responseitemrent.push(idxboostListCollection(element,ib_rent,idxboostCollecBuil.payload.type_filter));
+                        responseitemrentgrid +=idxboostListCollectionGrid(element,index,'rent',idxboostCollecBuil.payload.type_filter);
                        });
                        var htmlrent=idxboostListobj(responseitemrent,listbedrent,'rent','rent');
                        jQuery('.idxboost_collection_rent_list').html(htmlrent).ready(function() {  
@@ -766,7 +753,7 @@ responseitemsoldgrid='';
                           listbedsold.push(parseFloat(bedfil));
                         }
                         responseitemsold.push(idxboostListCollectionForSold(element,ib_sold));
-                        responseitemsoldgrid +=idxboostListCollectionGrid(element,index,'sold');
+                        responseitemsoldgrid +=idxboostListCollectionGrid(element,index,'sold',idxboostCollecBuil.payload.type_filter);
                        });                       
 
                        //sold list print 
@@ -930,11 +917,16 @@ function idxboostListCollectionForSold(element,ibstatus){
                         
                         responseitems +='<tr class="flex-tbl-link" data-mls="'+element['mls_num']+'" data-type="sold" data-permalink="'+idxboost_collection_params["siteUrl"]+'/property/sold-'+element['slug']+'">';
                         responseitems += '<td><div class="unit propertie" data-mls="'+element['mls_num']+'">';
-                        if (element['is_favorite']==1) {
-                          responseitems +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'"><span class="clidxboost-icon-check clidxboost-icon-check-list active flex-active-fav"></span></button><span>'+element['unit']+'</span>';
-                        }else{
-                          responseitems +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button><span>'+address_large+'</span>';
-                        }
+                        
+                        if (idxboostCollecBuil.payload.type_filter !='2') {
+                          if (element['is_favorite']==1) {
+                            responseitems +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'"><span class="clidxboost-icon-check clidxboost-icon-check-list active flex-active-fav"></span></button><span>'+element['unit']+'</span>';
+                          }else{
+                            responseitems +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button><span>'+address_large+'</span>';
+                          }
+                        }                        
+                        
+
                         responseitems +='</div></td><td><div class="asking-number blue">$ '+_.formatPrice(element['price_sold'])+'</div></td>';
                         var textreduced='';
                         if (element['reduced'] !== '' && element['reduced'] < 0 ) {
@@ -951,11 +943,9 @@ function idxboostListCollectionForSold(element,ibstatus){
                         else
                           textreducedmon='0%';
 
-                        responseitems +='<td><div class="porcentaje '+textreduced+'">'+textreducedmon+'</div></td>';
                         responseitems +='<td><div class="beds">'+element['bed']+' / '+element['bath']+' / '+element['baths_half']+'</div></td>';
                         responseitems +='<td class="table-beds show-desktop"><div class="beds">'+_.formatPrice(element['sqft'])+' <span> Sq.Ft.</span></div></td>';
                         responseitems +='<td class="table-beds show-desktop"><div class="price">$'+element['price_sqft']+'</div></td>';
-                        responseitems +='<td class="table-beds show-desktop"><div class="dayson">'+element['parce_date_close']+'</div></td></tr>';
                         //LISTFIN
                         var bedfil=parseFloat(element['bed']);
                         if (bedfil>=5 ) bedfil=6;
@@ -966,21 +956,36 @@ function idxboostListCollectionForSold(element,ibstatus){
                         return arraylist;
   }  
 
-  function idxboostListCollection(element,ibstatus){
+  function idxboostListCollection(element,ibstatus,type_filter){
     var responseitems='',arraylist=[];
+    if (type_filter=='2') {
+      var slug_property=idxboost_collection_params.subarealink+'/'+element['slug'];
+    }else{
+      var slug_property=idxboost_collection_params["siteUrl"]+'/property/'+element['slug'];
+      /*
+      if (type_property=='sold'){
+        slug_property=idxboost_collection_params["siteUrl"]+'/property/sold-'+element['slug'];
+      }
+      */
+    }
+
                         //LISTINI
                         address_large="";
                         if (element['address_short'] != '' && element['address_short'] != undefined ) {
                           address_large= element['address_short'];
                         }
                         
-                        responseitems +='<tr class="flex-tbl-link" data-mls="'+element['mls_num']+'" data-type="no-sold" data-permalink="'+idxboost_collection_params["siteUrl"]+'/property/'+element['slug']+'">';
+                        responseitems +='<tr class="flex-tbl-link" data-mls="'+element['mls_num']+'" data-type="no-sold" data-permalink="'+slug_property+'" href="'+slug_property+'">';
                         responseitems += '<td><div class="unit propertie" data-mls="'+element['mls_num']+'">';
-                        if (element['is_favorite']==1) {
-                          responseitems +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'"><span class="clidxboost-icon-check clidxboost-icon-check-list active flex-active-fav"></span></button><span>'+element['unit']+'</span>';
-                        }else{
-                          responseitems +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button><span>'+address_large+'</span>';
+
+                        if (idxboostCollecBuil.payload.type_filter !='2') {
+                          if (element['is_favorite']==1) {
+                            responseitems +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'"><span class="clidxboost-icon-check clidxboost-icon-check-list active flex-active-fav"></span></button><span>'+element['unit']+'</span>';
+                          }else{
+                            responseitems +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button><span>'+address_large+'</span>';
+                          }                          
                         }
+                        
                         responseitems +='</div></td><td><div class="asking-number blue">$ '+_.formatPrice(element['price'])+'</div></td>';
                         var textreduced='';
                         if (element['reduced'] !== '' && element['reduced'] < 0 ) {
@@ -1000,11 +1005,9 @@ function idxboostListCollectionForSold(element,ibstatus){
                         var pricetexsale=0;
                         if (element['sqft'] > 0 ) { pricetexsale=element['price']/element['sqft'] }else { pricetexsale=0; }
 
-                        responseitems +='<td><div class="porcentaje '+textreduced+'">'+textreducedmon+'</div></td>';
                         responseitems +='<td><div class="beds">'+element['bed']+' / '+element['bath']+' / '+element['baths_half']+'</div></td>';
                         responseitems +='<td class="table-beds show-desktop"><div class="beds">'+_.formatPrice(element['sqft'])+' <span> Sq.Ft.</span></div></td>';
                         responseitems +='<td class="table-beds show-desktop"><div class="price">$'+_.formatPrice(pricetexsale)+'</div></td>';
-                        responseitems +='<td class="table-beds show-desktop"><div class="dayson">'+element['days_market']+'</div></td></tr>';
                         //LISTFIN
                         var bedfil=parseFloat(element['bed']);
                         if (bedfil>=5) bedfil=6;
@@ -1014,14 +1017,21 @@ function idxboostListCollectionForSold(element,ibstatus){
                         return arraylist;
   }
 
-  function idxboostListCollectionGrid(element,count_item,type_property) {
+  function idxboostListCollectionGrid(element,count_item,type_property,type_filter) {
     var htmlgrid='';
     var price=_.formatPrice(element['price']);
-    var slug_property=idxboost_collection_params["siteUrl"]+'/property/'+element['slug'];
-    if (type_property=='sold'){
-      price=_.formatPrice(element['price_sold']);
-      slug_property=idxboost_collection_params["siteUrl"]+'/property/sold-'+element['slug'];
+    if (type_filter=='2') {
+      var slug_property=idxboost_collection_params.off_market_listing_link+'/'+element['slug'];
+    }else{
+
+      var slug_property=idxboost_collection_params["siteUrl"]+'/property/'+element['slug'];
+      if (type_property=='sold'){
+        price=_.formatPrice(element['price_sold']);
+        slug_property=idxboost_collection_params["siteUrl"]+'/property/sold-'+element['slug'];
+      }
     }
+
+
     htmlgrid +='<li class="propertie" data-id="'+element['mls_num']+'" data-mls="'+element['mls_num']+'" data-counter="'+count_item+'">';
       
       if (element['status']!=null || element['status']!=undefined ){

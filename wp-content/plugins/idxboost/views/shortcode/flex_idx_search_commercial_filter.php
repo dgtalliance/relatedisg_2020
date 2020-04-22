@@ -1,24 +1,15 @@
 <style>
-    .flex-breadcrumb {
-        margin-bottom: 0 !important;
-    }
+    .flex-breadcrumb { margin-bottom: 0 !important; }
 
-    #footer {
-        display: none !important;
-    }
+    #footer { display: none !important; }
 
-    .gwr {
-        max-width: 100% !important;
-    }
+    .gwr {max-width: 100% !important;}
 
-    .js-info-bubble-close {
-        width: 30px;
-        height: 30px;
-        opacity: 0 !important;
-    }
+    .js-info-bubble-close { width: 30px; height: 30px; opacity: 0 !important; }
 
     .ib-search-marker-active .dgt-richmarker-single,
-    .ib-search-marker-active .dgt-richmarker-group {
+    .ib-search-marker-active .dgt-richmarker-group
+    {
         background: rgb(255, 0, 72) !important;
     }
 
@@ -26,19 +17,16 @@
     .ib-search-marker-active .dgt-richmarker-single:after {
         border-top: 5px solid rgb(255, 0, 72) !important;
     }
-
     .ib-modal-filters-mobile {
         position: fixed !important;
     }
 
     @media (max-width: 989px) {
-        .flex-map-controls-ct {
-            display: none !important;
-        }
+        .flex-map-controls-ct { display: none !important; }
     }
 </style>
 
-<?php
+<?php 
 $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']) ? sanitize_text_field($flex_idx_info['agent']['agent_contact_phone_number']) : '';
 ?>
 
@@ -335,7 +323,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                                 <div class="ib-pbtnclose ib-phbtn"><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                             </div>
                         </div>
-                        <?php if (isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"])) : ?>
+                        <?php if ( isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"]) ): ?>
                             <div class="ib-logoprint">
                                 <img class="ib-logoimg" src="<?php echo $flex_idx_info["url_logo"]; ?>">
                             </div>
@@ -527,9 +515,9 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                                 </ul>
                             </div>
                             <div class="ib-bdisclaimer ib-bdisclaimer-desktop">
-                            <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])) : ?>
+                            <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])): ?>
                             <p>The multiple listing information is provided by the Houston Association of Realtors from a copyrighted compilation of listings. The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present TEXAS All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: <span class="ib-bdcourtesy">{{office_name}}</span></p>
-                            <?php else : ?>
+                            <?php else: ?>
                             <p>The multiple listing information is provided by the  {{board_name}}® from a copyrighted compilation of listings.
                             The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present  {{board_name}}®.
                             All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose
@@ -567,10 +555,10 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                                                 <input class="ib-cfinput" id="_ib_em_inq" name="email_address" type="email" placeholder="<?php echo __('Email*', IDXBOOST_DOMAIN_THEME_LANG); ?>" value="{{ leadEmailAddress this }} " required>
                                             </li>
                                             <li class="ib-cffitem">
-                                                <input class="ib-cfinput" id="_ib_ph_inq" name="phone_number" type="text" placeholder="<?php echo __('Phone*', IDXBOOST_DOMAIN_THEME_LANG); ?>" value="{{ leadPhoneNumber this }}">
+                                                <input class="ib-cfinput" id="_ib_ph_inq" name="phone_number" type="text" placeholder="<?php echo __('Phone*', IDXBOOST_DOMAIN_THEME_LANG); ?>" value="{{ leadPhoneNumber this }}" required>
                                             </li>
                                             <li class="ib-cffitem">
-                                                <textarea class="ib-cftextarea" name="message" type="text" placeholder="<?php echo __('Comments', IDXBOOST_DOMAIN_THEME_LANG); ?>" required><?php echo __('I&#039d like to schedule a viewing for ' . ' ', IDXBOOST_DOMAIN_THEME_LANG); ?>{{address_short}}, {{address_large}}. <?php echo __('Please contact me with more information!', IDXBOOST_DOMAIN_THEME_LANG); ?> </textarea>
+                                                <textarea class="ib-cftextarea" name="message" type="text" placeholder="<?php echo __('Comments', IDXBOOST_DOMAIN_THEME_LANG); ?>" required><?php echo __('I&#039d like to schedule a viewing for '. ' ', IDXBOOST_DOMAIN_THEME_LANG); ?>{{address_short}}, {{address_large}}. <?php echo __('Please contact me with more information!', IDXBOOST_DOMAIN_THEME_LANG); ?> </textarea>
                                             </li>
                                         </ul>
                                         <div class="ib-cfrequired"><?php echo __('* Required fields', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
@@ -615,9 +603,9 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                         {{/if}}
 
                         <div class="ib-bdisclaimer ib-bdisclaimer-mobile">
-                        <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])) : ?>
+                        <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])): ?>
                             <p>The multiple listing information is provided by the Houston Association of Realtors from a copyrighted compilation of listings. The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present TEXAS All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: <span class="ib-bdcourtesy">{{office_name}}</span></p>
-                            <?php else : ?>
+                            <?php else: ?>
                             <p>The multiple listing information is provided by the  {{board_name}}® from a copyrighted compilation of listings.
                             The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present  {{board_name}}®.
                             All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose
@@ -639,29 +627,29 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
 </script>
 
 <script id="ib-aside-template" type="text/x-handlebars-template">
-    {{#each this}}
-        <li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
-            <ul class="ib-piinfo">
-                <li class="ib-piitem ib-piprice">{{ formatPrice price }}{{ isRentalTypeListing is_rental }}</li>
-                <li class="ib-piitem ib-pibeds">{{ property_class_name }}</li>
-                <li class="ib-piitem ib-pisqft">{{ formatLotSize lot_size }} <?php echo __('Lot Size', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                <li class="ib-piitem ib-paddress">{{ full_address }}</li>
-                {{{ handleStatusProperty this }}}
-            </ul>
-            <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
-                {{{ idxGalleryImages this }}}
-                <!-- <img class="ib-pifimg" src="{{ idxImage this }}" alt="{{ full_address }}"> -->
-                <div class="gs-container-navs">
-                    <div class="gs-wrapper-arrows">
-                        <button class="gs-prev-arrow"></button>
-                        <button class="gs-next-arrow"></button>
-                    </div>
+{{#each this}}
+    <li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
+        <ul class="ib-piinfo">
+            <li class="ib-piitem ib-piprice">{{ formatPrice price }}{{ isRentalTypeListing is_rental }}</li>
+            <li class="ib-piitem ib-pibeds">{{ property_class_name }}</li>
+            <li class="ib-piitem ib-pisqft">{{ formatLotSize lot_size }} <?php echo __('Lot Size', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
+            <li class="ib-piitem ib-paddress">{{ full_address }}</li>
+            {{{ handleStatusProperty this }}}
+        </ul>
+        <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
+            {{{ idxGalleryImages this }}}
+            <!-- <img class="ib-pifimg" src="{{ idxImage this }}" alt="{{ full_address }}"> -->
+            <div class="gs-container-navs">
+                <div class="gs-wrapper-arrows">
+                    <button class="gs-prev-arrow"></button>
+                    <button class="gs-next-arrow"></button>
                 </div>
             </div>
-            <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-status="{{ status }}" data-token-alert="{{token_alert}}"><?php /*<span>Add to Favorites</span> */ ?></div>
-            <a class="ib-pipermalink" href="{{ idxPermalink this }}" title="<?php echo __('View Detail of', IDXBOOST_DOMAIN_THEME_LANG); ?> {{ full_address }}"><span>{{ full_address }}</span></a>
-        </li>
-        {{{ capturePositionHackbox @index }}}
+        </div>
+        <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-status="{{ status }}" data-token-alert="{{token_alert}}"><?php /*<span>Add to Favorites</span> */ ?></div>
+        <a class="ib-pipermalink" href="{{ idxPermalink this }}" title="<?php echo __('View Detail of', IDXBOOST_DOMAIN_THEME_LANG); ?> {{ full_address }}"><span>{{ full_address }}</span></a>
+    </li>
+    {{{ capturePositionHackbox @index }}}
     {{/each}}
 </script>
 
@@ -672,11 +660,11 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
     <div class="ib-content-modal-filters-mobile">
         <!--Header modal-->
         <div class="ib-header-modal-filters-mobile">
-            <!--<?php if (isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"])) : ?>
+        <!--<?php if ( isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"]) ): ?>
           <img src="<?php echo $flex_idx_info["url_logo"]; ?>">
           <?php endif; ?>-->
-            <h3 class="ib-mtitle"><?php echo __('Filters', IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
-            <button class="ib-close-modal-filters-mobile"><span><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+          <h3 class="ib-mtitle"><?php echo __('Filters', IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
+        <button class="ib-close-modal-filters-mobile"><span><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
         </div>
         <!--Boby modal-->
         <div class="ib-body-modal-filters-mobile">
@@ -854,7 +842,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 <div class="ib-item-collapse">
                     <h2 class="ib-header-collapse"><?php echo __('Total Lot Size Range', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
                     <div class="ib-body-collpase">
-                        <div class="ib-wrap-fm">
+                    <div class="ib-wrap-fm">
                             <div class="ib-item-wrap-fm ib-wrap-content-select">
                                 <!-- <select id="ib-min-land"></select> -->
                                 <input class="notranslate ib-iffrom ib-ubrange-lbl-lt" type="text" id="ib-min-land" value="">
@@ -874,7 +862,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 <div id="ib-bedrooms-collapse" class="ib-item-collapse">
                     <h2 class="ib-header-collapse"><?php echo __('Units / Beds Range', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
                     <div class="ib-body-collpase">
-                        <div class="ib-wrap-fm">
+                    <div class="ib-wrap-fm">
                             <div class="ib-item-wrap-fm ib-wrap-content-select">
                                 <input class="notranslate ib-iffrom ib-ubrange-lbl-lt" id="ib-min-beds" type="text" value="">
                                 <!-- <select id="ib-min-bedsrange"></select> -->
@@ -928,7 +916,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                         </div>
                     </div>
                 </div>
-
+            
                 <!-- CAP RATE RANGE -->
                 <div class="ib-item-collapse">
                     <h2 class="ib-header-collapse"><?php echo __('Cap Rate Range (%). ?', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
@@ -969,199 +957,6 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
 </div>
 
 <style type="text/css">
-    .gs-om-arrows {
-        z-index: 5;
-        position: absolute;
-        width: 100%;
-        height: 1px;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        justify-content: space-between;
-        align-items: center
-    }
 
-    .gs-om-arrows .gs-om-next-arrow,
-    .gs-om-arrows .gs-om-prev-arrow {
-        height: 46px;
-        width: 34px;
-        background-color: rgba(0, 0, 0, 0.7);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: all .15s;
-        position: relative
-    }
-
-    .gs-om-arrows .gs-om-next-arrow:before,
-    .gs-om-arrows .gs-om-prev-arrow:before {
-        content: "\66";
-        font-family: "idx-boost-icons" !important;
-        text-transform: none !important;
-        speak: none;
-        line-height: 1;
-        color: #fff;
-        font-size: 1.2em;
-        display: flex;
-        justify-content: center;
-        align-items: center
-    }
-
-    .gs-om-arrows .gs-om-next-arrow {
-        right: -34px
-    }
-
-    .gs-om-arrows .gs-om-prev-arrow {
-        left: -34px
-    }
-
-    .gs-om-arrows .gs-om-prev-arrow:before {
-        transform: rotateY(180deg)
-    }
-
-    #collection-markert .ib-item {
-        position: relative;
-        height: 100%;
-        display: none
-    }
-
-    #collection-markert .ib-item:after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        position: absolute;
-        background-color: rgba(0, 0, 0, 0.15);
-        z-index: 1
-    }
-
-    #collection-markert .ib-item img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-        z-index: 0
-    }
-
-    #collection-markert .ib-item .ib-title {
-        width: 100%;
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        padding: 0 50px;
-        transform: translate(-50%, -50%);
-        line-height: 1.2;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.33);
-        color: #fff;
-        text-align: center;
-        font-weight: 600;
-        font-size: 16px;
-        text-transform: uppercase;
-        z-index: 2
-    }
-
-    #collection-markert .ib-item .ib-wrap-btn {
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        z-index: 2;
-        bottom: 0;
-        left: 0;
-        height: 60px;
-        display: flex;
-        width: 100%
-    }
-
-    #collection-markert .ib-item .ib-wrap-btn .ib-mr-link {
-        padding: 0 10px;
-        width: auto;
-        margin: 0 5px;
-        min-width: 140px;
-        text-align: center;
-        height: 40px;
-        font-size: 10px;
-        background-color: transparent;
-        position: relative;
-        display: inline-block
-    }
-
-    @media screen and (min-width: 768px) {
-        #collection-markert .ib-item .ib-wrap-btn .ib-mr-link {
-            padding: 0;
-            font-size: 12px;
-            min-width: 180px
-        }
-    }
-
-    #collection-markert .ib-item .ib-wrap-btn .ib-mr-link span {
-        display: flex;
-        position: relative;
-        border-radius: 4px;
-        background-color: transparent;
-        background: #ea844d;
-        border: 0;
-        color: #fff;
-        background-image: linear-gradient(to bottom right, #d26c35, #ea844d);
-        border-top: 1px solid rgba(255, 255, 255, .33);
-        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .33);
-        overflow: hidden;
-        z-index: 2;
-        text-align: center;
-        justify-content: center;
-        height: 100%;
-        align-items: center;
-        text-transform: uppercase
-    }
-
-    #collection-markert .ib-item .ib-wrap-btn .ib-mr-link span:before {
-        content: "";
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        position: absolute;
-        transition: all .3s;
-        opacity: 1;
-        background-image: linear-gradient(to bottom right, #ea844d, #d26c35)
-    }
-
-    #collection-markert .ib-item .ib-wrap-btn .ib-mr-link:hover span:before {
-        opacity: 0
-    }
-
-    #collection-markert .ib-label {
-        font-size: 14px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.33);
-        font-family: 'DidotLTStd-Headline';
-        padding: 8px 20px;
-        border: 1px solid #fff;
-        font-style: italic;
-        display: inline-block;
-        width: auto;
-        position: absolute;
-        top: 20px;
-        transform: translateX(-50%);
-        left: 50%;
-        text-align: center;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.33)
-    }
-
-    #collection-markert:hover .gs-om-arrows .gs-om-next-arrow {
-        right: 0
-    }
-
-    #collection-markert:hover .gs-om-arrows .gs-om-prev-arrow {
-        left: 0
-    }
-
-    #collection-markert.gs-loaded .ib-item {
-        display: block
-    }
+.gs-om-arrows{z-index:5;position:absolute;width:100%;height:1px;left:0;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;align-items:center}.gs-om-arrows .gs-om-next-arrow,.gs-om-arrows .gs-om-prev-arrow{height:46px;width:34px;background-color:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;transition:all .15s;position:relative}.gs-om-arrows .gs-om-next-arrow:before,.gs-om-arrows .gs-om-prev-arrow:before{content:"\66";font-family:"idx-boost-icons"!important;text-transform:none!important;speak:none;line-height:1;color:#fff;font-size:1.2em;display:flex;justify-content:center;align-items:center}.gs-om-arrows .gs-om-next-arrow{right:-34px}.gs-om-arrows .gs-om-prev-arrow{left:-34px}.gs-om-arrows .gs-om-prev-arrow:before{transform:rotateY(180deg)}#collection-markert .ib-item{position:relative;height:100%;display:none}#collection-markert .ib-item:after{content:"";display:block;width:100%;height:100%;top:0;left:0;position:absolute;background-color:rgba(0,0,0,0.15);z-index:1}#collection-markert .ib-item img{position:absolute;top:0;left:0;object-fit:cover;width:100%;height:100%;z-index:0}#collection-markert .ib-item .ib-title{width:100%;position:absolute;top:55%;left:50%;padding:0 50px;transform:translate(-50%,-50%);line-height:1.2;text-shadow:1px 1px 2px rgba(0,0,0,0.33);color:#fff;text-align:center;font-weight:600;font-size:16px;text-transform:uppercase;z-index:2}#collection-markert .ib-item .ib-wrap-btn{justify-content:center;align-items:center;position:absolute;z-index:2;bottom:0;left:0;height:60px;display:flex;width:100%}#collection-markert .ib-item .ib-wrap-btn .ib-mr-link{padding:0 10px;width:auto;margin:0 5px;min-width:140px;text-align:center;height:40px;font-size:10px;background-color:transparent;position:relative;display:inline-block}@media screen and (min-width: 768px){#collection-markert .ib-item .ib-wrap-btn .ib-mr-link{padding:0;font-size:12px;min-width:180px}}#collection-markert .ib-item .ib-wrap-btn .ib-mr-link span{display:flex;position:relative;border-radius:4px;background-color:transparent;background:#ea844d;border:0;color:#fff;background-image:linear-gradient(to bottom right,#d26c35,#ea844d);border-top:1px solid rgba(255,255,255,.33);box-shadow:0 1px 4px 0 rgba(0,0,0,.33);overflow:hidden;z-index:2;text-align:center;justify-content:center;height:100%;align-items:center;text-transform:uppercase}#collection-markert .ib-item .ib-wrap-btn .ib-mr-link span:before{content:"";width:100%;height:100%;top:0;left:0;z-index:-1;position:absolute;transition:all .3s;opacity:1;background-image:linear-gradient(to bottom right,#ea844d,#d26c35)}#collection-markert .ib-item .ib-wrap-btn .ib-mr-link:hover span:before{opacity:0}#collection-markert .ib-label{font-size:14px;text-shadow:1px 1px 2px rgba(0,0,0,0.33);font-family:'DidotLTStd-Headline';padding:8px 20px;border:1px solid #fff;font-style:italic;display:inline-block;width:auto;position:absolute;top:20px;transform:translateX(-50%);left:50%;text-align:center;color:#fff;background-color:rgba(0,0,0,0.33)}#collection-markert:hover .gs-om-arrows .gs-om-next-arrow{right:0}#collection-markert:hover .gs-om-arrows .gs-om-prev-arrow{left:0}#collection-markert.gs-loaded .ib-item{display:block}
 </style>

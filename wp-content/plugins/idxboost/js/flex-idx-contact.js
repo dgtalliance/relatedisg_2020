@@ -34,7 +34,7 @@ $(function () {
         
     var style_map=[];
 
-    if ('undefined' !== typeof style_map_idxboost && ('' !== style_map_idxboost)) {
+    if(style_map_idxboost != undefined && style_map_idxboost != '') {
         style_map=JSON.parse(style_map_idxboost);
     }
 

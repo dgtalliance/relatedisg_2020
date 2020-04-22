@@ -283,8 +283,7 @@ var yDown = null;
                         class_id: class_id,
                         mls_num: mls_num,
                         type_action: 'remove',
-                        token_alert: token_alert,
-                        ibref: (typeof IB_AGENT_REGISTRATION_KEY !== "undefined") ? IB_AGENT_REGISTRATION_KEY : null
+                        token_alert: token_alert
                     },
                     dataType: "json",
                     success: function(data) {

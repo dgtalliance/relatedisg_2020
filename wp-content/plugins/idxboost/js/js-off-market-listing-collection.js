@@ -612,7 +612,7 @@ var yDown = null;
 
     function getGallery(mls, counter) {
         // ejemplo: http://retsimages.s3.amazonaws.com/34/A10172834_2.jpg
-        var cdn = 'https://retsimages.s3.amazonaws.com';
+        var cdn = '//retsimages.s3.amazonaws.com';
         var folder = mls.substring((mls.length) - 2); // 34
         var list = [];
         var img = '';

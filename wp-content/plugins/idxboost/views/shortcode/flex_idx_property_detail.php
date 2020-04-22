@@ -1,503 +1,452 @@
-<?php
+<?php 
 
-if (isset($_GET['ib_ref'])) {
-  $agent_registration_key = isset($_GET['ibref']) ? preg_replace('/[^a-z\-0-9]+/', '', $_GET['ibref']) : null;
-} else {
-  $agent_registration_key = get_post_meta($post->ID, '_flex_agent_registration_key', true);
+if (!empty($_COOKIE) && is_array($_COOKIE) && array_key_exists("reference_force_registration",$_COOKIE) && $_COOKIE["reference_force_registration"] == "yes") {
+  $flex_idx_info["agent"]["force_registration"]='0';
+  $registration_is_forced=false;
 }
 
-if (null !== $agent_registration_key) {
-  $agent_full_info = wp_remote_get(sprintf('%s/crm/agents/info/%s', FLEX_IDX_BASE_URL, $agent_registration_key), ['timeout' => 10]);
-  $agent_full_info = (is_wp_error($agent_full_info)) ? [] : wp_remote_retrieve_body($agent_full_info);
-  if (!empty($agent_full_info)) {
-    $agent_full_info = json_decode($agent_full_info, true);
-    $rel_agent_photo_src = $agent_full_info['info']['agent_avatar_image'];
-    $rel_agent_full_name = sprintf('%s %s', $agent_full_info['info']['first_name'], $agent_full_info['info']['last_name']);
-    $rel_agent_phone_number = flex_agent_format_phone_number($agent_full_info['info']['contact_phone']);
-  } else {
-    $rel_agent_photo_src = null;
-    $rel_agent_full_name = null;
-    $rel_agent_phone_number = null;
-  }
-}
-
-if (!empty($_COOKIE) && is_array($_COOKIE) && array_key_exists("reference_force_registration", $_COOKIE) && $_COOKIE["reference_force_registration"] == "yes") {
-  $flex_idx_info["agent"]["force_registration"] = '0';
-  $registration_is_forced = false;
-}
-
-if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
-  <script>
-    var IB_PAGE_PROPERTY_DETAIL = true;
-    <?php if (!empty($property['mls_num'])) : ?>
-      var IB_PAGE_PROPERTY_DETAIL_MLS_NUMBER = '<?php echo $property["mls_num"]; ?>';
-    <?php endif; ?>
-    jQuery(function() {
-      //jQuery('button[data-id="modal_login"]').remove();
-    });
-  </script>
+if ("1" == $flex_idx_info["agent"]["force_registration"]): ?>
+<script>
+var IB_PAGE_PROPERTY_DETAIL = true;
+<?php if (!empty($property['mls_num'])): ?>
+var IB_PAGE_PROPERTY_DETAIL_MLS_NUMBER = '<?php echo $property["mls_num"]; ?>';
+<?php endif; ?>
+jQuery(function() {
+  //jQuery('button[data-id="modal_login"]').remove();
+});
+</script>
 <?php endif; ?>
 
-<?php if (empty($property)) : ?>
-  <div class="gwr idx-mmg">
-    <div class="message-alert idx_color_primary flex-property-not-available">
-      <p>The property you requested with MLS <?php echo $GLOBALS['property_mls']; ?>. is not available.</p>
-    </div>
+<?php if (empty($property)): ?>
+<div class="gwr idx-mmg">
+  <div class="message-alert idx_color_primary flex-property-not-available">
+    <p>The property you requested with MLS <?php echo $GLOBALS['property_mls']; ?>. is not available.</p>
   </div>
-<?php else : ?>
-  <script>
-    var lastOpenedProperty = "<?php echo $property['mls_num']; ?>";
-    // // track listing view
-    // $.ajax({
-    //     type: "POST",
-    //     url: __flex_g_settings.ajaxUrl,
-    //     data: {
-    //     action: "track_property_view",
-    //     board_id: __flex_g_settings.boardId,
-    //     mls_number: (typeof lastOpenedProperty === "undefined") ? "" : lastOpenedProperty
-    //     },
-    //     success: function(response) {
-    //     console.log("track done for property #" + lastOpenedProperty);
-    //     }
-    // });
-  </script>
-  <?php if ((!empty($flex_idx_info["agent"]["google_analytics"])) && (!empty($flex_idx_info["agent"]["google_adwords"]))) : ?>
-    <script>
-      gtag('event', 'Listing_view', {
-        'send_to': '<?php echo $flex_idx_info["agent"]["google_adwords"]; ?>',
-        'listing_id': '<?php echo $property['mls_num']; ?>',
-        'listing_pagetype': 'pagedetail',
-        'listing_totalvalue': '<?php echo isset($property['is_sold']) ? $property['price_sold'] : $property['price']; ?>'
-      });
-      //google tag view content
-      gtag('event', 'Listing Viewers', {
-        'send_to': '<?php echo $flex_idx_info["agent"]["google_adwords"]; ?>',
-        'listing_id': '<?php echo $property['mls_num']; ?>',
-        'listing_pagetype': 'offerdetail',
-        'listing_totalvalue': '<?php echo isset($property['is_sold']) ? $property['price_sold'] : $property['price']; ?>'
-      });
-    </script>
-  <?php endif; ?>
-  <?php if (true === $registration_is_forced) : ?>
-    <script type="text/javascript">
-      (function($) {
-        $(function() {
-          var IB_HAS_LEFT_CLICKS = (__flex_g_settings.hasOwnProperty("signup_left_clicks") && (null != __flex_g_settings.signup_left_clicks));
+</div>
+<?php else: ?>
+<script>
+var lastOpenedProperty = "<?php echo $property['mls_num']; ?>";
+// // track listing view
+// $.ajax({
+//     type: "POST",
+//     url: __flex_g_settings.ajaxUrl,
+//     data: {
+//     action: "track_property_view",
+//     board_id: __flex_g_settings.boardId,
+//     mls_number: (typeof lastOpenedProperty === "undefined") ? "" : lastOpenedProperty
+//     },
+//     success: function(response) {
+//     console.log("track done for property #" + lastOpenedProperty);
+//     }
+// });
+</script>
+<?php if ((!empty($flex_idx_info["agent"]["google_analytics"])) && (!empty($flex_idx_info["agent"]["google_adwords"]))): ?>
+<script>
+  gtag('event', 'Listing_view', {
+      'send_to': '<?php echo $flex_idx_info["agent"]["google_adwords"]; ?>',
+      'listing_id': '<?php echo $property['mls_num']; ?>',
+      'listing_pagetype': 'pagedetail',
+      'listing_totalvalue': '<?php echo isset($property['is_sold']) ? $property['price_sold'] : $property['price']; ?>'
+  });
+  //google tag view content
+  gtag('event', 'Listing Viewers', {
+      'send_to': '<?php echo $flex_idx_info["agent"]["google_adwords"]; ?>',
+      'listing_id': '<?php echo $property['mls_num']; ?>',
+      'listing_pagetype': 'offerdetail',
+      'listing_totalvalue': '<?php echo isset($property['is_sold']) ? $property['price_sold'] : $property['price']; ?>'
+  });
+</script>
+<?php endif; ?>
+<?php if (true === $registration_is_forced): ?>
+<script type="text/javascript">
+  (function ($) {
+    $(function () {
+      var IB_HAS_LEFT_CLICKS = (__flex_g_settings.hasOwnProperty("signup_left_clicks") && (null != __flex_g_settings.signup_left_clicks));
 
-          if (true === IB_HAS_LEFT_CLICKS) {
-            if ((parseInt(Cookies.get("_ib_left_click_force_registration"), 10) <= 0) && ("yes" === __flex_g_settings.anonymous)) {
-              if (__flex_g_settings.hasOwnProperty("force_registration_forced") && ("yes" == __flex_g_settings.force_registration_forced)) {
-                $("#modal_login").find(".close").remove();
-              }
+      if (true === IB_HAS_LEFT_CLICKS) {
+        if ((parseInt(Cookies.get("_ib_left_click_force_registration"), 10) <= 0) && ("yes" === __flex_g_settings.anonymous)) {
+          if (__flex_g_settings.hasOwnProperty("force_registration_forced") && ("yes" == __flex_g_settings.force_registration_forced)) {
+              $("#modal_login").find(".close").remove();
+            }
 
-              // no left click then open popup registration
-              $("#modal_login").addClass("active_modal")
-                .find('[data-tab]').removeClass('active');
-
-              $("#modal_login").addClass("active_modal")
+            // no left click then open popup registration
+            $("#modal_login").addClass("active_modal")
+            .find('[data-tab]').removeClass('active');
+        
+            $("#modal_login").addClass("active_modal")
                 .find('[data-tab]:eq(1)')
                 .addClass('active');
-
-              $("#modal_login")
+            
+            $("#modal_login")
                 .find(".item_tab")
                 .removeClass("active");
+            
+            $("#tabRegister")
+            .addClass("active");
 
-              $("#tabRegister")
-                .addClass("active");
+            $("#modal_login #msRst").empty().html($("#mstextRst").html());
+            $("button.close-modal").addClass("ib-close-mproperty");
+            $(".overlay_modal").css("background-color", "rgba(0,0,0,0.8);");
 
-              $("#modal_login #msRst").empty().html($("#mstextRst").html());
-              $("button.close-modal").addClass("ib-close-mproperty");
-              $(".overlay_modal").css("background-color", "rgba(0,0,0,0.8);");
-
-              $("#modal_login h2").html($("#modal_login").find('[data-tab]:eq(1)').data("text-force"));
-
+            $("#modal_login h2").html($("#modal_login").find('[data-tab]:eq(1)').data("text-force"));
+        }
+      } else {
+        if ("yes" === __flex_g_settings.anonymous) {
+          if (__flex_g_settings.hasOwnProperty("force_registration_forced") && ("yes" == __flex_g_settings.force_registration_forced)) {
+              $("#modal_login").find(".close").remove();
             }
-          } else {
-            if ("yes" === __flex_g_settings.anonymous) {
-              if (__flex_g_settings.hasOwnProperty("force_registration_forced") && ("yes" == __flex_g_settings.force_registration_forced)) {
-                $("#modal_login").find(".close").remove();
-              }
 
-              jQuery("#modal_login").find(".close").css("visibility", "hidden");
-              jQuery("#modal_login").addClass("active_modal registration_forced");
-              jQuery("#modal_login .header-tab li a").removeClass("active");
-              jQuery("#modal_login .header-tab li a[data-tab='tabRegister']").addClass("active");
-              jQuery("#modal_login .item_tab").removeClass("active");
-              jQuery("#modal_login #tabRegister").addClass("active");
-              var $dataTextForce = jQuery("#modal_login .header-tab li").eq(1).find("a").attr("data-text-force");
-              var $registerText = $dataTextForce;
-              jQuery("#modal_login h2").html($registerText);
-              jQuery("#modal_login #msRst").empty().html(jQuery("#mstextRst").html());
-            }
-          }
-        });
-      })(jQuery);
-
-      <?php if ($property['img_cnt'] <= 0) { ?>
-        jQuery('#show-map').click();
-      <?php } ?>
-    </script>
-  <?php endif; ?>
-  <script>
-    var IDX_BOOST_PROPERTY_TITLE = "<?php echo str_replace('# ', '#', $property['address_short']); ?> <?php echo str_replace(' ,', ',', $property['address_large']); ?>";
-    document.title = IDX_BOOST_PROPERTY_TITLE;
-  </script>
-  <?php
-  $logo_broker = '';
-  $schoolRatio = '25';
-  $CollapsedPreference = '';
-  $CollapsedPreferenceDetailt = [];
-  $descriptionEspe = '';
+          jQuery("#modal_login").find(".close").css("visibility", "hidden");
+          jQuery("#modal_login").addClass("active_modal registration_forced");       
+          jQuery("#modal_login .header-tab li a").removeClass("active");
+          jQuery("#modal_login .header-tab li a[data-tab='tabRegister']").addClass("active");
+          jQuery("#modal_login .item_tab").removeClass("active");
+          jQuery("#modal_login #tabRegister").addClass("active");
+          var $dataTextForce = jQuery("#modal_login .header-tab li").eq(1).find("a").attr("data-text-force");
+          var $registerText = $dataTextForce;
+          jQuery("#modal_login h2").html($registerText);
+          jQuery("#modal_login #msRst").empty().html(jQuery("#mstextRst").html());
+        }
+      }
+    });
+  })(jQuery);
+  
+  <?php if($property['img_cnt'] <= 0 ){ ?>
+    jQuery('#show-map').click();
+  <?php } ?>
+  
+</script>
+<?php endif; ?>
+<script>
+  var IDX_BOOST_PROPERTY_TITLE = "<?php echo str_replace('# ', '#', $property['address_short']); ?> <?php echo str_replace(' ,', ',', $property['address_large']); ?>";
+  document.title = IDX_BOOST_PROPERTY_TITLE;
+</script>
+<?php
+  $logo_broker='';
+  $schoolRatio='25';
+  $CollapsedPreference='';
+  $CollapsedPreferenceDetailt=[];
+  $descriptionEspe='';
   $agent_contact_email_address = $flex_idx_info['agent']['agent_contact_email_address'];
-
-  if (array_key_exists('logo_broker', $response))  $logo_broker = $response['logo_broker'];
-  if (array_key_exists('descriptionEspe', $response))  $descriptionEspe = $response['descriptionEspe'];
-  if (array_key_exists('schoolRatio', $response))  $schoolRatio = $response['schoolRatio'];
-  if (array_key_exists('CollapsedPreference', $response))  $CollapsedPreference = $response['CollapsedPreference'];
-  if (array_key_exists('CollapsedPreferenceDetailt', $response))  $CollapsedPreferenceDetailt = $response['CollapsedPreferenceDetailt'];
-
+  
+  if (array_key_exists('logo_broker', $response))  $logo_broker=$response['logo_broker'];
+  if (array_key_exists('descriptionEspe', $response))  $descriptionEspe=$response['descriptionEspe'];
+  if (array_key_exists('schoolRatio', $response))  $schoolRatio=$response['schoolRatio'];
+  if (array_key_exists('CollapsedPreference', $response))  $CollapsedPreference=$response['CollapsedPreference'];
+  if (array_key_exists('CollapsedPreferenceDetailt', $response))  $CollapsedPreferenceDetailt=$response['CollapsedPreferenceDetailt'];
+  
   ?>
-  <?php
-  $arraydata = [];
-
-  $arraydata['range_la_lo'] = array(
-    'lat' => $property['lat'],
+<?php
+  $arraydata=[];
+  
+  $arraydata['range_la_lo']= array(
+    'lat' => $property['lat'] ,
     'long' => $property['lng'],
     'distance' => $schoolRatio
   );
   $sendParams = array('parameter'     => $arraydata);
   $chlatlong = curl_init();
-
+  
   curl_setopt($chlatlong, CURLOPT_URL, IDX_BOOTS_NICHE);
   curl_setopt($chlatlong, CURLOPT_POST, 1);
   curl_setopt($chlatlong, CURLOPT_POSTFIELDS, http_build_query($sendParams));
   curl_setopt($chlatlong, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($chlatlong, CURLOPT_FAILONERROR, true);
-
+  curl_setopt($chlatlong, CURLOPT_REFERER, ib_get_http_referer());
+  
   $outputlatlong = curl_exec($chlatlong);
   curl_close($chlatlong);
-  $outtemporali = json_decode($outputlatlong, true);
+  $outtemporali=json_decode($outputlatlong,true);
   ?>
-  <div id="full-main">
-    <section class="title-conteiner gwr animated fixed-box">
-      <div class="content-fixed">
-        <div class="content-fixed-title">
-          <h1 class="title-page"><?php echo str_replace('# ', '#', $property['address_short']); ?><span><?php echo $property['address_large']; ?></span></h1>
-          <div class="breadcrumb-options">
-            <?php if (wp_get_referer()) : ?>
-              <a href="<?php echo wp_get_referer(); ?>" class="btn link-back clidxboost-icon-arrow-select">
-                <?php echo __("Back to results", IDXBOOST_DOMAIN_THEME_LANG); ?>
-              </a>
-            <?php endif ?>
-            <a href="javascript:void(0)" class="btn-request">
-              <?php echo __("Request information", IDXBOOST_DOMAIN_THEME_LANG); ?>
-            </a>
-            <script type="text/javascript">
-              jQuery('body').on('click', '.btn-request', function() {
-                jQuery('#flex-idx-property-form .medium:eq(0)').focus();
-              });
-            </script>
-            <?php if (null !== $agent_registration_key) :
-              $agent_full_name = strtolower(implode(' ', [$agent_full_info['info']['first_name'], $agent_full_info['info']['last_name']]));
-              $agent_registration_pathname = str_replace(' ', '-', $agent_full_name);
-            ?>
-
-              <a href="<?php echo sprintf('%s/%s/search', get_site_url(), $agent_registration_pathname); ?>" class="btn link-search clidxboost-icon-search">
-                <?php echo __("New Search", IDXBOOST_DOMAIN_THEME_LANG); ?>
-              </a>
-            <?php else : ?>
-              <a href="<?php echo $flex_idx_info["pages"]["flex_idx_search"]["guid"]; ?>" class="btn link-search clidxboost-icon-search">
-                <?php echo __("New Search", IDXBOOST_DOMAIN_THEME_LANG); ?>
-              </a>
-            <?php endif; ?>
-            <?php if (1 == $property['status']) : ?>
-              <?php if ($property['is_favorite']) : ?>
-                <button class="chk_save chk_save_property btn-active-favorite dgt-mark-favorite" data-address="<?php echo $property['address_short']; ?>" data-alert-token="<?php echo $property['token_alert']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>">
-                  <span class="active"></span>
-                </button>
-              <?php else : ?>
-                <button class="chk_save chk_save_property btn-active-favorite" data-address="<?php echo $property['address_short']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>" class="dgt-mark-favorite">
-                  <span></span>
-                </button>
-              <?php endif; ?>
-            <?php endif; ?>
-          </div>
+<div id="full-main">
+  <section class="title-conteiner gwr animated fixed-box">
+    <div class="content-fixed">
+      <div class="content-fixed-title">
+        <h1 class="title-page"><?php echo str_replace('# ', '#', $property['address_short']); ?><span><?php echo $property['address_large']; ?></span></h1>
+        <div class="breadcrumb-options">
+          <?php if (wp_get_referer()): ?>
+          <a href="<?php echo wp_get_referer(); ?>" class="btn link-back clidxboost-icon-arrow-select">
+            <?php echo __("Back to results", IDXBOOST_DOMAIN_THEME_LANG); ?>
+          </a>
+          <?php endif?>
+          <a href="javascript:void(0)" class="btn-request">
+            <?php echo __("Request information", IDXBOOST_DOMAIN_THEME_LANG); ?>
+          </a>
+          <script type="text/javascript">
+            jQuery('body').on('click', '.btn-request',function(){
+              jQuery('#flex-idx-property-form .medium:eq(0)').focus();
+            });
+          </script>
+          <a href="<?php echo $flex_idx_info["pages"]["flex_idx_search"]["guid"]; ?>" class="btn link-search clidxboost-icon-search">
+            <?php echo __("New Search", IDXBOOST_DOMAIN_THEME_LANG); ?>
+          </a>
+          <?php if (1 == $property['status']): ?>
+            <?php if ($property['is_favorite']): ?>
+            <button class="chk_save chk_save_property btn-active-favorite dgt-mark-favorite" data-address="<?php echo $property['address_short']; ?>" data-alert-token="<?php echo $property['token_alert']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>">
+            <span class="active"></span>
+            </button>
+            <?php else: ?>
+            <button class="chk_save chk_save_property btn-active-favorite" data-address="<?php echo $property['address_short']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>" class="dgt-mark-favorite">
+            <span></span>
+            </button>
+            <?php endif;?>
+          <?php endif; ?>
         </div>
-        <ul class="content-fixed-btn">
-          <li><a href="<?php echo wp_get_referer(); ?>" class="clidxboost-icon-arrow"><span><?php echo __("Back to results", IDXBOOST_DOMAIN_THEME_LANG); ?></span></a></li>
-          <li>
-            <!--<button class="clidxboost-icon-envelope show-modal" data-modal="modal_email_to_friend">
+      </div>
+      <ul class="content-fixed-btn">
+        <li><a href="<?php echo wp_get_referer(); ?>" class="clidxboost-icon-arrow"><span><?php echo __("Back to results", IDXBOOST_DOMAIN_THEME_LANG); ?></span></a></li>
+        <li>
+          <!--<button class="clidxboost-icon-envelope show-modal" data-modal="modal_email_to_friend">
             <span><?php echo __("Email to a friend", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
           </button>-->
-            <a href="javascript:void(0)" class="btn-request" style="padding: 0 10px">
-              <span style="justify-content: center"><?php echo __("Request Information", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <div class="header-print">
-      <img src="<?php echo $logo_broker; ?>" title="FlexIdx">
-      <ul>
-        <li><?php echo __("Call me", IDXBOOST_DOMAIN_THEME_LANG); ?>: <?php echo flex_agent_format_phone_number($agent_info_phone); ?></li>
-        <li><?php echo $agent_contact_email_address; ?></li>
+          <a href="javascript:void(0)" class="btn-request" style="padding: 0 10px">
+            <span style="justify-content: center"><?php echo __("Request Information", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+          </a>
+        </li>
       </ul>
     </div>
-    <div id="imagen-print"></div>
-    <div id="full-slider">
-      <div class="gs-container-slider clidxboost-full-slider">
-        <?php if ($property['img_cnt'] > 0) : ?>
-          <?php foreach ($property['gallery'] as $thumbnail) : ?>
-            <img data-lazy="<?php echo $thumbnail; ?>" class="img-slider gs-lazy">
-          <?php endforeach; ?>
+  </section>
+  <div class="header-print">
+    <img src="<?php echo $logo_broker; ?>" title="FlexIdx">
+    <ul>
+      <li><?php echo __("Call me", IDXBOOST_DOMAIN_THEME_LANG); ?>: <?php echo flex_agent_format_phone_number($agent_info_phone); ?></li>
+      <li><?php echo $agent_contact_email_address; ?></li>
+    </ul>
+  </div>
+  <div id="imagen-print"></div>
+  <div id="full-slider">
+    <div class="gs-container-slider clidxboost-full-slider">
+      <?php if($property['img_cnt'] > 0 ): ?>
+      <?php foreach ($property['gallery'] as $thumbnail): ?>
+      <img data-lazy="<?php echo $thumbnail; ?>" class="img-slider gs-lazy">
+      <?php endforeach;?>
+      <?php endif;?>
+    </div>
+    <div class="moptions">
+      <ul class="slider-option">
+        <li>
+          <button class="option-switch active" id="show-gallery" data-view="gallery"><?php echo __("photos", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+        </li>
+        <li>
+          <button class="option-switch" id="show-map" data-view="map"><?php echo __("map view", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+        </li>
+        <?php if (!empty($property["virtual_tour"])): ?>
+        <li>
+          <button class="option-switch" onclick="javascript:window.open('<?php echo strip_tags($property["virtual_tour"]); ?>');"><?php echo __("video", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+        </li>
         <?php endif; ?>
-      </div>
-      <div class="moptions">
-        <ul class="slider-option">
-          <li>
-            <button class="option-switch active" id="show-gallery" data-view="gallery"><?php echo __("photos", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-          </li>
-          <li>
-            <button class="option-switch" id="show-map" data-view="map"><?php echo __("map view", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-          </li>
-          <?php if (!empty($property["virtual_tour"])) : ?>
-            <li>
-              <button class="option-switch" onclick="javascript:window.open('<?php echo strip_tags($property["virtual_tour"]); ?>');"><?php echo __("video", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-            </li>
-          <?php endif; ?>
-        </ul>
-        <?php /*<div id="min-map" data-map-img="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $property['lat']; ?>,<?php echo $property['lng']; ?>&amp;zoom=14&amp;size=163x87&amp;maptype=roadmap&amp;scale=false&amp;format=png&amp;key=AIzaSyBbcWAf3LnqNPxdZ5TP5resRxl3I3BPZb8&amp;visual_refresh=true&amp;markers=size:mid%7Ccolor:0xff4646%7Clabel:%7C<?php echo $property['lat']; ?>,<?php echo $property['lng']; ?>">
+      </ul>
+      <?php /*<div id="min-map" data-map-img="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $property['lat']; ?>,<?php echo $property['lng']; ?>&amp;zoom=14&amp;size=163x87&amp;maptype=roadmap&amp;scale=false&amp;format=png&amp;key=AIzaSyBbcWAf3LnqNPxdZ5TP5resRxl3I3BPZb8&amp;visual_refresh=true&amp;markers=size:mid%7Ccolor:0xff4646%7Clabel:%7C<?php echo $property['lat']; ?>,<?php echo $property['lng']; ?>">
     </div>
     */ ?>
-        <button class="full-screen" id="clidxboost-btn-flight"><?php echo __("Full screen", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-      </div>
-      <div id="map-view">
-        <div id="map-result" data-lat="<?php echo $property['lat']; ?>" data-lng="<?php echo $property['lng']; ?>"></div>
-      </div>
-      <?php if (array_key_exists("oh_info", $property) && !empty($property['oh_info'])) {
-        $oh_info = $property['oh_info'];
-        $oh_info_de = @json_decode($oh_info, true);
-        if (is_array($oh_info_de) && array_key_exists('date', $oh_info_de) && array_key_exists('timer', $oh_info_de)) {
-      ?>
-          <div class="ms-open">
-            <span class="ms-wrap-open">
-              <span class="ms-open-title"><?php echo __('Open House', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              <span class="ms-open-date"><?php echo $oh_info_de['date'];  ?></span>
-              <span class="ms-open-time"><?php echo $oh_info_de['timer']; ?></span>
-            </span>
-          </div>
-        <?php
-        }
-        ?>
-      <?php } ?>
+      <button class="full-screen" id="clidxboost-btn-flight"><?php echo __("Full screen", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
     </div>
-    <section class="main">
-      <h2 class="title-temp"><?php echo __("Property details information", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-      <div class="temporal-content"></div>
-      <div class="gwr">
-        <div class="container">
-          <ul class="property-information" data-inf="price:<?php echo isset($property['is_sold']) ? $property['price_sold'] : $property['price']; ?>|beds:<?php echo $property['bed']; ?>|baths:<?php echo $property['bath']; ?>|sqft:<?php echo $property['sqft']; ?>">
-            <li class="price-property">$<?php
-                                        $text_to_rent = '';
-                                        if ($property['is_rental'] != 0)
-                                          $text_to_rent = '/' . __("month", IDXBOOST_DOMAIN_THEME_LANG);
-
-                                        echo number_format($property['price']) . $text_to_rent; ?> <span>
-                <?php if ($property['status'] == "5") : // rented 
+    <div id="map-view">
+      <div id="map-result" data-lat="<?php echo $property['lat']; ?>" data-lng="<?php echo $property['lng']; ?>"></div>
+    </div>
+            <?php if(array_key_exists("oh_info", $property) && !empty($property['oh_info']) ) { 
+              $oh_info=$property['oh_info'];
+              $oh_info_de=@json_decode($oh_info,true);
+              if (is_array($oh_info_de) && array_key_exists('date',$oh_info_de) && array_key_exists('timer',$oh_info_de)) {
                 ?>
-                  <?php echo __("rented price", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                <?php elseif ($property['status'] == "2") : // sold 
-                ?>
-                  <?php echo __("sold price", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                <?php elseif ($property['status'] == "6") : // pending 
-                ?>
-                  <?php echo __("pending price", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                <?php else : ?>
-                  <?php echo __("asking price", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                <?php endif; ?>
-                <?php if (in_array($property['status'], array(5, 2, 1))) : ?>
-                  <?php if ($property['reduced'] == '') : ?>
-                  <?php elseif ($property['reduced'] < 0) : ?>
-                    <span class="down-price"><?php echo $property['reduced']; ?>%</span>
-                  <?php else : ?>
-                    <span class="up-price"><?php echo $property['reduced']; ?>%</span>
-                  <?php endif; ?>
-                <?php endif; ?>
-              </span>
-            </li>
-            <?php if ($property["is_commercial"] != 1) { ?>
-              <li><?php echo $property['bed']; ?> <span><?php if ($property['bed'] > 1) {
-                                                          echo __("Bedroom(s)", IDXBOOST_DOMAIN_THEME_LANG);
-                                                        } else {
-                                                          echo __("Bedroom(s)", IDXBOOST_DOMAIN_THEME_LANG);
-                                                        } ?> </span></li>
-              <li><?php echo $property['bath']; ?> <span><?php if ($property['bath'] > 1) {
-                                                            echo __("Bathroom(s)", IDXBOOST_DOMAIN_THEME_LANG);
-                                                          } else {
-                                                            echo __("Bathroom(s)", IDXBOOST_DOMAIN_THEME_LANG);
-                                                          } ?> </span></li>
-              <li><?php echo $property['baths_half']; ?> <span><?php if ($property['baths_half'] > 1) {
-                                                                  echo __("Half Baths", IDXBOOST_DOMAIN_THEME_LANG);
-                                                                } else {
-                                                                  echo __("Half Bath", IDXBOOST_DOMAIN_THEME_LANG);
-                                                                } ?></span></li>
-            <?php } else { ?>
-              <li><?php echo $property['property_type']; ?> <span><?php echo __("Type", IDXBOOST_DOMAIN_THEME_LANG); ?>.</span></li>
-            <?php } ?>
+              <div class="ms-open">
+                <span class="ms-wrap-open">
+                  <span class="ms-open-title"><?php echo __('Open House', IDXBOOST_DOMAIN_THEME_LANG); ?></span>    
+                  <span class="ms-open-date"><?php echo $oh_info_de['date'];  ?></span>
+                  <span class="ms-open-time"><?php echo $oh_info_de['timer']; ?></span>
+                </span>
+              </div>                
+                <?php
+              }
+              ?> 
+            <?php } ?>  
+  </div>
+<section class="main">
+  <h2 class="title-temp"><?php echo __("Property details information", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+  <div class="temporal-content"></div>
+  <div class="gwr">
+    <div class="container">
+      <ul class="property-information" data-inf="price:<?php echo isset($property['is_sold']) ? $property['price_sold'] : $property['price']; ?>|beds:<?php echo $property['bed']; ?>|baths:<?php echo $property['bath']; ?>|sqft:<?php echo $property['sqft']; ?>">
+        <li class="price-property">$<?php 
+        $text_to_rent='';
+        if($property['is_rental'] != 0)
+          $text_to_rent='/'.__("month", IDXBOOST_DOMAIN_THEME_LANG);
+        
+          echo number_format($property['price']).$text_to_rent; ?> <span>
+          <?php if ($property['status'] == "5"): // rented ?>
+          <?php echo __("rented price", IDXBOOST_DOMAIN_THEME_LANG); ?>
+          <?php elseif($property['status'] == "2"): // sold ?>
+          <?php echo __("sold price", IDXBOOST_DOMAIN_THEME_LANG); ?>
+          <?php elseif($property['status'] == "6"): // pending ?>
+          <?php echo __("pending price", IDXBOOST_DOMAIN_THEME_LANG); ?>
+          <?php else: ?>
+          <?php echo __("asking price", IDXBOOST_DOMAIN_THEME_LANG); ?>
+          <?php endif; ?>
+          <?php if (in_array($property['status'], array(5,2,1))): ?>
+          <?php if ($property['reduced'] == ''): ?>
+          <?php elseif ($property['reduced'] < 0): ?>
+          <span class="down-price"><?php echo $property['reduced']; ?>%</span>
+          <?php else: ?>
+          <span class="up-price"><?php echo $property['reduced']; ?>%</span>
+          <?php endif; ?>
+          <?php endif; ?>
+          </span>
+        </li>
+        <?php if ($property["is_commercial"] != 1){ ?>
+          <li><?php echo $property['bed']; ?> <span><?php if ($property['bed']>1) { echo __("Bedroom(s)", IDXBOOST_DOMAIN_THEME_LANG); }else{ echo __("Bedroom(s)", IDXBOOST_DOMAIN_THEME_LANG); } ?> </span></li>
+          <li><?php echo $property['bath']; ?> <span><?php if($property['bath']>1){ echo __("Bathroom(s)", IDXBOOST_DOMAIN_THEME_LANG); }else{ echo __("Bathroom(s)", IDXBOOST_DOMAIN_THEME_LANG); } ?> </span></li>
+          <li><?php echo $property['baths_half']; ?> <span><?php if ($property['baths_half']>1) { echo __("Half Baths", IDXBOOST_DOMAIN_THEME_LANG); }else{ echo __("Half Bath", IDXBOOST_DOMAIN_THEME_LANG); } ?></span></li>
+        <?php }else{ ?>
+          <li><?php echo $property['property_type']; ?> <span><?php echo __("Type", IDXBOOST_DOMAIN_THEME_LANG); ?>.</span></li>
+        <?php } ?>
 
-            <?php if (1 == $property["is_commercial"]) : ?>
-              <li><?php echo number_format($property['lot_size']); ?> <span><?php echo __("Approx Lot Size", IDXBOOST_DOMAIN_THEME_LANG); ?>.</span></li>
-            <?php else : ?>
-              <li><?php echo number_format($property['sqft']); ?> <span><?php echo __("size sq.ft", IDXBOOST_DOMAIN_THEME_LANG); ?>.</span></li>
-            <?php endif; ?>
+        <?php if(1 == $property["is_commercial"]): ?>
+        <li><?php echo number_format($property['lot_size']); ?> <span><?php echo __("Approx Lot Size", IDXBOOST_DOMAIN_THEME_LANG); ?>.</span></li>
+        <?php else: ?>
+        <li><?php echo number_format($property['sqft']); ?> <span><?php echo __("size sq.ft", IDXBOOST_DOMAIN_THEME_LANG); ?>.</span></li>
+        <?php endif; ?>
 
-            <?php if ($property['status'] == 1) : ?>
-              <li class="btn-save">
-                <?php if ($property['is_favorite']) : ?>
-                  <button class="chk_save chk_save_property dgt-mark-favorite" data-address="<?php echo $property['address_short']; ?>" data-alert-token="<?php echo $property['token_alert']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>">
-                    <span class="active"><?php echo __("Remove", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  </button>
-                <?php else : ?>
-                  <button class="chk_save chk_save_property dgt-mark-favorite" data-address="<?php echo $property['address_short']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>">
-                    <span><?php echo __("save favorite", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  </button>
-                <?php endif; ?>
-              </li>
-            <?php endif; ?>
-          </ul>
-          <div class="panel-options">
-            <a style="display:none;" class="show-modal btn clidxboost-btn-blue" href="#" title="Schedule a showing now" data-modal="modal_schedule" rel="nofollow" id="schedule-now"><?php echo __("Schedule a showing now", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
-            <div class="options-list">
-              <div class="shared-content">
-                <button id="show-shared"><?php echo __("share", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-                <ul class="shared-list">
-                  <li><a data-share-url="<?php echo $property_permalink; ?>" data-share-title="<?php echo str_replace('# ', '#', $property['address_short']);; ?> <?php echo $property['address_large']; ?>" data-share-description="<?php echo strip_tags($property['remark']); ?>" data-share-image="<?php echo $property['gallery'][0]; ?>" class="ico-facebook property-detail-share-fb" onclick="idxsharefb()" title="Faceboook" rel="nofollow">Faceboook</a></li>
-                  <li><a class="ico-twitter" href="#" onclick="window.open('<?php echo $twitter_share_url; ?>','s_tw','width=600,height=400'); return false;" title="Twitter" rel="nofollow">Twitter</a></li>
-                </ul>
-              </div>
-              <ul class="action-list">
-                <li><a data-price="$<?php echo number_format($property['price']); ?>" class="show-modal ico-calculator" href="#" title="mortgage calculator" data-modal="modal_calculator" rel="nofollow" id="calculator-mortgage"><?php echo __("mortgage", IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
-                <li><a class="show-modal ico-envelope" href="javascript:void(0)" title="email to a firend" data-modal="modal_email_to_friend" rel="nofollow" id="email-friend"><?php echo __("email to a friend", IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
-                <li><a class="ico-printer" href="javascript:void(0)" title="print" rel="nofollow" id="print-btn"><?php echo __("print", IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
-              </ul>
-            </div>
+        <?php if ($property['status'] == 1): ?>
+        <li class="btn-save">
+          <?php if ($property['is_favorite']): ?>
+          <button class="chk_save chk_save_property dgt-mark-favorite" data-address="<?php echo $property['address_short']; ?>" data-alert-token="<?php echo $property['token_alert']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>">
+          <span class="active"><?php echo __("Remove", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+          </button>
+          <?php else: ?>
+          <button class="chk_save chk_save_property dgt-mark-favorite" data-address="<?php echo $property['address_short']; ?>" data-mls="<?php echo $property['mls_num']; ?>" data-class-id="<?php echo $property['class_id']; ?>">
+          <span><?php echo __("save favorite", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+          </button>
+          <?php endif;?>
+        </li>
+        <?php endif; ?>
+      </ul>
+      <div class="panel-options">
+        <a style="display:none;" class="show-modal btn clidxboost-btn-blue" href="#" title="Schedule a showing now" data-modal="modal_schedule" rel="nofollow" id="schedule-now"><?php echo __("Schedule a showing now", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+        <div class="options-list">
+          <div class="shared-content">
+            <button id="show-shared"><?php echo __("share", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+            <ul class="shared-list">
+              <li><a data-share-url="<?php echo $property_permalink; ?>" data-share-title="<?php echo str_replace('# ', '#', $property['address_short']);; ?> <?php echo $property['address_large']; ?>" data-share-description="<?php echo strip_tags($property['remark']); ?>" data-share-image="<?php echo $property['gallery'][0]; ?>" class="ico-facebook property-detail-share-fb" onclick="idxsharefb()" title="Faceboook" rel="nofollow">Faceboook</a></li>
+              <li><a class="ico-twitter" href="#" onclick="window.open('<?php echo $twitter_share_url; ?>','s_tw','width=600,height=400'); return false;" title="Twitter" rel="nofollow">Twitter</a></li>
+            </ul>
           </div>
-          <div class="main-content">
-            <?php if ($property['remark'] != '') { ?>
-              <div class="property-description" id="property-description">
-                <p><?php echo $property['remark']; ?></p>
-              </div>
-            <?php } ?>
-            <?php if (!empty($descriptionEspe)) { ?>
-              <?php
-              echo $descriptionEspe;
-              ?>
-            <?php } ?>
-            <div class="list-details clidxboost-property-container">
-              <h2 class="title-details"><?php echo __("Property Details", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-              <ul class="list-detail">
-                <li><span><?php echo __("MLS", IDXBOOST_DOMAIN_THEME_LANG); ?> #</span><span><?php echo $property['mls_num']; ?></span></li>
-                <li> <span><?php echo __("Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['property_type']; ?></span></li>
-                <?php if ($property['status'] == "6") : // pending 
-                ?>
-                  <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Pending", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
-                <?php elseif ($property['status'] == "5") : // rented 
-                ?>
-                  <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Rented", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
-                <?php elseif ($property['status'] == "2") : // closed 
-                ?>
-                  <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Closed", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
-                <?php else : ?>
-                  <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Active", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
-                <?php endif; ?>
-                <li><span><?php echo __("Development", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo empty($property['development']) ? $property['complex'] : $property['development']; ?></span></li>
-                <li><span><?php echo __("Subdivision", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['subdivision']; ?></span></li>
-                <?php if ($property['is_rental'] == 0) : ?>
-                  <li><span><?php echo __("Sale Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['short_sale'] == 1 ? 'Short Sale' : 'Regular Sale'; ?></span></li>
-                <?php endif; ?>
-                <?php if ($property["is_commercial"] == 1) : ?>
-                  <li><span><?php echo __("Approx Lot Size", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo number_format($property['lot_size']); ?></span></li>
-                <?php else : ?>
-                  <li><span><?php echo __("Lot Size", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo number_format($property['lot_size']); ?></span></li>
-                <?php endif; ?>
-                <?php if ($property["is_commercial"] == 0) : ?>
-                  <li><span><?php echo __("Price / Sq.Ft.", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo '$' . number_format($property['price_sqft']); ?></span></li>
-                <?php endif; ?>
-                <?php if ($property["is_commercial"] == 1) : ?>
-                  <li><span><?php echo __("Parking", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['parking_desc']; ?></span></li>
-                <?php else : ?>
-                  <li><span><?php echo __("Parking Spaces", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo (int) $property['parking']; ?></span></li>
-                <?php endif; ?>
-                <?php if ($property["is_commercial"] == 0) : ?>
-                  <li><span><?php echo __("Swimming Pool", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['pool'] == 1 ? 'Yes' : 'No'; ?></span></li>
-                <?php endif; ?>
-                <li><span><?php echo __("Days on Market", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['days_market']; ?></span></li>
-                <li><span><?php echo __("Year Built", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['year']; ?></span></li>
-                <li><span><?php echo __("Style", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['style']; ?></span></li>
-                <li> <span><?php echo __("Waterfront", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['water_front'] == 1 ? 'Yes' : 'No'; ?></span></li>
-                <li><span><?php echo __("Furnished", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['furnished'] >= 1 ? 'Yes' : 'No'; ?></span></li>
-                <li><span><?php echo __("Flooring Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['floor']; ?></span></li>
-                <?php if ($property['status'] == "5") : // rented 
-                ?>
-                  <li><span><?php echo __("Date Rented", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo date('m/d/Y', $property['date_close']); ?></span></li>
-                <?php elseif ($property['status'] == "2") : // closed 
-                ?>
-                  <li><span><?php echo __("Date Sold", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo date('m/d/Y', $property['date_close']); ?></span></li>
-                <?php else : ?>
-                  <li><span><?php echo __("Date Listed", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo date('m/d/Y', $property['list_date']); ?></span></li>
-                <?php endif; ?>
-                <?php if ($property["is_commercial"] == 0) : ?>
-                  <li><span><?php echo __("HOA Fees", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span> <?php echo $property['assoc_fee']; ?></span></li>
-                <?php endif; ?>
-                <?php if ($property["is_commercial"] == 1) : ?>
-                  <li><span><?php echo __("Cooling", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['cooling']; ?></span></li>
-                  <li><span><?php echo __("Heating", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['heating']; ?></span></li>
-                <?php else : ?>
-                  <li><span><?php echo __("Cooling Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['cooling']; ?></span></li>
-                  <li><span><?php echo __("Heating Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['heating']; ?></span></li>
-                <?php endif; ?>
-                <li><span><?php echo __("Taxes Year", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['tax_year']; ?></span></li>
-                <li><span><?php echo __("Taxes", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span>$<?php echo number_format($property['tax_amount']); ?></span></li>
-              </ul>
-            </div>
-            <?php if (isset($property['amenities']) && is_array($property['amenities']) && !empty($property['amenities'])) : ?>
-              <div class="list-details clidxboost-amenities-container active">
-                <h2 class="title-amenities"><?php echo __("Amenities", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-                <ul class="list-amenities">
-                  <?php foreach ($property['amenities'] as $amenity) : ?>
-                    <li><?php echo $amenity; ?></li>
-                  <?php endforeach; ?>
-                </ul>
-              </div>
+          <ul class="action-list">
+            <li><a data-price="$<?php echo number_format($property['price']); ?>" class="show-modal ico-calculator" href="#" title="mortgage calculator" data-modal="modal_calculator" rel="nofollow" id="calculator-mortgage"><?php echo __("mortgage", IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
+            <li><a class="show-modal ico-envelope" href="javascript:void(0)" title="email to a firend" data-modal="modal_email_to_friend" rel="nofollow" id="email-friend"><?php echo __("email to a friend", IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
+            <li><a class="ico-printer" href="javascript:void(0)" title="print" rel="nofollow" id="print-btn"><?php echo __("print", IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-content">
+        <?php if($property['remark'] != ''){ ?>
+        <div class="property-description" id="property-description">
+          <p><?php echo $property['remark']; ?></p>
+        </div>
+        <?php } ?>
+        <?php if(!empty($descriptionEspe)){ ?>
+        <?php 
+          echo $descriptionEspe;
+          ?>
+        <?php } ?>
+        <div class="list-details clidxboost-property-container">
+          <h2 class="title-details"><?php echo __("Property Details", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+          <ul class="list-detail">
+            <li><span><?php echo __("MLS", IDXBOOST_DOMAIN_THEME_LANG); ?> #</span><span><?php echo $property['mls_num']; ?></span></li>
+            <li> <span><?php echo __("Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['property_type']; ?></span></li>
+            <?php if ($property['status'] == "6"): // pending ?>
+            <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Pending", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
+            <?php elseif ($property['status'] == "5"): // rented ?>
+            <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Rented", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
+            <?php elseif ($property['status'] == "2"): // closed ?>
+            <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Closed", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
+            <?php else: ?>
+            <li><span><?php echo __("Status", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo __("Active", IDXBOOST_DOMAIN_THEME_LANG); ?></span></li>
             <?php endif; ?>
-            <?php if (isset($property['feature_interior']) && is_array($property['feature_interior']) && !empty($property['feature_interior'])) : ?>
-              <div class="list-details clidxboost-interior-container active">
-                <h2 class="title-amenities"><?php echo __("Interior Features", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-                <ul class="list-amenities">
-                  <?php foreach ($property['feature_interior'] as $feature_interior) : ?>
-                    <li><?php echo $feature_interior; ?></li>
-                  <?php endforeach; ?>
-                </ul>
-              </div>
+            <li><span><?php echo __("Development", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo empty($property['development']) ? $property['complex'] : $property['development']; ?></span></li>
+            <li><span><?php echo __("Subdivision", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['subdivision']; ?></span></li>
+            <?php if ($property['is_rental'] == 0): ?>
+            <li><span><?php echo __("Sale Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['short_sale'] == 1 ? 'Short Sale' : 'Regular Sale'; ?></span></li>
             <?php endif; ?>
-            <?php if (isset($property['feature_exterior']) && is_array($property['feature_exterior']) && !empty($property['feature_exterior'])) : ?>
-              <div class="list-details clidxboost-exterior-container active">
-                <h2 class="title-amenities">
-                  <?php
-                  if ($property["is_commercial"] == 1) {
-                    echo __("Miscellaneous Information", IDXBOOST_DOMAIN_THEME_LANG);
-                  } else {
-                    echo __("Exterior Features", IDXBOOST_DOMAIN_THEME_LANG);
-                  } ?>
-                </h2>
-                <ul class="list-amenities">
-                  <?php foreach ($property['feature_exterior'] as $feature_exterior) : ?>
-                    <li><?php echo $feature_exterior; ?></li>
-                  <?php endforeach; ?>
-                </ul>
-              </div>
+            <?php if ($property["is_commercial"] == 1): ?>
+            <li><span><?php echo __("Approx Lot Size", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo number_format($property['lot_size']); ?></span></li>
+            <?php else: ?>
+            <li><span><?php echo __("Lot Size", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo number_format($property['lot_size']); ?></span></li>
             <?php endif; ?>
-            <?php /*
+            <?php if ($property["is_commercial"] == 0): ?>
+            <li><span><?php echo __("Price / Sq.Ft.", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo '$'. number_format($property['price_sqft']); ?></span></li>
+            <?php endif; ?>
+            <?php if ($property["is_commercial"] == 1): ?>
+            <li><span><?php echo __("Parking", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['parking_desc']; ?></span></li>
+            <?php else: ?>
+            <li><span><?php echo __("Parking Spaces", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo (int) $property['parking']; ?></span></li>
+            <?php endif; ?>
+            <?php if ($property["is_commercial"] == 0): ?>
+            <li><span><?php echo __("Swimming Pool", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['pool'] == 1 ? 'Yes' : 'No'; ?></span></li>
+            <?php endif; ?>
+            <li><span><?php echo __("Days on Market", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['days_market']; ?></span></li>
+            <li><span><?php echo __("Year Built", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['year']; ?></span></li>
+            <li><span><?php echo __("Style", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['style']; ?></span></li>
+            <li> <span><?php echo __("Waterfront", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['water_front'] == 1 ? 'Yes' : 'No'; ?></span></li>
+            <li><span><?php echo __("Furnished", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['furnished'] >= 1 ? 'Yes' : 'No'; ?></span></li>
+            <li><span><?php echo __("Flooring Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['floor']; ?></span></li>
+            <?php if ($property['status'] == "5"): // rented ?>
+            <li><span><?php echo __("Date Rented", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo date('m/d/Y', $property['date_close']); ?></span></li>
+            <?php elseif ($property['status'] == "2"): // closed ?>
+            <li><span><?php echo __("Date Sold", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo date('m/d/Y', $property['date_close']); ?></span></li>
+            <?php else: ?>
+            <li><span><?php echo __("Date Listed", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo date('m/d/Y', $property['list_date']); ?></span></li>
+            <?php endif; ?>
+            <?php if ($property["is_commercial"] == 0): ?>
+            <li><span><?php echo __("HOA Fees", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span> <?php echo $property['assoc_fee']; ?></span></li>
+            <?php endif; ?>
+            <?php if ($property["is_commercial"] == 1): ?>
+            <li><span><?php echo __("Cooling", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['cooling']; ?></span></li>
+            <li><span><?php echo __("Heating", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['heating']; ?></span></li>
+            <?php else: ?>
+            <li><span><?php echo __("Cooling Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['cooling']; ?></span></li>
+            <li><span><?php echo __("Heating Type", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['heating']; ?></span></li>
+            <?php endif; ?>
+            <li><span><?php echo __("Taxes Year", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span><?php echo $property['tax_year']; ?></span></li>
+            <li><span><?php echo __("Taxes", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span>$<?php echo number_format($property['tax_amount']); ?></span></li>
+          </ul>
+        </div>
+        <?php if (isset($property['amenities']) && is_array($property['amenities']) && !empty($property['amenities'])): ?>
+        <div class="list-details clidxboost-amenities-container active">
+          <h2 class="title-amenities"><?php echo __("Amenities", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+          <ul class="list-amenities">
+            <?php foreach ($property['amenities'] as $amenity): ?>
+            <li><?php echo $amenity; ?></li>
+            <?php endforeach;?>
+          </ul>
+        </div>
+        <?php endif;?>
+        <?php if (isset($property['feature_interior']) && is_array($property['feature_interior']) && !empty($property['feature_interior'])): ?>
+        <div class="list-details clidxboost-interior-container active">
+          <h2 class="title-amenities"><?php echo __("Interior Features", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+          <ul class="list-amenities">
+            <?php foreach ($property['feature_interior'] as $feature_interior): ?>
+            <li><?php echo $feature_interior; ?></li>
+            <?php endforeach;?>
+          </ul>
+        </div>
+        <?php endif;?>
+        <?php if (isset($property['feature_exterior']) && is_array($property['feature_exterior']) && !empty($property['feature_exterior'])): ?>
+        <div class="list-details clidxboost-exterior-container active">
+          <h2 class="title-amenities">
+            <?php
+             if ($property["is_commercial"] == 1){ 
+              echo __("Miscellaneous Information", IDXBOOST_DOMAIN_THEME_LANG); 
+            }else{
+             echo __("Exterior Features", IDXBOOST_DOMAIN_THEME_LANG);
+            }?>
+            </h2>
+          <ul class="list-amenities">
+            <?php foreach ($property['feature_exterior'] as $feature_exterior): ?>
+            <li><?php echo $feature_exterior; ?></li>
+            <?php endforeach;?>
+          </ul>
+        </div>
+        <?php endif;?>
+        <?php /*
         <div class="list-details clidxboost-schools-container" id="clidxboost-schools-container">
           <h2 class="title-amenities"><?php echo __("School Information", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
           <div class="list-amenities school-list">
@@ -600,173 +549,157 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
           </div>
         </div>   */ ?>
 
-            <div class="property-contact">
-              <div class="info-content">
+        <div class="property-contact">
+          <div class="info-content">
 
-                <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])) : ?>
-                  <p>The multiple listing information is provided by the Houston Association of Realtors from a copyrighted compilation of listings. The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present TEXAS All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: <?php echo $property["office_name"]; ?></p>
-                <?php else : ?>
-                  <p>The multiple listing information is provided by the <?php echo $property["board_name"]; ?>® from a copyrighted compilation of listings.
-                    The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present <?php echo $property["board_name"]; ?>®.
-                    All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose
-                    other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal.
-                    All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified.
-                    Listing courtesy of: <?php echo $property["office_name"]; ?></p>
-                <?php endif; ?>
+            <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])): ?>
+              <p>The multiple listing information is provided by the Houston Association of Realtors from a copyrighted compilation of listings. The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present TEXAS All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: <?php echo $property["office_name"]; ?></p>
+            <?php else: ?>
+              <p>The multiple listing information is provided by the <?php echo $property["board_name"]; ?>® from a copyrighted compilation of listings.
+              The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present <?php echo $property["board_name"]; ?>®.
+              All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose
+              other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal.
+              All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified.
+              Listing courtesy of: <?php echo $property["office_name"]; ?></p>
+            <?php endif; ?>
 
-                <span>Real Estate IDX Powered by: <a href="https://www.tremgroup.com" title="TREMGROUP" rel="nofollow">TREMGROUP</a></span>
-              </div>
-            </div>
+            <span>Real Estate IDX Powered by: <a href="https://www.tremgroup.com" title="TREMGROUP" rel="nofollow">TREMGROUP</a></span>
           </div>
-        </div>
-        <div class="aside ib-mb-show">
-          <div class="form-content">
-            <div class="avatar-content">
-              <?php
-              $agent_info_name = $flex_idx_info['agent']['agent_first_name'] . ' ' . $flex_idx_info['agent']['agent_last_name'];
-              $agent_info_phone = $flex_idx_info['agent']['agent_contact_phone_number'];
-              ?>
-              <div class="content-avatar-image">
-                <?php if (null !== $rel_agent_photo_src) : ?>
-                  <img class="lazy-img" data-src="<?php echo $rel_agent_photo_src; ?>" title="<?php echo $rel_agent_photo_src; ?>" alt="<?php echo $rel_agent_full_name; ?>">
-                <?php else : ?>
-                  <img class="lazy-img" data-src="<?php echo $agent_info_photo; ?>" title="<?php echo $agent_info_name; ?>" alt="<?php echo $agent_info_name; ?>">
-                <?php endif; ?>
-              </div>
-              <div class="avatar-information">
-                <?php if (null !== $rel_agent_full_name) : ?>
-                  <h2><?php echo $rel_agent_full_name; ?></h2>
-                <?php else : ?>
-                  <h2><?php echo $agent_info_name; ?></h2>
-                <?php endif; ?>
-                <?php if (null !== $rel_agent_phone_number) : ?>
-                  <a class="phone-avatar" href="tel:<?php echo preg_replace('/[^\d]/', '', $rel_agent_phone_number); ?>" title="Call to <?php echo flex_agent_format_phone_number($rel_agent_phone_number); ?>"><?php echo __('Ph', IDXBOOST_DOMAIN_THEME_LANG); ?>. <?php echo flex_agent_format_phone_number($rel_agent_phone_number); ?></a>
-                <?php else : ?>
-                  <?php if (!empty($agent_info_phone)) : ?>
-                    <a class="phone-avatar" href="tel:<?php echo preg_replace('/[^\d]/', '', $agent_info_phone); ?>" title="Call to <?php echo flex_agent_format_phone_number($agent_info_phone); ?>"><?php echo __('Ph', IDXBOOST_DOMAIN_THEME_LANG); ?>. <?php echo $agent_info_phone; ?></a>
-                  <?php endif; ?>
-                <?php endif; ?>
-              </div>
-            </div>
-            <form method="post" id="flex-idx-property-form" class="gtm_more_info_property iboost-secured-recaptcha-form">
-              <?php if (isset($_GET['ibref']) && !empty($_GET['ibref'])) : ?>
-                <input type="hidden" name="registration_key" value="<?php echo strip_tags($_GET['ibref']); ?>" />
-              <?php endif; ?>
-              <input type="hidden" name="ib_tags" value="">
-              <input type="hidden" name="action" value="flex_idx_request_property_form">
-              <input type="hidden" name="origin" value="<?php echo $property_permalink; ?>">
-              <input type="hidden" name="price" id="flex_idx_form_price" value="<?php echo intval($property['price']); ?>">
-              <input type="hidden" id="flex_idx_form_mls_num" name="mls_num" value="<?php echo $property['mls_num']; ?>">
-              <input type="hidden" class="name_share" value="<?php echo $property['address_short']; ?>">
-              <input type="hidden" class="link_share" value="<?php echo $property_permalink; ?>">
-              <input type="hidden" class="picture_share" value="<?php echo $property['gallery'][0]; ?>">
-              <input type="hidden" class="caption_sahre" value="<?php echo $property['remark']; ?>">
-              <input type="hidden" class="description_share" value="<?php echo $property['remark']; ?>">
-              <div class="gform_body">
-                <ul class="gform_fields">
-                  <?php if (array_key_exists('track_gender', $flex_idx_info['agent'])) {
-                    if ($flex_idx_info['agent']['track_gender'] == true) {  ?>
-                      <li class="gfield">
-                        <label class="gfield_label" for="first_name"><?php echo __("Gender", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                        <div class="ginput_container ginput_container_text sp-box">
-                          <select name="gender" class="gender">
-                            <option value="<?php echo __('Mr.', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Mr.', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                            <option value="<?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                            <option value="<?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                          </select>
-                          <input required class="medium" name="first_name" id="first_name" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])) : ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif; ?>" placeholder="<?php echo __('First Name', IDXBOOST_DOMAIN_THEME_LANG); ?>*">
-                        </div>
-                      </li>
-                    <?php } else { ?>
-                      <li class="gfield">
-                        <label class="gfield_label" for="first_name"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                        <div class="ginput_container ginput_container_text">
-                          <input required class="medium" name="first_name" id="_ib_fn_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])) : ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif; ?>" placeholder="<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
-                        </div>
-                      </li>
-                    <?php  }
-                  } else { ?>
-                    <li class="gfield">
-                      <label class="gfield_label" for="first_name"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                      <div class="ginput_container ginput_container_text">
-                        <input required class="medium" name="first_name" id="_ib_fn_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])) : ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif; ?>" placeholder="<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
-                      </div>
-                    </li>
-                  <?php } ?>
-                  <li class="gfield">
-                    <label class="gfield_label" for="first_name"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <div class="ginput_container ginput_container_text">
-                      <input class="medium" name="last_name" id="_ib_ln_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['last_name'])) : ?><?php echo $flex_idx_lead['lead_info']['last_name']; ?><?php endif; ?>" placeholder="<?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
-                    </div>
-                  </li>
-                  <li class="gfield">
-                    <label class="gfield_label" for="email"><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <div class="ginput_container ginput_container_email">
-                      <input required class="medium" name="email" id="_ib_em_inq" type="email" value="<?php if (isset($flex_idx_lead['lead_info']['email_address'])) : ?><?php echo $flex_idx_lead['lead_info']['email_address']; ?><?php endif; ?>" placeholder="<?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
-                    </div>
-                  </li>
-                  <li class="gfield">
-                    <label class="gfield_label" for="phone"><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <div class="ginput_container ginput_container_email">
-                      <input class="medium" name="phone" id="_ib_ph_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['phone_number'])) : ?><?php echo $flex_idx_lead['lead_info']['phone_number']; ?><?php endif; ?>" placeholder="<?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
-                    </div>
-                  </li>
-                  <li class="gfield comments">
-                    <label class="gfield_label" for="message"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <div class="ginput_container">
-                      <textarea class="medium textarea" name="message" id="message" type="text" value="" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" rows="10" cols="50"><?php echo __("I am interested in", IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo str_replace('# ', '#', $property['address_short']); ?> <?php echo $property['address_large']; ?></textarea>
-                    </div>
-                  </li>
-                  <li class="gfield requiredFields">* <?php echo __("Required Fields", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                  <div class="gform_footer">
-                    <input class="gform_button button gform_submit_button_5" type="submit" value="<?php echo __("Request Information", IDXBOOST_DOMAIN_THEME_LANG); ?>">
-                  </div>
-                </ul>
-              </div>
-            </form>
-          </div>
-          <?php if (!empty($property['related_items'])) : ?>
-            <div class="similar-properties">
-              <h2 class="title-similar-list"><?php echo __("Similar Properties For", IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $property['is_rental'] == 1 ? __("Rent", IDXBOOST_DOMAIN_THEME_LANG) : __("Sale", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-              <ul>
-                <?php foreach ($property['related_items'] as $rel_item) : ?>
-                  <li>
-                    <article>
-                      <h2>
-                        <a href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $rel_item['slug']; ?>" title="<?php echo str_replace('# ', '#', $rel_item['address_short']); ?>">
-                          <?php echo str_replace('# ', '#', $rel_item['address_short']); ?>
-                        </a>
-                      </h2>
-                      <ul>
-                        <li class="address"><span><?php echo $rel_item['address_large']; ?></span></li>
-                        <li class="price">$<?php echo number_format($rel_item['price']); ?></li>
-                        <li> <span><?php echo $rel_item['bed']; ?> </span>
-                          <?php
-                          if ($rel_item['bed'] > 1) {
-                            echo __("Bed(s)", IDXBOOST_DOMAIN_THEME_LANG);
-                          } else {
-                            echo __("Bed(s)", IDXBOOST_DOMAIN_THEME_LANG);
-                          }
-                          ?>
-                        </li>
-                        <li> <span><?php echo $rel_item['bath']; ?><?php if ($rel_item['baths_half'] > 0) : ?>.5<?php endif; ?></span> <?php echo __("Baths", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                        <li> <span><?php echo number_format($rel_item['sqft']); ?> </span><?php echo __("Sq.Ft", IDXBOOST_DOMAIN_THEME_LANG); ?>.</li>
-                      </ul>
-                      <a class="layout-img" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $rel_item['slug']; ?>">
-                        <img class="lazy-img" data-src="<?php echo $rel_item['gallery'][0]; ?>">
-                      </a>
-                    </article>
-                  </li>
-                <?php endforeach; ?>
-              </ul>
-            </div>
-          <?php endif; ?>
         </div>
       </div>
-    </section>
+    </div>
+    <div class="aside ib-mb-show">
+      <div class="form-content">
+        <div class="avatar-content">
+          <?php
+            $agent_info_name = $flex_idx_info['agent']['agent_first_name'] . ' ' . $flex_idx_info['agent']['agent_last_name'];
+            $agent_info_phone = $flex_idx_info['agent']['agent_contact_phone_number'];
+            ?>
+          <div class="content-avatar-image"><img class="lazy-img" data-src="<?php echo $agent_info_photo; ?>" title="<?php echo $agent_info_name; ?>" alt="<?php echo $agent_info_name; ?>"></div>
+          <div class="avatar-information">
+            <h2><?php echo $agent_info_name; ?></h2>
+            <?php if (!empty($agent_info_phone)): ?>
+            <a class="phone-avatar" href="tel:<?php echo preg_replace('/[^\d]/', '', $agent_info_phone); ?>" title="Call to <?php echo flex_agent_format_phone_number($agent_info_phone); ?>"><?php echo __('Ph', IDXBOOST_DOMAIN_THEME_LANG);?>. <?php echo $agent_info_phone; ?></a>
+            <?php endif; ?>
+          </div>
+        </div>
+        <form method="post" id="flex-idx-property-form" class="gtm_more_info_property iboost-secured-recaptcha-form">
+          <input type="hidden" name="ib_tags" value="">
+          <input type="hidden" name="action" value="flex_idx_request_property_form">
+          <input type="hidden" name="origin" value="<?php echo $property_permalink; ?>">
+          <input type="hidden" name="price" id="flex_idx_form_price" value="<?php echo intval($property['price']); ?>">
+          <input type="hidden" id="flex_idx_form_mls_num" name="mls_num" value="<?php echo $property['mls_num']; ?>">
+          <input type="hidden"  class="name_share" value="<?php echo $property['address_short']; ?>">
+          <input type="hidden"  class="link_share" value="<?php echo $property_permalink; ?>">
+          <input type="hidden"  class="picture_share" value="<?php echo $property['gallery'][0]; ?>">
+          <input type="hidden"  class="caption_sahre" value="<?php echo $property['remark']; ?>">
+          <input type="hidden"  class="description_share" value="<?php echo $property['remark']; ?>">
+          <div class="gform_body">
+            <ul class="gform_fields">
+              <?php if (array_key_exists('track_gender', $flex_idx_info['agent'])) { 
+                if ($flex_idx_info['agent']['track_gender']==true) {  ?>
+              <li class="gfield">
+                <label class="gfield_label" for="first_name"><?php echo __("Gender", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <div class="ginput_container ginput_container_text sp-box">
+                  <select name="gender" class="gender">
+                    <option value="<?php echo __('Mr.', IDXBOOST_DOMAIN_THEME_LANG);?>"><?php echo __('Mr.', IDXBOOST_DOMAIN_THEME_LANG);?></option>
+                    <option value="<?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG);?>"><?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG);?></option>
+                    <option value="<?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG);?>"><?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG);?></option>
+                  </select>
+                  <input required class="medium" name="first_name" id="first_name" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])): ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif;?>" placeholder="<?php echo __('First Name', IDXBOOST_DOMAIN_THEME_LANG);?>*">
+                </div>
+              </li>
+              <?php }else{ ?>
+              <li class="gfield">
+                <label class="gfield_label" for="first_name"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <div class="ginput_container ginput_container_text">
+                  <input required class="medium" name="first_name" id="_ib_fn_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])): ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif;?>" placeholder="<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
+                </div>
+              </li>
+              <?php  } }else{ ?>
+              <li class="gfield">
+                <label class="gfield_label" for="first_name"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <div class="ginput_container ginput_container_text">
+                  <input required class="medium" name="first_name" id="_ib_fn_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])): ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif;?>" placeholder="<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
+                </div>
+              </li>
+              <?php } ?>
+              <li class="gfield">
+                <label class="gfield_label" for="first_name"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <div class="ginput_container ginput_container_text">
+                  <input class="medium" name="last_name" id="_ib_ln_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['last_name'])): ?><?php echo $flex_idx_lead['lead_info']['last_name']; ?><?php endif;?>" placeholder="<?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
+                </div>
+              </li>
+              <li class="gfield">
+                <label class="gfield_label" for="email"><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <div class="ginput_container ginput_container_email">
+                  <input required class="medium" name="email" id="_ib_em_inq" type="email" value="<?php if (isset($flex_idx_lead['lead_info']['email_address'])): ?><?php echo $flex_idx_lead['lead_info']['email_address']; ?><?php endif;?>" placeholder="<?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
+                </div>
+              </li>
+              <li class="gfield">
+                <label class="gfield_label" for="phone"><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <div class="ginput_container ginput_container_email">
+                  <input class="medium" name="phone" id="_ib_ph_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['phone_number'])): ?><?php echo $flex_idx_lead['lead_info']['phone_number']; ?><?php endif;?>" placeholder="<?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
+                </div>
+              </li>
+              <li class="gfield comments">
+                <label class="gfield_label" for="message"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <div class="ginput_container">
+                  <textarea class="medium textarea" name="message" id="message" type="text" value="" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" rows="10" cols="50"><?php echo __("I am interested in", IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo str_replace('# ', '#', $property['address_short']); ?> <?php echo $property['address_large']; ?></textarea>
+                </div>
+              </li>
+              <li class="gfield requiredFields">* <?php echo __("Required Fields", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
+              <div class="gform_footer">
+                <input class="gform_button button gform_submit_button_5" type="submit" value="<?php echo __("Request Information", IDXBOOST_DOMAIN_THEME_LANG); ?>">
+              </div>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <?php if (!empty($property['related_items'])): ?>
+      <div class="similar-properties">
+        <h2 class="title-similar-list"><?php echo __("Similar Properties For", IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $property['is_rental'] == 1 ? __("Rent", IDXBOOST_DOMAIN_THEME_LANG) : __("Sale", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+        <ul>
+          <?php foreach ($property['related_items'] as $rel_item): ?>
+          <li>
+            <article>
+              <h2>
+                <a
+                  href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $rel_item['slug']; ?>"
+                  title="<?php echo str_replace('# ' , '#', $rel_item['address_short']); ?>">
+                <?php echo str_replace('# ' , '#', $rel_item['address_short']); ?>
+                </a>
+              </h2>
+              <ul>
+                <li class="address"><span><?php echo $rel_item['address_large']; ?></span></li>
+                <li class="price">$<?php echo number_format($rel_item['price']); ?></li>
+                <li> <span><?php echo $rel_item['bed']; ?> </span>
+                  <?php
+                    if ($rel_item['bed']>1) {
+                      echo __("Bed(s)", IDXBOOST_DOMAIN_THEME_LANG);
+                    }else{
+                      echo __("Bed(s)", IDXBOOST_DOMAIN_THEME_LANG);
+                    }
+                    ?>
+                </li>
+                <li> <span><?php echo $rel_item['bath']; ?><?php if($rel_item['baths_half'] > 0): ?>.5<?php endif; ?></span> <?php echo __("Baths", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
+                <li> <span><?php echo number_format($rel_item['sqft']); ?> </span><?php echo __("Sq.Ft", IDXBOOST_DOMAIN_THEME_LANG); ?>.</li>
+              </ul>
+              <a class="layout-img" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $rel_item['slug']; ?>">
+              <img class="lazy-img" data-src="<?php echo $rel_item['gallery'][0]; ?>">
+              </a>
+            </article>
+          </li>
+          <?php endforeach;?>
+        </ul>
+      </div>
+      <?php endif; ?>
+    </div>
   </div>
-  <div id="printMessageBox"><?php echo __("Please wait while we create your document", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-  <!--
+</section>
+</div>
+<div id="printMessageBox"><?php echo __("Please wait while we create your document", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+<!--
   <script type="text/javascript">
     (function ($) {
       $(function() {
@@ -777,12 +710,12 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
     })(jQuery);
   </script>
   -->
-  <script>
-    function idxsharefb() {
-      window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');
-    }
-  </script>
-  <!--
+<script>
+  function idxsharefb(){
+    window.open('http://www.facebook.com/sharer/sharer.php?u='+window.location.href, 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');
+  }
+</script>
+<!--
   <script type="text/javascript">
   (function ($) {
     $(function () {
@@ -813,71 +746,54 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
 <?php endif; ?>
 <script type="text/javascript">
   <?php
-  if (!empty($CollapsedPreference)) {
-    if ($CollapsedPreference == '1') { ?>
+    if (!empty($CollapsedPreference)){
+      if ($CollapsedPreference=='1'){ ?>
       jQuery('.list-details').removeClass('active');
+  
+    <?php if (is_numeric(array_search('property_detail', $CollapsedPreferenceDetailt))  != false) { ?> jQuery('.clidxboost-property-container').addClass('active'); <?php } ?>
+    <?php if (is_numeric(array_search('amenities', $CollapsedPreferenceDetailt)) != false) {  ?> jQuery('.clidxboost-amenities-container').addClass('active'); <?php } ?>
+    <?php if (is_numeric(array_search('interior_features', $CollapsedPreferenceDetailt)) != false) { ?> jQuery('.clidxboost-interior-container').addClass('active'); <?php } ?>
+    <?php if (is_numeric(array_search('exterior_features', $CollapsedPreferenceDetailt)) != false) {  ?> jQuery('.clidxboost-exterior-container').addClass('active'); <?php } ?>
+    
+    <?php if (is_numeric(array_search('school_information', $CollapsedPreferenceDetailt)) != false) { ?> 
+      jQuery('.clidxboost-schools-container').addClass('active').ready(function(){ jQuery('.school-list').addClass('show'); }); 
+    <?php } ?>
 
-      <?php if (is_numeric(array_search('property_detail', $CollapsedPreferenceDetailt))  != false) { ?> jQuery('.clidxboost-property-container').addClass('active');
-      <?php } ?>
-      <?php if (is_numeric(array_search('amenities', $CollapsedPreferenceDetailt)) != false) {  ?> jQuery('.clidxboost-amenities-container').addClass('active');
-      <?php } ?>
-      <?php if (is_numeric(array_search('interior_features', $CollapsedPreferenceDetailt)) != false) { ?> jQuery('.clidxboost-interior-container').addClass('active');
-      <?php } ?>
-      <?php if (is_numeric(array_search('exterior_features', $CollapsedPreferenceDetailt)) != false) {  ?> jQuery('.clidxboost-exterior-container').addClass('active');
-      <?php } ?>
-
-      <?php if (is_numeric(array_search('school_information', $CollapsedPreferenceDetailt)) != false) { ?>
-        jQuery('.clidxboost-schools-container').addClass('active').ready(function() {
-          jQuery('.school-list').addClass('show');
-        });
-      <?php } ?>
-
-    <?php } else { ?>
+    <?php }else{ ?>
       jQuery('.clidxboost-property-container').addClass('active');
-      jQuery('.clidxboost-schools-container').addClass('active').ready(function() {
-        jQuery('.school-list').addClass('show');
-      });
-    <?php
-    }
-  } else { ?>
-    jQuery('.clidxboost-property-container').addClass('active');
-    jQuery('.clidxboost-schools-container').addClass('active').ready(function() {
-      jQuery('.school-list').addClass('show');
-    });
-  <?php  } ?>
+      jQuery('.clidxboost-schools-container').addClass('active').ready(function(){ jQuery('.school-list').addClass('show'); }); 
+      <?php
+      }
 
-  var view_grid_type = '';
+    }else{ ?>
+      jQuery('.clidxboost-property-container').addClass('active');
+      jQuery('.clidxboost-schools-container').addClass('active').ready(function(){ jQuery('.school-list').addClass('show'); }); 
+  <?php  } ?>
+  
+  var view_grid_type='';
   <?php
-  $sta_view_grid_type = '0';
-  if (array_key_exists('view_grid_type', $search_params)) $sta_view_grid_type = (int) $search_params['view_grid_type']; ?>
-  view_grid_type = <?php echo $sta_view_grid_type; ?>;
-  if (!jQuery('body').hasClass('clidxboost-ngrid') && view_grid_type == 1) {
+    $sta_view_grid_type='0'; if(array_key_exists('view_grid_type',$search_params)) $sta_view_grid_type= (int) $search_params['view_grid_type']; ?>
+  view_grid_type=<?php echo $sta_view_grid_type; ?>;
+  if ( !jQuery('body').hasClass('clidxboost-ngrid') && view_grid_type==1) {
     jQuery('body').addClass('clidxboost-ngrid');
   }
 </script>
 
 <script>
-  (function($) {
+  (function ($) {
     $(function() {
 
-      <?php if ((isset($flex_idx_info['agent']['has_dynamic_ads'])) && (true === $flex_idx_info['agent']['has_dynamic_ads'])) : ?>
+      <?php if( (isset($flex_idx_info['agent']['has_dynamic_ads'])) && (true === $flex_idx_info['agent']['has_dynamic_ads']) ): ?>
         <?php
         $property_price = $property['is_sold'] ? $property['price_sold'] : $property['price'];
         ?>
-        setTimeout(function() {
-          if ("undefined" !== typeof dataLayer) {
-            var _priceCalc = '<?php echo $property_price; ?>';
-            var int_price = parseInt(_priceCalc.replace(/[^\d+]/g, ""));
-            dataLayer.push({
-              "event": "view_item",
-              "value": int_price,
-              "items": [{
-                "id": "22438195",
-                "google_business_vertical": "real_estate"
-              }]
-            });
-          }
-        }, 3000);
+      setTimeout(function () {
+        if ("undefined" !== typeof dataLayer) {
+          var _priceCalc = '<?php echo $property_price; ?>';
+          var int_price = parseInt(_priceCalc.replace(/[^\d+]/g, ""));
+          dataLayer.push({"event": "view_item","value": int_price,"items": [{"id": "22438195","google_business_vertical": "real_estate"}]});
+        }
+      }, 3000);
       <?php endif; ?>
 
       /*------------------------------------------------------------------------------------------*/
@@ -886,14 +802,12 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
 
       var nicheContent = $(".clidxboost-body-niche .clidxboost-td-niche");
 
-      if (nicheContent.length) {
+      if(nicheContent.length){
 
         size_li = $(".clidxboost-body-niche .clidxboost-td-niche").length;
         size_li_actives = 0;
 
-        if (size_li == 0) {
-          $("#clidxboost-container-loadMore-niche").hide();
-        }
+        if (size_li == 0) { $("#clidxboost-container-loadMore-niche").hide(); }
 
         x = 8;
 
@@ -905,23 +819,22 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
             $('#clidxboost-container-loadMore-niche').hide();
           }
           size_li_actives = $('.clidxboost-body-niche .clidxboost-td-niche-show').length;
-          var result_item = (parseInt(size_li) - parseInt(size_li_actives));
-          $('.clidxboost-count-niche').text(result_item + ' more schools');
+          var result_item=(parseInt(size_li)-parseInt(size_li_actives));
+          $('.clidxboost-count-niche').text( result_item+ ' more schools' );
         });
 
         $(document).on('click', '.clidxboost-niche-tab-filters button', function() {
           $('#clidxboost-container-loadMore-niche').show();
           $('.clidxboost-td-niche').removeClass('clidxboost-td-niche-show');
-          if ($(this).attr('data-filter') == 'all') {
-            x = 8;
-            $('#clidxboost-data-loadMore-niche').click();
-          } else if ($(this).attr('data-filter') == 'elementary') {
+          if ($(this).attr('data-filter')=='all') {
+            x=8; $('#clidxboost-data-loadMore-niche').click();
+          }else if($(this).attr('data-filter')=='elementary'){
             $('.clidxboost-td-niche.elementary').addClass('clidxboost-td-niche-show');
             $('#clidxboost-container-loadMore-niche').hide();
-          } else if ($(this).attr('data-filter') == 'middle') {
+          }else if($(this).attr('data-filter')=='middle'){
             $('.clidxboost-td-niche.middle').addClass('clidxboost-td-niche-show');
             $('#clidxboost-container-loadMore-niche').hide();
-          } else if ($(this).attr('data-filter') == 'high') {
+          }else if($(this).attr('data-filter')=='high'){
             $('.clidxboost-td-niche.high').addClass('clidxboost-td-niche-show');
             $('#clidxboost-container-loadMore-niche').hide();
           }
@@ -934,7 +847,7 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
           $(this).addClass('active');
           var $dataFilter = $(this).attr('data-filter');
           $('.clidxboost-td-niche').addClass('td-hidden');
-          $('.clidxboost-body-niche .' + $dataFilter).removeClass('td-hidden');
+          $('.clidxboost-body-niche .'+$dataFilter).removeClass('td-hidden');
           if ($dataFilter == 'all') {
             $('.clidxboost-td-niche').removeClass('td-hidden');
           }

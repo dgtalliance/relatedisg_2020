@@ -1,24 +1,15 @@
 <style>
-    .flex-breadcrumb {
-        margin-bottom: 0 !important;
-    }
+    .flex-breadcrumb { margin-bottom: 0 !important; }
 
-    #footer {
-        display: none !important;
-    }
+    #footer { display: none !important; }
 
-    .gwr {
-        max-width: 100% !important;
-    }
+    .gwr {max-width: 100% !important;}
 
-    .js-info-bubble-close {
-        width: 30px;
-        height: 30px;
-        opacity: 0 !important;
-    }
+    .js-info-bubble-close { width: 30px; height: 30px; opacity: 0 !important; }
 
     .ib-search-marker-active .dgt-richmarker-single,
-    .ib-search-marker-active .dgt-richmarker-group {
+    .ib-search-marker-active .dgt-richmarker-group
+    {
         background: rgb(255, 0, 72) !important;
     }
 
@@ -26,15 +17,12 @@
     .ib-search-marker-active .dgt-richmarker-single:after {
         border-top: 5px solid rgb(255, 0, 72) !important;
     }
-
     .ib-modal-filters-mobile {
         position: fixed !important;
     }
 
     @media (max-width: 989px) {
-        .flex-map-controls-ct {
-            display: none !important;
-        }
+        .flex-map-controls-ct { display: none !important; }
     }
 
 
@@ -43,7 +31,6 @@
         overflow-y: auto;
         overflow-x: hidden;
     }
-
     .autocomplete-item-type {
         font-weight: bold;
         color: #c1c1c1;
@@ -56,7 +43,7 @@
         text-transform: capitalize;
     }
 </style>
-<?php
+<?php 
 $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']) ? sanitize_text_field($flex_idx_info['agent']['agent_contact_phone_number']) : '';
 ?>
 
@@ -379,7 +366,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                             </div>
                         </div>
 
-                        <?php if (isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"])) : ?>
+                        <?php if ( isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"]) ): ?>
                             <div class="ib-logoprint">
                                 <img class="ib-logoimg" src="<?php echo $flex_idx_info["url_logo"]; ?>">
                             </div>
@@ -572,9 +559,9 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                                 </ul>
                             </div>
                             <div class="ib-bdisclaimer ib-bdisclaimer-desktop">
-                            <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])) : ?>
+                            <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])): ?>
                             <p>The multiple listing information is provided by the Houston Association of Realtors from a copyrighted compilation of listings. The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present TEXAS All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: <?php echo $property["office_name"]; ?></p>
-                            <?php else : ?>
+                            <?php else: ?>
                             <p>The multiple listing information is provided by the  {{board_name}}® from a copyrighted compilation of listings.
                             The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present  {{board_name}}®.
                             All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose
@@ -620,7 +607,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                                                 <input class="ib-cfinput" id="_ib_em_inq" name="email_address" type="email" placeholder="<?php echo __('Email*', IDXBOOST_DOMAIN_THEME_LANG); ?>" value="{{ leadEmailAddress this }} " required>
                                             </li>
                                             <li class="ib-cffitem">
-                                                <input class="ib-cfinput" id="_ib_ph_inq" name="phone_number" type="text" placeholder="<?php echo __('Phone*', IDXBOOST_DOMAIN_THEME_LANG); ?>" value="{{ leadPhoneNumber this }}">
+                                                <input class="ib-cfinput" id="_ib_ph_inq" name="phone_number" type="text" placeholder="<?php echo __('Phone*', IDXBOOST_DOMAIN_THEME_LANG); ?>" value="{{ leadPhoneNumber this }}" required>
                                             </li>
                                             <li class="ib-cffitem">
                                                 <textarea class="ib-cftextarea" name="message" type="text" placeholder="<?php echo __('Comments', IDXBOOST_DOMAIN_THEME_LANG); ?>" required><?php echo __('I&#039d like to schedule a viewing for ', IDXBOOST_DOMAIN_THEME_LANG); ?>{{address_short}}, {{address_large}}. <?php echo __('Please contact me with more information!', IDXBOOST_DOMAIN_THEME_LANG); ?> </textarea>
@@ -669,9 +656,9 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
 
                         <div class="ib-bdisclaimer ib-bdisclaimer-mobile">
                         
-                        <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])) : ?>
+                        <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])): ?>
                             <p>The multiple listing information is provided by the Houston Association of Realtors from a copyrighted compilation of listings. The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present TEXAS All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: <span class="ib-bdcourtesy">{{office_name}}</span></p>
-                            <?php else : ?>
+                            <?php else: ?>
                             <p>The multiple listing information is provided by the  {{board_name}}® from a copyrighted compilation of listings.
                             The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present  {{board_name}}®.
                             All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose
@@ -694,27 +681,27 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
 
 <script id="ib-aside-template" type="text/x-handlebars-template">
     {{#each this}}
-        <li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
-            <ul class="ib-piinfo">
-                <li class="ib-piitem ib-piprice">{{ formatPrice price }}{{ isRentalTypeListing is_rental }}</li>
-                <li class="ib-piitem ib-pibeds">{{ property_class_name }}</li>
-                <li class="ib-piitem ib-pisqft">{{ formatLotSize lot_size }} <?php echo __('Lot Size', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                <li class="ib-piitem ib-paddress">{{ full_address }}</li>
-                {{{ handleStatusProperty this }}}
-            </ul>
-            <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
-                {{{ idxGalleryImages this }}}
-                <!-- <img class="ib-pifimg" src="{{ idxImage this }}" alt="{{ full_address }}"> -->
-                <div class="gs-container-navs">
-                    <div class="gs-wrapper-arrows">
-                        <button class="gs-prev-arrow"></button>
-                        <button class="gs-next-arrow"></button>
-                    </div>
+    <li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
+        <ul class="ib-piinfo">
+            <li class="ib-piitem ib-piprice">{{ formatPrice price }}{{ isRentalTypeListing is_rental }}</li>
+            <li class="ib-piitem ib-pibeds">{{ property_class_name }}</li>
+            <li class="ib-piitem ib-pisqft">{{ formatLotSize lot_size }} <?php echo __('Lot Size', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
+            <li class="ib-piitem ib-paddress">{{ full_address }}</li>
+            {{{ handleStatusProperty this }}}
+        </ul>
+        <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
+            {{{ idxGalleryImages this }}}
+            <!-- <img class="ib-pifimg" src="{{ idxImage this }}" alt="{{ full_address }}"> -->
+            <div class="gs-container-navs">
+                <div class="gs-wrapper-arrows">
+                    <button class="gs-prev-arrow"></button>
+                    <button class="gs-next-arrow"></button>
                 </div>
             </div>
-            <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-status="{{ status }}" data-token-alert="{{token_alert}}"><?php /*<span>Add to Favorites</span> */ ?></div>
-            <a class="ib-pipermalink" href="{{ idxPermalink this }}" title="<?php echo __('View Detail of', IDXBOOST_DOMAIN_THEME_LANG); ?> {{ full_address }}"><span>{{ full_address }}</span></a>
-        </li>
+        </div>
+        <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-status="{{ status }}" data-token-alert="{{token_alert}}"><?php /*<span>Add to Favorites</span> */ ?></div>
+        <a class="ib-pipermalink" href="{{ idxPermalink this }}" title="<?php echo __('View Detail of', IDXBOOST_DOMAIN_THEME_LANG); ?> {{ full_address }}"><span>{{ full_address }}</span></a>
+    </li>
     {{/each}}
 </script>
 
@@ -725,11 +712,11 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
     <div class="ib-content-modal-filters-mobile">
         <!--Header modal-->
         <div class="ib-header-modal-filters-mobile">
-            <!--<?php if (isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"])) : ?>
+        <!--<?php if ( isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"]) ): ?>
           <img src="<?php echo $flex_idx_info["url_logo"]; ?>">
           <?php endif; ?>-->
-            <h3 class="ib-mtitle"><?php echo __('Filters', IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
-            <button class="ib-close-modal-filters-mobile"><span><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+          <h3 class="ib-mtitle"><?php echo __('Filters', IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
+        <button class="ib-close-modal-filters-mobile"><span><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
         </div>
         <!--Boby modal-->
         <div class="ib-body-modal-filters-mobile">

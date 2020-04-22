@@ -1,181 +1,91 @@
 <?php
-get_header('idx-agents');
-
-global $post, $flex_idx_info;
-
-$agent_registration_key = get_post_meta($post->ID, "_flex_agent_registration_key", true);
-$agent_page_slug = $post->post_name;
-$agent_full_info = [];
-
-if ("idx-agents" === $post->post_type) {
-  list($agent_name) = explode("/", $wp->request);
-  $agent_full_slugname = implode("/", [site_url(), $agent_name]);
-}
-
+get_header('idx-agent'); 
+ while ( have_posts() ) : the_post();
 ?>
 
-<?php if (isset($agent_registration_key) && !empty($agent_registration_key)) :
-  $agent_full_info = wp_remote_get(sprintf('%s/crm/agents/info/%s', FLEX_IDX_BASE_URL, $agent_registration_key), ['timeout' => 10]);
-  $agent_full_info = (is_wp_error($agent_full_info)) ? [] : wp_remote_retrieve_body($agent_full_info);
-
-  if (!empty($agent_full_info)) {
-    $agent_full_info = json_decode($agent_full_info, true);
-  }
-
-  $logo_type = $agent_full_info['info']['agent_logo_type'];
-  $logo_title = $agent_full_info['info']['agent_logo_title'];
-  $logo_slogan = $agent_full_info['info']['agent_logo_slogan'];
-  $logo_img = $agent_full_info['info']['agent_logo_image'];
-
-  $banner_type = $agent_full_info['info']['agent_home_page_banner_type'];
-  $banner_title = $agent_full_info['info']['agent_home_page_banner_title'];
-  $banner_sub_title = $agent_full_info['info']['agent_home_page_banner_sub_title'];
-  $banner_vide = $agent_full_info['info']['agent_home_page_banner_path_video'];
-  $banner_gallery = $agent_full_info['info']['agent_home_page_banner_gallery'];
-
-?>
-  <script>
-    var IB_AGENT_REGISTRATION_KEY = "<?php echo $agent_registration_key; ?>";
-    var IB_IS_AGENT_HOME = true;
-  </script>
-<?php endif; ?>
-
-<!--<div class="wrap-preloader">
-  <div class="item-wrap-preloader">
-    <?php idx_the_custom_logo_header(); ?>
-    <span class="preloader-icon"></span>
-  </div>
-</div>-->
-
-<main id="agent">
-  <section id="welcome" class="ms-section ms-animate">
-    <?php if (!empty($banner_title)) {
-      echo '<h1 class="ms-title">' . $banner_title . '</h1>';
-    } else {
-      echo '<h1 class="ms-title">Welcome to ' . $agent_full_info['info']['first_name'] . ' website</h1>';
-    } ?>
-
-    <?php if (!empty($banner_sub_title)) {
-      echo '<h2 class="ms-subtitle">' . $banner_sub_title . '</h2>';
-    } else {
-      echo '<h2 class="ms-subtitle">Expert Real Estate Specialist</h2>';
-    } ?>
-
-    <div class="ms-wrap-btn">
-      <a href="#" class="ms-btn js-btn-sell-rent active" title="buy"><span>buy</span></a>
-      <a href="#" class="ms-btn js-btn-sell-rent" title="rent"><span>rent</span></a>
-    </div>
-    <?php echo do_shortcode('[flex_autocomplete registration_key="' . $agent_registration_key . '" agent_page_slug="' . $agent_page_slug . '"]'); ?>
-    <div class="ms-slider">
-      <div class="gs-container-slider clidxboost-main-slider" data-gs='{"nav": true, "autoplay": true, "autoPlaySpeed": 4000}'>
-        <?php if (!empty($banner_type) && $banner_type == '1' && !empty($banner_gallery) && is_array($banner_gallery) && count($banner_gallery) > 0) {
-          foreach ($banner_gallery as $value) {  ?>
-            <img class="ms-img ms-lazy" data-real-type="image" data-img="<?php echo $value['url']; ?>" alt="<?php echo $value['altag']; ?>" title="<?php echo $value['title']; ?>">
-            <?php
-          }
-        } else {
-
-          if (false === get_theme_mod('idx_image_slider')) {
-            $idx_image_slider = [];
-          } else {
-            $idx_image_slider = get_theme_mod('idx_image_slider');
-          }
-          $aum = 0;
-          ksort($idx_image_slider);
-          foreach ($idx_image_slider as $key_slider => $value_slider) {
-            if (!empty($value_slider['thumb'])) { ?>
-              <img class="ms-img ms-lazy" data-real-type="image" data-img="<?php echo $value_slider['thumb']; ?>" alt="<?php echo get_the_title(); ?>">
-            <?php } ?>
-        <?php $aum = $aum + 1;
-          }
-        }
-        ?>
+    <main id="flex-blog-detail-theme">
+      <?php /*
+      <div class="gwr gwr-breadcrumb">
+        <nav class="flex-breadcrumb" aria-label="breadcrumb">
+          <ol>
+            <li><a href="<?php echo site_url(); ?>" title="Home">Home</a></li>
+            <li aria-current="page"><?php echo get_the_title(); ?></li>
+          </ol>
+        </nav>
       </div>
-    </div>
+      */ ?>
+      <div class="gwr c-flex">
+        <article class="flex-block-description">
+          <div class="flex-blog-header">
+            <h1 class="flex-page-title"><?php echo get_the_title(); ?> (Home Page)</h1>
+            <span class="date-publish"><?php echo get_the_date(); ?></span>
+            <!--
+            <div class="flex-block-share mini">
+              <span class="title-share">Share this article</span>
+                <div class="social-networks">
+             
+                  <ul class="item-header social-networks">
+                    <?php if (!empty( get_theme_mod('idx_social_media' )['facebook'] )): ?>
+                    <li class="clidxboost-icon-facebook"><a href="<?php echo get_theme_mod('idx_social_media' )['facebook']; ?>" title="Facebook" target="_blank" rel="nofollow">Facebook</a></li>
+                    <?php endif; ?>
+                    <?php if (!empty(get_theme_mod('idx_social_media' )['twitter']  )): ?>
+                    <li class="clidxboost-icon-twitter"><a href="<?php echo get_theme_mod('idx_social_media' )['twitter']; ?>" title="Twitter" target="_blank" rel="nofollow">Twitter</a></li>
+                    <?php endif; ?>
+                    <?php if (!empty( get_theme_mod('idx_social_media' )['google'] )): ?>
+                    <li class="clidxboost-icon-google-plus"><a href="<?php echo get_theme_mod('idx_social_media' )['google']; ?>" title="Google+" target="_blank" rel="nofollow">Google+</a></li>
+                    <?php endif; ?>
+                    <?php if (!empty( get_theme_mod('idx_social_media' )['instagram'] )): ?>
+                    <li class="clidxboost-icon-instagram"><a href="<?php echo get_theme_mod('idx_social_media' )['instagram']; ?>" title="Instagram" target="_blank" rel="nofollow">Instagram</a></li>
+                    <?php endif; ?>
+                    <?php if (!empty( get_theme_mod('idx_social_media' )['linkedin'] )): ?>
+                    <li class="clidxboost-icon-linkedin"><a href="<?php echo get_theme_mod('idx_social_media' )['linkedin']; ?>" title="Linked In" target="_blank" rel="nofollow">Linked In</a></li>
+                    <?php endif; ?>
 
-    <button class="ms-next-step" data-step="#featured-properties" aria-label="Skip to main content">
-      <div class="chevron"></div>
-      <div class="chevron"></div>
-      <div class="chevron"></div>
-    </button>
-  </section>
+                    <?php if (!empty( get_theme_mod('idx_social_media' )['youtube'] )): ?>
+                    <li class="clidxboost-icon-youtube"><a href="<?php echo get_theme_mod('idx_social_media' )['youtube']; ?>" title="Youtube" target="_blank" rel="nofollow">YouTube</a></li>
+                    <?php endif; ?>
 
-  <section id="listings" class="ms-section ms-animate">
-    <h2 class="ms-title">Featured Properties</h2>
-    <div class="ms-wrap-slider">
-      <?php
-      $filter_featured_page_token = flex_filter_has_featured_page();
-      if (null !== $filter_featured_page_token) {
-        echo do_shortcode(sprintf('[flex_idx_filter id="%s" agent_slug="' . $post->post_name . '" type="2" " mode="thumbs" registration_key="' . $agent_registration_key . '"]', $filter_featured_page_token));
-      }
-      ?>
-    </div>
-    <div class="ms-wrap-btn">
-      <a href="<?php echo rtrim(get_permalink($post->ID), "/"); ?>/listings" class="ms-btn" title="View all Listings">
-        <span>view all listings</span>
-      </a>
-    </div>
-  </section>
+                  </ul>  
+                </div>
+            </div>
+            -->
+          </div>
+          <?php the_content(); ?>
 
-  <section id="profile" class="ms-animate">
-    <article class="ms-section">
-      <h2 class="ms-title"><?php echo $agent_full_info['info']['first_name']; ?> <?php echo $agent_full_info['info']['last_name']; ?></h2>
-      <h3 class="ms-sb-title"><?php echo $agent_full_info['info']['agent_title']; ?></h3>
-      <ul class="ms-contact">
-        <li>Office: <a href="tel:<?php echo preg_replace('/[^\d]/', '', $agent_full_info['info']['office_info']['phone']); ?>"><?php echo flex_agent_format_phone_number($agent_full_info['info']['office_info']['phone']); ?></a></li>
-        <li>Cell: <a href="tel:<?php echo preg_replace('/[^\d]/', '', $agent_full_info['info']['contact_phone']); ?>"><?php echo flex_agent_format_phone_number($agent_full_info['info']['contact_phone']); ?></a></li>
-        <li>Email: <a href="mailto:<?php echo $agent_full_info['info']['contact_email']; ?>"><?php echo $agent_full_info['info']['contact_email']; ?></a></li>
-      </ul>
-      <div class="ms-paragraph">
-        <?php echo $agent_full_info['info']['bio']; ?>
+          <div class="flex-block-share standar">
+            <!--
+            <span class="title-share">Share this article</span>
+            <div class="social-networks">
+
+            <ul class="item-header social-networks">
+              <?php if (!empty( get_theme_mod('idx_social_media' )['facebook'] )): ?>
+              <li class="clidxboost-icon-facebook"><a href="<?php echo get_theme_mod('idx_social_media' )['facebook']; ?>" title="Facebook" target="_blank" rel="nofollow">Facebook</a></li>
+              <?php endif; ?>
+              <?php if (!empty(get_theme_mod('idx_social_media' )['twitter']  )): ?>
+              <li class="clidxboost-icon-twitter"><a href="<?php echo get_theme_mod('idx_social_media' )['twitter']; ?>" title="Twitter" target="_blank" rel="nofollow">Twitter</a></li>
+              <?php endif; ?>
+              <?php if (!empty( get_theme_mod('idx_social_media' )['google'] )): ?>
+              <li class="clidxboost-icon-google-plus"><a href="<?php echo get_theme_mod('idx_social_media' )['google']; ?>" title="Google+" target="_blank" rel="nofollow">Google+</a></li>
+              <?php endif; ?>
+              <?php if (!empty( get_theme_mod('idx_social_media' )['instagram'] )): ?>
+              <li class="clidxboost-icon-instagram"><a href="<?php echo get_theme_mod('idx_social_media' )['instagram']; ?>" title="Instagram" target="_blank" rel="nofollow">Instagram</a></li>
+              <?php endif; ?>
+              <?php if (!empty( get_theme_mod('idx_social_media' )['linkedin'] )): ?>
+              <li class="clidxboost-icon-linkedin"><a href="<?php echo get_theme_mod('idx_social_media' )['linkedin']; ?>" title="Linked In" target="_blank" rel="nofollow">Linked In</a></li>
+              <?php endif; ?>
+
+              <?php if (!empty( get_theme_mod('idx_social_media' )['youtube'] )): ?>
+              <li class="clidxboost-icon-youtube"><a href="<?php echo get_theme_mod('idx_social_media' )['youtube']; ?>" title="Youtube" target="_blank" rel="nofollow">YouTube</a></li>
+              <?php endif; ?>
+            </ul>  
+
+            </div>
+            -->
+            <!-- <a class="clidxboost-btn-link" href="<?php echo get_site_url(); ?>/blog"><span>Back to Blog</span></a> -->
+          </div>
+          
+        </article>
       </div>
-      <a class="ms-btn" href="<?php echo $agent_full_slugname; ?>/about" aria-label="Learn more">
-        <span>Learn more</span>
-      </a>
-      <div class="ms-wrap-img">
-        <img data-real-type="image" data-img="<?php echo $agent_full_info['info']['agent_photo_file']; ?>" src="<?php echo $agent_full_info['info']['agent_photo_file']; ?>" alt="<?php echo $agent_full_info['info']['first_name']; ?> <?php echo $agent_full_info['info']['last_name']; ?> - <?php echo $agent_full_info['info']['agent_title']; ?>">
-      </div>
-    </article>
-  </section>
+    </main>
 
-  <section id="signUpSection" class="ms-section ms-animate">
-    <div class="ms-wrap-section">
-      <div class="ms-wrap-detail">
-        <h2 class="ms-title">Sign up and power <span>your next move</span></h2>
-        <p>Claim your free RelatedISG account to save your favorite listings and searches, access listing details, and work with an agent.</p>
-        <button class="ms-btn" aria-label="Sign Up">
-          <span>Sign Up</span>
-        </button>
-      </div>
-      <div class="ms-wrap-img">
-        <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/iphone.png" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-lazy" alt="Sign up and power your next move">
-      </div>
-    </div>
-  </section>
-
-  <section id="contactUs" class="ms-section ms-animate">
-    <h2 class="ms-title">Contact Us</h2>
-    <div class="ms-wrap-section">
-      <h3 class="ms-wrap-title">Need help? We are here for you.</h3>
-      <p>Please complete the form below and one of our expert agents will contact you.</p>
-      <?php echo do_shortcode('[flex_idx_contact_form registration_key=' . $agent_registration_key . ']'); ?>
-      <input type="hidden" name="idx_contact_email_temp" class="idx_contact_email_temp" value="">
-      <script type="text/javascript">
-        jQuery(".flex-content-form .pt-name .medium").attr('placeholder', 'First Name*');
-        jQuery(".flex-content-form .pt-lname .medium").attr('placeholder', 'Last Name*');
-        jQuery(".flex-content-form .pt-email .medium").attr('placeholder', 'E-mail Address*');
-        jQuery(".flex-content-form .pt-phone .medium").attr('placeholder', 'Phone Number');
-        jQuery(".flex-content-form .textarea").attr('placeholder', 'Type your message here');
-      </script>
-    </div>
-  </section>
-</main>
-<?php get_footer('idx-agents'); ?>
-
-<script>
-  var maxCharacters = 500;
-  var profileTextWrapper = jQuery("#profile .ms-paragraph");
-  var profileText = jQuery("#profile .ms-paragraph").text().trim().replace(/(\r\n|\n|\r)/gm, "&nbsp;");
-  var newProfileText = profileText.slice(0, maxCharacters);
-  profileTextWrapper.html('<p>' + newProfileText + '...</p>');
-</script>
+<?php endwhile; get_footer(); ?>

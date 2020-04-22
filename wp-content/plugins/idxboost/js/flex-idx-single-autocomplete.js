@@ -71,12 +71,7 @@
 
     function handleRedirectTo(term, type) {
         var rentalType = $("#flex_ac_rental_slug").val();
-
-        if (typeof __ib_autocomplete !== "undefined") {
-            var redirectTo = __ib_autocomplete.siteUrl + "/" + __ib_autocomplete.agent_page_slug + "/search";
-        } else {
-            var redirectTo = __flex_g_settings.searchUrl;
-        }
+        var redirectTo = __flex_g_settings.searchUrl;
 
         redirectTo += "?for=" + ( (0 == rentalType) ? "sale" : "rent" );
 

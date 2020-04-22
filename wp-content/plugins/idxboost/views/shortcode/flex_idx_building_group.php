@@ -77,7 +77,7 @@
                       <?php endif; ?>
                       <?php } ?>
                       <?php }else{ ?>
-                      <li class="flex-slider-item-current"><img class="flex-lazy-image" data-original="https://www.idxboost.com/i/default_thumbnail.jpg"></li>
+                      <li class="flex-slider-item-current"><img class="flex-lazy-image" data-original="http://idxboost.com/i/default_thumbnail.jpg"></li>
                       <?php } ?>
                     </ul>
                   </div>

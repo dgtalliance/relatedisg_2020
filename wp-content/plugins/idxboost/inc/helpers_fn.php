@@ -1,29 +1,21 @@
 <?php
 
 if (!function_exists('iboost_get_mod_time')) {
-    function iboost_get_mod_time($filename)
-    {
-        return (string) filemtime(FLEX_IDX_PATH . "/" . $filename);
+    function iboost_get_mod_time($filename) {
+        return (string) filemtime(FLEX_IDX_PATH . $filename);
     }
 }
 
-function ibCodRandow($longitud)
-{
+function ibCodRandow($longitud) {
     $key = '';
     $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWYZ';
-    $max = strlen($pattern) - 1;
-
-    for ($i = 0; $i < $longitud; $i++) {
-        $rand_value = mt_rand(0, $max);
-        $key .= $pattern[$rand_value];
-    }
-
+    $max = strlen($pattern)-1;
+    for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
     return $key;
-}
+}   
 
 if (!function_exists("flex_idx_track_property_view_xhr_fn")) {
-    function flex_idx_track_property_view_xhr_fn()
-    {
+    function flex_idx_track_property_view_xhr_fn() {
         $response = [];
 
         $response = [];
@@ -52,8 +44,7 @@ if (!function_exists("flex_idx_track_property_view_xhr_fn")) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
-
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $output = curl_exec($ch);
         curl_close($ch);
 
@@ -66,19 +57,18 @@ if (!function_exists("flex_idx_track_property_view_xhr_fn")) {
 
 
 if (!function_exists("idxboost_agent_contact_inquiry_xhr_fn")) {
-    function idxboost_agent_contact_inquiry_xhr_fn()
-    {
+    function idxboost_agent_contact_inquiry_xhr_fn() {
         $response = [];
 
         $response = [];
         $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
-
+        
         $first_name = isset($_POST["name"]) ? $_POST["name"] : "";
         $last_name = isset($_POST["lastname"]) ? $_POST["lastname"] : "";
         $email_address = isset($_POST["email"]) ? $_POST["email"] : "";
         $phone_number = isset($_POST["phone"]) ? $_POST["phone"] : "";
-        $comments = isset($_POST["message"]) ? $_POST["message"] : "";
+        $comments = isset($_POST["message"]) ? $_POST["message"] : "";       
         $time_to_reach       = isset($_POST['option_time']) ? sanitize_text_field($_POST['option_time']) : '';
         $comments             = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
         $gender       = isset($_POST['gender']) ? sanitize_text_field($_POST['gender']) : '';
@@ -93,15 +83,15 @@ if (!function_exists("idxboost_agent_contact_inquiry_xhr_fn")) {
         $idx_agent_data_email = isset($_POST["idx_agent_data_email"]) ? $_POST["idx_agent_data_email"] : "";
         $idx_agent_data_phone = isset($_POST["idx_agent_data_phone"]) ? $_POST["idx_agent_data_phone"] : "";
         $idx_agent_data_name = isset($_POST["idx_agent_data_name"]) ? $_POST["idx_agent_data_name"] : "";
+        
+        $data_agent=[];
 
-        $data_agent = [];
-
-        $data_agent['phone'] = $idx_agent_data_phone;
-        $data_agent['email'] = $idx_agent_data_email;
-        $data_agent['name'] = $idx_agent_data_name;
-
+        $data_agent['phone']=$idx_agent_data_phone;
+        $data_agent['email']=$idx_agent_data_email;
+        $data_agent['name']=$idx_agent_data_name;
+        
         $sendParams = array(
-            'data_agent'          => json_encode($data_agent, true),
+            'data_agent'          => json_encode($data_agent,true),
             'data'         => array(
                 'first_name'          => $first_name,
                 'last_name'           => $last_name,
@@ -126,7 +116,7 @@ if (!function_exists("idxboost_agent_contact_inquiry_xhr_fn")) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $output = curl_exec($ch);
         curl_close($ch);
 
@@ -139,49 +129,46 @@ if (!function_exists("idxboost_agent_contact_inquiry_xhr_fn")) {
 
 // for WP-Customizer
 if (!function_exists('func_customizer_idxboost')) {
-    function func_customizer_idxboost($wp_customize)
-    {
-        $wp_customize->add_section('idx_plugin_customizer_scheme', array('title'    => __('Colors', 'idx_plugin_customizer'), 'priority' => 102,));
-
-        $wp_customize->add_setting('idx_plugin_custom[idx_text_sub_title_search_bar]', array('capability'        => 'edit_theme_options', 'default'           => '--------------', 'sanitize_callback' => 'sanitize_text_field',));
-        $wp_customize->add_control('idx_plugin_custom[idx_text_sub_title_search_bar]', array('type'     => 'text', 'section'  => 'idx_plugin_customizer_scheme', 'label'    => __('Search Bar Title'), 'settings' => 'idx_plugin_custom[idx_text_sub_title_search_bar]',));
-        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_sub_title_search_bar]', array('selector'            => '.idx_text_sub_title_search_bar', 'render_callback'     => array($wp_customize, '_idx_text_sub_title_search_bar'), 'container_inclusive' => true,));
-
-
-        $wp_customize->add_setting('idx_plugin_custom[idx_text_search_bar]', array('capability'        => 'edit_theme_options', 'default'           => '--------------', 'sanitize_callback' => 'sanitize_text_field',));
-        $wp_customize->add_control('idx_plugin_custom[idx_text_search_bar]', array('type'     => 'text', 'section'  => 'idx_plugin_customizer_scheme', 'label'    => __('Search Bar Text'), 'settings' => 'idx_plugin_custom[idx_text_search_bar]',));
-        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_search_bar]', array('selector'            => '.idx_text_search_bar', 'render_callback'     => array($wp_customize, '_idx_text_search_bar'), 'container_inclusive' => true,));
-
+    function func_customizer_idxboost($wp_customize){
+        $wp_customize->add_section('idx_plugin_customizer_scheme', array( 'title'    => __('Colors', 'idx_plugin_customizer'),'priority' => 102,));
+  
+        $wp_customize->add_setting('idx_plugin_custom[idx_text_sub_title_search_bar]', array('capability'        => 'edit_theme_options','default'           => '--------------','sanitize_callback' => 'sanitize_text_field',));
+        $wp_customize->add_control('idx_plugin_custom[idx_text_sub_title_search_bar]', array('type'     => 'text','section'  => 'idx_plugin_customizer_scheme','label'    => __('Search Bar Title'),'settings' => 'idx_plugin_custom[idx_text_sub_title_search_bar]',));
+        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_sub_title_search_bar]', array('selector'            => '.idx_text_sub_title_search_bar','render_callback'     => array($wp_customize, '_idx_text_sub_title_search_bar'),'container_inclusive' => true,));
+  
+  
+        $wp_customize->add_setting('idx_plugin_custom[idx_text_search_bar]', array('capability'        => 'edit_theme_options','default'           => '--------------','sanitize_callback' => 'sanitize_text_field',));
+        $wp_customize->add_control('idx_plugin_custom[idx_text_search_bar]', array('type'     => 'text','section'  => 'idx_plugin_customizer_scheme','label'    => __('Search Bar Text'),'settings' => 'idx_plugin_custom[idx_text_search_bar]',));
+        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_search_bar]', array('selector'            => '.idx_text_search_bar','render_callback'     => array($wp_customize, '_idx_text_search_bar'),'container_inclusive' => true,));
+  
         $wp_customize->add_setting('idx_plugin_custom[has_button]', array('capability' => 'edit_theme_options', 'sanitize_callback' => 'sanitize_text_field'));
         $wp_customize->add_control('idx_plugin_custom[has_button]', array('label' => __('Has button ?'), 'section' => 'idx_plugin_customizer_scheme', 'settings' => 'idx_plugin_custom[has_button]', 'type' => 'checkbox'));
         $wp_customize->selective_refresh->add_partial('idx_plugin_custom[has_button]', array('selector' => '.idx_languages_english', 'render_callback' => array($wp_customize, '_idx_tesoro_english'), 'container_inclusive' => true));
-
-        $wp_customize->add_setting('idx_plugin_custom[idx_text_button1_search_bar]', array('capability'        => 'edit_theme_options', 'default'           => "I'm looking to buy", 'sanitize_callback' => 'sanitize_text_field',));
-        $wp_customize->add_control('idx_plugin_custom[idx_text_button1_search_bar]', array('type'     => 'text', 'section'  => 'idx_plugin_customizer_scheme', 'label'    => __('Firts Button'), 'settings' => 'idx_plugin_custom[idx_text_button1_search_bar]',));
-        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_button1_search_bar]', array('selector'            => '.idx_text_button1_search_bar', 'render_callback'     => array($wp_customize, '_idx_text_button1_search_bar'), 'container_inclusive' => true,));
-
-        $wp_customize->add_setting('idx_plugin_custom[idx_text_button2_search_bar]', array('capability'        => 'edit_theme_options', 'default'           => "I'm looking to sell", 'sanitize_callback' => 'sanitize_text_field',));
-        $wp_customize->add_control('idx_plugin_custom[idx_text_button2_search_bar]', array('type'     => 'text', 'section'  => 'idx_plugin_customizer_scheme', 'label'    => __('Second Button'), 'settings' => 'idx_plugin_custom[idx_text_button2_search_bar]',));
-        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_button2_search_bar]', array('selector' => '.idx_text_button2_search_bar', 'render_callback'     => array($wp_customize, '_idx_text_button2_search_bar'), 'container_inclusive' => true,));
-
-
-        $wp_customize->add_setting('idx_plugin_custom[idx_link_button1_search_bar]', array('capability'        => 'edit_theme_options', 'default'           => '#', 'sanitize_callback' => 'sanitize_text_field',));
-        $wp_customize->add_control('idx_plugin_custom[idx_link_button1_search_bar]', array('type'     => 'text', 'section'  => 'idx_plugin_customizer_scheme', 'label'    => __('Firts link Button'), 'settings' => 'idx_plugin_custom[idx_link_button1_search_bar]',));
-        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_link_button1_search_bar]', array('selector'            => '.idx_link_button1_search_bar', 'render_callback'     => array($wp_customize, '_idx_link_button1_search_bar'), 'container_inclusive' => true,));
-
-        $wp_customize->add_setting('idx_plugin_custom[idx_link_button2_search_bar]', array('capability'        => 'edit_theme_options', 'default'           => '#', 'sanitize_callback' => 'sanitize_text_field',));
-        $wp_customize->add_control('idx_plugin_custom[idx_link_button2_search_bar]', array('type'     => 'text', 'section'  => 'idx_plugin_customizer_scheme', 'label'    => __('Second Link Button'), 'settings' => 'idx_plugin_custom[idx_link_button2_search_bar]',));
-        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_link_button2_search_bar]', array('selector'            => '.idx_link_button2_search_bar', 'render_callback'     => array($wp_customize, '_idx_link_button2_search_bar'), 'container_inclusive' => true,));
+  
+        $wp_customize->add_setting('idx_plugin_custom[idx_text_button1_search_bar]', array('capability'        => 'edit_theme_options','default'           => "I'm looking to buy",'sanitize_callback' => 'sanitize_text_field',));
+        $wp_customize->add_control('idx_plugin_custom[idx_text_button1_search_bar]', array('type'     => 'text','section'  => 'idx_plugin_customizer_scheme','label'    => __('Firts Button'),'settings' => 'idx_plugin_custom[idx_text_button1_search_bar]',));
+        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_button1_search_bar]', array('selector'            => '.idx_text_button1_search_bar','render_callback'     => array($wp_customize, '_idx_text_button1_search_bar'),'container_inclusive' => true,));
+  
+        $wp_customize->add_setting('idx_plugin_custom[idx_text_button2_search_bar]', array('capability'        => 'edit_theme_options','default'           => "I'm looking to sell",'sanitize_callback' => 'sanitize_text_field',));
+        $wp_customize->add_control('idx_plugin_custom[idx_text_button2_search_bar]', array('type'     => 'text','section'  => 'idx_plugin_customizer_scheme','label'    => __('Second Button'),'settings' => 'idx_plugin_custom[idx_text_button2_search_bar]',));
+        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_text_button2_search_bar]', array('selector'=> '.idx_text_button2_search_bar','render_callback'     => array($wp_customize, '_idx_text_button2_search_bar'), 'container_inclusive' => true, ));
+  
+  
+        $wp_customize->add_setting('idx_plugin_custom[idx_link_button1_search_bar]', array('capability'        => 'edit_theme_options','default'           => '#','sanitize_callback' => 'sanitize_text_field',));
+        $wp_customize->add_control('idx_plugin_custom[idx_link_button1_search_bar]', array('type'     => 'text','section'  => 'idx_plugin_customizer_scheme','label'    => __('Firts link Button'),'settings' => 'idx_plugin_custom[idx_link_button1_search_bar]',));
+        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_link_button1_search_bar]', array('selector'            => '.idx_link_button1_search_bar','render_callback'     => array($wp_customize, '_idx_link_button1_search_bar'),'container_inclusive' => true,));
+  
+        $wp_customize->add_setting('idx_plugin_custom[idx_link_button2_search_bar]', array('capability'        => 'edit_theme_options','default'           => '#','sanitize_callback' => 'sanitize_text_field',));
+        $wp_customize->add_control('idx_plugin_custom[idx_link_button2_search_bar]', array('type'     => 'text','section'  => 'idx_plugin_customizer_scheme','label'    => __('Second Link Button'),'settings' => 'idx_plugin_custom[idx_link_button2_search_bar]',));
+        $wp_customize->selective_refresh->add_partial('idx_plugin_custom[idx_link_button2_search_bar]', array('selector'            => '.idx_link_button2_search_bar','render_callback'     => array($wp_customize, '_idx_link_button2_search_bar'),'container_inclusive' => true,));
     }
-}
+  }
 
 // lead submission for buy
 if (!function_exists("ib_lead_submission_buy_xhr_fn")) {
-    function ib_lead_submission_buy_xhr_fn()
-    {
+    function ib_lead_submission_buy_xhr_fn() {
         $response = [];
-        $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
@@ -198,15 +185,14 @@ if (!function_exists("ib_lead_submission_buy_xhr_fn")) {
             "referer" => $referer,
             "origin" => $origin,
             "agent" => $agent,
-            "form_data" => $_POST,
-            'has_registration_key' => $has_registration_key
+            "form_data" => $_POST
         ];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_LEAD_SUBMISSION_BUY);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($output, true);
@@ -216,11 +202,9 @@ if (!function_exists("ib_lead_submission_buy_xhr_fn")) {
 }
 // lead submission for rent
 if (!function_exists("ib_lead_submission_rent_xhr_fn")) {
-    function ib_lead_submission_rent_xhr_fn()
-    {
+    function ib_lead_submission_rent_xhr_fn() {
         $response = [];
-        $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
@@ -237,15 +221,14 @@ if (!function_exists("ib_lead_submission_rent_xhr_fn")) {
             "referer" => $referer,
             "origin" => $origin,
             "agent" => $agent,
-            "form_data" => $_POST,
-            'has_registration_key' => $has_registration_key
+            "form_data" => $_POST
         ];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_LEAD_SUBMISSION_RENT);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($output, true);
@@ -255,11 +238,9 @@ if (!function_exists("ib_lead_submission_rent_xhr_fn")) {
 }
 // lead submission for sell
 if (!function_exists("ib_lead_submission_sell_xhr_fn")) {
-    function ib_lead_submission_sell_xhr_fn()
-    {
+    function ib_lead_submission_sell_xhr_fn() {
         $response = [];
-        $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
@@ -276,15 +257,14 @@ if (!function_exists("ib_lead_submission_sell_xhr_fn")) {
             "referer" => $referer,
             "origin" => $origin,
             "agent" => $agent,
-            "form_data" => $_POST,
-            'has_registration_key' => $has_registration_key
+            "form_data" => $_POST
         ];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_LEAD_SUBMISSION_SELL);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($output, true);
@@ -293,8 +273,7 @@ if (!function_exists("ib_lead_submission_sell_xhr_fn")) {
     }
 }
 if (!function_exists("ib_register_quizz_save_fn")) {
-    function ib_register_quizz_save_fn()
-    {
+    function ib_register_quizz_save_fn() {
         $response = [];
         $access_token = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
@@ -319,7 +298,7 @@ if (!function_exists("ib_register_quizz_save_fn")) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -327,8 +306,7 @@ if (!function_exists("ib_register_quizz_save_fn")) {
     }
 }
 if (!function_exists('ib_schools_info_xhr_fn')) {
-    function ib_schools_info_xhr_fn()
-    {
+    function ib_schools_info_xhr_fn() {
         $lat = isset($_POST["lat"]) ? $_POST["lat"] : null;
         $lng = isset($_POST["lng"]) ? $_POST["lng"] : null;
         $distance = isset($_POST["distance"]) ? $_POST["distance"] : null;
@@ -342,126 +320,126 @@ if (!function_exists('ib_schools_info_xhr_fn')) {
             ]
         ];
         $ch = curl_init();
-
+        
         curl_setopt($ch, CURLOPT_URL, IDX_BOOTS_NICHE);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
-
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
+        
         $output = curl_exec($ch);
-        $response = json_decode($output, true);
+        $response = json_decode($output,true);
         curl_close($ch);
         ob_start();
         if (is_array($response)) {
 ?>
 
-            <!-- starts schools information -->
+<!-- starts schools information -->
 
-            <div class="list-details clidxboost-schools-container" id="clidxboost-schools-container">
-                <div class="list-amenities show school-list">
-                    <h3 class="school-title"><?php echo __("Schools for", IDXBOOST_DOMAIN_THEME_LANG); ?> {{address_short}}, <span>{{address_large}}</span></h3>
-                    <div class="clidxboost-niche-tab-filters">
-                        <div class="clidxboost-niche-tab">
-                            <button class="active" data-filter="all"><span><?php echo __("All Schools", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
-                        </div>
-                        <div class="clidxboost-niche-tab">
-                            <button data-filter="elementary"><span><?php echo __("Elementary", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
-                        </div>
-                        <div class="clidxboost-niche-tab">
-                            <button data-filter="middle"><span><?php echo __("Middle", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
-                        </div>
-                        <div class="clidxboost-niche-tab">
-                            <button data-filter="high"><span><?php echo __("High", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
-                        </div>
-                    </div>
-                    <div class="clidxboost-header-niche">
-                        <div class="clidxboost-header-th"><?php echo __("School", IDXBOOST_DOMAIN_THEME_LANG); ?> </div>
-                        <div class="clidxboost-header-th"><?php echo __("Rating", IDXBOOST_DOMAIN_THEME_LANG); ?> </div>
-                        <div class="clidxboost-header-th"><?php echo __("Grades", IDXBOOST_DOMAIN_THEME_LANG); ?> </div>
-                        <div class="clidxboost-header-th"><?php echo __("Safety", IDXBOOST_DOMAIN_THEME_LANG); ?> </div>
-                        <div class="clidxboost-header-th"><?php echo __("Distance", IDXBOOST_DOMAIN_THEME_LANG); ?> </div>
-                        <div class="clidxboost-header-th"><?php echo __("Type", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-                    </div>
-                    <div class="clidxboost-body-niche">
-                        <?php
-                        $textAcade = '';
-                        $textBest = '';
-                        if ($response['success']) {
-                            foreach ($response['data'] as $keygeom => $valuegeome) {
-                                if (empty($valuegeome['grade_best_school'])) {
-                                    $textBest = 'overall-not-graded.png';
-                                } else {
-                                    $textBest = strtolower($valuegeome['grade_best_school']);
-                                    $textBest = str_replace("-", "-minus", $textBest);
-                                    $textBest = 'overall-' . str_replace("+", "-plus", $textBest) . '.png';
-                                }
+<div class="list-details clidxboost-schools-container" id="clidxboost-schools-container">
+    <div class="list-amenities show school-list">
+    <h3 class="school-title"><?php echo __("Schools for", IDXBOOST_DOMAIN_THEME_LANG); ?> {{address_short}}, <span>{{address_large}}</span></h3>
+    <div class="clidxboost-niche-tab-filters">
+        <div class="clidxboost-niche-tab">
+        <button class="active" data-filter="all"><span><?php echo __("All Schools", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+        </div>
+        <div class="clidxboost-niche-tab">
+        <button data-filter="elementary"><span><?php echo __("Elementary", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+        </div>
+        <div class="clidxboost-niche-tab">
+        <button data-filter="middle"><span><?php echo __("Middle", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+        </div>
+        <div class="clidxboost-niche-tab">
+        <button data-filter="high"><span><?php echo __("High", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+        </div>
+    </div>
+    <div class="clidxboost-header-niche">
+        <div class="clidxboost-header-th"><?php echo __("School", IDXBOOST_DOMAIN_THEME_LANG); ?>  </div>
+        <div class="clidxboost-header-th"><?php echo __("Rating", IDXBOOST_DOMAIN_THEME_LANG); ?>  </div>
+        <div class="clidxboost-header-th"><?php echo __("Grades", IDXBOOST_DOMAIN_THEME_LANG); ?>  </div>
+        <div class="clidxboost-header-th"><?php echo __("Safety", IDXBOOST_DOMAIN_THEME_LANG); ?>  </div>
+        <div class="clidxboost-header-th"><?php echo __("Distance", IDXBOOST_DOMAIN_THEME_LANG); ?>  </div>
+        <div class="clidxboost-header-th"><?php echo __("Type", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+    </div>
+    <div class="clidxboost-body-niche">
+        <?php
+        $textAcade='';
+        $textBest='';
+        if ($response['success']) {
+            foreach ($response['data'] as $keygeom => $valuegeome) {
+            if (empty($valuegeome['grade_best_school'])) {
+            $textBest='overall-not-graded.png';
+            }else{
+            $textBest=strtolower($valuegeome['grade_best_school']);
+            $textBest=str_replace("-","-minus",$textBest);
+            $textBest='overall-'.str_replace("+","-plus",$textBest).'.png';
+            }
+        
+            if (empty($valuegeome['grade_academics_school'])) {
+            $textAcade='overall-not-graded.png';
+            }else{
+            $textAcade=strtolower($valuegeome['grade_academics_school']);
+            $textAcade=str_replace("-","-minus",$textAcade);
+            $textAcade='overall-'.str_replace("+","-plus",$textAcade).'.png';
+            }
+            $pathImageBest='https://alerts.flexidx.com/img/grades/'.$textBest;
+            $pathImageAca='https://alerts.flexidx.com/img/grades/'.$textAcade;
+            $filtextSchool='';
+        
+            if ( strpos($valuegeome['name_school'],'Elementary') ) {
+            $filtextSchool='elementary';
+            }elseif  ( strpos($valuegeome['name_school'],'Middle') ) {
+            $filtextSchool='elementary';
+            }elseif  ( strpos($valuegeome['name_school'],'High') ) {
+            $filtextSchool='high';
+            }
+        ?>
+        <div class="clidxboost-td-niche <?php echo $filtextSchool;?> clidxboost-td-niche-hide">
+        <div class="clidxboost-data-item">
+            <a target="blank" rel="nofollow" href="<?php echo  $valuegeome['url'] ;?>"><?php echo $valuegeome['name_school']; ?></a>
+        </div>
+        <div class="clidxboost-data-item"> <img class="clidxboost-rangeSchools" src="<?php echo $pathImageBest; ?>"></div>
+        <div class="clidxboost-data-item"><?php echo $valuegeome['grades_offered']; ?></div>
+        <div class="clidxboost-data-item"><img class="clidxboost-safelySchools" src="<?php echo $pathImageAca;?> "></div>
+        <div class="clidxboost-data-item"><?php echo number_format(($valuegeome['distancePoint']* 0.62137), 1, '.', ''); ?> <?php echo __("Miles", IDXBOOST_DOMAIN_THEME_LANG); ?>   </div>
+        <div class="clidxboost-data-item"><?php echo $valuegeome['character']; ?></div>
+        </div>
+        <?php   }
+        }
+        ?>
+        <div id="clidxboost-container-loadMore-niche" class="clidxboost-container-loadMore-niche">
+        <div class="clidxboost-count-niche"><?php echo $response["count"]; ?> <?php echo __("more schools", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+        <div id="clidxboost-data-loadMore-niche"><?php echo __("Expand", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+        </div>
+        <div class="uc-listingSchools-disclaimer">
+        <p>
+            <a class="uc-listingSchools-attributionLink" href="https://www.niche.com/k12" target="_blank">
+            <?php echo __("K12 School Data", IDXBOOST_DOMAIN_THEME_LANG); ?>
+            </a>
+            <?php echo __("provided by", IDXBOOST_DOMAIN_THEME_LANG); ?>
+            <a href="//www.niche.com/" target="_blank">
+            <svg id="niche-logotype" viewBox="0 0 501.59 76.61" width="100%" height="100%">
+                <path d="M418.36 17.89a34.14 34.14 0 0 0 6.31 3.89 37.4 37.4 0 0 0 18 3.91c6.54-.25 12.5-2.45 18-4.68 4.44-1.78 9.65-3.69 15.25-3.69h1.55a33.94 33.94 0 0 1 14.33 4.58 29.47 29.47 0 0 1 5.46 3.77 3 3 0 0 0 2 .79 2.26 2.26 0 0 0 2.08-1.34 2.48 2.48 0 0 0-.18-2.39 5.25 5.25 0 0 0-1.14-1.21l-.1-.08a38.92 38.92 0 0 0-6-3.87 39.74 39.74 0 0 0-17.6-4.8c-6.4-.19-12.34 1.79-17.79 4l-.14.06c-5.37 2.15-10.93 4.37-17 4.45h-.37a31 31 0 0 1-19.81-7.42 2.47 2.47 0 0 0-2-.56 2.35 2.35 0 0 0-1.67 1.08 2.68 2.68 0 0 0 0 2.58 3.54 3.54 0 0 0 .82.93zM418.36 37.55a34.34 34.34 0 0 0 6.31 3.89 37.26 37.26 0 0 0 18 3.91c6.52-.25 12.49-2.45 18-4.68 4.44-1.78 9.64-3.69 15.25-3.69h1.55a33.94 33.94 0 0 1 14.33 4.59 29.57 29.57 0 0 1 5.46 3.77 3 3 0 0 0 2 .79 2.26 2.26 0 0 0 2.08-1.34 2.44 2.44 0 0 0-.18-2.39 5.26 5.26 0 0 0-1.14-1.21l-.1-.08a39.05 39.05 0 0 0-6-3.87 39.75 39.75 0 0 0-17.6-4.8c-6.41-.2-12.34 1.79-17.79 4l-.15.06c-5.37 2.15-10.92 4.37-17 4.45h-.36a31 31 0 0 1-19.82-7.42 2.47 2.47 0 0 0-2-.56 2.35 2.35 0 0 0-1.67 1.07 2.68 2.68 0 0 0 0 2.59 3.59 3.59 0 0 0 .83.92zM500.04 60.84l-.1-.08a38.89 38.89 0 0 0-6-3.87 39.75 39.75 0 0 0-17.6-4.8c-6.42-.19-12.34 1.79-17.79 4l-.15.06c-5.37 2.15-10.92 4.37-17 4.45h-.37a31 31 0 0 1-19.81-7.43 2.45 2.45 0 0 0-2-.56 2.35 2.35 0 0 0-1.67 1.07 2.68 2.68 0 0 0 0 2.59 3.56 3.56 0 0 0 .83 1 34.3 34.3 0 0 0 6.31 3.89 37.23 37.23 0 0 0 18 3.91c6.54-.25 12.5-2.45 18-4.68 4.45-1.78 9.66-3.69 15.25-3.69h1.55a34 34 0 0 1 14.31 4.53 29.35 29.35 0 0 1 5.46 3.76 3 3 0 0 0 2 .79 2.26 2.26 0 0 0 2.08-1.34 2.47 2.47 0 0 0-.18-2.39 5.25 5.25 0 0 0-1.12-1.21zM398.18 8.64A39.3 39.3 0 0 0 365.59.8a38.27 38.27 0 0 0-2.65 74.3 37.26 37.26 0 0 0 10.54 1.5 39.81 39.81 0 0 0 22.58-7.09A38.68 38.68 0 0 0 412.3 38.3a38.48 38.48 0 0 0-14.12-29.66zm9.38 29.66a34.85 34.85 0 0 1-14.19 27.8 34 34 0 1 1-19.44-61.94h1.49a34.07 34.07 0 0 1 32.14 34.14z"></path>
+                <path d="M389.36 17.69a2.5 2.5 0 0 0-2.49 2.49v29.71L360.4 18.51a2.32 2.32 0 0 0-2.14-.82 2.49 2.49 0 0 0-2.49 2.49v36.79a2.5 2.5 0 0 0 5 0V27.04l26.57 31.5a2.26 2.26 0 0 0 1 .69 2.46 2.46 0 0 0 1 .24 2.5 2.5 0 0 0 2.49-2.49v-36.8a2.5 2.5 0 0 0-2.47-2.49zM81.46 5.99c-2 0-3.54 1.19-3.54 4.18v56.42a3.54 3.54 0 0 0 7.07 0V10.25c0-2.95-1.58-4.26-3.53-4.26zM52.61 5.99c-2 0-3.54 1.19-3.54 4.18V56.3L6.55 7.37a3.25 3.25 0 0 0-1-.78 3.4 3.4 0 0 0-2-.64c-2 0-3.54 1.19-3.54 4.18v56.42a3.54 3.54 0 0 0 7.07 0V18.21L49.8 68.88a3.27 3.27 0 0 0 1.88 1.1 3.49 3.49 0 0 0 4.45-3.4V10.25c.01-2.95-1.57-4.26-3.52-4.26zM234.5 5.99c-2 0-3.53 1.19-3.53 4.18v24.44h-42V10.25c0-2.91-1.58-4.26-3.53-4.26h-.08c-2 0-3.53 1.19-3.53 4.18v56.42a3.54 3.54 0 0 0 3.53 3.53h.08a3.53 3.53 0 0 0 3.53-3.53v-26h42v26a3.535 3.535 0 0 0 7.07 0V10.25c0-2.95-1.58-4.26-3.54-4.26zM124.96 13.78c10.1-5.06 22.05-2.17 29.77 5.71a3.84 3.84 0 0 0 5.31.45 3.36 3.36 0 0 0 0-4.93c-9.51-9.71-23.66-12.35-36.27-7.78-11 4-19.16 14.57-20.7 26.1a32.73 32.73 0 0 0 13.32 30.7 34.05 34.05 0 0 0 36.41 1.85 33.57 33.57 0 0 0 6.45-4.83c1.77-1.68.85-4-.61-5.08a3.59 3.59 0 0 0-4.66.6 25.8 25.8 0 0 1-29.6 4.61c-9.07-4.54-14.29-14.31-14.17-24.27a26.6 26.6 0 0 1 14.75-23.13zM307.27 11.95c2.45 0 3.59-1.33 3.59-3s-1-3-3.52-3h-43.31c-2 0-3.53 1.19-3.53 4.18v56.42a3.54 3.54 0 0 0 3.53 3.53h43.24c2.45 0 3.59-1.33 3.59-3s-1-3-3.52-3h-39.7V40.56h32c2.45 0 3.59-1.33 3.59-3s-1-3-3.51-3h-32.07V11.95zM325.74 20.01a7 7 0 1 1 7-7 7 7 0 0 1-7 7zm0-13.1a6.14 6.14 0 1 0 6 6.1 6.1 6.1 0 0 0-6-6.11z"></path>
+                <path d="M326.66 13.4a2.11 2.11 0 0 0 2-2.22 2.25 2.25 0 0 0-2.13-2.25h-2.75a.38.38 0 0 0-.38.46.87.87 0 0 0 0 .1v7.08c0 .5.12.65.46.65s.44-.17.44-.65v-3.14h1.49l1.58 3.15s.34.76.75.55 0-.94 0-.94zm-2.41-3.71h2.11a1.47 1.47 0 0 1 1.35 1.48 1.45 1.45 0 0 1-1.31 1.46h-2.15z"></path>
+            </svg>
+            </a>
+        </p>
+        <p>
+            <?php echo __("School data provided as-is by", IDXBOOST_DOMAIN_THEME_LANG); ?>
+            <a class="uc-listingSchools-disclaimerLink" href="https://www.niche.com" target="_blank">
+            Niche</a>,
+            <?php echo __("a third party. It is the responsibility of the user to evaluate all sources of information. Users should visit all school district web sites and visit all the schools in person to verify and consider all data, including eligibility.", IDXBOOST_DOMAIN_THEME_LANG); ?>
+        </p>
+        </div>
+    </div>
+    <div class="idxboost-line-properties"></div>
+    </div>
+</div>
 
-                                if (empty($valuegeome['grade_academics_school'])) {
-                                    $textAcade = 'overall-not-graded.png';
-                                } else {
-                                    $textAcade = strtolower($valuegeome['grade_academics_school']);
-                                    $textAcade = str_replace("-", "-minus", $textAcade);
-                                    $textAcade = 'overall-' . str_replace("+", "-plus", $textAcade) . '.png';
-                                }
-                                $pathImageBest = 'https://alerts.flexidx.com/img/grades/' . $textBest;
-                                $pathImageAca = 'https://alerts.flexidx.com/img/grades/' . $textAcade;
-                                $filtextSchool = '';
+<!-- ends schools information -->
 
-                                if (strpos($valuegeome['name_school'], 'Elementary')) {
-                                    $filtextSchool = 'elementary';
-                                } elseif (strpos($valuegeome['name_school'], 'Middle')) {
-                                    $filtextSchool = 'elementary';
-                                } elseif (strpos($valuegeome['name_school'], 'High')) {
-                                    $filtextSchool = 'high';
-                                }
-                        ?>
-                                <div class="clidxboost-td-niche <?php echo $filtextSchool; ?> clidxboost-td-niche-hide">
-                                    <div class="clidxboost-data-item">
-                                        <a target="blank" rel="nofollow" href="<?php echo  $valuegeome['url']; ?>"><?php echo $valuegeome['name_school']; ?></a>
-                                    </div>
-                                    <div class="clidxboost-data-item"> <img class="clidxboost-rangeSchools" src="<?php echo $pathImageBest; ?>"></div>
-                                    <div class="clidxboost-data-item"><?php echo $valuegeome['grades_offered']; ?></div>
-                                    <div class="clidxboost-data-item"><img class="clidxboost-safelySchools" src="<?php echo $pathImageAca; ?> "></div>
-                                    <div class="clidxboost-data-item"><?php echo number_format(($valuegeome['distancePoint'] * 0.62137), 1, '.', ''); ?> <?php echo __("Miles", IDXBOOST_DOMAIN_THEME_LANG); ?> </div>
-                                    <div class="clidxboost-data-item"><?php echo $valuegeome['character']; ?></div>
-                                </div>
-                        <?php   }
-                        }
-                        ?>
-                        <div id="clidxboost-container-loadMore-niche" class="clidxboost-container-loadMore-niche">
-                            <div class="clidxboost-count-niche"><?php echo $response["count"]; ?> <?php echo __("more schools", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-                            <div id="clidxboost-data-loadMore-niche"><?php echo __("Expand", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-                        </div>
-                        <div class="uc-listingSchools-disclaimer">
-                            <p>
-                                <a class="uc-listingSchools-attributionLink" href="https://www.niche.com/k12" target="_blank">
-                                    <?php echo __("K12 School Data", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                                </a>
-                                <?php echo __("provided by", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                                <a href="//www.niche.com/" target="_blank">
-                                    <svg id="niche-logotype" viewBox="0 0 501.59 76.61" width="100%" height="100%">
-                                        <path d="M418.36 17.89a34.14 34.14 0 0 0 6.31 3.89 37.4 37.4 0 0 0 18 3.91c6.54-.25 12.5-2.45 18-4.68 4.44-1.78 9.65-3.69 15.25-3.69h1.55a33.94 33.94 0 0 1 14.33 4.58 29.47 29.47 0 0 1 5.46 3.77 3 3 0 0 0 2 .79 2.26 2.26 0 0 0 2.08-1.34 2.48 2.48 0 0 0-.18-2.39 5.25 5.25 0 0 0-1.14-1.21l-.1-.08a38.92 38.92 0 0 0-6-3.87 39.74 39.74 0 0 0-17.6-4.8c-6.4-.19-12.34 1.79-17.79 4l-.14.06c-5.37 2.15-10.93 4.37-17 4.45h-.37a31 31 0 0 1-19.81-7.42 2.47 2.47 0 0 0-2-.56 2.35 2.35 0 0 0-1.67 1.08 2.68 2.68 0 0 0 0 2.58 3.54 3.54 0 0 0 .82.93zM418.36 37.55a34.34 34.34 0 0 0 6.31 3.89 37.26 37.26 0 0 0 18 3.91c6.52-.25 12.49-2.45 18-4.68 4.44-1.78 9.64-3.69 15.25-3.69h1.55a33.94 33.94 0 0 1 14.33 4.59 29.57 29.57 0 0 1 5.46 3.77 3 3 0 0 0 2 .79 2.26 2.26 0 0 0 2.08-1.34 2.44 2.44 0 0 0-.18-2.39 5.26 5.26 0 0 0-1.14-1.21l-.1-.08a39.05 39.05 0 0 0-6-3.87 39.75 39.75 0 0 0-17.6-4.8c-6.41-.2-12.34 1.79-17.79 4l-.15.06c-5.37 2.15-10.92 4.37-17 4.45h-.36a31 31 0 0 1-19.82-7.42 2.47 2.47 0 0 0-2-.56 2.35 2.35 0 0 0-1.67 1.07 2.68 2.68 0 0 0 0 2.59 3.59 3.59 0 0 0 .83.92zM500.04 60.84l-.1-.08a38.89 38.89 0 0 0-6-3.87 39.75 39.75 0 0 0-17.6-4.8c-6.42-.19-12.34 1.79-17.79 4l-.15.06c-5.37 2.15-10.92 4.37-17 4.45h-.37a31 31 0 0 1-19.81-7.43 2.45 2.45 0 0 0-2-.56 2.35 2.35 0 0 0-1.67 1.07 2.68 2.68 0 0 0 0 2.59 3.56 3.56 0 0 0 .83 1 34.3 34.3 0 0 0 6.31 3.89 37.23 37.23 0 0 0 18 3.91c6.54-.25 12.5-2.45 18-4.68 4.45-1.78 9.66-3.69 15.25-3.69h1.55a34 34 0 0 1 14.31 4.53 29.35 29.35 0 0 1 5.46 3.76 3 3 0 0 0 2 .79 2.26 2.26 0 0 0 2.08-1.34 2.47 2.47 0 0 0-.18-2.39 5.25 5.25 0 0 0-1.12-1.21zM398.18 8.64A39.3 39.3 0 0 0 365.59.8a38.27 38.27 0 0 0-2.65 74.3 37.26 37.26 0 0 0 10.54 1.5 39.81 39.81 0 0 0 22.58-7.09A38.68 38.68 0 0 0 412.3 38.3a38.48 38.48 0 0 0-14.12-29.66zm9.38 29.66a34.85 34.85 0 0 1-14.19 27.8 34 34 0 1 1-19.44-61.94h1.49a34.07 34.07 0 0 1 32.14 34.14z"></path>
-                                        <path d="M389.36 17.69a2.5 2.5 0 0 0-2.49 2.49v29.71L360.4 18.51a2.32 2.32 0 0 0-2.14-.82 2.49 2.49 0 0 0-2.49 2.49v36.79a2.5 2.5 0 0 0 5 0V27.04l26.57 31.5a2.26 2.26 0 0 0 1 .69 2.46 2.46 0 0 0 1 .24 2.5 2.5 0 0 0 2.49-2.49v-36.8a2.5 2.5 0 0 0-2.47-2.49zM81.46 5.99c-2 0-3.54 1.19-3.54 4.18v56.42a3.54 3.54 0 0 0 7.07 0V10.25c0-2.95-1.58-4.26-3.53-4.26zM52.61 5.99c-2 0-3.54 1.19-3.54 4.18V56.3L6.55 7.37a3.25 3.25 0 0 0-1-.78 3.4 3.4 0 0 0-2-.64c-2 0-3.54 1.19-3.54 4.18v56.42a3.54 3.54 0 0 0 7.07 0V18.21L49.8 68.88a3.27 3.27 0 0 0 1.88 1.1 3.49 3.49 0 0 0 4.45-3.4V10.25c.01-2.95-1.57-4.26-3.52-4.26zM234.5 5.99c-2 0-3.53 1.19-3.53 4.18v24.44h-42V10.25c0-2.91-1.58-4.26-3.53-4.26h-.08c-2 0-3.53 1.19-3.53 4.18v56.42a3.54 3.54 0 0 0 3.53 3.53h.08a3.53 3.53 0 0 0 3.53-3.53v-26h42v26a3.535 3.535 0 0 0 7.07 0V10.25c0-2.95-1.58-4.26-3.54-4.26zM124.96 13.78c10.1-5.06 22.05-2.17 29.77 5.71a3.84 3.84 0 0 0 5.31.45 3.36 3.36 0 0 0 0-4.93c-9.51-9.71-23.66-12.35-36.27-7.78-11 4-19.16 14.57-20.7 26.1a32.73 32.73 0 0 0 13.32 30.7 34.05 34.05 0 0 0 36.41 1.85 33.57 33.57 0 0 0 6.45-4.83c1.77-1.68.85-4-.61-5.08a3.59 3.59 0 0 0-4.66.6 25.8 25.8 0 0 1-29.6 4.61c-9.07-4.54-14.29-14.31-14.17-24.27a26.6 26.6 0 0 1 14.75-23.13zM307.27 11.95c2.45 0 3.59-1.33 3.59-3s-1-3-3.52-3h-43.31c-2 0-3.53 1.19-3.53 4.18v56.42a3.54 3.54 0 0 0 3.53 3.53h43.24c2.45 0 3.59-1.33 3.59-3s-1-3-3.52-3h-39.7V40.56h32c2.45 0 3.59-1.33 3.59-3s-1-3-3.51-3h-32.07V11.95zM325.74 20.01a7 7 0 1 1 7-7 7 7 0 0 1-7 7zm0-13.1a6.14 6.14 0 1 0 6 6.1 6.1 6.1 0 0 0-6-6.11z"></path>
-                                        <path d="M326.66 13.4a2.11 2.11 0 0 0 2-2.22 2.25 2.25 0 0 0-2.13-2.25h-2.75a.38.38 0 0 0-.38.46.87.87 0 0 0 0 .1v7.08c0 .5.12.65.46.65s.44-.17.44-.65v-3.14h1.49l1.58 3.15s.34.76.75.55 0-.94 0-.94zm-2.41-3.71h2.11a1.47 1.47 0 0 1 1.35 1.48 1.45 1.45 0 0 1-1.31 1.46h-2.15z"></path>
-                                    </svg>
-                                </a>
-                            </p>
-                            <p>
-                                <?php echo __("School data provided as-is by", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                                <a class="uc-listingSchools-disclaimerLink" href="https://www.niche.com" target="_blank">
-                                    Niche</a>,
-                                <?php echo __("a third party. It is the responsibility of the user to evaluate all sources of information. Users should visit all school district web sites and visit all the schools in person to verify and consider all data, including eligibility.", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="idxboost-line-properties"></div>
-                </div>
-            </div>
-
-            <!-- ends schools information -->
-
-            <?php
+<?php
         } else {
             echo "";
         }
@@ -475,109 +453,99 @@ if (!function_exists('ib_schools_info_xhr_fn')) {
 
 //EN STAGING NO
 if (!function_exists('iboost_print_googlegtm_head_script')) {
-    function iboost_print_googlegtm_head_script()
-    {
+  function iboost_print_googlegtm_head_script() {
 
-        $idx_boost_setting = FLEX_IDX_PATH . 'feed/idx_boost_setting.json';
-        $environment_deco = [];
+        $idx_boost_setting=FLEX_IDX_PATH.'feed/idx_boost_setting.json';
+        $environment_deco=[];
         if (file_exists($idx_boost_setting)) {
-            $environment = file_get_contents($idx_boost_setting);
+            $environment=file_get_contents($idx_boost_setting);
             if (!empty($environment)) {
-                $environment_deco = json_decode($environment, true);
+                $environment_deco= json_decode($environment,true);
             }
-
-            if (is_array($environment_deco) && array_key_exists('status', $environment_deco) && $environment_deco['status'] != false) {
-                if ($environment_deco['environment'] == 'production') {
+            
+            if (is_array($environment_deco) && array_key_exists('status',$environment_deco) && $environment_deco['status'] !=false ) {
+                if ($environment_deco['environment']=='production') {
 
                     global $flex_idx_info;
-                    if (array_key_exists('google_gtm', $flex_idx_info['agent']) &&  !empty($flex_idx_info['agent']['google_gtm'])) {
-            ?>
+                    if ( array_key_exists('google_gtm', $flex_idx_info['agent']) &&  !empty($flex_idx_info['agent']['google_gtm']) ) {
+                        ?>
                         <!-- Google Tag Manager -->
-                        <script>
-                            (function(w, d, s, l, i) {
-                                w[l] = w[l] || [];
-                                w[l].push({
-                                    'gtm.start': new Date().getTime(),
-                                    event: 'gtm.js'
-                                });
-                                var f = d.getElementsByTagName(s)[0],
-                                    j = d.createElement(s),
-                                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                                j.async = true;
-                                j.src =
-                                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                                f.parentNode.insertBefore(j, f);
-                            })(window, document, 'script', 'dataLayer', '<?php echo $flex_idx_info['agent']['google_gtm']; ?>');
-                        </script>
+                        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                        })(window,document,'script','dataLayer','<?php echo $flex_idx_info['agent']['google_gtm']; ?>');</script>
                         <!-- End Google Tag Manager -->
-                    <?php
+                <?php
                     }
+                    
                 }
             }
-        }
-    }
+        }   
+  }
 }
 
 //EN STAGING NO
 if (!function_exists('iboost_print_googlegtm_body_script')) {
-    function iboost_print_googlegtm_body_script()
-    {
+  function iboost_print_googlegtm_body_script() {
 
-        $idx_boost_setting = FLEX_IDX_PATH . 'feed/idx_boost_setting.json';
-        $environment_deco = [];
+        $idx_boost_setting=FLEX_IDX_PATH.'feed/idx_boost_setting.json';
+        $environment_deco=[];
         if (file_exists($idx_boost_setting)) {
-            $environment = file_get_contents($idx_boost_setting);
+            $environment=file_get_contents($idx_boost_setting);
             if (!empty($environment)) {
-                $environment_deco = json_decode($environment, true);
+                $environment_deco= json_decode($environment,true);
             }
-
-            if (is_array($environment_deco) && array_key_exists('status', $environment_deco) && $environment_deco['status'] != false) {
-                if ($environment_deco['environment'] == 'production') {
-
+            
+            if (is_array($environment_deco) && array_key_exists('status',$environment_deco) && $environment_deco['status'] !=false ) {
+                if ($environment_deco['environment']=='production') {
+                  
                     global $flex_idx_info;
-                    if (array_key_exists('google_gtm', $flex_idx_info['agent']) &&  !empty($flex_idx_info['agent']['google_gtm'])) { ?>
-                        <!-- Google Tag Manager (noscript) -->
-                        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $flex_idx_info['agent']['google_gtm']; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-                        <!-- End Google Tag Manager (noscript) -->
-                        <?php
+                    if ( array_key_exists('google_gtm', $flex_idx_info['agent']) &&  !empty($flex_idx_info['agent']['google_gtm']) ) { ?>
+                    <!-- Google Tag Manager (noscript) -->
+                    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $flex_idx_info['agent']['google_gtm']; ?>"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+                    <!-- End Google Tag Manager (noscript) -->
+                <?php
                     }
+
                 }
             }
+            
         }
-    }
+
+    
+  }
 }
 
 
 if (!function_exists('iboost_print_analytics_script')) {
-    function iboost_print_analytics_script()
-    {
-        global $flex_idx_info;
-        if ((!empty($flex_idx_info["agent"]["google_analytics"])) && (!empty($flex_idx_info["agent"]["google_adwords"]))) {
-            printf('<script async src="//googletagmanager.com/gtag/js?id=%s"></script>', $flex_idx_info["agent"]["google_analytics"]);
-            echo '<script>';
-            echo 'var iboost_track_gid = true;';
-            echo 'window.dataLayer = window.dataLayer || [];';
-            echo 'function gtag() { dataLayer.push(arguments); }';
-            echo 'gtag("js", new Date());';
-            echo 'gtag("config", "' . $flex_idx_info["agent"]["google_analytics"] . '");';
-            echo 'gtag("config", "' . $flex_idx_info["agent"]["google_adwords"] . '");';
-            echo 'var ibost_g_config_analytics = "' . $flex_idx_info["agent"]["google_analytics"] . '";';
-            echo 'var ibost_g_config_adwords = "' . $flex_idx_info["agent"]["google_adwords"] . '"';
-            echo '</script>';
-        }
+  function iboost_print_analytics_script() {
+    global $flex_idx_info;
+    if ((!empty($flex_idx_info["agent"]["google_analytics"])) && (!empty($flex_idx_info["agent"]["google_adwords"]))) {
+      printf('<script async src="//googletagmanager.com/gtag/js?id=%s"></script>', $flex_idx_info["agent"]["google_analytics"]);
+      echo '<script>';
+      echo 'var iboost_track_gid = true;';
+      echo 'window.dataLayer = window.dataLayer || [];';
+      echo 'function gtag() { dataLayer.push(arguments); }';
+      echo 'gtag("js", new Date());';
+      echo 'gtag("config", "'.$flex_idx_info["agent"]["google_analytics"].'");';
+      echo 'gtag("config", "'.$flex_idx_info["agent"]["google_adwords"].'");';
+      echo 'var ibost_g_config_analytics = "'.$flex_idx_info["agent"]["google_analytics"].'";';
+      echo 'var ibost_g_config_adwords = "'.$flex_idx_info["agent"]["google_adwords"].'"';
+      echo '</script>';
     }
+  }
 }
 if (!function_exists('iboost_load_property_xhr_fn')) {
-    function iboost_load_property_xhr_fn()
-    {
+    function iboost_load_property_xhr_fn() {
         global $wp, $wpdb, $flex_idx_info, $flex_idx_lead;
         $access_token = flex_idx_get_access_token();
         $search_params = $flex_idx_info['search'];
         if (get_option('idxboost_client_status') != 'active') {
-            return '<div class="clidxboost-msg-info"><strong>Please update your API key</strong> on your IDX Boost dashboard to display live MLS data.</div>';
+            return '<div class="clidxboost-msg-info"><strong>Please update your API key</strong> on your IDX Boost dashboard to display live MLS data. <a href="' . FLEX_IDX_CPANEL_URL . '" rel="nofollow">Click here to update</a></div>';
         }
         $mls_num = isset($_POST["mlsNumber"]) ? trim($_POST["mlsNumber"]) : "";
-        $agent_slug = isset($_POST['agent_slug']) ? $_POST['agent_slug'] : null;
         $wp_request     = $wp->request;
         // $wp_request_exp = explode('/', $wp_request);
         // list($page, $slug) = $wp_request_exp;
@@ -625,7 +593,7 @@ if (!function_exists('iboost_load_property_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
         $server_output = curl_exec($ch);
         curl_close($ch);
@@ -638,14 +606,10 @@ if (!function_exists('iboost_load_property_xhr_fn')) {
         $agent_info_photo = isset($flex_idx_info['agent']['agent_contact_photo_profile']) ? $flex_idx_info['agent']['agent_contact_photo_profile'] : '';
         $agent_info_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']) ? $flex_idx_info['agent']['agent_contact_phone_number'] : '';
         $agent_info_email = isset($flex_idx_info['agent']['agent_contact_email_address']) ? $flex_idx_info['agent']['agent_contact_email_address'] : '';
-        if (!empty($agent_slug)) {
-            $property_permalink = rtrim($agent_slug, "/") . $prefix_property_slug . $property['slug'];
-        } else {
-            $property_permalink = rtrim($flex_idx_info['pages']['flex_idx_property_detail']['guid'], "/") . $prefix_property_slug . $property['slug'];
-        }
+        $property_permalink = rtrim($flex_idx_info['pages']['flex_idx_property_detail']['guid'], "/") . $prefix_property_slug . $property['slug'];
         // build facebook url share
         $site_title = get_bloginfo('name');
-        $facebook_share_url    = 'https://www.facebook.com/sharer/sharer.php';
+        $facebook_share_url    = '//facebook.com/sharer/sharer.php';
         $facebook_share_params = http_build_query(array(
             'u'           => $property_permalink,
             'picture'     => $property['gallery'][0],
@@ -660,7 +624,7 @@ if (!function_exists('iboost_load_property_xhr_fn')) {
             'text' => $twitter_text,
             'url'  => $property_permalink,
         ));
-        $twitter_share_url = 'https://twitter.com/intent/tweet?' . $twitter_share_url_params;
+        $twitter_share_url = '//twitter.com/intent/tweet?' . $twitter_share_url_params;
         $agent_info = get_option('idxboost_agent_info');
         $registration_is_forced = (isset($agent_info["force_registration"]) && (true === $agent_info["force_registration"])) ? true : false;
         ob_start();
@@ -675,14 +639,13 @@ if (!function_exists('iboost_load_property_xhr_fn')) {
     }
 }
 if (!function_exists('iboost_try_save_filter_xhr_fn')) {
-    function iboost_try_save_filter_xhr_fn()
-    {
-        global $wpdb;
-        $referrerUrl = isset($_POST["referrerUrl"]) ? trim(strip_tags($_POST["referrerUrl"])) : "";
-        $response = [];
-        if ("" !== $referrerUrl) {
-            $filter_post_name = trim(parse_url($referrerUrl, PHP_URL_PATH), "/");
-            $filter_options = $wpdb->get_row("
+  function iboost_try_save_filter_xhr_fn() {
+    global $wpdb;
+    $referrerUrl = isset($_POST["referrerUrl"]) ? trim(strip_tags($_POST["referrerUrl"])) : "";
+    $response = [];
+    if ("" !== $referrerUrl) {
+      $filter_post_name = trim(parse_url($referrerUrl, PHP_URL_PATH), "/");
+      $filter_options = $wpdb->get_row("
       select t1.ID, t1.post_name, t1.post_title, t1.guid, t2.meta_value AS filter_ID
       from {$wpdb->posts} t1
       inner join {$wpdb->postmeta} t2
@@ -690,37 +653,37 @@ if (!function_exists('iboost_try_save_filter_xhr_fn')) {
       where post_type = 'flex-filter-pages' and post_status = 'publish' and post_name = 'miami-beach-homes' and t2.meta_key = '_flex_filter_page_id'
       limit 1
       ", ARRAY_A);
-            if (!empty($filter_options)) {
-                $response["search_url"] = $referrerUrl;
-                $response["action"] = "idxboost_filter_save_search";
-                $response["search_count"] = 0;
-                $response["name"] = $filter_options["post_title"];
-                $response["notification_day"] = 1;
-                $response["notification_type"] = array("new_listing", "price_change", "status_change");
-                $response["search_query"] = "";
-                $response["wp_object"] = $filter_options;
-            }
-        }
-        wp_send_json($response);
+      if (!empty($filter_options)) {
+        $response["search_url"] = $referrerUrl;
+        $response["action"] = "idxboost_filter_save_search";
+        $response["search_count"] = 0;
+        $response["name"] = $filter_options["post_title"];
+        $response["notification_day"] = 1;
+        $response["notification_type"] = array("new_listing","price_change","status_change");
+        $response["search_query"] = "";
+        $response["wp_object"] = $filter_options;
+      }
     }
+    wp_send_json($response);
+  }
 }
 if (!function_exists('idx_boots_main_css')) {
-    function idx_boots_main_css()
-    {
+    function idx_boots_main_css() {
         wp_enqueue_style('flex-idx-main-project');
     }
 }
 if (!function_exists('grab_image')) {
-    function grab_image($url, $saveto)
-    {
-        $ch = curl_init($url);
+    function grab_image($url, $saveto) {
+        $ch = curl_init ($url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
-        $raw = curl_exec($ch);
-        curl_close($ch);
-        if (file_exists($saveto)) {
+        $raw=curl_exec($ch);
+        curl_close ($ch);
+        if(file_exists($saveto)){
             unlink($saveto);
         } else {
             $dirname = dirname($saveto);
@@ -728,75 +691,70 @@ if (!function_exists('grab_image')) {
                 mkdir($dirname, 0755, true);
             }
         }
-        $fp = fopen($saveto, 'x');
+        $fp = fopen($saveto,'x');
         fwrite($fp, $raw);
         fclose($fp);
     }
 }
 if (!function_exists('flex_has_filter_url_params')) {
-    function flex_has_filter_url_params()
-    {
-        if (isset($_GET["ibtrack"]) && ("fp" === $_GET["ibtrack"])) {
-            return true;
-        }
-        return false;
+  function flex_has_filter_url_params() {
+    if (isset($_GET["ibtrack"]) && ("fp" === $_GET["ibtrack"])) {
+      return true;
     }
+    return false;
+  }
 }
 if (!function_exists('flex_get_filter_url_params')) {
-    function flex_get_filter_url_params()
-    {
-        $parameters = array();
-        $valid_parameters = array("price", "bed", "bath", "type", "sqft", "lotsize", "yearbuilt", "waterdesc", "parking", "features", "view", "sort", "pagenum");
-        $GET_parameters = array_filter($_GET);
-        foreach ($GET_parameters as $key => $value) {
-            if (!in_array($key, $valid_parameters)) {
-                continue;
-            }
-            $parameters[$key] = $value;
-        }
-        return empty($parameters) ? "" : json_encode($parameters);
+  function flex_get_filter_url_params() {
+    $parameters = array();
+    $valid_parameters = array("price","bed","bath","type","sqft","lotsize","yearbuilt","waterdesc","parking","features","view","sort","pagenum");
+    $GET_parameters = array_filter($_GET);
+    foreach($GET_parameters as $key => $value) {
+      if (!in_array($key, $valid_parameters)) {
+        continue;
+      }
+      $parameters[$key] = $value;
     }
+    return empty($parameters) ? "" : json_encode($parameters);
+  }
 }
 if (!function_exists('flex_idx_skip_import_data_fn')) {
-    function flex_idx_skip_import_data_fn()
-    {
-        $response = array("success" => true, "message" => "OK");
-        add_option('idxboost_import_initial_data', 'yes');
-        wp_send_json($response);
-        exit;
-    }
+  function flex_idx_skip_import_data_fn() {
+    $response = array("success" => true, "message" => "OK");
+    add_option('idxboost_import_initial_data', 'yes');
+    wp_send_json($response);
+    exit;
+  }
 }
 if (!function_exists('idxboost_attach_image_to_post')) {
-    function idxboost_attach_image_to_post($image_src, $post_id)
-    {
+    function idxboost_attach_image_to_post($image_src, $post_id) {
         $wp_upload_dir = wp_upload_dir();
         $post_base_dir = $wp_upload_dir['basedir'];
         $path_save = $wp_upload_dir['path'] . '/' . basename($image_src);
         grab_image($image_src, $path_save);
         // attach image to post in wordpress
         $filename = $path_save;
-        $filetype = wp_check_filetype(basename($filename), null);
+        $filetype = wp_check_filetype( basename( $filename ), null );
         $attachment = array(
-            'guid'           => $wp_upload_dir['url'] . '/' . basename($filename),
+            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
             'post_mime_type' => $filetype['type'],
-            'post_title'     => preg_replace('/\.[^.]+$/', '', basename($filename)) . '_thumb_' . uniqid(),
+            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ) . '_thumb_' . uniqid(),
             'post_content' => '',
             'post_status'    => 'inherit',
         );
         $attach_id = wp_insert_attachment($attachment);
         // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
         // Generate the metadata for the attachment, and update the database record.
         $filepath = trim($wp_upload_dir['subdir'] . '/' . basename($filename), '/');
         add_post_meta($attach_id, '_wp_attached_file', $filepath, true);
-        $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
-        wp_update_attachment_metadata($attach_id, $attach_data);
-        set_post_thumbnail($post_id, $attach_id);
+        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+        wp_update_attachment_metadata( $attach_id, $attach_data );
+        set_post_thumbnail( $post_id, $attach_id );
     }
 }
 if (!function_exists('dgt_mortgage_calculator_fn')) {
-    function dgt_mortgage_calculator_fn()
-    {
+    function dgt_mortgage_calculator_fn() {
         $params = $_POST;
         if (isset($params['action'])) {
             $sale_price              = (float) sanitize_text_field($params['purchase_price']);
@@ -814,8 +772,7 @@ if (!function_exists('dgt_mortgage_calculator_fn')) {
     }
 }
 if (!function_exists('calculateMortgage')) {
-    function calculateMortgage($sale_price, $down_percent, $year_term, $annual_interest_percent)
-    {
+    function calculateMortgage($sale_price, $down_percent, $year_term, $annual_interest_percent) {
         $monthly_factor        = 0;
         $month_term            = $year_term * 12;
         $down_payment          = $sale_price * ($down_percent / 100);
@@ -893,7 +850,7 @@ if (!function_exists('flex_schedule_showing_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -953,7 +910,7 @@ if (!function_exists('flex_share_with_friend_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -967,12 +924,12 @@ if (!function_exists('idx_import_tgbuilding_update_xhr_fn')) {
     {
         global $wpdb;
 
-        $response = ['status' => false, 'message' => 'You need install TgBuilding'];
-
+        $response=['status'=>false,'message'=>'You need install TgBuilding'];
+        
         if (function_exists('feed_file_building')) {
-            $response['data'] = feed_file_building();
-            $response['status'] = true;
-            $response['message'] = 'success update!!';
+            $response['data']=feed_file_building();
+            $response['status']=true;
+            $response['message']='success update!!';
         }
         return $response;
     }
@@ -984,61 +941,61 @@ if (!function_exists('idxboost_import_building_xhr_fn')) {
         global $wp, $wpdb, $flex_idx_info, $flex_idx_lead;
         $access_token          = flex_idx_get_access_token();
         $page     = isset($_POST['page']) ? trim(strip_tags($_POST['page'])) : 0;
-        $estruct_insert_page = "INSERT INTO wp_posts(post_title,post_type,post_status,post_mime_type,post_name) values";
-        $wp_postmeta_insert = "INSERT INTO wp_postmeta(post_id,meta_key,meta_value) values";
-        $struct_table_relationship = 'INSERT into wp_term_relationships(object_id,term_taxonomy_id,term_order) values';
-        $struct_update_relationship = "UPDATE wp_term_relationships set  term_taxonomy_id = CASE ";
+        $estruct_insert_page="INSERT INTO wp_posts(post_title,post_type,post_status,post_mime_type,post_name) values";
+        $wp_postmeta_insert="INSERT INTO wp_postmeta(post_id,meta_key,meta_value) values";
+        $struct_table_relationship='INSERT into wp_term_relationships(object_id,term_taxonomy_id,term_order) values';
+        $struct_update_relationship="UPDATE wp_term_relationships set  term_taxonomy_id = CASE ";
 
-        $estruct_update_postmeta = "UPDATE wp_postmeta set  meta_value = CASE ";
-        $estruct_update_wppost = "UPDATE wp_posts set  post_title = CASE ";
+        $estruct_update_postmeta="UPDATE wp_postmeta set  meta_value = CASE ";
+        $estruct_update_wppost="UPDATE wp_posts set  post_title = CASE ";
 
-        $list_building_id = [];
+        $list_building_id=[];
         $insert_pages_idxboost = [];
-        $update_relationship_cate = [];
-        $meta_insert = [];
-        $title_update = [];
+        $update_relationship_cate=[];
+        $meta_insert=[];
+        $title_update=[];
 
-        $meta_update['tgbuilding_url'] = array('query' => []);
-        $meta_update['dgt_extra_address'] = array('query' => []);
-        $meta_update['dgt_extra_lat'] = array('query' => []);
-        $meta_update['dgt_extra_lng'] = array('query' => []);
-        $meta_update['dgt_year_building'] = array('query' => []);
-        $meta_update['dgt_extra_floor'] = array('query' => []);
-        $meta_update['dgt_extra_unit'] = array('query' => []);
-        $meta_update['dgt_tg_idxboost_building'] = array('query' => []);
-        $meta_update['dgt_tg_gallery'] = array('query' => []);
+        $meta_update['tgbuilding_url']=array('query'=>[]);
+        $meta_update['dgt_extra_address']=array('query'=>[]);
+        $meta_update['dgt_extra_lat']=array('query'=>[]);
+        $meta_update['dgt_extra_lng']=array('query'=>[]);
+        $meta_update['dgt_year_building']=array('query'=>[]);
+        $meta_update['dgt_extra_floor']=array('query'=>[]);
+        $meta_update['dgt_extra_unit']=array('query'=>[]);
+        $meta_update['dgt_tg_idxboost_building']=array('query'=>[]);
+        $meta_update['dgt_tg_gallery']=array('query'=>[]);
 
 
 
-        $code_existing = '123456789';
+        $code_existing='123456789';
         if (get_option('idxboost_client_status') != 'active') {
-            return '<div class="clidxboost-msg-info"><strong>Please update your API key</strong> on your IDX Boost dashboard to display live MLS data.</div>';
+            return '<div class="clidxboost-msg-info"><strong>Please update your API key</strong> on your IDX Boost dashboard to display live MLS data. <a href="' . FLEX_IDX_CPANEL_URL . '" rel="nofollow">Click here to update</a></div>';
         }
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
+        
+       $categorys_loop = $wpdb->get_results("SELECT {$wpdb->terms}.slug,{$wpdb->terms}.term_id FROM {$wpdb->term_taxonomy} INNER JOIN {$wpdb->terms} ON {$wpdb->terms}.term_id={$wpdb->term_taxonomy}.term_id AND {$wpdb->term_taxonomy}.taxonomy='category_building';",ARRAY_A);   
 
-        $categorys_loop = $wpdb->get_results("SELECT {$wpdb->terms}.slug,{$wpdb->terms}.term_id FROM {$wpdb->term_taxonomy} INNER JOIN {$wpdb->terms} ON {$wpdb->terms}.term_id={$wpdb->term_taxonomy}.term_id AND {$wpdb->term_taxonomy}.taxonomy='category_building';", ARRAY_A);
+        $result_tgbuilding_wp=$wpdb->get_results("SELECT post.ID,post.post_title as name,meta.meta_value as code FROM {$wpdb->posts} post inner join {$wpdb->postmeta} as meta on meta.post_id=post.ID and meta.meta_key='dgt_tg_idxboost_building'  where post_type='tgbuilding';",ARRAY_A);
 
-        $result_tgbuilding_wp = $wpdb->get_results("SELECT post.ID,post.post_title as name,meta.meta_value as code FROM {$wpdb->posts} post inner join {$wpdb->postmeta} as meta on meta.post_id=post.ID and meta.meta_key='dgt_tg_idxboost_building'  where post_type='tgbuilding';", ARRAY_A);
+        $list_term_slug=[];
+        $list_term_id=[];
+        $columns_category=[];
+        $result_item_cat_rela=[];
+        $list_building_wp=[];
 
-        $list_term_slug = [];
-        $list_term_id = [];
-        $columns_category = [];
-        $result_item_cat_rela = [];
-        $list_building_wp = [];
+        if (is_array($result_tgbuilding_wp) && count($result_tgbuilding_wp)>0) {
 
-        if (is_array($result_tgbuilding_wp) && count($result_tgbuilding_wp) > 0) {
+            $list_building_wp=array_column($result_tgbuilding_wp, 'code');
 
-            $list_building_wp = array_column($result_tgbuilding_wp, 'code');
-
-            if (is_array($categorys_loop) && count($categorys_loop) > 0) {
+            if (is_array($categorys_loop) && count($categorys_loop)>0) {
 
                 $list_term_slug = array_column($categorys_loop, 'slug');
                 $list_term_id = array_column($categorys_loop, 'term_id');
-                $result_item_cat_rela = $wpdb->get_results("SELECT object_id as post_id,term_taxonomy_id as category_id FROM wp_term_relationships where term_taxonomy_id in (" . implode(',', $list_term_id) . ");", ARRAY_A);
-                $columns_category = array_column($result_item_cat_rela, 'post_id');
+                $result_item_cat_rela=$wpdb->get_results("SELECT object_id as post_id,term_taxonomy_id as category_id FROM wp_term_relationships where term_taxonomy_id in (".implode(',',$list_term_id).");",ARRAY_A);
+                $columns_category=array_column($result_item_cat_rela, 'post_id');
             }
         }
-
+        
         //$result_idxbuilding_wp=$wpdb->get_results("SELECT post.ID,post.post_title as name,meta.meta_value as code FROM wp_work.wp_posts post inner join wp_work.wp_postmeta as meta on meta.post_id=post.ID and meta.meta_key='_flex_building_page_id'  where post_type='flex-idx-building';",ARRAY_A);
 
         $wp_request     = $wp->request;
@@ -1046,7 +1003,7 @@ if (!function_exists('idxboost_import_building_xhr_fn')) {
         $sendParams = array(
             'access_token'     => $access_token,
             'flex_credentials' => $flex_lead_credentials,
-            'page' => $page,
+            'page' => $page,           
             'existing_code' => $code_existing
         );
 
@@ -1055,18 +1012,18 @@ if (!function_exists('idxboost_import_building_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
-        $response = json_decode($server_output, true);
+        $response=json_decode($server_output,true);
         curl_close($ch);
-        $response_data_new_items = [];
+        $response_data_new_items=[];
+        
+        $status_data=false;
+        if ($response['status'] !=false) {
 
-        $status_data = false;
-        if ($response['status'] != false) {
+        $status_data=true;
 
-            $status_data = true;
-
-            $building_slug = $wpdb->get_var("SELECT t1.post_name
+          $building_slug = $wpdb->get_var("SELECT t1.post_name
             FROM {$wpdb->posts} t1
           inner join {$wpdb->postmeta} t2
           on t1.ID = t2.post_id
@@ -1077,152 +1034,152 @@ if (!function_exists('idxboost_import_building_xhr_fn')) {
           limit 1
           ");
 
-            if (empty($building_slug) || $building_slug == '')
-                $building_slug = 'building';
+          if (empty($building_slug) || $building_slug=='')
+              $building_slug='building';
 
 
             foreach ($response['item'] as $value_item) {
 
-                $key_exist_tgbuilding = array_search($value_item['codBuilding'], $list_building_wp);
+                $key_exist_tgbuilding = array_search($value_item['codBuilding'], $list_building_wp );
                 //$key_exist_idxbuilding = array_search($value_item['codBuilding'], array_column($result_idxbuilding_wp, 'code'));
+                
+                $gallery_tg='';
 
-                $gallery_tg = '';
-
-                $name = $value_item['name'];
-                $address = $value_item['address'];
-                $lat = $value_item['lat'];
-                $lng = $value_item['lng'];
-                $year = $value_item['year'];
-                $floor = $value_item['floor'];
-                $units = $value_item['unitBuilding'];
-                $cod_buillding = $value_item['codBuilding'];
-                $category = $value_item['type_building'];
+                $name=$value_item['name'];
+                $address=$value_item['address'];
+                $lat=$value_item['lat'];
+                $lng=$value_item['lng'];
+                $year=$value_item['year'];
+                $floor=$value_item['floor'];
+                $units=$value_item['unitBuilding'];
+                $cod_buillding=$value_item['codBuilding'];
+                $category=$value_item['type_building'];
 
                 if (empty($floor)) {
-                    $floor = '0';
+                    $floor='0';
                 }
 
-                $temp_id = base64_encode(random_bytes(10));
+                $temp_id=base64_encode(random_bytes(10));
 
-                if (!empty($value_item['gallery']) && is_array($value_item['gallery']) && count($value_item['gallery']) > 0) {
-                    $gallery_tg = $value_item['gallery'][0]['url_image'];
+                if (!empty($value_item['gallery']) && is_array($value_item['gallery']) && count($value_item['gallery'])>0) {
+                    $gallery_tg=$value_item['gallery'][0]['url_image'];
                 }
 
                 //is new page
-                if (!is_numeric($key_exist_tgbuilding)) {
-                    $insert_pages_idxboost[] = "('" . addslashes($name) . "','tgbuilding','publish','" . $cod_buillding . "','" . generar_url_temp($name) . "')";
-                    $response_data_new_items[] = array('name' => $name, 'address' => $address, 'lat' => $lat, 'lng' => $lng, 'year' => $year, 'unit' => $units, 'code' => $cod_buillding, 'gallery' => $gallery_tg, 'category' => $category, 'floor' => $floor);
-                } else {
+                if (!is_numeric($key_exist_tgbuilding) ) {
+                    $insert_pages_idxboost[]="('".addslashes($name)."','tgbuilding','publish','".$cod_buillding."','".generar_url_temp($name)."')";
+                    $response_data_new_items[]=array('name'=> $name, 'address'=> $address,'lat' => $lat,'lng'=>$lng,'year'=>$year,'unit'=>$units,'code'=>$cod_buillding,'gallery'=>$gallery_tg,'category'=> $category,'floor'=>$floor );
 
-                    $id_building = $result_tgbuilding_wp[$key_exist_tgbuilding]['ID'];
-                    $exist_build_cat = array_search($id_building, $columns_category);
+                }else{
 
-                    if (is_numeric($exist_build_cat)) {
+                    $id_building=$result_tgbuilding_wp[$key_exist_tgbuilding]['ID'];
+                    $exist_build_cat = array_search($id_building, $columns_category );
 
-                        $building_category = 'complete-building';
-                        if ($category == '1') {
-                            $building_category = 'pre-construction';
+                    if (is_numeric($exist_build_cat) ) {
+
+                        $building_category='complete-building';
+                        if ($category=='1') {
+                            $building_category='pre-construction';
                         }
 
-                        $keys_category = array_search($building_category, $list_term_slug);
+                        $keys_category=array_search($building_category, $list_term_slug );
 
-                        if (is_numeric($keys_category) && array_key_exists($keys_category, $categorys_loop)) {
-                            $update_relationship_cate[] = " WHEN object_id = '" . $id_building . "' THEN '" . $categorys_loop[$keys_category]['term_id'] . "' ";
+                        if (is_numeric($keys_category) && array_key_exists($keys_category,$categorys_loop) ) {
+                            $update_relationship_cate[]=" WHEN object_id = '".$id_building."' THEN '".$categorys_loop[$keys_category]['term_id']."' ";      
                         }
                         //end category
-
+                        
                     }
 
 
-                    $list_building_id[] = $id_building;
-                    $title_update[] = " WHEN ID = '" . $id_building . "' THEN '" . addslashes($name) . "' ";
-                    $meta_update['dgt_extra_floor']['query'][] = " WHEN meta_key='dgt_extra_floor' and post_id = '" . $id_building . "' THEN '" . $floor . "' ";
-                    $meta_update['tgbuilding_url']['query'][] = " WHEN meta_key='tgbuilding_url' and post_id = '" . $id_building . "' THEN '" . get_site_url() . '/' . $building_slug . '/' . generar_url_temp($name) . "' ";
-                    $meta_update['dgt_extra_address']['query'][] = " WHEN meta_key='dgt_extra_address' and post_id = '" . $id_building . "' THEN '" . addslashes($address) . "' ";
+                    $list_building_id[]=$id_building;
+                    $title_update[]=" WHEN ID = '".$id_building."' THEN '".addslashes($name)."' ";
+                    $meta_update['dgt_extra_floor']['query'][]=" WHEN meta_key='dgt_extra_floor' and post_id = '".$id_building."' THEN '".$floor."' ";
+                    $meta_update['tgbuilding_url']['query'][]=" WHEN meta_key='tgbuilding_url' and post_id = '".$id_building."' THEN '".get_site_url().'/'.$building_slug.'/'.generar_url_temp($name)."' ";
+                    $meta_update['dgt_extra_address']['query'][]=" WHEN meta_key='dgt_extra_address' and post_id = '".$id_building."' THEN '".addslashes($address)."' ";
                     //comentado por joseph cambios de latitud y longitud que vienen del cpanel
                     //$meta_update['dgt_extra_lat']['query'][]=" WHEN meta_key='dgt_extra_lat' and post_id = '".$id_building."' THEN '".addslashes($lat)."' ";
                     //$meta_update['dgt_extra_lng']['query'][]=" WHEN meta_key='dgt_extra_lng' and post_id = '".$id_building."' THEN '".addslashes($lng)."' ";
-                    $meta_update['dgt_year_building']['query'][] = " WHEN meta_key='dgt_year_building' and post_id = '" . $id_building . "' THEN '" . addslashes($year) . "' ";
-                    $meta_update['dgt_extra_unit']['query'][] = " WHEN meta_key='dgt_extra_unit' and post_id = '" . $id_building . "' THEN '" . addslashes($units) . "' ";
-                    $meta_update['dgt_tg_idxboost_building']['query'][] = " WHEN meta_key='dgt_tg_idxboost_building' and post_id = '" . $id_building . "' THEN '" . $cod_buillding . "' ";
-                    $meta_update['dgt_tg_gallery']['query'][] = " WHEN meta_key='dgt_tg_gallery' and post_id = '" . $id_building . "' THEN '" . addslashes($gallery_tg) . "' ";
+                    $meta_update['dgt_year_building']['query'][]=" WHEN meta_key='dgt_year_building' and post_id = '".$id_building."' THEN '".addslashes($year)."' ";
+                    $meta_update['dgt_extra_unit']['query'][]=" WHEN meta_key='dgt_extra_unit' and post_id = '".$id_building."' THEN '".addslashes($units)."' ";
+                    $meta_update['dgt_tg_idxboost_building']['query'][]=" WHEN meta_key='dgt_tg_idxboost_building' and post_id = '".$id_building."' THEN '".$cod_buillding."' ";
+                    $meta_update['dgt_tg_gallery']['query'][]=" WHEN meta_key='dgt_tg_gallery' and post_id = '".$id_building."' THEN '".addslashes($gallery_tg)."' ";
+
                 }
             }
 
             //actualizamos las antiguas listas
-            if (!empty($insert_pages_idxboost) && is_array($insert_pages_idxboost) && count($insert_pages_idxboost) > 0) {
-                $result_pages_insert = $wpdb->query($estruct_insert_page . implode(',', $insert_pages_idxboost));
+            if (!empty($insert_pages_idxboost) && is_array($insert_pages_idxboost) && count($insert_pages_idxboost)>0) {
+                $result_pages_insert=$wpdb->query($estruct_insert_page.implode(',', $insert_pages_idxboost));
             }
 
-            $list_update_temp = [];
-            $list_update_keys = [];
+            $list_update_temp =[];
+            $list_update_keys =[];
 
-            if (!empty($meta_update) && is_array($meta_update) && count($meta_update) > 0) {
+            if (!empty($meta_update) && is_array($meta_update) && count($meta_update)>0) {
                 foreach ($meta_update as $key_update => $value_update) {
-                    if (count($value_update['query']) > 0) {
-                        $list_update_temp[] =  implode(' ', $value_update['query']) . ' ';
-                        $list_update_keys[] = '"' . $key_update . '"';
+                    if (count($value_update['query'])>0) {
+                        $list_update_temp[]=  implode(' ', $value_update['query']).' ';
+                        $list_update_keys[]='"'.$key_update.'"';
                     }
                 }
 
-                if (count($list_update_temp) > 0) {
-                    $query_update = $estruct_update_postmeta . implode(' ', $list_update_temp) . ' END WHERE post_id in(' . implode(',', $list_building_id) . ') and meta_key in (' . implode(',', $list_update_keys) . ');';
+                if (count($list_update_temp)>0) {
+                    $query_update=$estruct_update_postmeta.implode(' ',$list_update_temp).' END WHERE post_id in('.implode(',',$list_building_id).') and meta_key in ('.implode(',',$list_update_keys).');';
                     $wpdb->query($query_update);
                 }
             }
             //fin de los items actualizados
 
-            $list_title_temp = [];
-            if (!empty($title_update) && is_array($title_update) && count($title_update) > 0) {
-                $query_update_post = $estruct_update_wppost . implode(' ', $title_update) . ' END WHERE ID in(' . implode(',', $list_building_id) . ') ;';
-                $wpdb->query($query_update_post);
+            $list_title_temp =[];
+            if (!empty($title_update) && is_array($title_update) && count($title_update)>0) {
+                    $query_update_post=$estruct_update_wppost.implode(' ',$title_update).' END WHERE ID in('.implode(',',$list_building_id).') ;';
+                    $wpdb->query($query_update_post);
             }
 
-            if (!empty($update_relationship_cate) && is_array($update_relationship_cate) && count($update_relationship_cate) > 0) {
-                $query_update_categories = $struct_update_relationship . implode(' ', $update_relationship_cate) . ' END WHERE object_id in(' . implode(',', $list_building_id) . ') ;';
-                $wpdb->query($query_update_categories);
-            }
+            if (!empty($update_relationship_cate) && is_array($update_relationship_cate) && count($update_relationship_cate)>0) {
+                    $query_update_categories=$struct_update_relationship.implode(' ',$update_relationship_cate).' END WHERE object_id in('.implode(',',$list_building_id).') ;';
+                    $wpdb->query($query_update_categories);
+            }         
 
             //inicio proceso guardar los nuevos items para sus metas
-            if (!empty($response_data_new_items) && is_array($response_data_new_items) && count($response_data_new_items) > 0) {
-                $list_codes = '"' . implode('","', array_map(function ($item) {
-                    return $item['code'];
-                }, $response_data_new_items)) . '"';
+            if (!empty($response_data_new_items) && is_array($response_data_new_items) && count($response_data_new_items)>0) {
+                $list_codes='"'.implode('","', array_map(function($item) { return $item['code']; }, $response_data_new_items ) ).'"';
+                
+                $result_tgbuilding_wp_new=$wpdb->get_results("SELECT post.ID,post.post_title as name,post.post_mime_type as code FROM wp_posts post where post_type='tgbuilding' and post.post_mime_type in (".$list_codes.");",ARRAY_A);                
+                $list_build_new=[];
 
-                $result_tgbuilding_wp_new = $wpdb->get_results("SELECT post.ID,post.post_title as name,post.post_mime_type as code FROM wp_posts post where post_type='tgbuilding' and post.post_mime_type in (" . $list_codes . ");", ARRAY_A);
-                $list_build_new = [];
-
-                if (is_array($result_tgbuilding_wp_new) && count($result_tgbuilding_wp_new) > 0) {
+                if (is_array($result_tgbuilding_wp_new) && count($result_tgbuilding_wp_new)>0) {
 
                     $list_build_new = array_column($result_tgbuilding_wp_new, 'code');
 
                     foreach ($response_data_new_items as $key => $value_item) {
-                        $key_exist_tgbuilding = array_search($value_item['code'], $list_build_new);
+                        $key_exist_tgbuilding = array_search($value_item['code'], $list_build_new );
+                        
+                        if (is_numeric($key_exist_tgbuilding) ) {
+                            $id_building=$result_tgbuilding_wp_new[$key_exist_tgbuilding]['ID'];                         
 
-                        if (is_numeric($key_exist_tgbuilding)) {
-                            $id_building = $result_tgbuilding_wp_new[$key_exist_tgbuilding]['ID'];
+                            $meta_insert[]="('".$id_building."','dgt_extra_floor','".$value_item['floor']."')";      
 
-                            $meta_insert[] = "('" . $id_building . "','dgt_extra_floor','" . $value_item['floor'] . "')";
-
-                            $meta_insert[] = "('" . $id_building . "','tgbuilding_url','" . get_site_url() . '/building/' . generar_url_temp($value_item['name']) . "')";
-                            $meta_insert[] = "('" . $id_building . "','dgt_extra_address','" . $value_item['address'] . "')";
-                            $meta_insert[] = "('" . $id_building . "','dgt_extra_lat','" . $value_item['lat'] . "')";
-                            $meta_insert[] = "('" . $id_building . "','dgt_extra_lng','" . $value_item['lng'] . "')";
-                            $meta_insert[] = "('" . $id_building . "','dgt_year_building','" . $value_item['year'] . "')";
-                            $meta_insert[] = "('" . $id_building . "','dgt_extra_unit','" . $value_item['unit'] . "')";
-                            $meta_insert[] = "('" . $id_building . "','dgt_tg_idxboost_building','" . $value_item['code'] . "')";
-                            $meta_insert[] = "('" . $id_building . "','dgt_tg_gallery','" . $value_item['gallery'] . "')";
+                            $meta_insert[]="('".$id_building."','tgbuilding_url','".get_site_url().'/building/'.generar_url_temp($value_item['name'])."')";      
+                            $meta_insert[]="('".$id_building."','dgt_extra_address','".$value_item['address']."')";      
+                            $meta_insert[]="('".$id_building."','dgt_extra_lat','".$value_item['lat']."')";      
+                            $meta_insert[]="('".$id_building."','dgt_extra_lng','".$value_item['lng']."')";      
+                            $meta_insert[]="('".$id_building."','dgt_year_building','".$value_item['year']."')";      
+                            $meta_insert[]="('".$id_building."','dgt_extra_unit','".$value_item['unit']."')";      
+                            $meta_insert[]="('".$id_building."','dgt_tg_idxboost_building','".$value_item['code']."')";      
+                            $meta_insert[]="('".$id_building."','dgt_tg_gallery','".$value_item['gallery']."')"; 
 
 
                             /*cateogry*/
-                            $building_category = 'complete-building';
-                            if ($value_item['category'] == '1') {
-                                $building_category = 'pre-construction';
+                            $building_category='complete-building';
+                            if ($value_item['category']=='1') {
+                                $building_category='pre-construction';
                             }
-                            $keys_category = array_search($building_category, $list_term_slug);
+                            $keys_category=array_search($building_category, $list_term_slug );
 
-                            if (is_numeric($keys_category) && array_key_exists($keys_category, $categorys_loop)) {
-                                $values_category[] = "('" . $id_building . "','" . $categorys_loop[$keys_category]['term_id'] . "','0')";
+                            if (is_numeric($keys_category) && array_key_exists($keys_category,$categorys_loop) ) {
+                                $values_category[]="('".$id_building."','".$categorys_loop[$keys_category]['term_id']."','0')";      
                             }
                             //end category
                         }
@@ -1230,18 +1187,19 @@ if (!function_exists('idxboost_import_building_xhr_fn')) {
                 }
             }
 
-            if (!empty($meta_insert) && is_array($meta_insert) && count($meta_insert) > 0) {
-                $result_pages_insert_meta = $wpdb->query($wp_postmeta_insert . implode(',', $meta_insert));
+            if (!empty($meta_insert) && is_array($meta_insert) && count($meta_insert)>0) {
+                $result_pages_insert_meta=$wpdb->query($wp_postmeta_insert.implode(',', $meta_insert));
             }
 
-            if (!empty($values_category) && is_array($values_category) && count($values_category) > 0) {
-                $query_insert_categories = $wpdb->query($struct_table_relationship . implode(',', $values_category));
+            if (!empty($values_category) && is_array($values_category) && count($values_category)>0) {
+                $query_insert_categories=$wpdb->query($struct_table_relationship.implode(',', $values_category));
             }
+
         }
 
-
-        wp_send_json(['status' => true, 'message' => 'Upload susscess', 'category' => $values_category, 'update_post' => $query_update_post, 'category_query' => $struct_table_relationship . implode(',', $values_category), 'update' => $query_update, 'insert' => $meta_insert, 'new_insert' => $response_data_new_items, 'cate_update' => $update_relationship_cate, 'status_data' => $status_data]);
-        exit;
+        
+        wp_send_json(['status'=>true,'message'=>'Upload susscess','category'=>$values_category,'update_post' => $query_update_post,'category_query'=>$struct_table_relationship.implode(',', $values_category),'update'=> $query_update,'insert' => $meta_insert,'new_insert'=>$response_data_new_items,'cate_update'=>$update_relationship_cate,'status_data' => $status_data ]);
+        exit;        
     }
 }
 
@@ -1267,27 +1225,27 @@ if (!function_exists('flex_idx_agents_admin_columns_content')) {
             case 'agent_first_name':
                 $flex_agent_first_name = get_post_meta($post_ID, '_flex_agent_first_name', true);
                 echo $flex_agent_first_name;
-                break;
+            break;
 
             case 'agent_last_name':
                 $flex_agent_last_name = get_post_meta($post_ID, '_flex_agent_last_name', true);
                 echo $flex_agent_last_name;
-                break;
+            break;
 
             case 'agent_phone':
                 $flex_agent_phone = get_post_meta($post_ID, '_flex_agent_phone', true);
                 echo $flex_agent_phone;
-                break;
+            break;
 
             case 'agent_email':
                 $flex_agent_email = get_post_meta($post_ID, '_flex_agent_email', true);
                 echo $flex_agent_email;
-                break;
+            break;
 
             case 'agent_registration_key':
                 $flex_agent_registration_key = get_post_meta($post_ID, '_flex_agent_registration_key', true);
                 echo $flex_agent_registration_key;
-                break;
+            break;
         }
     }
     add_action('manage_idx-agents_posts_custom_column', 'flex_idx_agents_admin_columns_content', 10, 2);
@@ -1411,9 +1369,12 @@ if (!function_exists('flex_http_request')) {
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         curl_setopt($ch, CURLOPT_URL, $uri);
         $server_output = curl_exec($ch);
         $response      = [];
@@ -1446,10 +1407,10 @@ if (!function_exists('flex_include_html_partial')) {
     {
         ob_start();
         if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/form/modals.php')) {
-            include IDXBOOST_OVERRIDE_DIR . '/views/form/modals.php';
-        } else {
-            include FLEX_IDX_PATH . '/views/form/modals.php';
-        }
+                    include IDXBOOST_OVERRIDE_DIR . '/views/form/modals.php';
+                } else {
+                    include FLEX_IDX_PATH . '/views/form/modals.php';
+                }
         $output = ob_get_clean();
         echo $output;
     }
@@ -1488,10 +1449,9 @@ if (!function_exists('flex_map_array')) {
     }
 }
 if (!function_exists('idxboost_array_sort_by_column')) {
-    function idxboost_array_sort_by_column(&$arr, $col, $dir = SORT_ASC)
-    {
+    function idxboost_array_sort_by_column(&$arr, $col, $dir = SORT_ASC) {
         $sort_col = array();
-        foreach ($arr as $key => $row) {
+        foreach ($arr as $key=> $row) {
             $sort_col[$key] = $row[$col];
         }
         array_multisort($sort_col, $dir, $arr);
@@ -1501,145 +1461,137 @@ if (!function_exists('flex_idx_get_info')) {
     function flex_idx_get_info()
     {
         global $wpdb;
-
         // fetch info
         $idxboost_commercial_types = get_option('idxboost_commercial_types');
+
         $idxboost_search_settings = get_option('idxboost_search_settings');
         $idxboost_pusher_settings = get_option('idxboost_pusher_settings');
         $idxboost_agent_info = get_option('idxboost_agent_info');
         $template_name = get_template_directory();
         $template_name = basename($template_name);
         $output = array();
-
         // basic info
         $output['website_name'] = get_bloginfo('name');
         $output['website_url']  = get_bloginfo('wpurl');
         $output['template_name'] = $template_name;
         $output['template_directory_url']  = get_template_directory_uri();
         $output['url_logo'] = get_option('flex_idx_alerts_url_logo');
-
         // pages info
         $output['pages'] = idxboost_list_pages();
-
         // agent info
-        if (false !== $idxboost_agent_info) {
-            $output['agent']['has_dynamic_ads'] = isset($idxboost_agent_info['has_dynamic_ads']) ? (bool) $idxboost_agent_info['has_dynamic_ads'] : false;
-            $output['agent']['has_seo_client'] = isset($idxboost_agent_info['has_seo_client']) ? (bool) $idxboost_agent_info['has_seo_client'] : false;
+        #$list_agent_info = $wpdb->get_results('SELECT `key`,`value` FROM flex_idx_settings WHERE `key` LIKE "agent_%"', ARRAY_A);
+        #$output['agent'] = flex_map_array($list_agent_info);
 
-            $output['agent']['hackbox'] = isset($idxboost_agent_info['hackbox']) ? $idxboost_agent_info['hackbox'] : '';
-            $output['agent']['agent_first_name'] = isset($idxboost_agent_info['first_name']) ? $idxboost_agent_info['first_name'] : '';
-            $output['agent']['agent_last_name'] = isset($idxboost_agent_info['last_name']) ? $idxboost_agent_info['last_name'] : '';
-            $output['agent']['agent_email_address'] = isset($idxboost_agent_info['email_address']) ? $idxboost_agent_info['email_address'] : '';
-            $output['agent']['agent_phone_number'] = isset($idxboost_agent_info['phone_number']) ? $idxboost_agent_info['phone_number'] : '';
-            $output['agent']['agent_address'] = isset($idxboost_agent_info['address']) ? $idxboost_agent_info['address'] : '';
-            $output['agent']['agent_address2'] = isset($idxboost_agent_info['address2']) ? $idxboost_agent_info['address2'] : '';
-            $output['agent']['agent_city'] = isset($idxboost_agent_info['city']) ? $idxboost_agent_info['city'] : '';
-            $output['agent']['agent_state'] = isset($idxboost_agent_info['state']) ? $idxboost_agent_info['state'] : '';
-            $output['agent']['agent_zip_code'] = isset($idxboost_agent_info['zip_code']) ? $idxboost_agent_info['zip_code'] : '';
-            $output['agent']['agent_website_url'] = isset($idxboost_agent_info['website_url']) ? $idxboost_agent_info['website_url'] : '';
-            $output['agent']['agent_contact_first_name'] = isset($idxboost_agent_info['contact_first_name']) ? $idxboost_agent_info['contact_first_name'] : '';
-            $output['agent']['agent_contact_last_name'] = isset($idxboost_agent_info['contact_last_name']) ? $idxboost_agent_info['contact_last_name'] : '';
-            $output['agent']['agent_contact_email_address'] = isset($idxboost_agent_info['contact_email_address']) ? $idxboost_agent_info['contact_email_address'] : '';
-            $output['agent']['agent_contact_phone_number'] = isset($idxboost_agent_info['contact_phone_number']) ? $idxboost_agent_info['contact_phone_number'] : '';
-            $output['agent']['agent_contact_photo_profile'] = isset($idxboost_agent_info['contact_photo_profile']) ? $idxboost_agent_info['contact_photo_profile'] : '';
-            $output['agent']['track_gender'] = isset($idxboost_agent_info['track_gender']) ? $idxboost_agent_info['track_gender'] : "";
-            $output['agent']['agent_logo_file'] = isset($idxboost_agent_info['agent_logo_file']) ? $idxboost_agent_info['agent_logo_file'] : '';
-            $output['agent']['broker_logo_file'] = isset($idxboost_agent_info['broker_logo_file']) ? $idxboost_agent_info['broker_logo_file'] : '';
-            $output['agent']['agent_address_lat'] = isset($idxboost_agent_info['address_lat']) ? $idxboost_agent_info['address_lat'] : '';
-            $output['agent']['agent_address_lng'] = isset($idxboost_agent_info['address_lng']) ? $idxboost_agent_info['address_lng'] : '';
-            $output['agent']['force_registration'] = isset($idxboost_agent_info['force_registration']) ? (int) $idxboost_agent_info['force_registration'] : 0;
-            $output['agent']['user_show_quizz'] = isset($idxboost_agent_info['user_show_quizz']) ? (int) $idxboost_agent_info['user_show_quizz'] : 0;
-            $output['agent']['facebook_app_id'] = isset($idxboost_agent_info['facebook_app_id']) ? $idxboost_agent_info['facebook_app_id'] : "";
-            $output['agent']['track_gender'] = isset($idxboost_agent_info['track_gender']) ? $idxboost_agent_info['track_gender'] : "";
-            $output['agent']['google_client_id'] = isset($idxboost_agent_info['google_client_id']) ? $idxboost_agent_info['google_client_id'] : "";
-            $output['agent']['google_client_id'] = isset($idxboost_agent_info['google_client_id']) ? $idxboost_agent_info['google_client_id'] : "";
-            $output['agent']['facebook_login_enabled'] = isset($idxboost_agent_info['facebook_login_enabled']) ? $idxboost_agent_info['facebook_login_enabled'] : false;
-            $output['agent']['google_login_enabled'] = isset($idxboost_agent_info['google_login_enabled']) ? $idxboost_agent_info['google_login_enabled'] : false;
-            $output['agent']['google_maps_api_key'] = isset($idxboost_agent_info['google_maps_api_key']) ? $idxboost_agent_info['google_maps_api_key'] : "";
-            $output['agent']['google_captcha_public_key'] = isset($idxboost_agent_info['google_captcha_public_key']) ? (string) $idxboost_agent_info['google_captcha_public_key'] : "";
-            $output['agent']['google_captcha_private_key'] = isset($idxboost_agent_info['google_captcha_private_key']) ? (string) $idxboost_agent_info['google_captcha_private_key'] : "";
-            $output['agent']['google_analytics'] = isset($idxboost_agent_info['google_analytics']) ? $idxboost_agent_info['google_analytics'] : "";
-            $output['agent']['google_adwords'] = isset($idxboost_agent_info['google_adwords']) ? $idxboost_agent_info['google_adwords'] : "";
-            $output['agent']['facebook_pixel'] = isset($idxboost_agent_info['facebook_pixel']) ? $idxboost_agent_info['facebook_pixel'] : "";
-            $output['agent']['google_gtm'] = isset($idxboost_agent_info['google_gtm']) ? $idxboost_agent_info['google_gtm'] : "";
-            $output['agent']['signup_left_clicks'] = isset($idxboost_agent_info['signup_left_clicks']) ? $idxboost_agent_info['signup_left_clicks'] : null;
-            $output['agent']['force_registration_forced'] = isset($idxboost_agent_info['force_registration_forced']) ? (bool) $idxboost_agent_info['force_registration_forced'] : false;
+        $output['agent']['has_dynamic_ads'] = isset($idxboost_agent_info['has_dynamic_ads']) ? (boolean) $idxboost_agent_info['has_dynamic_ads'] : false;
+        $output['agent']['has_seo_client'] = isset($idxboost_agent_info['has_seo_client']) ? (boolean) $idxboost_agent_info['has_seo_client'] : false;
 
-            // social info
-            $output['social']['facebook_social_url'] = $idxboost_agent_info['facebook_social_url'];
-            $output['social']['twitter_social_url'] = $idxboost_agent_info['twitter_social_url'];
-            $output['social']['gplus_social_url'] = $idxboost_agent_info['gplus_social_url'];
-            $output['social']['youtube_social_url'] = $idxboost_agent_info['youtube_social_url'];
-            $output['social']['instagram_social_url'] = $idxboost_agent_info['instagram_social_url'];
-            $output['social']['linkedin_social_url'] = $idxboost_agent_info['linkedin_social_url'];
-            $output['social']['pinterest_social_url'] = $idxboost_agent_info['pinterest_social_url'];
-        }
+        $output['agent']['hackbox'] = isset($idxboost_agent_info['hackbox']) ? $idxboost_agent_info['hackbox'] : '';
+        $output['agent']['agent_first_name'] = isset($idxboost_agent_info['first_name']) ? $idxboost_agent_info['first_name'] : '';
+        $output['agent']['agent_last_name'] = isset($idxboost_agent_info['last_name']) ? $idxboost_agent_info['last_name'] : '';
+        $output['agent']['agent_email_address'] = isset($idxboost_agent_info['email_address']) ? $idxboost_agent_info['email_address'] : '';
+        $output['agent']['agent_phone_number'] = isset($idxboost_agent_info['phone_number']) ? $idxboost_agent_info['phone_number'] : '';
+        $output['agent']['agent_address'] = isset($idxboost_agent_info['address']) ? $idxboost_agent_info['address'] : '';
+        $output['agent']['agent_address2'] = isset($idxboost_agent_info['address2']) ? $idxboost_agent_info['address2'] : '';
+        $output['agent']['agent_city'] = isset($idxboost_agent_info['city']) ? $idxboost_agent_info['city'] : '';
+        $output['agent']['agent_state'] = isset($idxboost_agent_info['state']) ? $idxboost_agent_info['state'] : '';
+        $output['agent']['agent_zip_code'] = isset($idxboost_agent_info['zip_code']) ? $idxboost_agent_info['zip_code'] : '';
+        $output['agent']['agent_website_url'] = isset($idxboost_agent_info['website_url']) ? $idxboost_agent_info['website_url'] : '';
+        $output['agent']['agent_contact_first_name'] = isset($idxboost_agent_info['contact_first_name']) ? $idxboost_agent_info['contact_first_name'] : '';
+        $output['agent']['agent_contact_last_name'] = isset($idxboost_agent_info['contact_last_name']) ? $idxboost_agent_info['contact_last_name'] : '';
+        $output['agent']['agent_contact_email_address'] = isset($idxboost_agent_info['contact_email_address']) ? $idxboost_agent_info['contact_email_address'] : '';
+        $output['agent']['agent_contact_phone_number'] = isset($idxboost_agent_info['contact_phone_number']) ? $idxboost_agent_info['contact_phone_number'] : '';
+        $output['agent']['agent_contact_photo_profile'] = isset($idxboost_agent_info['contact_photo_profile']) ? $idxboost_agent_info['contact_photo_profile'] : '';
+        $output['agent']['track_gender'] = isset($idxboost_agent_info['track_gender']) ? $idxboost_agent_info['track_gender'] : "";        
+        $output['agent']['agent_logo_file'] = isset($idxboost_agent_info['agent_logo_file']) ? $idxboost_agent_info['agent_logo_file'] : '';
+        $output['agent']['broker_logo_file'] = isset($idxboost_agent_info['broker_logo_file']) ? $idxboost_agent_info['broker_logo_file'] : '';
+        $output['agent']['agent_address_lat'] = isset($idxboost_agent_info['address_lat']) ? $idxboost_agent_info['address_lat'] : '';
+        $output['agent']['agent_address_lng'] = isset($idxboost_agent_info['address_lng']) ? $idxboost_agent_info['address_lng'] : '';
+        $output['agent']['force_registration'] = isset($idxboost_agent_info['force_registration']) ? (int) $idxboost_agent_info['force_registration'] : 0;
+        $output['agent']['user_show_quizz'] = isset($idxboost_agent_info['user_show_quizz']) ? (int) $idxboost_agent_info['user_show_quizz'] : 0;
+        $output['agent']['facebook_app_id'] = isset($idxboost_agent_info['facebook_app_id']) ? $idxboost_agent_info['facebook_app_id'] : "";
+        $output['agent']['track_gender'] = isset($idxboost_agent_info['track_gender']) ? $idxboost_agent_info['track_gender'] : "";
+        $output['agent']['google_client_id'] = isset($idxboost_agent_info['google_client_id']) ? $idxboost_agent_info['google_client_id'] : "";
+        $output['agent']['google_client_id'] = isset($idxboost_agent_info['google_client_id']) ? $idxboost_agent_info['google_client_id'] : "";
+        $output['agent']['facebook_login_enabled'] = isset($idxboost_agent_info['facebook_login_enabled']) ? $idxboost_agent_info['facebook_login_enabled'] : false;
+        $output['agent']['google_login_enabled'] = isset($idxboost_agent_info['google_login_enabled']) ? $idxboost_agent_info['google_login_enabled'] : false;
+        $output['agent']['google_maps_api_key'] = isset($idxboost_agent_info['google_maps_api_key']) ? $idxboost_agent_info['google_maps_api_key'] : "";
+        $output['agent']['google_captcha_public_key'] = isset($idxboost_agent_info['google_captcha_public_key']) ? (string) $idxboost_agent_info['google_captcha_public_key'] : "";
+        $output['agent']['google_captcha_private_key'] = isset($idxboost_agent_info['google_captcha_private_key']) ? (string) $idxboost_agent_info['google_captcha_private_key'] : "";
+        $output['agent']['google_analytics'] = isset($idxboost_agent_info['google_analytics']) ? $idxboost_agent_info['google_analytics'] : "";
+        $output['agent']['google_adwords'] = isset($idxboost_agent_info['google_adwords']) ? $idxboost_agent_info['google_adwords'] : "";
+        $output['agent']['facebook_pixel'] = isset($idxboost_agent_info['facebook_pixel']) ? $idxboost_agent_info['facebook_pixel'] : "";
+        $output['agent']['google_gtm'] = isset($idxboost_agent_info['google_gtm']) ? $idxboost_agent_info['google_gtm'] : "";
+        $output['agent']['signup_left_clicks'] = isset($idxboost_agent_info['signup_left_clicks']) ? $idxboost_agent_info['signup_left_clicks'] : null;
+        $output['agent']['force_registration_forced'] = isset($idxboost_agent_info['force_registration_forced']) ? (boolean) $idxboost_agent_info['force_registration_forced'] : false;
+        // social info
+        #$list_social_info = $wpdb->get_results('SELECT `key`,`value` FROM flex_idx_settings WHERE `key` LIKE "%_social_url"', ARRAY_A);
+        #$output['social'] = flex_map_array($list_social_info);
+        $output['social']['facebook_social_url'] = $idxboost_agent_info['facebook_social_url'];
+        $output['social']['twitter_social_url'] = $idxboost_agent_info['twitter_social_url'];
+        $output['social']['gplus_social_url'] = $idxboost_agent_info['gplus_social_url'];
+        $output['social']['youtube_social_url'] = $idxboost_agent_info['youtube_social_url'];
+        $output['social']['instagram_social_url'] = $idxboost_agent_info['instagram_social_url'];
+        $output['social']['linkedin_social_url'] = $idxboost_agent_info['linkedin_social_url'];
+        $output['social']['pinterest_social_url'] = $idxboost_agent_info['pinterest_social_url'];
+        // search info $idxboost_search_settings
+        $output['board_id'] = $idxboost_search_settings['board_id'];
+        $output['search']['amenities'] = $idxboost_search_settings['amenities'];
+        $output['search']['baths_range'] = $idxboost_search_settings['baths_range'];
+        $output['search']['beds_range'] = $idxboost_search_settings['beds_range'];
+        $output['search']['cities'] = $idxboost_search_settings['cities'];
+        $output['search']['default_sort'] = $idxboost_search_settings['default_sort'];
+        $output['search']['default_view'] = $idxboost_search_settings['default_view'];
+        $output['search']['living_size_range'] = $idxboost_search_settings['living_size_range'];
+        $output['search']['lot_size_range'] = $idxboost_search_settings['lot_size_range'];
+        $output['search']['parking_options'] = $idxboost_search_settings['parking_options'];
+        $output['search']['price_rent_range'] = $idxboost_search_settings['price_rent_range'];
+        $output['search']['price_sale_range'] = $idxboost_search_settings['price_sale_range'];
+        $output['search']['property_types'] = $idxboost_search_settings['property_types'];
+        $output['search']['rental_types'] = $idxboost_search_settings['default_rental_type'];
+        $output['search']['view_grid_type'] = $idxboost_search_settings['default_view_grid'];
+        $output['search']['view_icon_type'] = $idxboost_search_settings['default_view_icon'];
+        $output['search']['schools_ratio'] = $idxboost_search_settings['default_schools_ratio'];
+        $output['search']['waterfront_options'] = $idxboost_search_settings['waterfront_options'];
+        $output['search']['year_built_range'] = $idxboost_search_settings['year_built_range'];
+        $output['search']['default_language'] = $idxboost_search_settings['default_language'];
+        $output['search']['default_floor_plan'] = $idxboost_search_settings['default_floor_plan'];
+        /*$list_search_info = $wpdb->get_results('SELECT `key`,`value` FROM flex_idx_settings WHERE `key` LIKE "search_%"', ARRAY_A);
+        $output['search'] = flex_map_array($list_search_info);
+        if (!empty($output['search']) && isset($output['search']['search_idx_cities']) ) {
+            idxboost_array_sort_by_column($output['search']['search_idx_cities'], 'name');
+        }*/
+        // pusher info
+        #$list_pusher_info = $wpdb->get_results('SELECT `key`,`value` FROM flex_idx_settings WHERE `key` LIKE "pusher_%"', ARRAY_A);
+        #$output['pusher'] = flex_map_array($list_pusher_info);
+        $output['pusher']['pusher_app_key'] = $idxboost_pusher_settings['app_key'];
+        $output['pusher']['pusher_app_cluster'] = $idxboost_pusher_settings['app_cluster'];
+        $output['pusher']['pusher_presence_channel'] = $idxboost_pusher_settings['presence_channel'];
 
-        // search info
-        if (false !== $idxboost_search_settings) {
-            $output['board_id'] = $idxboost_search_settings['board_id'];
-            $output['search']['amenities'] = $idxboost_search_settings['amenities'];
-            $output['search']['baths_range'] = $idxboost_search_settings['baths_range'];
-            $output['search']['beds_range'] = $idxboost_search_settings['beds_range'];
-            $output['search']['cities'] = $idxboost_search_settings['cities'];
-            $output['search']['default_sort'] = $idxboost_search_settings['default_sort'];
-            $output['search']['default_view'] = $idxboost_search_settings['default_view'];
-            $output['search']['living_size_range'] = $idxboost_search_settings['living_size_range'];
-            $output['search']['lot_size_range'] = $idxboost_search_settings['lot_size_range'];
-            $output['search']['parking_options'] = $idxboost_search_settings['parking_options'];
-            $output['search']['price_rent_range'] = $idxboost_search_settings['price_rent_range'];
-            $output['search']['price_sale_range'] = $idxboost_search_settings['price_sale_range'];
-            $output['search']['property_types'] = $idxboost_search_settings['property_types'];
-            $output['search']['rental_types'] = $idxboost_search_settings['default_rental_type'];
-            $output['search']['view_grid_type'] = $idxboost_search_settings['default_view_grid'];
-            $output['search']['view_icon_type'] = $idxboost_search_settings['default_view_icon'];
-            $output['search']['schools_ratio'] = $idxboost_search_settings['default_schools_ratio'];
-            $output['search']['waterfront_options'] = $idxboost_search_settings['waterfront_options'];
-            $output['search']['year_built_range'] = $idxboost_search_settings['year_built_range'];
-            $output['search']['default_language'] = $idxboost_search_settings['default_language'];
-            $output['search']['default_floor_plan'] = $idxboost_search_settings['default_floor_plan'];
-            $output['pusher']['pusher_app_key'] = $idxboost_pusher_settings['app_key'];
-            $output['pusher']['pusher_app_cluster'] = $idxboost_pusher_settings['app_cluster'];
-            $output['pusher']['pusher_presence_channel'] = $idxboost_pusher_settings['presence_channel'];
-        }
-
-        if (false !== $idxboost_commercial_types) {
-            $output['commercial_types'] = $idxboost_commercial_types;
-        }
+        $output['commercial_types'] = $idxboost_commercial_types;
 
         return $output;
     }
 }
 if (!function_exists('idxboost_list_pages')) {
-    function idxboost_list_pages()
-    {
-        global $wpdb;
-
-        if (false === get_transient("idxboost_list_main_pages")) {
-            $idxboost_pages = array();
-
-            $list_pages = $wpdb->get_results("
-        select ID, post_title, post_name, guid, t2.meta_value AS page_id
-        from {$wpdb->posts} t1
-        inner join {$wpdb->postmeta} t2
-        on t1.ID = t2.post_id
-        where t1.post_type = 'flex-idx-pages'
-        and t1.post_status = 'publish'
-        and t2.meta_key = '_flex_id_page'
-        ", ARRAY_A);
-
-            foreach ($list_pages as $idxboost_page) {
-                $idxboost_page['guid'] = implode('/', array(site_url(), $idxboost_page['post_name']));
-                $idxboost_pages[$idxboost_page["page_id"]] = $idxboost_page;
-            }
-
-            set_transient('idxboost_list_main_pages', $idxboost_pages, 60);
-        }
-
-        $idxboost_pages = get_transient("idxboost_list_main_pages");
-
-        return $idxboost_pages;
+  function idxboost_list_pages()
+  {
+    global $wpdb;
+    $idxboost_pages = array();
+    $list_pages = $wpdb->get_results("
+    select ID, post_title, post_name, guid, t2.meta_value AS page_id
+    from {$wpdb->posts} t1
+    inner join {$wpdb->postmeta} t2
+    on t1.ID = t2.post_id
+    where t1.post_type = 'flex-idx-pages'
+    and t1.post_status = 'publish'
+    and t2.meta_key = '_flex_id_page'
+    ", ARRAY_A);
+    foreach($list_pages as $idxboost_page) {
+      $idxboost_page['guid'] = implode('/', array(site_url(), $idxboost_page['post_name']));
+      $idxboost_pages[$idxboost_page["page_id"]] = $idxboost_page;
     }
+    return $idxboost_pages;
+  }
 }
 if (!function_exists('flex_user_list_pages')) {
     function flex_user_list_pages()
@@ -1647,198 +1599,198 @@ if (!function_exists('flex_user_list_pages')) {
         global $wpdb, $flex_idx_info;
         $list_pages = array();
         foreach ($flex_idx_info["pages"] as $page_id => $page_info) {
-            if (preg_match("/^my-(.*)/", $page_info["post_name"])) {
-                $list_pages[] = array(
-                    "post_title" => $page_info["post_title"],
-                    "permalink" => $page_info["guid"]
-                );
-            }
+          if (preg_match("/^my-(.*)/", $page_info["post_name"])) {
+            $list_pages[] = array(
+              "post_title" => $page_info["post_title"],
+              "permalink" => $page_info["guid"]
+            );
+          }
         }
         return $list_pages;
     }
 }
 if (!function_exists('idxboost_autologin_alerts_fn')) {
-    function idxboost_autologin_alerts_fn()
-    {
-        $client_ip = get_client_ip_server();
-        $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
-        $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
-        $agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
+  function idxboost_autologin_alerts_fn() {
+    $client_ip = get_client_ip_server();
+    $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
+    $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
+    $agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
 
-        global $wpdb, $wp, $flex_idx_info;
-        if (!empty($_GET)) {
-            if (is_array($_GET)) {
-                if (array_key_exists('token_authau', $_GET)) {
-                    $access_token = flex_idx_get_access_token();
-                    $event_auto_login = '';
-                    if (array_key_exists('event', $_GET)) {
-                        $event_auto_login = $_GET['event'];
-                    }
+    global $wpdb ,$wp, $flex_idx_info;    
+    if (!empty($_GET)) {
+        if (is_array($_GET)) {
+            if (array_key_exists('token_authau', $_GET)) {
+                $access_token = flex_idx_get_access_token();
+                $event_auto_login='';
+                if (array_key_exists('event',$_GET )) {
+                    $event_auto_login=$_GET['event'];
+                }
 
-                    $sendParams = array('access_token' => $access_token, 'alert_token' => $_GET['token_authau'], 'event_login' => $event_auto_login);
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_TRACK_PROPERTY_LOOK_TOKEN);
-                    curl_setopt($ch, CURLOPT_POST, 1);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_FAILONERROR, true);
-                    $server_output = curl_exec($ch);
-                    $dataTokentem = json_decode($server_output, true);
-                    curl_close($ch);
-                    if (is_array($_COOKIE)) {
-                        if (array_key_exists('ib_lead_token', $_COOKIE) == false) {
-                            if (is_array($dataTokentem)) {
+                $sendParams = array('access_token'=> $access_token, 'alert_token' => $_GET['token_authau'],'event_login'=>$event_auto_login );
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_TRACK_PROPERTY_LOOK_TOKEN);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
+                $server_output = curl_exec($ch);                
+                $dataTokentem=json_decode($server_output,true);
+                curl_close($ch);
+                if (is_array($_COOKIE)) {   
+                    if (array_key_exists('ib_lead_token', $_COOKIE) == false ) {
+                        if (is_array($dataTokentem)) {
 
-                                if (array_key_exists('lead_info', $dataTokentem)) {
-                                    if (!empty($dataTokentem['lead_info'])) {
-                                        $idx_info_lead = $dataTokentem['lead_info'];
-                                    }
-                                }
-
-                                if (array_key_exists('encode_token', $dataTokentem)) {
-                                    if (!empty($dataTokentem['encode_token'])) {
-                                        $encode_token = $dataTokentem['encode_token'];
-                                    }
-                                }
-
-                                if (!empty($idx_info_lead) || !empty($encode_token)) {
-                                    //listing view
-
-                                    //get mls_num
-                                    $wp_request     = $wp->request;
-                                    $wp_request_exp = explode('/', $wp_request);
-
-                                    list($page, $slug) = $wp_request_exp;
-
-                                    if (strstr($slug, '-rx-')) {
-                                        $exp_slug = explode('-', $slug);
-                                        $mls_num  = 'rx-' . end($exp_slug);
-                                    } else {
-                                        $exp_slug = explode('-', $slug);
-                                        $mls_num  = end($exp_slug);
-                                    }
-                                    //get mls_num
-
-                                    if (!empty($mls_num)) {
-                                        $params_listing_view = [
-                                            "access_token" => $access_token,
-                                            "lead_token" => $encode_token,
-                                            "client_ip" => $client_ip,
-                                            "url_referer" => $referer,
-                                            "url_origin" => $origin,
-                                            "user_agent" => $agent,
-                                            "mls_number" => $mls_num,
-                                            "board_id" => $flex_idx_info['board_id']
-                                        ];
-
-                                        $ch_listing_view = curl_init();
-                                        curl_setopt($ch_listing_view, CURLOPT_URL, FLEX_IDX_API_TRACK_PROPERTY_VIEW);
-                                        curl_setopt($ch_listing_view, CURLOPT_POST, 1);
-                                        curl_setopt($ch_listing_view, CURLOPT_POSTFIELDS, http_build_query($params_listing_view));
-                                        curl_setopt($ch_listing_view, CURLOPT_RETURNTRANSFER, true);
-                                        curl_setopt($ch_listing_view, CURLOPT_FAILONERROR, true);
-                                        $output_listing_view = curl_exec($ch_listing_view);
-                                        curl_close($ch_listing_view);
-                                        $response_listing_view = json_decode($output_listing_view, true);
-                                    }
-
-                                    //listing view
-                        ?>
-                                    <script type="text/javascript">
-                                        <?php if (!empty($idx_info_lead)) { ?>
-                                            var idx_info_lead = <?php echo json_encode($idx_info_lead); ?>;
-
-                                            (function($) {
-                                                //INICITIAL VARIABLES USER
-                                                $("#_ib_fn_inq").val(idx_info_lead.first_name);
-                                                $("#_ib_ln_inq").val(idx_info_lead.last_name);
-                                                $("#_ib_em_inq").val(idx_info_lead.email_address);
-                                                $("#_ib_ph_inq").val(idx_info_lead.phone_number);
-
-                                                $("._ib_fn_inq").val(idx_info_lead.first_name);
-                                                $("._ib_ln_inq").val(idx_info_lead.last_name);
-                                                $("._ib_em_inq").val(idx_info_lead.email_address);
-                                                $("._ib_ph_inq").val(idx_info_lead.phone_number);
-
-                                                //Building default label
-                                                var ob_form_building_footer;
-                                                ob_form_building_footer = $('.flex_idx_building_form');
-
-                                                if (ob_form_building_footer.length > 0) {
-                                                    ob_form_building_footer.find('[name="first_name"]').val(idx_info_lead.first_name);
-                                                    ob_form_building_footer.find('[name="last_name"]').val(idx_info_lead.last_name);
-                                                    ob_form_building_footer.find('[name="email"]').val(idx_info_lead.phone_number);
-                                                    ob_form_building_footer.find('[name="phone"]').val(idx_info_lead.email_address);
-                                                }
-
-                                                //modal regular filter default label
-                                                var ob_form_modal;
-                                                ob_form_modal = $('.ib-propery-inquiry-f');
-                                                if (ob_form_modal.length > 0) {
-                                                    ob_form_modal.find('[name="first_name"]').val(idx_info_lead.first_name);
-                                                    ob_form_modal.find('[name="last_name"]').val(idx_info_lead.last_name);
-                                                    ob_form_modal.find('[name="email_address"]').val(idx_info_lead.phone_number);
-                                                    ob_form_modal.find('[name="phone_number"]').val(idx_info_lead.email_address);
-                                                }
-
-                                                //Off market listing default label
-                                                var ob_form_off_market_listing;
-                                                ob_form_off_market_listing = $('#flex-idx-property-form');
-                                                if (ob_form_off_market_listing.length > 0) {
-                                                    ob_form_off_market_listing.find('[name="first_name"]').val(idx_info_lead.first_name);
-                                                    ob_form_off_market_listing.find('[name="last_name"]').val(idx_info_lead.last_name);
-                                                    ob_form_off_market_listing.find('[name="email"]').val(idx_info_lead.phone_number);
-                                                    ob_form_off_market_listing.find('[name="phone"]').val(idx_info_lead.email_address);
-                                                }
-                                                //INICITIAL VARIABLES USER
-
-                                                var htmlMenuidx = [];
-
-                                                htmlMenuidx.push('<li class="login show_modal_login_active">');
-                                                htmlMenuidx.push('<a href="javascript:void(0)" rel="nofollow">' + word_translate.welcome + ' ' + idx_info_lead.first_name + '</a>');
-                                                htmlMenuidx.push('<div class="menu_login_active">');
-                                                htmlMenuidx.push('<ul>');
-                                                htmlMenuidx.push('<li><a href="' + __flex_g_settings.page_setting.flex_idx_favorites.guid + '">' + __flex_g_settings.page_setting.flex_idx_favorites.post_title + '</a></li>');
-                                                htmlMenuidx.push('<li><a href="' + __flex_g_settings.page_setting.flex_idx_saved_searches.guid + '">' + __flex_g_settings.page_setting.flex_idx_saved_searches.post_title + '</a></li>');
-                                                htmlMenuidx.push('<li><a href="' + __flex_g_settings.page_setting.flex_idx_profile.guid + '">' + __flex_g_settings.page_setting.flex_idx_profile.post_title + '</a></li>');
-                                                htmlMenuidx.push('<li><a href="#" class="flex-logout-link" id="flex-logout-link" rel="nofollow">' + word_translate.logout + '</a></li>');
-                                                htmlMenuidx.push('</ul>');
-                                                htmlMenuidx.push('</div>');
-                                                htmlMenuidx.push('</li>');
-
-
-                                                $("#user-options").html(htmlMenuidx.join(''));
-
-                                                __flex_g_settings.anonymous = "no";
-
-                                            })(jQuery);
-
-                                        <?php } ?>
-
-                                        <?php if (!empty($encode_token)) { ?>
-                                            Cookies.set('ib_lead_token', "<?php echo $encode_token; ?>", {
-                                                expires: 30
-                                            });
-                                        <?php
-                                            $_COOKIE['ib_lead_token'] = $encode_token;
-                                        } ?>
-                                    </script>
-        <?php
+                            if (array_key_exists('lead_info', $dataTokentem)) {
+                                if (!empty($dataTokentem['lead_info'])) {
+                                    $idx_info_lead = $dataTokentem['lead_info'];
                                 }
                             }
-                        }
+
+                            if (array_key_exists('encode_token', $dataTokentem)) {
+                                if (!empty($dataTokentem['encode_token'])) {
+                                    $encode_token = $dataTokentem['encode_token']; 
+                                }
+                            }
+
+                            if (!empty($idx_info_lead) || !empty($encode_token) ) { 
+                            //listing view
+                            
+                                //get mls_num
+                                $wp_request     = $wp->request;
+                                $wp_request_exp = explode('/', $wp_request);
+                                
+                                list($page, $slug) = $wp_request_exp;
+
+                                if (strstr($slug, '-rx-')) {
+                                    $exp_slug = explode('-', $slug);
+                                    $mls_num  = 'rx-' . end($exp_slug);
+                                } else {
+                                    $exp_slug = explode('-', $slug);
+                                    $mls_num  = end($exp_slug);
+                                }
+                                //get mls_num
+
+                                if (!empty($mls_num)) {
+                                    $params_listing_view = [
+                                        "access_token" => $access_token,
+                                        "lead_token" => $encode_token,
+                                        "client_ip" => $client_ip,
+                                        "url_referer" => $referer,
+                                        "url_origin" => $origin,
+                                        "user_agent" => $agent,
+                                        "mls_number" => $mls_num,
+                                        "board_id" => $flex_idx_info['board_id']
+                                    ];
+
+                                    $ch_listing_view = curl_init();
+                                    curl_setopt($ch_listing_view, CURLOPT_URL, FLEX_IDX_API_TRACK_PROPERTY_VIEW);
+                                    curl_setopt($ch_listing_view, CURLOPT_POST, 1);
+                                    curl_setopt($ch_listing_view, CURLOPT_POSTFIELDS, http_build_query($params_listing_view));
+                                    curl_setopt($ch_listing_view, CURLOPT_RETURNTRANSFER, true);
+                                    curl_setopt($ch_listing_view, CURLOPT_REFERER, ib_get_http_referer());
+                                    $output_listing_view = curl_exec($ch_listing_view);
+                                    curl_close($ch_listing_view);
+                                    $response_listing_view = json_decode($output_listing_view, true);
+                                }
+                                
+                                //listing view
+                            ?>
+                            <script type="text/javascript"> 
+                                <?php if (!empty($idx_info_lead)) { ?>
+                                    var idx_info_lead=<?php echo json_encode($idx_info_lead); ?>;
+
+                                    (function ($) {
+                                        //INICITIAL VARIABLES USER
+                                        $("#_ib_fn_inq").val(idx_info_lead.first_name);
+                                        $("#_ib_ln_inq").val(idx_info_lead.last_name);
+                                        $("#_ib_em_inq").val(idx_info_lead.email_address);
+                                        $("#_ib_ph_inq").val(idx_info_lead.phone_number);
+
+                                        $("._ib_fn_inq").val(idx_info_lead.first_name);
+                                        $("._ib_ln_inq").val(idx_info_lead.last_name);
+                                        $("._ib_em_inq").val(idx_info_lead.email_address);
+                                        $("._ib_ph_inq").val(idx_info_lead.phone_number);
+
+                                        //Building default label
+                                        var ob_form_building_footer;
+                                        ob_form_building_footer=$('.flex_idx_building_form');
+
+                                        if (ob_form_building_footer.length>0){
+                                          ob_form_building_footer.find('[name="first_name"]').val(idx_info_lead.first_name);
+                                          ob_form_building_footer.find('[name="last_name"]').val(idx_info_lead.last_name);
+                                          ob_form_building_footer.find('[name="email"]').val(idx_info_lead.phone_number);
+                                          ob_form_building_footer.find('[name="phone"]').val(idx_info_lead.email_address);
+                                        }
+                                        
+                                        //modal regular filter default label
+                                        var ob_form_modal;
+                                        ob_form_modal=$('.ib-propery-inquiry-f');
+                                        if (ob_form_modal.length>0){
+                                          ob_form_modal.find('[name="first_name"]').val(idx_info_lead.first_name);
+                                          ob_form_modal.find('[name="last_name"]').val(idx_info_lead.last_name);
+                                          ob_form_modal.find('[name="email_address"]').val(idx_info_lead.phone_number);
+                                          ob_form_modal.find('[name="phone_number"]').val(idx_info_lead.email_address);
+                                        }
+
+                                        //Off market listing default label
+                                        var ob_form_off_market_listing;
+                                        ob_form_off_market_listing=$('#flex-idx-property-form');
+                                        if (ob_form_off_market_listing.length>0){
+                                          ob_form_off_market_listing.find('[name="first_name"]').val(idx_info_lead.first_name);
+                                          ob_form_off_market_listing.find('[name="last_name"]').val(idx_info_lead.last_name);
+                                          ob_form_off_market_listing.find('[name="email"]').val(idx_info_lead.phone_number);
+                                          ob_form_off_market_listing.find('[name="phone"]').val(idx_info_lead.email_address);
+                                        }
+                                        //INICITIAL VARIABLES USER
+
+                                        var htmlMenuidx =[];
+                                        
+                                        htmlMenuidx.push('<li class="login show_modal_login_active">');
+                                            htmlMenuidx.push('<a href="javascript:void(0)" rel="nofollow">'+word_translate.welcome+' '+idx_info_lead.first_name+'</a>');
+                                            htmlMenuidx.push('<div class="menu_login_active">');
+                                                htmlMenuidx.push('<ul>');
+                                                    htmlMenuidx.push('<li><a href="'+__flex_g_settings.page_setting.flex_idx_favorites.guid+'">'+__flex_g_settings.page_setting.flex_idx_favorites.post_title+'</a></li>');
+                                                    htmlMenuidx.push('<li><a href="'+__flex_g_settings.page_setting.flex_idx_saved_searches.guid+'">'+__flex_g_settings.page_setting.flex_idx_saved_searches.post_title+'</a></li>');
+                                                    htmlMenuidx.push('<li><a href="'+__flex_g_settings.page_setting.flex_idx_profile.guid+'">'+__flex_g_settings.page_setting.flex_idx_profile.post_title+'</a></li>');
+                                                    htmlMenuidx.push('<li><a href="#" class="flex-logout-link" id="flex-logout-link" rel="nofollow">'+word_translate.logout+'</a></li>');
+                                                htmlMenuidx.push('</ul>');
+                                            htmlMenuidx.push('</div>');
+                                        htmlMenuidx.push('</li>');
+
+                                        
+                                        $("#user-options").html(htmlMenuidx.join(''));
+
+                                        __flex_g_settings.anonymous = "no";
+
+                                    })(jQuery);
+
+                                <?php } ?>
+                                
+                                <?php if (!empty($encode_token)) { ?>
+                                    Cookies.set('ib_lead_token', "<?php echo $encode_token; ?>", {
+                                      expires: 30
+                                    });                                    
+                                <?php 
+                                $_COOKIE['ib_lead_token']=$encode_token;
+                            } ?>
+                                
+                            </script>
+                            <?php
+                            }
+                        }        
                     }
                 }
             }
         }
     }
+  }
 }
 if (!function_exists('flex_idx_posttype_pages_fn')) {
-    function flex_idx_posttype_pages_fn()
-    {
-        global $wpdb;
+  function flex_idx_posttype_pages_fn()
+  {
+    global $wpdb;
 
-        $result_building_slug = $wpdb->get_results("
+      $result_building_slug = $wpdb->get_results("
       SELECT t1.post_name,t2.meta_value as idx_filter
       FROM {$wpdb->posts} t1
       inner join {$wpdb->postmeta} t2
@@ -1846,126 +1798,133 @@ if (!function_exists('flex_idx_posttype_pages_fn')) {
       where t1.post_type = 'flex-idx-pages' 
       and 
         ( t1.post_status = 'publish' and t2.meta_key = '_flex_id_page' and t2.meta_value = 'flex_idx_building' ) or
-        (t1.post_status = 'publish' and t2.meta_key = '_flex_id_page' and t2.meta_value = 'flex_idx_sub_area' )
+        (t1.post_status = 'publish' and t2.meta_key = '_flex_id_page' and t2.meta_value = 'flex_idx_sub_area' ) or 
+        (t1.post_status = 'publish' and t2.meta_key = '_flex_id_page' and t2.meta_value = 'flex_idx_off_market_listing' )
+        
       limit 2
-      ", ARRAY_A);
+      ",ARRAY_A);
 
-        //var_dump($building_slug);
-        $building_slug = 'building';
-        $sub_area_slug = 'sub-area';
-        $keys_building = array_search('flex_idx_building', array_column($result_building_slug, 'idx_filter'));
+      //var_dump($building_slug);
+      $building_slug='building';
+      $sub_area_slug='sub-area';
+      $off_market_listing_slug='off-market-listing';
+      $keys_building=array_search('flex_idx_building', array_column($result_building_slug, 'idx_filter'));
 
-        if (is_numeric($keys_building)) {
-            $building_slug = $result_building_slug[$keys_building]['post_name'];
-        }
+      if (is_numeric($keys_building) ) {
+          $building_slug=$result_building_slug[$keys_building]['post_name'];
+      }
 
-        $keys_sub_area = array_search('flex_idx_sub_area', array_column($result_building_slug, 'idx_filter'));
-        if (is_numeric($keys_sub_area)) {
-            $sub_area_slug = $result_building_slug[$keys_sub_area]['post_name'];
-        }
+      $keys_sub_area=array_search('flex_idx_sub_area', array_column($result_building_slug, 'idx_filter'));     
+      if (is_numeric($keys_sub_area) ) {
+          $sub_area_slug=$result_building_slug[$keys_sub_area]['post_name'];
+      }
 
+      $keys_off_market_listing=array_search('flex_idx_off_market_listing', array_column($result_building_slug, 'idx_filter'));     
+      if (is_numeric($keys_off_market_listing) ) {
+          $off_market_listing_slug=$result_building_slug[$keys_off_market_listing]['post_name'];
+      }
 
-        register_post_type('flex-idx-building', array(
-            'public'              => true,
-            'exclude_from_search' => true,
-            'show_in_menu' => false,
-            'label'               => 'My IDX Buildings',
-            'rewrite'             => array(
-                'with_front' => false,
-                'slug' => $building_slug,
-            ),
-            'supports'            => array('title', 'page-attributes', 'post-formats'),
-            'capability_type'     => 'post'
-        ));
-        register_post_type('flex-idx-pages', array(
-            'public'              => true,
-            'exclude_from_search' => true,
-            'show_in_menu' => false,
-            'label'               => 'My IDX Pages',
-            'rewrite' => array(
-                'with_front' => false,
-                'slug' => 'flex-idx-pages'
-            ),
-            'supports'            => array('title', 'editor', 'page-attributes'),
-            'capability_type'     => 'post'
-        ));
-        register_post_type('flex-landing-pages', array(
-            'public'              => true,
-            'exclude_from_search' => true,
-            'show_in_menu' => false,
-            'label'               => 'My Search Filter Pages',
-            'rewrite' => array(
-                'with_front' => false,
-                'slug' => 'flex-landing-pages'
-            ),
-            'hierarchical'          => true,
-            'supports'            => array('title', 'editor', 'thumbnail', 'page-attributes'),
-            'capability_type'     => 'post',
-        ));
-        register_post_type('idx-off-market', array(
+      register_post_type('flex-idx-building', array(
+          'public'              => true,
+          'exclude_from_search' => true,
+          'show_in_menu' => false,
+          'label'               => 'My IDX Buildings',
+          'rewrite'             => array(
+              'with_front' => false,
+              'slug' => $building_slug,
+          ),
+          'supports'            => array('title', 'page-attributes', 'post-formats'),
+          'capability_type'     => 'post'
+      ));
+      register_post_type('flex-idx-pages', array(
+          'public'              => true,
+          'exclude_from_search' => true,
+          'show_in_menu' => false,
+          'label'               => 'My IDX Pages',
+          'rewrite' => array(
+            'with_front' => false,
+            'slug' => 'flex-idx-pages'
+          ),
+          'supports'            => array('title', 'editor', 'page-attributes'),
+          'capability_type'     => 'post'
+      ));
+      register_post_type('flex-landing-pages', array(
+        'public'              => true,
+        'exclude_from_search' => true,
+        'show_in_menu' => false,
+        'label'               => 'My Search Filter Pages',
+        'rewrite' => array(
+          'with_front' => false,
+          'slug' => 'flex-landing-pages'
+        ),
+        'hierarchical'          => true,
+        'supports'            => array('title', 'editor', 'thumbnail','page-attributes'),
+        'capability_type'     => 'post',
+    ));
+      register_post_type('idx-off-market', array(
             'public'              => true,
             'exclude_from_search' => true,
             'show_in_menu' => false,
             'label'               => 'My Off Market Listings',
             'rewrite'             => array(
-                'with_front' => false,
-                'slug' => 'off-market-listing',
+              'with_front' => false,
+              'slug' => $off_market_listing_slug,
             ),
             'supports'            => array('title', 'page-attributes', 'post-formats'),
             'capability_type'     => 'post'
-        ));
-        register_post_type('flex-filter-pages', array(
-            'public'              => true,
-            'exclude_from_search' => true,
-            'show_in_menu' => false,
-            'label'               => 'My Filter Pages',
-            'rewrite' => array(
-                'with_front' => false,
-                'slug' => 'flex-filter-pages'
-            ),
-            'supports'            => array('title', 'editor', 'thumbnail'),
-            'capability_type'     => 'post',
-        ));
+      ));
+      register_post_type('flex-filter-pages', array(
+          'public'              => true,
+          'exclude_from_search' => true,
+          'show_in_menu' => false,
+          'label'               => 'My Filter Pages',
+          'rewrite' => array(
+            'with_front' => false,
+            'slug' => 'flex-filter-pages'
+          ),
+          'supports'            => array('title', 'editor', 'thumbnail'),
+          'capability_type'     => 'post',
+      ));
 
 
-        register_post_type('idx-sub-area', array(
-            'public'              => true,
-            'exclude_from_search' => true,
-            'show_in_menu' => false,
-            'label'               => 'My Sub Areas',
-            'rewrite'             => array(
-                'with_front' => false,
-                'slug' => $sub_area_slug,
-            ),
-            'supports'            => array('title', 'page-attributes', 'post-formats'),
-            'capability_type'     => 'post'
-        ));
+      register_post_type('idx-sub-area', array(
+          'public'              => true,
+          'exclude_from_search' => true,
+          'show_in_menu' => false,
+          'label'               => 'My Sub Areas',
+          'rewrite'             => array(
+              'with_front' => false,
+              'slug' => $sub_area_slug,
+          ),
+          'supports'            => array('title', 'page-attributes', 'post-formats'),
+          'capability_type'     => 'post'
+      ));
 
-        register_post_type('idx-agents', array(
-            'public' => true,
-            'exclude_from_search' => true,
-            'show_in_menu' => false,
-            'label' => 'Agents',
-            'rewrite'             => array(
-                'with_front' => false,
-                'slug' => 'idx-agents',
-            ),
-            'supports' => array('title', 'editor', 'thumbnail'),
-            'capability_type' => 'post'
-        ));
+      register_post_type('idx-agents', array(
+        'public' => true,
+        'exclude_from_search' => true,
+        'show_in_menu' => false,
+        'label' => 'Agents',
+        'rewrite'             => array(
+            'with_front' => false,
+            'slug' => 'idx-agents',
+        ),
+        'supports' => array('title', 'editor', 'thumbnail'),
+        'capability_type' => 'post'
+      ));
 
-        // setup rewrite rules
-        flex_idx_rewrite_rules();
-        flush_rewrite_rules();
-    }
+      // setup rewrite rules
+      flex_idx_rewrite_rules();
+      flush_rewrite_rules();
+  }
 }
 if (!function_exists('flex_idx_rewrite_rules')) {
     function flex_idx_rewrite_rules()
     {
-        global $wpdb;
-
-        // handle search $permalink
-        /*
+      global $wpdb;
+    
+      // handle search $permalink
+      /*
       $search_slug = $wpdb->get_var("
       select t1.post_name
       from {$wpdb->posts} t1
@@ -1982,8 +1941,8 @@ if (!function_exists('flex_idx_rewrite_rules')) {
         add_rewrite_rule(sprintf('^%s/(.*)?', $search_slug), sprintf('index.php?flex-idx-pages=%s', $search_slug), 'top');
       }
       */
-        // handle property detail permalink
-        $property_slug = $wpdb->get_var("
+      // handle property detail permalink
+      $property_slug = $wpdb->get_var("
       select t1.post_name
       from {$wpdb->posts} t1
       inner join {$wpdb->postmeta} t2
@@ -1994,24 +1953,23 @@ if (!function_exists('flex_idx_rewrite_rules')) {
       and t2.meta_value = 'flex_idx_property_detail'
       limit 1
       ");
-        if (!empty($property_slug)) {
-            add_rewrite_rule(sprintf('^%s/([^/]+)/?$', $property_slug), sprintf('index.php?flex-idx-pages=%s', $property_slug), 'top');
-        }
+      if (!empty($property_slug)) {
+        add_rewrite_rule(sprintf('^%s/([^/]+)/?$', $property_slug), sprintf('index.php?flex-idx-pages=%s', $property_slug), 'top');
+      }
 
-        // handle active agent pages
-        $active_agent_pages = $wpdb->get_results("
+      // handle active agent pages
+      $active_agent_pages = $wpdb->get_results("
       select post_name
       from {$wpdb->posts}
       where post_type = 'idx-agents'
       and post_status = 'publish'
       ", ARRAY_A);
 
-        if (!empty($active_agent_pages)) {
-            foreach ($active_agent_pages as $rewrite_agent_page) {
-                add_rewrite_rule(sprintf('^%s/([^/]+)/?$', $rewrite_agent_page['post_name']), sprintf('index.php?idx-agents=%s', $rewrite_agent_page['post_name']), 'top');
-                add_rewrite_rule(sprintf('^%s/property/([^/]+)/?$', $rewrite_agent_page['post_name']), sprintf('index.php?idx-agents=%s', $rewrite_agent_page['post_name']), 'top');
-            }
-        }
+      if (!empty($active_agent_pages)) {
+          foreach($active_agent_pages as $rewrite_agent_page) {
+            add_rewrite_rule(sprintf('^%s/([^/]+)/?$', $rewrite_agent_page['post_name']), sprintf('index.php?idx-agents=%s', $rewrite_agent_page['post_name']), 'top');
+          }
+      }
     }
 }
 if (!function_exists('flex_idx_on_activation')) {
@@ -2054,13 +2012,13 @@ if (!function_exists('is_flex_user_logged_in')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
         $server_output = curl_exec($ch);
         curl_close($ch);
 
         $response = json_decode($server_output, true);
-        if ((is_array($response) && isset($response['success'])) && true === $response['success']) {
+        if ( (is_array($response) && isset($response['success'])) && true === $response['success']) {
             return $response;
         }
         return false;
@@ -2069,7 +2027,6 @@ if (!function_exists('is_flex_user_logged_in')) {
 if (!function_exists('flex_lead_signup_xhr_fn')) {
     function flex_lead_signup_xhr_fn()
     {
-        $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
         $access_token = flex_idx_get_access_token();
         $response = [];
         $email    = isset($_POST['register_email']) ? trim(strip_tags($_POST['register_email'])) : '';
@@ -2102,15 +2059,14 @@ if (!function_exists('flex_lead_signup_xhr_fn')) {
             'user_agent' => $user_agent,
             'url_origin' => $url_origin,
             'ib_tags' => $ib_tags,
-            'signup_price' => $signup_price,
-            'has_registration_key' => $has_registration_key
+            'signup_price' => $signup_price
         );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_LEADS_SIGNUP);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
         $server_output = curl_exec($ch);
         curl_close($ch);
@@ -2118,23 +2074,23 @@ if (!function_exists('flex_lead_signup_xhr_fn')) {
         $flex_idx_lead         = is_flex_user_logged_in();
         $my_flex_pages = flex_user_list_pages();
         ob_start();
-        // if ($window_width < 640) { 
-        ?>
-        <li class="login show_modal_login_active">
-            <a href="javascript:void(0)" rel="nofollow"><?php echo __('Welcome', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $name; ?></a>
-            <div class="menu_login_active">
-                <?php if (!empty($my_flex_pages)) : ?>
-                    <ul>
-                        <?php foreach ($my_flex_pages as $my_flex_page) : ?>
-                            <li><a href="<?php echo $my_flex_page['permalink']; ?>"><?php echo $my_flex_page['post_title']; ?></a></li>
-                        <?php endforeach; ?>
-                        <li><a href="#" class="flex-logout-link" id="flex-logout-link" rel="nofollow"><?php echo __('Logout', IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
-                    </ul>
-                <?php endif; ?>
-            </div>
-        </li>
-    <?php
-        // }
+// if ($window_width < 640) { 
+?>
+<li class="login show_modal_login_active">
+  <a href="javascript:void(0)" rel="nofollow"><?php echo __('Welcome', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $name; ?></a>
+  <div class="menu_login_active">
+    <?php if (!empty($my_flex_pages)): ?>
+    <ul>
+      <?php foreach ($my_flex_pages as $my_flex_page): ?>
+      <li><a href="<?php echo $my_flex_page['permalink']; ?>"><?php echo $my_flex_page['post_title']; ?></a></li>
+      <?php endforeach; ?>
+      <li><a href="#" class="flex-logout-link" id="flex-logout-link" rel="nofollow"><?php echo __('Logout', IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
+    </ul>
+    <?php endif; ?>
+  </div>
+</li>
+<?php
+    // }
         $response_html = ob_get_clean();
         $response["output"] = $response_html;
         $response["last_logged_in_username"] = $email;
@@ -2161,7 +2117,7 @@ if (!function_exists('flex_idx_get_resetpass_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
         $server_output = curl_exec($ch);
         curl_close($ch);
@@ -2188,7 +2144,7 @@ if (!function_exists('flex_idx_lead_resetpass_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
         $server_output = curl_exec($ch);
         curl_close($ch);
@@ -2206,11 +2162,10 @@ if (!function_exists('idxboost_save_filter_search_alert_xhr_fn')) {
         //search_filter
     }
 }
-
+    
 if (!function_exists('flex_lead_signin_xhr_fn')) {
     function flex_lead_signin_xhr_fn()
     {
-        $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
         $access_token = flex_idx_get_access_token();
         $username     = isset($_POST['user_name']) ? sanitize_text_field($_POST['user_name']) : '';
         $password     = isset($_POST['user_pass']) ? trim($_POST['user_pass']) : '';
@@ -2231,16 +2186,15 @@ if (!function_exists('flex_lead_signin_xhr_fn')) {
             'ip_address' => $ip_address,
             'user_agent' => $user_agent,
             'url_origin' => $url_origin,
-            'signup_price' => $signup_price,
-            'has_registration_key' => $has_registration_key
+            'signup_price' => $signup_price
         );
-
+        
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_LEADS_LOGIN);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
         $server_output = curl_exec($ch);
         curl_close($ch);
@@ -2252,30 +2206,30 @@ if (!function_exists('flex_lead_signin_xhr_fn')) {
             $response["first_name"] = isset($user_info["first_name"]) ? strip_tags($user_info["first_name"]) : "";
         }
 
-        // if ($window_width < 640) {
-    ?>
-        <li class="login show_modal_login_active">
-            <a href="javascript:void(0)" rel="nofollow"><?php echo __('Welcome', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $response["first_name"]; ?></a>
-            <div class="menu_login_active">
-                <?php if (!empty($my_flex_pages)) : ?>
-                    <ul>
-                        <?php foreach ($my_flex_pages as $my_flex_page) : ?>
-                            <li><a href="<?php echo $my_flex_page['permalink']; ?>"><?php echo $my_flex_page['post_title']; ?></a></li>
-                        <?php endforeach; ?>
-                        <li><a href="#" class="flex-logout-link" id="flex-logout-link" rel="nofollow"><?php echo __('Logout', IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
-                    </ul>
-                <?php endif; ?>
-            </div>
-        </li>
-        <?php
-        // }
+// if ($window_width < 640) {
+?>
+<li class="login show_modal_login_active">
+<a href="javascript:void(0)" rel="nofollow"><?php echo __('Welcome', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $response["first_name"]; ?></a>
+<div class="menu_login_active">
+    <?php if (!empty($my_flex_pages)): ?>
+    <ul>
+    <?php foreach ($my_flex_pages as $my_flex_page): ?>
+    <li><a href="<?php echo $my_flex_page['permalink']; ?>"><?php echo $my_flex_page['post_title']; ?></a></li>
+    <?php endforeach; ?>
+    <li><a href="#" class="flex-logout-link" id="flex-logout-link" rel="nofollow"><?php echo __('Logout', IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
+    </ul>
+    <?php endif; ?>
+</div>
+</li>
+<?php
+// }
 
         $response_html = ob_get_clean();
 
         $response["output"] = $response_html;
 
         $response["last_logged_in_username"] = $username;
-        if (empty($response["last_logged_in_username"])) {
+        if ( empty($response["last_logged_in_username"]) ) {
             $response["last_logged_in_username"] = (!empty($user_info) && isset($user_info["email"])) ? $user_info["email"] : "";
         }
         wp_send_json($response);
@@ -2296,29 +2250,27 @@ if (!function_exists('get_flex_idx_search_settings')) {
 }
 
 if (!function_exists('ib_add_missing_scheme')) {
-    function ib_add_missing_scheme($url)
-    {
+    function ib_add_missing_scheme($url) {
         if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
             if (isset($_SERVER["HTTPS"])) {
                 $has_https_on = true;
             } else {
                 $has_https_on = false;
             }
-
+    
             if ($has_https_on) {
                 $url = "https://" . $url;
             } else {
                 $url = "http://" . $url;
             }
         }
-
+    
         return $url;
     }
 }
 
 if (!function_exists("ib_get_http_referer")) {
-    function ib_get_http_referer()
-    {
+    function ib_get_http_referer() {
         if (isset($_SERVER["HTTP_HOST"])) {
             return ib_add_missing_scheme($_SERVER["HTTP_HOST"]);
         }
@@ -2349,57 +2301,64 @@ if (!function_exists("flex_idx_generate_access_token")) {
         curl_setopt_array($ch, array(
             CURLOPT_URL => FLEX_IDX_API_GENERATE_NEW_TOKEN,
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_FAILONERROR => true,
+            CURLOPT_REFERER => ib_get_http_referer(),
             CURLOPT_POSTFIELDS => http_build_query($send_params)
         ));
 
         $server_output = curl_exec($ch);
         curl_close($ch);
 
-        if (false === $server_output) {
-            return null;
-        }
-
         $response = json_decode($server_output, true);
+
+        // set_transient('flex_api_access_token', $response['access_token'], 3500);
 
         return $response['access_token'];
     }
 }
 
 if (!function_exists('flex_idx_get_access_token')) {
-    function flex_idx_get_access_token($has_registration_key = null)
+    function flex_idx_get_access_token()
     {
         global $flex_idx_token;
+        
+        return $flex_idx_token;
 
-        if (null == $has_registration_key) {
-            return $flex_idx_token;
-        }
-
-        $send_params = array(
-            'registration_key' => $has_registration_key
-        );
-
-        $ch = curl_init();
-
-        curl_setopt_array($ch, array(
-            CURLOPT_URL => FLEX_IDX_API_GENERATE_NEW_TOKEN,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => http_build_query($send_params),
-            CURLOPT_FAILONERROR => true
-        ));
-
-        $server_output = curl_exec($ch);
-        curl_close($ch);
-
-        $response = json_decode($server_output, true);
-
-        return $response['access_token'];
+        // global $wpdb;
+        // $access_token = get_transient('flex_api_access_token');
+        // if (false === get_transient('flex_api_access_token')) {
+        //     $registration_key = get_option('idxboost_registration_key');
+        //     $send_params = array(
+        //         'registration_key' => $registration_key
+        //     );
+        //     $ch = curl_init();
+        //     curl_setopt_array($ch, array(
+        //         CURLOPT_URL => FLEX_IDX_API_VERIFY_CREDENTIALS,
+        //         CURLOPT_RETURNTRANSFER => true,
+        //         CURLOPT_MAXREDIRS => 10,
+        //         CURLOPT_TIMEOUT => 30,
+        //         CURLOPT_CUSTOMREQUEST => "POST",
+        //         CURLOPT_POSTFIELDS => http_build_query($send_params)
+        //     ));
+        //     $server_output = curl_exec($ch);
+        //     curl_close($ch);
+        //     $response = json_decode($server_output, true);
+        //     if (is_array($response) && isset($response['access_token'])) {
+        //         $access_token = $response['access_token'];
+        //         update_option('idxboost_registration_key', $registration_key);
+        //         set_transient('flex_api_access_token', $access_token, 3500);
+        //         update_option('idxboost_client_status', 'active');
+        //     } else {
+        //         update_option('idxboost_client_status', 'inactive');
+        //         delete_transient('flex_api_access_token');
+        //     }
+        // }
+        // return $access_token;
     }
 }
-function flex_is_valid_url($url)
-{
+function flex_is_valid_url($url) {
     $_domain_regex = "|^[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})/?$|";
     if (preg_match($_domain_regex, $url)) {
         return true;
@@ -2407,7 +2366,7 @@ function flex_is_valid_url($url)
     $_regex = '#^([a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))$#';
     if (preg_match($_regex, $url, $matches)) {
         $_parts = parse_url($url);
-        if (!in_array($_parts['scheme'], array('http', 'https')))
+        if (!in_array($_parts['scheme'], array( 'http', 'https' )))
             return false;
         if (!preg_match($_domain_regex, $_parts['host']))
             return false;
@@ -2420,80 +2379,78 @@ if (!function_exists('flex_connect_launch_fn')) {
     {
         global $wpdb;
         $access_token = flex_idx_get_access_token();
-        $response = [];
-        $sendParams = [];
+        $response=[]; $sendParams=[];
         $current_user_id = get_current_user_id();
         $api_registration_launch = isset($_POST['flex_idx_registration_launch']) ? sanitize_text_field($_POST['flex_idx_registration_launch']) : '';
         $flex_idx_registration_launch = get_option('flex_idx_registration_launch');
-        if ($flex_idx_registration_launch == false) {
-            if (flex_is_valid_url($api_registration_launch)) {
+        if ($flex_idx_registration_launch==false) {
+            if ( flex_is_valid_url($api_registration_launch) ) {
                 update_option('flex_idx_registration_launch', $api_registration_launch);
-                $response['launch_key'] = $flex_idx_registration_launch;
-                $response['message'] = $api_registration_launch . "is a valid URL";
-                $response['success'] = true;
-                $sendParams = array('WebsiteClient' => $api_registration_launch, 'access_token' => $access_token);
+                $response['launch_key']=$flex_idx_registration_launch;
+                $response['message']=$api_registration_launch. "is a valid URL";
+                $response['success']=true;
+                $sendParams=array('WebsiteClient'=> $api_registration_launch, 'access_token'=>$access_token );
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, FLEX_IDX_BASE_TICKET);
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($server_output, true);
             } else {
-                $response['message'] = $api_registration_launch . "is not a valid URL";
-                $response['success'] = false;
+                $response['message']=$api_registration_launch. "is not a valid URL";
+                $response['success']=false;
             }
-        } else {
-            $response['message'] = "Problem, you already generated a launch.";
-            $response['success'] = false;
+        }else{
+                $response['message']="Problem, you already generated a launch.";
+                $response['success']=false;
         }
         wp_send_json($response);
     }
 }
 if (!function_exists('flex_idx_import_data_fn')) {
-    function flex_idx_import_data_fn()
-    {
-        global $wpdb, $flex_idx_info;
-        $idxboost_registration_key = get_option('idxboost_registration_key');
-        $current_user_id = get_current_user_id();
-        $response = [];
-        if (false == get_option('idxboost_import_initial_data')) {
-            $sendParams = array(
+    function flex_idx_import_data_fn() {
+         global $wpdb, $flex_idx_info;
+         $idxboost_registration_key = get_option('idxboost_registration_key');
+         $current_user_id = get_current_user_id();
+         $response = [];
+         if (false == get_option('idxboost_import_initial_data')) {
+             $sendParams = array(
                 'registration_key' => $idxboost_registration_key
-            );
+             );
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_IMPORT_DATA);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FAILONERROR, true);
+            curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
             $server_output = curl_exec($ch);
             curl_close($ch);
             $response = json_decode($server_output, true);
             if (!empty($response['agent_info'])) { // idxboost_agent_info
-                $agent_info = $response['agent_info'];
-                update_option('idxboost_agent_info', $agent_info);
-                // update theme mod options
+               $agent_info = $response['agent_info'];
+               update_option('idxboost_agent_info', $agent_info);
+               // update theme mod options
                 $theme_options = get_option('theme_mods_' . $flex_idx_info['template_name']);
                 $build_array = array();
                 if (empty($agent_info['broker_logo_file'])) {
-                    $build_array['idx_image_logo_footer'] = $agent_info['broker_website_url']; // left bottom (agent logo)
-                    $build_array['idx_theme_custom']['idx_image_logo_mobile_theme'] = $agent_info['broker_website_url'];
+                  $build_array['idx_image_logo_footer'] = $agent_info['broker_website_url']; // left bottom (agent logo)
+                  $build_array['idx_theme_custom']['idx_image_logo_mobile_theme'] = $agent_info['broker_website_url'];
                 } else {
-                    $build_array['idx_image_logo_footer'] = $agent_info['broker_logo_file']; // left bottom (agent logo)
-                    $build_array['idx_theme_custom']['idx_image_logo_mobile_theme'] = $agent_info['broker_logo_file'];
+                  $build_array['idx_image_logo_footer'] = $agent_info['broker_logo_file']; // left bottom (agent logo)
+                  $build_array['idx_theme_custom']['idx_image_logo_mobile_theme'] = $agent_info['broker_logo_file'];
                 }
                 $build_array['idx_plugin_custom']['idx_text_search_bar'] = 'Your Real Estate Resource'; // Your Real Estate Resource
                 if (empty($agent_info['agent_logo_file'])) {
-                    $build_array['idx_site_text'] = $agent_info['agent_logo_text'];
-                    $build_array['idx_site_text_slogan'] = $agent_info['agent_logo_headline'];
-                    update_option('idx_site_radio_sta', 'text');
+                  $build_array['idx_site_text'] = $agent_info['agent_logo_text'];
+                  $build_array['idx_site_text_slogan'] = $agent_info['agent_logo_headline'];
+                  update_option('idx_site_radio_sta', 'text');
                 } else {
-                    $build_array['idx_image_logo'] = $agent_info['agent_logo_file']; // top left (agent logo)
-                    $build_array['idx_site_text_slogan'] = 'Real Estate Website';
-                    update_option('idx_site_radio_sta', 'image');
+                  $build_array['idx_image_logo'] = $agent_info['agent_logo_file']; // top left (agent logo)
+                  $build_array['idx_site_text_slogan'] = 'Real Estate Website';
+                  update_option('idx_site_radio_sta', 'image');
                 }
                 $build_array['idx_txt_description_front'] = $agent_info['welcome_text']; // lorem...
                 $build_array['idx_txt_title_front'] = 'Welcome to my Website'; // Welcome to my website
@@ -2558,10 +2515,10 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 WHERE t1.post_type = 'flex-filter-pages' AND t1.post_status = 'publish'
                 AND t2.meta_key = '_flex_filter_page_id'
                 ");
-                foreach ($response['filter_pages'] as $filter_page) {
-                    if (in_array($filter_page['filter_id'], $wp_agent_filters)) {
-                        continue;
-                    }
+                foreach($response['filter_pages'] as $filter_page) {
+                  if (in_array($filter_page['filter_id'], $wp_agent_filters)) {
+                      continue;
+                  }
                     $wp_filter_page = wp_insert_post(array(
                         'post_title'   => $filter_page['title'],
                         'post_name'    => sanitize_title($filter_page['title']),
@@ -2582,7 +2539,7 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 }
             }
             if (isset($response['building_pages']) && is_array($response['building_pages'])) {
-                $wp_agent_buildings = $wpdb->get_col("
+              $wp_agent_buildings = $wpdb->get_col("
               SELECT t2.meta_value
               FROM {$wpdb->posts} t1
               INNER JOIN {$wpdb->postmeta} t2
@@ -2590,10 +2547,10 @@ if (!function_exists('flex_idx_import_data_fn')) {
               WHERE t1.post_type = 'flex-idx-building' AND t1.post_status = 'publish'
               AND t2.meta_key = '_flex_building_page_id'
               ");
-                foreach ($response['building_pages'] as $building_page) {
-                    if (in_array($my_building['building_id'], $wp_agent_buildings)) {
-                        continue;
-                    }
+                foreach($response['building_pages'] as $building_page) {
+                  if (in_array($my_building['building_id'], $wp_agent_buildings)) {
+                      continue;
+                  }
                     $wp_building_page = wp_insert_post(array(
                         'post_title'   => $building_page['title'],
                         'post_name'    => sanitize_title($building_page['title']),
@@ -2606,10 +2563,10 @@ if (!function_exists('flex_idx_import_data_fn')) {
                     update_post_meta($wp_building_page, '_flex_imported_page', 'yes');
                 }
             }
-            if ($response['agent_info']['template_id'] == 'fortune') {
-
+            if($response['agent_info']['template_id']=='fortune') {
+                
                 if (isset($response['building_group_pages']) && is_array($response['building_group_pages'])) {
-                    $wp_agent_building_group_pages = $wpdb->get_col("
+                  $wp_agent_building_group_pages = $wpdb->get_col("
                   SELECT t1.post_title
                   FROM {$wpdb->posts} t1
                   INNER JOIN {$wpdb->postmeta} t2
@@ -2617,8 +2574,8 @@ if (!function_exists('flex_idx_import_data_fn')) {
                   WHERE t1.post_type = 'page' AND t1.post_status = 'publish'
                   AND t2.meta_key = '_flex_imported_building_group_page'
                   ");
-                    foreach ($response['building_group_pages'] as $building_group_page) {
-                        if (in_array($building_group_page['title'] . ' Buildings', $wp_agent_building_group_pages)) {
+                    foreach($response['building_group_pages'] as $building_group_page) {
+                        if (in_array( $building_group_page['title'] . ' Buildings', $wp_agent_building_group_pages)) {
                             continue;
                         }
                         $wp_building_group_page = wp_insert_post(array(
@@ -2631,11 +2588,11 @@ if (!function_exists('flex_idx_import_data_fn')) {
                         ));
                         update_post_meta($wp_building_group_page, '_flex_imported_building_group_page', 'yes');
                     }
-                }
-            }
-
+                }               
+            }   
+            
             if (isset($response['building_group_pages']) && is_array($response['building_group_pages'])) {
-                $wp_agent_building_group_pages = $wpdb->get_col("
+              $wp_agent_building_group_pages = $wpdb->get_col("
               SELECT t1.post_title
               FROM {$wpdb->posts} t1
               INNER JOIN {$wpdb->postmeta} t2
@@ -2643,8 +2600,8 @@ if (!function_exists('flex_idx_import_data_fn')) {
               WHERE t1.post_type = 'page' AND t1.post_status = 'publish'
               AND t2.meta_key = '_flex_imported_building_group_page'
               ");
-                foreach ($response['building_group_pages'] as $building_group_page) {
-                    if (in_array($building_group_page['title'] . ' Buildings', $wp_agent_building_group_pages)) {
+                foreach($response['building_group_pages'] as $building_group_page) {
+                    if (in_array( $building_group_page['title'] . ' Buildings', $wp_agent_building_group_pages)) {
                         continue;
                     }
                     $wp_building_group_page = wp_insert_post(array(
@@ -2671,35 +2628,35 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 'menu-item-object' => 'page',
                 'menu-item-type'      => 'post_type',
                 'menu-item-status'    => 'publish'
-            );
+              );
             wp_update_nav_menu_item($menu_id, 0, $itemData);
             $aboutUsParentID = wp_update_nav_menu_item($menu_id, 0, array(
                 'menu-item-title' => 'About Us',
                 'menu-item-url' => '#',
                 'menu-item-status' => 'publish'
             ));
-            $agent_info_tbl = get_option('idxboost_agent_info');
-            $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'About' AND post_type = 'page' AND post_status = 'publish' LIMIT 1");
-            $itemData =  array(
-                'menu-item-title' => 'Meet ' . $agent_info_tbl['first_name'] . ' ' . $agent_info_tbl['last_name'],
-                'menu-item-object-id' => $myPageID,
-                'menu-item-parent-id' => $aboutUsParentID,
-                'menu-item-position'  => 1,
-                'menu-item-object' => 'page',
-                'menu-item-type'      => 'post_type',
-                'menu-item-status'    => 'publish'
-            );
-            wp_update_nav_menu_item($menu_id, 0, $itemData);
-            $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'Recent Sales' AND post_type = 'flex-filter-pages' AND post_status = 'publish' LIMIT 1");
-            $itemData =  array(
-                'menu-item-object-id' => $myPageID,
-                'menu-item-parent-id' => $aboutUsParentID,
-                'menu-item-position'  => 2,
-                'menu-item-object' => 'flex-filter-pages',
-                'menu-item-type'      => 'post_type',
-                'menu-item-status'    => 'publish'
-            );
-            wp_update_nav_menu_item($menu_id, 0, $itemData);
+                $agent_info_tbl = get_option('idxboost_agent_info');
+                $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'About' AND post_type = 'page' AND post_status = 'publish' LIMIT 1");
+                $itemData =  array(
+                    'menu-item-title' => 'Meet ' . $agent_info_tbl['first_name'] . ' ' . $agent_info_tbl['last_name'],
+                    'menu-item-object-id' => $myPageID,
+                    'menu-item-parent-id' => $aboutUsParentID,
+                    'menu-item-position'  => 1,
+                    'menu-item-object' => 'page',
+                    'menu-item-type'      => 'post_type',
+                    'menu-item-status'    => 'publish'
+                  );
+                wp_update_nav_menu_item($menu_id, 0, $itemData);
+                $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'Recent Sales' AND post_type = 'flex-filter-pages' AND post_status = 'publish' LIMIT 1");
+                $itemData =  array(
+                    'menu-item-object-id' => $myPageID,
+                    'menu-item-parent-id' => $aboutUsParentID,
+                    'menu-item-position'  => 2,
+                    'menu-item-object' => 'flex-filter-pages',
+                    'menu-item-type'      => 'post_type',
+                    'menu-item-status'    => 'publish'
+                  );
+                wp_update_nav_menu_item($menu_id, 0, $itemData);
             $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'Advanced Search Form' AND post_type = 'flex-idx-pages' AND post_status = 'publish' LIMIT 1");
             $itemData =  array(
                 'menu-item-title' => 'Search Properties',
@@ -2707,7 +2664,7 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 'menu-item-object' => 'flex-idx-pages',
                 'menu-item-type'      => 'post_type',
                 'menu-item-status'    => 'publish'
-            );
+              );
             wp_update_nav_menu_item($menu_id, 0, $itemData);
             $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'Exclusive Listings' AND post_type = 'flex-filter-pages' AND post_status = 'publish' LIMIT 1");
             $itemData =  array(
@@ -2715,14 +2672,14 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 'menu-item-object' => 'flex-filter-pages',
                 'menu-item-type'      => 'post_type',
                 'menu-item-status'    => 'publish'
-            );
+              );
             wp_update_nav_menu_item($menu_id, 0, $itemData);
             $neighborhoodsParentID = wp_update_nav_menu_item($menu_id, 0, array(
                 'menu-item-title' => 'Neighborhoods',
                 'menu-item-url' => '#',
                 'menu-item-status' => 'publish'
             ));
-            $fetch_neighborhoods = $wpdb->get_results("
+                $fetch_neighborhoods = $wpdb->get_results("
                 select t1.ID, t1.post_title, t1.post_type
                 from {$wpdb->posts} t1
                 inner join {$wpdb->postmeta} t2
@@ -2734,24 +2691,24 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 and t1.post_title not in ('Exclusive Listings','Recent Sales')
                 order by t1.post_title
                 ", ARRAY_A);
-            if (!empty($fetch_neighborhoods)) {
-                foreach ($fetch_neighborhoods as $neighborhood) {
-                    $itemData =  array(
-                        'menu-item-object-id' => $neighborhood['ID'],
-                        'menu-item-parent-id' => $neighborhoodsParentID,
-                        'menu-item-object' => $neighborhood['post_type'],
-                        'menu-item-type'      => 'post_type',
-                        'menu-item-status'    => 'publish'
-                    );
-                    wp_update_nav_menu_item($menu_id, 0, $itemData);
+                if (!empty($fetch_neighborhoods)) {
+                    foreach($fetch_neighborhoods as $neighborhood) {
+                        $itemData =  array(
+                            'menu-item-object-id' => $neighborhood['ID'],
+                            'menu-item-parent-id' => $neighborhoodsParentID,
+                            'menu-item-object' => $neighborhood['post_type'],
+                            'menu-item-type'      => 'post_type',
+                            'menu-item-status'    => 'publish'
+                          );
+                        wp_update_nav_menu_item($menu_id, 0, $itemData);
+                    }
                 }
-            }
             $condoBuildingsParentID = wp_update_nav_menu_item($menu_id, 0, array(
                 'menu-item-title' => 'Condo Buildings',
                 'menu-item-url' => '#',
                 'menu-item-status' => 'publish'
             ));
-            $fetch_building_groups = $wpdb->get_results("
+                $fetch_building_groups = $wpdb->get_results("
                 select t1.ID, t1.post_title, t1.post_type
                 from {$wpdb->posts} t1
                 inner join {$wpdb->postmeta} t2
@@ -2762,25 +2719,25 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 and t2.meta_value = 'yes'
                 order by t1.post_title
                 ", ARRAY_A);
-            if (!empty($fetch_building_groups)) {
-                foreach ($fetch_building_groups as $building_group) {
-                    $itemData =  array(
-                        'menu-item-object-id' => $building_group['ID'],
-                        'menu-item-parent-id' => $condoBuildingsParentID,
-                        'menu-item-object' => $building_group['post_type'],
-                        'menu-item-type'      => 'post_type',
-                        'menu-item-status'    => 'publish'
-                    );
-                    wp_update_nav_menu_item($menu_id, 0, $itemData);
+                if (!empty($fetch_building_groups)) {
+                    foreach($fetch_building_groups as $building_group) {
+                        $itemData =  array(
+                            'menu-item-object-id' => $building_group['ID'],
+                            'menu-item-parent-id' => $condoBuildingsParentID,
+                            'menu-item-object' => $building_group['post_type'],
+                            'menu-item-type'      => 'post_type',
+                            'menu-item-status'    => 'publish'
+                          );
+                        wp_update_nav_menu_item($menu_id, 0, $itemData);
+                    }
                 }
-            }
             $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'Blog' AND post_type = 'page' AND post_status = 'publish' LIMIT 1");
             $itemData =  array(
                 'menu-item-object-id' => $myPageID,
                 'menu-item-object' => 'page',
                 'menu-item-type'      => 'post_type',
                 'menu-item-status'    => 'publish'
-            );
+              );
             wp_update_nav_menu_item($menu_id, 0, $itemData);
             $myPageID = $wpdb->get_var("SELECT * FROM {$wpdb->posts} WHERE post_title = 'Contact' AND post_type = 'page' AND post_status = 'publish' LIMIT 1");
             $itemData =  array(
@@ -2788,76 +2745,74 @@ if (!function_exists('flex_idx_import_data_fn')) {
                 'menu-item-object' => 'page',
                 'menu-item-type'      => 'post_type',
                 'menu-item-status'    => 'publish'
-            );
+              );
             wp_update_nav_menu_item($menu_id, 0, $itemData);
             add_option('idxboost_import_initial_data', 'yes');
-        }
-        wp_send_json($response);
-        exit;
+         }
+         wp_send_json($response);
+         exit;
     }
 }
 
 if (!function_exists('idx_save_tools_admin_form_fn')) {
-    function idx_save_tools_admin_form_fn()
-    {
-        $response = [];
-        $data_setting = ['status' => false];
+    function idx_save_tools_admin_form_fn() {
+        $response=[];
+        $data_setting=['status'=>false];
         global $wpdb, $flex_idx_info;
-        $data_parameters = [];
+        $data_parameters=[];
         if ($_POST && is_array($_POST)) {
-            $data_parameters['idx_environment_site'] = $_POST['idx_environment_site'];
-            $data_parameters['idx_map_style'] = $_POST['idx_map_style'];
-            $response = fc_idx_save_tools_admin($data_parameters);
+            $data_parameters['idx_environment_site']=$_POST['idx_environment_site'];
+            $data_parameters['idx_map_style']=$_POST['idx_map_style'];
+            $response=fc_idx_save_tools_admin($data_parameters);
         }
 
-        wp_send_json($response);
+     wp_send_json($response);
 
-        exit();
+     exit();
     }
 }
 
 
 if (!function_exists('fc_idx_save_tools_admin')) {
-    function fc_idx_save_tools_admin($parameters)
-    {
-        $response = [];
-        $data_setting = ['status' => false];
+    function fc_idx_save_tools_admin($parameters) {
+        $response=[];
+        $data_setting=['status'=>false];
         global $wpdb, $flex_idx_info;
 
         //setting for environment
-        $path_feed = FLEX_IDX_PATH . 'feed/';
-        $idx_environment_site = $parameters['idx_environment_site'];
-
+        $path_feed = FLEX_IDX_PATH.'feed/';
+        $idx_environment_site=$parameters['idx_environment_site'];
+        
         if (!empty($idx_environment_site)) {
-            $data_setting['status'] = true;
-            $data_setting['environment'] = $idx_environment_site;
-            $file_setting_cache = json_encode($data_setting, true);
+            $data_setting['status']=true;
+            $data_setting['environment'] =$idx_environment_site;
+            $file_setting_cache=json_encode($data_setting,true);
         }
 
-        $idx_boost_setting = $path_feed . 'idx_boost_setting.json';
-        $result_setting = file_put_contents($idx_boost_setting, $file_setting_cache);
+        $idx_boost_setting=$path_feed.'idx_boost_setting.json';
+        $result_setting=file_put_contents($idx_boost_setting, $file_setting_cache);
         //setting for environment
 
-        $response['success'] = false;
-        $tbl_idxboost_tools = $wpdb->prefix . 'idxboost_setting';
-        $idx_map_style = '';
+        $response['success']=false;
+        $tbl_idxboost_tools = $wpdb->prefix.'idxboost_setting';
+        $idx_map_style='';
 
         $wp_idxboost_tools = $wpdb->get_col("SELECT id FROM {$tbl_idxboost_tools}; ");
 
 
-        if (array_key_exists('idx_map_style', $parameters) && !empty($parameters['idx_map_style'])) {
-            $idx_map_style = $parameters['idx_map_style'];
-        }
+     if( array_key_exists('idx_map_style', $parameters) && !empty($parameters['idx_map_style']) ) {
+        $idx_map_style=$parameters['idx_map_style'];
+     }
 
-        if (is_array($wp_idxboost_tools) && count($wp_idxboost_tools) == 0) {
-            $result_query = $wpdb->query("INSERT INTO {$tbl_idxboost_tools} (idx_map_style) VALUES('{$idx_map_style}'); ");
-        } else {
-            $result_query = $wpdb->query("UPDATE {$tbl_idxboost_tools} SET idx_map_style='{$idx_map_style}'; ");
-        }
-        $response['success'] = false;
-        $response['message'] = 'Your register were saved !!';
+     if ( is_array($wp_idxboost_tools) && count($wp_idxboost_tools)==0) {
+        $result_query=$wpdb->query("INSERT INTO {$tbl_idxboost_tools} (idx_map_style) VALUES('{$idx_map_style}'); ");
+     }else{
+        $result_query=$wpdb->query("UPDATE {$tbl_idxboost_tools} SET idx_map_style='{$idx_map_style}'; ");
+     }
+     $response['success']=false;
+     $response['message']='Your register were saved !!';
 
-        return $response;
+     return $response;
     }
 }
 
@@ -2865,78 +2820,40 @@ if (!function_exists('fc_idx_save_tools_admin')) {
 if (!function_exists('flex_idx_connect_fn')) {
     function flex_idx_connect_fn()
     {
-        // @todo temporal timezone
-        date_default_timezone_set('America/New_York');
-
         global $wpdb, $flex_idx_info;
-
-        $api_registration_key = isset($_POST['idxboost_registration_key']) ? sanitize_text_field($_POST['idxboost_registration_key']) : '';
         $current_user_id = get_current_user_id();
-
+        $api_registration_key = isset($_POST['idxboost_registration_key']) ? sanitize_text_field($_POST['idxboost_registration_key']) : '';
         $sendParams = array(
             'registration_key' => $api_registration_key,
             'urlpoints' => get_site_url()
         );
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_VERIFY_CREDENTIALS);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
         $server_output = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            $error_msg = curl_error($ch);
-            echo $error_msg;
-            exit;
-        }
-
         curl_close($ch);
 
         $response = json_decode($server_output, true);
-        $removed_agents = [];
 
         if (isset($response['active_agents']) && is_array($response['active_agents'])) {
-            $wp_agents_list = $wpdb->get_results("
-            SELECT t2.meta_value, t2.post_id
+            $wp_agents = $wpdb->get_col("
+            SELECT t2.meta_value
             FROM {$wpdb->posts} t1
             INNER JOIN {$wpdb->postmeta} t2
             ON t1.ID = t2.post_id
             WHERE t1.post_type = 'idx-agents' AND t1.post_status = 'publish'
             AND t2.meta_key = '_flex_agent_id'
-            ", ARRAY_A);
-
-            $wp_agents = [];
-
-            foreach ($wp_agents_list as $wp_agent_ID) {
-                if (!in_array($wp_agent_ID['meta_value'], $response['agents_id_list'])) {
-                    $removed_agents[] = $wp_agent_ID['post_id'];
-                }
-
-                $wp_agents[] = $wp_agent_ID['meta_value'];
-            }
-
-            $response['removed_agents'] = $removed_agents;
-
-            if (!empty($removed_agents)) {
-                foreach ($removed_agents as $remove_agent_ID) {
-                    if (has_post_thumbnail($remove_agent_ID)) {
-                        $attachment_id = get_post_thumbnail_id($remove_agent_ID);
-                        wp_delete_attachment($attachment_id, true);
-                    }
-                    wp_delete_post($remove_agent_ID, true);
-                }
-
-                $wpdb->query('DELETE FROM wp_postmeta WHERE post_id IN(' . implode(',', $removed_agents) . ')');
-            }
-
-            foreach ($response['active_agents'] as $idx_agent) {
+            ");
+        
+            foreach($response['active_agents'] as $idx_agent) {
                 if (in_array($idx_agent['id'], $wp_agents)) {
                     continue;
                 }
-
+        
                 $wp_idx_agent = wp_insert_post(array(
                     'post_title' => implode(' ', array($idx_agent['contact_first_name'], $idx_agent['contact_last_name'])),
                     'post_name' => $idx_agent['agent_slug'],
@@ -2949,7 +2866,7 @@ if (!function_exists('flex_idx_connect_fn')) {
                 if (!empty($idx_agent['agent_photo_file'])) {
                     idxboost_attach_image_to_post($idx_agent['agent_photo_file'], $wp_idx_agent);
                 }
-
+        
                 update_post_meta($wp_idx_agent, '_flex_agent_id', $idx_agent['id']);
                 update_post_meta($wp_idx_agent, '_flex_agent_slug', $idx_agent['agent_slug']);
                 update_post_meta($wp_idx_agent, '_flex_agent_first_name', $idx_agent['contact_first_name']);
@@ -2970,7 +2887,7 @@ if (!function_exists('flex_idx_connect_fn')) {
             WHERE t1.post_type = 'flex-filter-pages' AND t1.post_status = 'publish'
             AND t2.meta_key = '_flex_filter_page_id'
             ");
-            foreach ($response['agent_filters'] as $my_filter) {
+            foreach($response['agent_filters'] as $my_filter) {
                 if (in_array($my_filter['code'], $wp_agent_filters)) {
                     continue;
                 }
@@ -2991,24 +2908,24 @@ if (!function_exists('flex_idx_connect_fn')) {
             FROM {$wpdb->posts}
             WHERE post_type = 'flex-landing-pages' AND post_status = 'publish'
             ");
-
+            
             $wp_agent_search_filter_codes = [];
 
-            foreach ($wp_agent_search_filters as $prev_my_search_filter) {
+            foreach($wp_agent_search_filters as $prev_my_search_filter) {
                 preg_match("/(?:(?:\"(?:\\\\\"|[^\"])+\")|(?:'(?:\\\'|[^'])+'))/is", $prev_my_search_filter, $matches_sfilter);
 
                 if (is_array($matches_sfilter) && isset($matches_sfilter[0])) {
                     $wp_agent_search_filter_codes[] = preg_replace("/[^a-zA-Z0-9]+/", "", $matches_sfilter[0]);
                 }
             }
-
-            foreach ($response['agent_search_filters'] as $my_search_filter) {
+            
+            foreach($response['agent_search_filters'] as $my_search_filter) {
                 if (in_array($my_search_filter['code'], $wp_agent_search_filter_codes)) {
                     continue;
                 }
 
                 if (isset($my_search_filter["is_commercial"])) {
-                    $is_commercial = (bool) $my_search_filter["is_commercial"];
+                    $is_commercial = (boolean) $my_search_filter["is_commercial"];
 
                     if (true === $is_commercial) {
                         $wp_insert_filter =  wp_insert_post(array(
@@ -3091,7 +3008,7 @@ if (!function_exists('flex_idx_connect_fn')) {
             WHERE t1.post_type = 'idx-off-market' AND t1.post_status = 'publish'
             AND t2.meta_key = '_flex_token_listing_page_id'
             ");
-            foreach ($response['off_market_listings'] as $my_building) {
+            foreach($response['off_market_listings'] as $my_building) {
                 if (in_array($my_building['code'], $wp_off_market_listings)) {
                     continue;
                 }
@@ -3115,7 +3032,7 @@ if (!function_exists('flex_idx_connect_fn')) {
             WHERE t1.post_type = 'flex-idx-building' AND t1.post_status = 'publish'
             AND t2.meta_key = '_flex_building_page_id'
             ");
-            foreach ($response['agent_buildings'] as $my_building) {
+            foreach($response['agent_buildings'] as $my_building) {
                 if (in_array($my_building['code'], $wp_agent_buildings)) {
                     continue;
                 }
@@ -3139,7 +3056,7 @@ if (!function_exists('flex_idx_connect_fn')) {
             WHERE t1.post_type = 'idx-sub-area' AND t1.post_status = 'publish'
             AND t2.meta_key = '_flex_building_page_id'
             ");
-            foreach ($response['agent_sub_areas'] as $my_sub_area) {
+            foreach($response['agent_sub_areas'] as $my_sub_area) {
                 if (in_array($my_sub_area['code'], $wp_agent_sub_area)) {
                     continue;
                 }
@@ -3172,9 +3089,9 @@ if (!function_exists('flex_idx_connect_fn')) {
                 update_option('flex_idx_alerts_url_logo', $notifications_settings['url_logo']);
             }
             if (!empty($response['agent_info'])) { // idxboost_agent_info
-                $agent_info = $response['agent_info'];
-                update_option('idxboost_agent_info', $agent_info);
-            }
+               $agent_info = $response['agent_info'];
+               update_option('idxboost_agent_info', $agent_info);
+}
             if (!empty($response['pusher_settings'])) { // idxboost_pusher_settings
                 $pusher_info = $response['pusher_settings'];
                 update_option('idxboost_pusher_settings', $pusher_info);
@@ -3184,7 +3101,7 @@ if (!function_exists('flex_idx_connect_fn')) {
                 update_option('idxboost_search_settings', $search_settings);
             }
 
-            if (isset($response["commercial_types"])) {
+            if ( isset($response["commercial_types"]) ) {
                 $commercial_types = empty($response["commercial_types"]) ? [] : $response["commercial_types"];
                 update_option("idxboost_commercial_types", $commercial_types);
             }
@@ -3234,7 +3151,7 @@ if (!function_exists('flex_idx_profile_save_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -3268,8 +3185,7 @@ if (!function_exists('flex_update_search_xhr_fn')) {
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
         $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
         $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
-        if ($notification_day == 0)  $status_change = 0;
-        else $status_change = 1;
+        if ($notification_day==0)  $status_change=0; else $status_change=1;
         $sendParams = array(
             'access_token'     => $access_token,
             'flex_credentials' => $flex_lead_credentials,
@@ -3322,7 +3238,7 @@ if (!function_exists('flex_update_search_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output      = curl_exec($ch);
                 $response['cpanel'] = $server_output;
                 curl_close($ch);
@@ -3338,7 +3254,7 @@ if (!function_exists('idxboost_history_building_xhr_fn')) {
         global $wp, $wpdb, $flex_idx_info, $flex_idx_lead;
         $access_token          = flex_idx_get_access_token();
         if (get_option('idxboost_client_status') != 'active') {
-            return '<div class="clidxboost-msg-info"><strong>Please update your API key</strong> on your IDX Boost dashboard to display live MLS data.</div>';
+            return '<div class="clidxboost-msg-info"><strong>Please update your API key</strong> on your IDX Boost dashboard to display live MLS data. <a href="' . FLEX_IDX_CPANEL_URL . '" rel="nofollow">Click here to update</a></div>';
         }
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $wp_request     = $wp->request;
@@ -3348,33 +3264,32 @@ if (!function_exists('idxboost_history_building_xhr_fn')) {
             'access_token'     => $access_token,
             'flex_credentials' => $flex_lead_credentials
         );
-        $building_id = md5($building_id);
-        $path_feed = FLEX_IDX_PATH . 'feed/';
-        $post_building = $path_feed . 'condo_' . $building_id . '.json';
+        $building_id=md5($building_id);
+        $path_feed = FLEX_IDX_PATH.'feed/';
+        $post_building=$path_feed.'condo_'.$building_id.'.json';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_BUILDING_COLLECTION_LOOKUP);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
-        $result = file_put_contents($post_building, $server_output);
+        $result=file_put_contents($post_building, $server_output);
         return '1';
     }
 }
 if (!function_exists('get_feed_file_building_history_building_xhr_fn')) {
-    function get_feed_file_building_history_building_xhr_fn($building_id)
-    {
-        $path_feed = FLEX_IDX_PATH . 'feed/';
-        $building_id = md5($building_id);
-        $post_building = $path_feed . 'condo_' . $building_id . '.json';
+    function get_feed_file_building_history_building_xhr_fn($building_id){
+        $path_feed = FLEX_IDX_PATH.'feed/';
+        $building_id=md5($building_id);
+        $post_building=$path_feed.'condo_'.$building_id.'.json';
         $result = [];
 
         if (file_exists($post_building)) {
-            $result = file_get_contents($post_building);
+            $result=file_get_contents($post_building);
         }
-
+        
         return $result;
     }
 }
@@ -3383,7 +3298,7 @@ if (!function_exists('get_feed_file_building_history_building_xhr_fn')) {
 if (!function_exists('idx_force_registration_building_xhr_fn')) {
     function idx_force_registration_building_xhr_fn()
     {
-        global $wpdb, $flex_idx_lead, $flex_idx_info;
+        global $wpdb, $flex_idx_lead,$flex_idx_info;
         $access_token          = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $response = array();
@@ -3399,25 +3314,25 @@ if (!function_exists('idx_force_registration_building_xhr_fn')) {
         $lead_name       = isset($_POST['lead_name']) ? trim(strip_tags($_POST['lead_name'])) : '';
         $lead_lastname       = isset($_POST['lead_lastname']) ? trim(strip_tags($_POST['lead_lastname'])) : '';
         $lead_email       = isset($_POST['lead_email']) ? trim(strip_tags($_POST['lead_email'])) : '';
-
+       
         $search_filter_params  = isset($_POST['search_filter_params']) ? $_POST['search_filter_params'] : '';
         $search_condition       = isset($_POST['search_condition']) ? trim(strip_tags($_POST['search_condition'])) : '';
         $notification_type = [];
-        $notification_type = array("status_change" => true, "price_change" => true, "new_listing" => true);
+        $notification_type=array("status_change" => true,"price_change" =>true,"new_listing"=>true);
         $ip_address = get_client_ip_server();
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
         $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
         $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
-        $board_id = $flex_idx_info['board_id'];
+        $board_id=$flex_idx_info['board_id'];
         $ib_tags = isset($_POST["ib_tags"]) ? trim(strip_tags($_POST["ib_tags"])) : "";
-        if (empty($board_id)) $board_id = 1;
+        if (empty($board_id)) $board_id=1;
         $sendParams = array(
             'ib_tags' => $ib_tags,
             'access_token'     => $access_token,
             'flex_credentials' => $flex_lead_credentials,
             'search_params' => $search_filter_params,
             'data'             => array(
-                'search_board'  => $board_id,
+                'search_board'  =>$board_id,
                 'search_type'  => 'building_filter',
                 'search_name'  => $search_name,
                 'search_url'   => $search_url,
@@ -3436,17 +3351,18 @@ if (!function_exists('idx_force_registration_building_xhr_fn')) {
         } else if ($search_count <= 0) {
             $response['success'] = false;
             $response['message'] = 'This search does not contain any valid property.';
-        } else {
+        }else{
             if (($notification_day == 7) || ($notification_day == 1 || $notification_day == 30)) {
                 $listings  = [];
                 $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
 
-                if (empty($flex_idx_lead) && is_array($flex_idx_lead) && array_key_exists('lead_info', $flex_idx_lead) && array_key_exists('first_name', $flex_idx_lead['lead_info'])) {
-                    $lead_name = $flex_idx_lead['lead_info']['first_name'];
+                if (empty($flex_idx_lead) && is_array($flex_idx_lead) && array_key_exists('lead_info', $flex_idx_lead) && array_key_exists('first_name', $flex_idx_lead['lead_info']) ) {
+                    $lead_name=$flex_idx_lead['lead_info']['first_name'];
+                    
                 }
-                if (empty($flex_idx_lead) && is_array($flex_idx_lead) && array_key_exists('lead_info', $flex_idx_lead) && array_key_exists('email_address', $flex_idx_lead['lead_info'])) {
-                    $lead_email = $flex_idx_lead['lead_info']['email_address'];
-                }
+                if (empty($flex_idx_lead) && is_array($flex_idx_lead) && array_key_exists('lead_info', $flex_idx_lead) && array_key_exists('email_address', $flex_idx_lead['lead_info']) ) {
+                    $lead_email=$flex_idx_lead['lead_info']['email_address'];
+                }                
 
                 $save_alert_params = [
                     'type_subscription'     => 2,
@@ -3479,7 +3395,7 @@ if (!function_exists('idx_force_registration_building_xhr_fn')) {
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FAILONERROR, true);
+            curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
             $server_output = curl_exec($ch);
             curl_close($ch);
             $response = json_decode($server_output, true);
@@ -3492,7 +3408,7 @@ if (!function_exists('idx_force_registration_building_xhr_fn')) {
 if (!function_exists('idxboost_new_filter_save_search_xhr_fn')) {
     function idxboost_new_filter_save_search_xhr_fn()
     {
-        global $wpdb, $flex_idx_lead, $flex_idx_info;
+        global $wpdb, $flex_idx_lead,$flex_idx_info;
         $access_token          = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $response = array();
@@ -3512,14 +3428,14 @@ if (!function_exists('idxboost_new_filter_save_search_xhr_fn')) {
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
         $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
         $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
-        $board_id = $flex_idx_info['board_id'];
-        if (empty($board_id)) $board_id = 1;
+        $board_id=$flex_idx_info['board_id'];
+        if (empty($board_id)) $board_id=1;
         $sendParams = array(
             'access_token'     => $access_token,
             'flex_credentials' => $flex_lead_credentials,
             'search_params' => $search_filter_params,
             'data'             => array(
-                'search_board'  => $board_id,
+                'search_board'  =>$board_id,
                 'search_type'  => 'search_filter',
                 'search_name'  => $search_name,
                 'search_url'   => $search_url,
@@ -3538,7 +3454,7 @@ if (!function_exists('idxboost_new_filter_save_search_xhr_fn')) {
         } else if ($search_count <= 0) {
             $response['success'] = false;
             $response['message'] = 'This search does not contain any valid property.';
-        } else {
+        }else{
             if (($notification_day == 7) || ($notification_day == 1 || $notification_day == 30)) {
                 $listings  = [];
                 $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
@@ -3574,7 +3490,7 @@ if (!function_exists('idxboost_new_filter_save_search_xhr_fn')) {
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FAILONERROR, true);
+            curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
             $server_output = curl_exec($ch);
             curl_close($ch);
             $response = json_decode($server_output, true);
@@ -3586,7 +3502,7 @@ if (!function_exists('idxboost_new_filter_save_search_xhr_fn')) {
 if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
     function idxboost_filter_save_search_xhr_fn()
     {
-        global $wpdb, $flex_idx_lead, $flex_idx_info;
+        global $wpdb, $flex_idx_lead,$flex_idx_info;
         $access_token          = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $response = array();
@@ -3603,13 +3519,13 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
         $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
         $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
-        $board_id = $flex_idx_info['board_id'];
-        if (empty($board_id)) $board_id = 1;
+        $board_id=$flex_idx_info['board_id'];
+        if (empty($board_id)) $board_id=1;
         $sendParams = array(
             'access_token'     => $access_token,
             'flex_credentials' => $flex_lead_credentials,
             'data'             => array(
-                'search_board'  => $board_id,
+                'search_board'  =>$board_id,
                 'search_type'  => 'filter',
                 'search_name'  => $search_name,
                 'search_url'   => $search_url,
@@ -3664,7 +3580,7 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
                             'access_token'     => $access_token,
                             'flex_credentials' => $flex_lead_credentials,
                             'data'             => array(
-                                'search_board'  => $board_id,
+                                'search_board'  =>$board_id,
                                 'search_name'  => $search_name,
                                 'search_url'   => $search_url,
                                 'search_count' => $search_count,
@@ -3689,7 +3605,7 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
                     curl_setopt($ch, CURLOPT_POST, 1);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                    curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                     $server_output = curl_exec($ch);
                     curl_close($ch);
                     $response = json_decode($server_output, true);
@@ -3721,7 +3637,7 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($server_output, true);
@@ -3747,7 +3663,7 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
                             'period'          => intval($notification_day),
                             'notify_criteria' => json_encode($notification_type),
                             'statusalert'     => 1,
-                            'board'  => $board_id,
+                            'board'  =>$board_id,
                         ];
                         $update_alert_q = flex_http_request(FLEX_IDX_ALERTS_UPDATE, $save_alert_params);
                         $response       = $update_alert_q;
@@ -3757,7 +3673,7 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
                     'access_token'     => $access_token,
                     'flex_credentials' => $flex_lead_credentials,
                     'data'             => array(
-                        'search_board'  => $board_id,
+                        'search_board'  =>$board_id,
                         'search_name'  => $search_name,
                         'search_type'  => 'regular',
                         'search_url'   => $search_url,
@@ -3777,7 +3693,7 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 break;
@@ -3789,7 +3705,7 @@ if (!function_exists('idxboost_filter_save_search_xhr_fn')) {
 if (!function_exists('flex_idx_save_search_xhr_fn')) {
     function flex_idx_save_search_xhr_fn()
     {
-        global $wpdb, $flex_idx_lead, $flex_idx_info;
+        global $wpdb, $flex_idx_lead,$flex_idx_info;
         $access_token          = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $response = array();
@@ -3806,14 +3722,14 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
         $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
         $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
-        $board_id = $flex_idx_info['board_id'];
-        if (empty($board_id)) $board_id = 1;
+        $board_id=$flex_idx_info['board_id'];
+        if (empty($board_id)) $board_id=1;
 
         $sendParams = array(
             'access_token'     => $access_token,
             'flex_credentials' => $flex_lead_credentials,
             'data'             => array(
-                'search_board'  => $board_id,
+                'search_board'  =>$board_id,
                 'search_name'  => $search_name,
                 'search_url'   => $search_url,
                 'search_count' => $search_count,
@@ -3868,7 +3784,7 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                             'access_token'     => $access_token,
                             'flex_credentials' => $flex_lead_credentials,
                             'data'             => array(
-                                'search_board'  => $board_id,
+                                'search_board'  =>$board_id,
                                 'search_name'  => $search_name,
                                 'search_url'   => $search_url,
                                 'search_count' => $search_count,
@@ -3893,7 +3809,7 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                     curl_setopt($ch, CURLOPT_POST, 1);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                    curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                     $server_output = curl_exec($ch);
                     curl_close($ch);
                     $response = json_decode($server_output, true);
@@ -3926,7 +3842,7 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($server_output, true);
@@ -3934,7 +3850,7 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                 $response['success'] = true;
                 $response['message'] = 'Your saved search has been removed sucessfully';
                 break;
-            case 'update':
+            case 'update':                                   
                 if ($search_name == '') {
                     $response['success'] = false;
                     $response['message'] = 'You must provide a search title to identify your custom search.';
@@ -3942,12 +3858,12 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                     $response['success'] = false;
                     $response['message'] = 'This search does not contain any valid property.';
                 } else {
-                    if (($notification_day == 7) || ($notification_day == 1 || $notification_day == 30 || $notification_day == "0")) {
+                    if (($notification_day == 7) || ($notification_day == 1 || $notification_day == 30 || $notification_day=="0")) {
                         $listings  = [];
-                        $statusalert = "1";
-                        if ($notification_day == "0") {
-                            $statusalert = "0";
-                            $notification_day_alert = "1";
+                        $statusalert="1";
+                        if ($notification_day=="0") {
+                            $statusalert="0";
+                            $notification_day_alert="1";
                         }
 
                         $save_alert_params = [
@@ -3958,7 +3874,7 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                             'period'          => intval($notification_day_alert),
                             'notify_criteria' => json_encode($notification_type),
                             'statusalert'     => $statusalert,
-                            'board'  => $board_id,
+                            'board'  =>$board_id,
                         ];
                         $update_alert_q = flex_http_request(FLEX_IDX_ALERTS_UPDATE, $save_alert_params);
                         $response       = $update_alert_q;
@@ -3968,7 +3884,7 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                     'access_token'     => $access_token,
                     'flex_credentials' => $flex_lead_credentials,
                     'data'             => array(
-                        'search_board'  => $board_id,
+                        'search_board'  =>$board_id,
                         'search_name'  => $search_name,
                         'search_url'   => $search_url,
                         'search_count' => $search_count,
@@ -3987,7 +3903,7 @@ if (!function_exists('flex_idx_save_search_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 break;
@@ -4018,7 +3934,7 @@ if (!function_exists('flex_idx_favorite_comments_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4048,7 +3964,7 @@ if (!function_exists('flex_idx_favorite_rate_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4080,7 +3996,7 @@ if (!function_exists('flex_idx_favorite_comments_remove_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4125,7 +4041,7 @@ if (!function_exists('flex_idx_favorite_building_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($server_output, true);
@@ -4141,7 +4057,7 @@ if (!function_exists('flex_idx_favorite_building_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 curl_exec($ch);
                 curl_close($ch);
                 // track favorite add [end]
@@ -4192,7 +4108,7 @@ if (!function_exists('flex_favorite_sub_area_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($server_output, true);
@@ -4208,7 +4124,7 @@ if (!function_exists('flex_favorite_sub_area_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 curl_exec($ch);
                 curl_close($ch);
                 // track favorite add [end]
@@ -4222,8 +4138,7 @@ if (!function_exists('flex_favorite_sub_area_xhr_fn')) {
 }
 
 if (!function_exists('ib_hide_listing_view_xhr_fn')) {
-    function ib_hide_listing_view_xhr_fn()
-    {
+    function ib_hide_listing_view_xhr_fn() {
 
         global $wpdb, $flex_idx_info, $flex_idx_lead;
 
@@ -4243,7 +4158,7 @@ if (!function_exists('ib_hide_listing_view_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
 
         curl_close($ch);
@@ -4258,8 +4173,7 @@ if (!function_exists('flex_idx_favorite_xhr_fn')) {
     {
         global $wpdb, $flex_idx_info, $flex_idx_lead;
         $response = array();
-        $has_registration_key = isset($_POST['ibref']) ? trim(strip_tags($_POST['ibref'])) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $type_action    = isset($_POST['type_action']) ? trim(strip_tags($_POST['type_action'])) : '';
         $mls_num        = isset($_POST['mls_num']) ? trim(strip_tags($_POST['mls_num'])) : null;
@@ -4283,13 +4197,12 @@ if (!function_exists('flex_idx_favorite_xhr_fn')) {
                 'user_agent'    => $user_agent,
                 'type_property' => 1
             ),
-            'has_registration_key' => $has_registration_key
         );
         switch ($type_action) {
             case 'add':
                 $response_alerts = flex_http_request(FLEX_IDX_ALERTS_REGISTER, [
                     'type_subscription'     => 1,
-                    'search_name'           => 'Property update on : ' . $subject,
+                    'search_name'           => 'Property update on : '. $subject,
                     'rk'                    => get_option('flex_idx_alerts_keys'),
                     'wp_web_id'             => get_option('flex_idx_alerts_app_id'),
                     'wp_user_name'          => $flex_idx_lead['lead_info']['first_name'],
@@ -4319,7 +4232,7 @@ if (!function_exists('flex_idx_favorite_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
 
                 curl_close($ch);
@@ -4339,7 +4252,7 @@ if (!function_exists('flex_idx_favorite_xhr_fn')) {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
                 $server_output = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($server_output, true);
@@ -4356,7 +4269,7 @@ if (!function_exists('flex_idx_request_property_form_fn')) {
         $last_name  = isset($_POST['last_name']) ? sanitize_text_field($_POST['last_name']) : '';
         $email_address      = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
         $phone_number      = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
-        $gender       = isset($_POST['gender']) ? sanitize_text_field($_POST['gender']) : '';
+        $gender       = isset($_POST['gender']) ? sanitize_text_field($_POST['gender']) : '';        
         $comments    = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
         $mls_num    = isset($_POST['mls_num']) ? sanitize_text_field($_POST['mls_num']) : '';
         $price    = isset($_POST['price']) ? sanitize_text_field($_POST['price']) : '';
@@ -4395,16 +4308,16 @@ if (!function_exists('flex_idx_request_property_form_fn')) {
             'access_token'     => $access_token
         );
         $ch = curl_init();
-        $endpointinquire = FLEX_IDX_API_INQUIRY_PROPERTY_FORM;
+        $endpointinquire=FLEX_IDX_API_INQUIRY_PROPERTY_FORM;
         if (!empty($flex_idx_type_form))
-            if ($flex_idx_type_form == 'off_market_listing')
-                $endpointinquire = FLEX_IDX_API_INQUIRY_OFF_MARKET_LISTING_FORM;
-
-        curl_setopt($ch, CURLOPT_URL, $endpointinquire);
+            if ($flex_idx_type_form=='off_market_listing') 
+                $endpointinquire=FLEX_IDX_API_INQUIRY_OFF_MARKET_LISTING_FORM;
+        
+        curl_setopt($ch, CURLOPT_URL, $endpointinquire );
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4413,22 +4326,26 @@ if (!function_exists('flex_idx_request_property_form_fn')) {
     }
 }
 // Function to get the client ip address
-function get_client_ip_server()
-{
+function get_client_ip_server() {
     // Get real visitor IP behind CloudFlare network
     if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-        $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-        $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+              $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+              $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
     }
     $client  = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : "";
     $forward = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : "";
     $remote  = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : "";
 
-    if (filter_var($client, FILTER_VALIDATE_IP)) {
+    if(filter_var($client, FILTER_VALIDATE_IP))
+    {
         $ip = $client;
-    } elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
+    }
+    elseif(filter_var($forward, FILTER_VALIDATE_IP))
+    {
         $ip = $forward;
-    } else {
+    }
+    else
+    {
         $ip = $remote;
     }
     return $ip;
@@ -4460,7 +4377,7 @@ if (!function_exists('flex_track_property_detail_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4483,8 +4400,7 @@ if (!function_exists('idxboost_contact_inquiry_fn')) {
         $url_referer             = isset($_SERVER['HTTP_REFERER']) ? sanitize_text_field($_SERVER['HTTP_REFERER']) : '';
         $url_origin = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field($_SERVER['HTTP_HOST']) : '';
         $user_agent          = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field($_SERVER['HTTP_USER_AGENT']) : '';
-        $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $tags = isset($_POST["ib_tags"]) ? trim(strip_tags($_POST["ib_tags"])) : "";
         $recaptcha_response = isset($_POST["recaptcha_response"]) ? trim(strip_tags($_POST["recaptcha_response"])) : "";
@@ -4507,15 +4423,14 @@ if (!function_exists('idxboost_contact_inquiry_fn')) {
             ),
             'lead_credentials'    => $lead_credentials,
             'access_token' => $access_token,
-            'server' => $_SERVER,
-            'has_registration_key' => $has_registration_key
+            'server' => $_SERVER
         );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_INQUIRY_CONTACT_FORM);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4569,7 +4484,7 @@ if (!function_exists('flex_idx_request_website_building_form_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4603,7 +4518,7 @@ if (!function_exists('flex_idx_search_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4636,7 +4551,7 @@ if (!function_exists('flex_look_building_xhr_fn')) {
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FAILONERROR, true);
+            curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
             $server_output = curl_exec($ch);
             curl_close($ch);
             $response = json_decode($server_output, true);
@@ -4651,15 +4566,12 @@ if (!function_exists('flex_look_building_xhr_fn')) {
         }
     }
 }
-function filter_search_recent_sales_xhr_fn()
-{
+function filter_search_recent_sales_xhr_fn(){
     $params       = isset($_POST['idx']) ? $_POST['idx'] : array();
     $filter_ID    = isset($_POST['filter_ID']) ? (int) $_POST['filter_ID'] : 0;
     $filter_type    = isset($_POST['filter_type']) ? (int) $_POST['filter_type'] : 0;
-    if (!empty($_POST['limit'])) $limit    = $_POST['limit'];
-    else     $limit    = 'default';
-    $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-    $access_token = flex_idx_get_access_token($has_registration_key);
+    if (!empty($_POST['limit'])) $limit    = $_POST['limit'];    else     $limit    = 'default';
+    $access_token = flex_idx_get_access_token();
     $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
     $flex_credentials_exp  = explode('|', $flex_lead_credentials);
     $ip_address          = get_client_ip_server();
@@ -4669,13 +4581,13 @@ function filter_search_recent_sales_xhr_fn()
     $filter_token_ID     = get_post_meta($filter_ID, '_flex_filter_page_id', true);
     $filter_listing_type = get_post_meta($filter_ID, '_flex_filter_page_fl', true);
     if (empty($filter_token_ID)) {
-        $filter_token_ID = $_POST['filter_panel'];
+        $filter_token_ID= $_POST['filter_panel'];
     }
-    if ('' != $filter_token_ID) {
+    if ('' != $filter_token_ID ) {
         $filter_listing_type = 0;
     }
-    if (empty($filter_listing_type) || $filter_listing_type == false) {
-        $filter_listing_type = $filter_type;
+    if (empty($filter_listing_type) || $filter_listing_type==false) {
+        $filter_listing_type=$filter_type;
     }
     $sendParams = array(
         'idx'              => $params,
@@ -4693,14 +4605,13 @@ function filter_search_recent_sales_xhr_fn()
         'page'             => isset($params['page']) ? (int) $params['page'] : 1,
         'view'             => isset($params['view']) ? $params['view'] : 'grid',
         'sort'             => isset($params['sort']) ? $params['sort'] : 'price-desc',
-        'has_registration_key' => $has_registration_key
     );
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_MARKET_RECENT_SALE);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+    curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
     $server_output = curl_exec($ch);
     curl_close($ch);
     $response = json_decode($server_output, true);
@@ -4709,13 +4620,12 @@ function filter_search_recent_sales_xhr_fn()
 }
 
 if (!function_exists('idxboost_collection_list_fn')) {
-    function idxboost_collection_list_fn()
-    {
+    function idxboost_collection_list_fn(){
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $access_token          = flex_idx_get_access_token();
         $filter_id    = $_POST['building_id'];
-        $building_id = md5($filter_id);
-        $path_feed = FLEX_IDX_PATH . 'feed/';
+        $building_id=md5($filter_id);
+        $path_feed = FLEX_IDX_PATH.'feed/';
 
         $sendParams = array(
             'filter_id'        => $filter_id,
@@ -4724,23 +4634,23 @@ if (!function_exists('idxboost_collection_list_fn')) {
         );
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_BUILDING_COLLECTION_LOOKUP);
+        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_BUILDING_COLLECTION_LOOKUP );
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
-        $post_building = $path_feed . 'condo_' . $building_id . '.json';
+        $post_building=$path_feed.'condo_'.$building_id.'.json';
         file_put_contents($post_building, $server_output);
         $response = json_decode($server_output, true);
         wp_send_json($response);
         exit;
+
     }
 }
 
 if (!function_exists('idxboost_sub_area_collection_list_fn')) {
-    function idxboost_sub_area_collection_list_fn()
-    {
+    function idxboost_sub_area_collection_list_fn(){
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $access_token          = flex_idx_get_access_token();
         $filter_id    = $_POST['building_id'];
@@ -4754,31 +4664,32 @@ if (!function_exists('idxboost_sub_area_collection_list_fn')) {
         );
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_SUB_AREA_COLLECTION_LOOKUP);
+        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_SUB_AREA_COLLECTION_LOOKUP );
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         $response = json_decode($server_output, true);
         curl_close($ch);
         wp_send_json($response);
         exit;
+
     }
 }
 
 if (!function_exists('ib_slider_filter_regular_xhr_fn')) {
-    function ib_slider_filter_regular_xhr_fn()
-    {
+    function ib_slider_filter_regular_xhr_fn(){
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $access_token          = flex_idx_get_access_token();
         $type_filter    = $_POST['type_filter'];
         $id_filter    = $_POST['id_filter'];
 
+
         $sendParams = array(
             'filter_id'        => $id_filter,
             'listing_type'     => $type_filter,
-            // 'order'            => $order,
+            'order'            => $order,
             'mode'            => 'slider',
             'idx'            => [],
             'access_token'     => $access_token,
@@ -4786,31 +4697,31 @@ if (!function_exists('ib_slider_filter_regular_xhr_fn')) {
             'flex_credentials' => $flex_lead_credentials
         );
 
-        $endpointFilter = FLEX_IDX_API_MARKET;
-        if ($type_filter == '2') {
-            $endpointFilter = FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
-        } elseif ($type_filter == '1') {
-            $endpointFilter = FLEX_IDX_API_MARKET_RECENT_SALE;
+        $endpointFilter=FLEX_IDX_API_MARKET;
+        if ($type_filter=='2') {
+            $endpointFilter=FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
+        }elseif($type_filter=='1') {
+            $endpointFilter=FLEX_IDX_API_MARKET_RECENT_SALE;
         }
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $endpointFilter);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $endpointFilter );
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
 
-        $server_output = curl_exec($ch);
-        $response = json_decode($server_output, true);
+                $server_output = curl_exec($ch);
+                $response = json_decode($server_output, true);
 
         curl_close($ch);
         echo wp_send_json($response);
         exit;
+
     }
 }
 
 if (!function_exists('filter_agent_office_xhr_fn')) {
-    function filter_agent_office_xhr_fn()
-    {
+    function filter_agent_office_xhr_fn(){
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $access_token          = flex_idx_get_access_token();
         $params       = isset($_POST['idx']) ? $_POST['idx'] : array();
@@ -4820,11 +4731,11 @@ if (!function_exists('filter_agent_office_xhr_fn')) {
         $order = null;
         $view  = '';
         $page  = 1;
-        $param_url = [];
-        $sale_type = [];
-
+        $param_url=[];
+        $sale_type=[];
+        
         if (!empty($sale_type_param)) {
-            $sale_type[] = $sale_type_param;
+            $sale_type[]=$sale_type_param;
         }
 
         $sendParams = array(
@@ -4839,21 +4750,21 @@ if (!function_exists('filter_agent_office_xhr_fn')) {
         );
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_TRACK_PROPERTY_AGENT_OR_OFFICE);
+        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_TRACK_PROPERTY_AGENT_OR_OFFICE );
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         $response = json_decode($server_output, true);
         wp_send_json($response);
         exit;
+
     }
 }
 
 if (!function_exists('idxboost_collection_off_market_fn')) {
-    function idxboost_collection_off_market_fn()
-    {
+    function idxboost_collection_off_market_fn(){
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $access_token          = flex_idx_get_access_token();
         $market_order = isset($_POST['market_order']) ? ($_POST['market_order']) : '';
@@ -4875,7 +4786,7 @@ if (!function_exists('idxboost_collection_off_market_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -4885,19 +4796,18 @@ if (!function_exists('idxboost_collection_off_market_fn')) {
 }
 
 if (!function_exists('idx_exclusive_operation_slider_xhr_fn')) {
-    function idx_exclusive_operation_slider_xhr_fn($type, $id, $sale_type_param)
-    {
+    function idx_exclusive_operation_slider_xhr_fn($type,$id,$sale_type_param){
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $access_token          = flex_idx_get_access_token();
 
         $order = null;
         $view  = '';
         $page  = 1;
-        $param_url = [];
-        $sale_type = [];
-
+        $param_url=[];
+        $sale_type=[];
+        
         if (!empty($sale_type_param)) {
-            $sale_type[] = $sale_type_param;
+            $sale_type[]=$sale_type_param;
         }
 
 
@@ -4915,18 +4825,18 @@ if (!function_exists('idx_exclusive_operation_slider_xhr_fn')) {
             'flex_credentials' => $flex_lead_credentials
         );
 
-        $endpointFilter = FLEX_IDX_API_MARKET;
-        if ($type == '2') {
-            $endpointFilter = FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
-        } elseif ($$type == '1') {
-            $endpointFilter = FLEX_IDX_API_MARKET_RECENT_SALE;
+        $endpointFilter=FLEX_IDX_API_MARKET;
+        if ($type=='2') {
+            $endpointFilter=FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
+        }elseif($$type=='1') {
+            $endpointFilter=FLEX_IDX_API_MARKET_RECENT_SALE;
         }
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $endpointFilter);
+        curl_setopt($ch, CURLOPT_URL, $endpointFilter );
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
 
         $response = json_decode($server_output, true);
@@ -4934,15 +4844,12 @@ if (!function_exists('idx_exclusive_operation_slider_xhr_fn')) {
     }
 }
 
-function filter_search_exclusive_listing_xhr_fn()
-{
+function filter_search_exclusive_listing_xhr_fn(){
     $params       = isset($_POST['idx']) ? $_POST['idx'] : array();
     $filter_ID    = isset($_POST['filter_ID']) ? (int) $_POST['filter_ID'] : 0;
     $filter_type    = isset($_POST['filter_type']) ? (int) $_POST['filter_type'] : 0;
-    if (!empty($_POST['limit'])) $limit    = $_POST['limit'];
-    else     $limit    = 'default';
-    $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-    $access_token = flex_idx_get_access_token($has_registration_key);
+    if (!empty($_POST['limit'])) $limit    = $_POST['limit'];    else     $limit    = 'default';
+    $access_token = flex_idx_get_access_token();
     $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
     $flex_credentials_exp  = explode('|', $flex_lead_credentials);
     $ip_address          = get_client_ip_server();
@@ -4952,13 +4859,13 @@ function filter_search_exclusive_listing_xhr_fn()
     $filter_token_ID     = get_post_meta($filter_ID, '_flex_filter_page_id', true);
     $filter_listing_type = get_post_meta($filter_ID, '_flex_filter_page_fl', true);
     if (empty($filter_token_ID)) {
-        $filter_token_ID = $_POST['filter_panel'];
+        $filter_token_ID= $_POST['filter_panel'];
     }
-    if ('' != $filter_token_ID) {
+    if ('' != $filter_token_ID ) {
         $filter_listing_type = 0;
     }
-    if (empty($filter_listing_type) || $filter_listing_type == false) {
-        $filter_listing_type = $filter_type;
+    if (empty($filter_listing_type) || $filter_listing_type==false) {
+        $filter_listing_type=$filter_type;
     }
     $sendParams = array(
         'idx'              => $params,
@@ -4976,14 +4883,13 @@ function filter_search_exclusive_listing_xhr_fn()
         'page'             => isset($params['page']) ? (int) $params['page'] : 1,
         'view'             => isset($params['view']) ? $params['view'] : 'grid',
         'sort'             => isset($params['sort']) ? $params['sort'] : 'price-desc',
-        'has_registration_key' => $has_registration_key
     );
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+    curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
     $server_output = curl_exec($ch);
     curl_close($ch);
     $response = json_decode($server_output, true);
@@ -4992,57 +4898,56 @@ function filter_search_exclusive_listing_xhr_fn()
 }
 
 if (!function_exists('idxboost_get_data_slider_xhr_fn')) {
-    function idxboost_get_data_slider_xhr_fn()
-    {
+    function idxboost_get_data_slider_xhr_fn(){
         global $wp, $wpdb, $flex_idx_info;
-        $response = [];
+        $response=[];
         $type    = $_POST['type'];
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $access_token          = flex_idx_get_access_token();
-        $param_url = [];
-        $order = null;
-        $view = '';
-        $page = '1';
-        $listing_type = '';
-        $sale_type = [];
-        if (!empty($type)) {
+        $param_url=[];
+        $order=null;
+        $view='';
+        $page='1';
+        $listing_type='';
+        $sale_type=[];
+        if ( !empty($type) ) {
 
-            if ($type == 'exclusive-listing') {
-                $endpointFilter = FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
-                $listing_type = '2';
-            } elseif ($type == 'recent-sale') {
-                $endpointFilter = FLEX_IDX_API_MARKET_RECENT_SALE;
-                $listing_type = '1';
-            }
+                if ($type=='exclusive-listing') {
+                    $endpointFilter=FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
+                    $listing_type='2';
+                }elseif($type=='recent-sale') {
+                    $endpointFilter=FLEX_IDX_API_MARKET_RECENT_SALE;
+                    $listing_type='1';
+                }
 
-            $sendParams = array(
-                'filter_id'        => '',
-                'listing_type'     => $listing_type,
-                'list_type'     => $list_type,
-                'limit'     => $atts['limit'],
-                'order'            => $order,
-                'sale_type' => $sale_type,
-                'view'             => $view,
-                'page'             => $page,
-                'idx'            => $param_url,
-                'access_token'     => $access_token,
-                'version_endpoint'     => 'new',
-                'flex_credentials' => $flex_lead_credentials
-            );
+                $sendParams = array(
+                    'filter_id'        => '',
+                    'listing_type'     => $listing_type,
+                    'list_type'     => $list_type,
+                    'limit'     => $atts['limit'],
+                    'order'            => $order,
+                    'sale_type' => $sale_type,
+                    'view'             => $view,
+                    'page'             => $page,
+                    'idx'            => $param_url,
+                    'access_token'     => $access_token,
+                    'version_endpoint'     => 'new',
+                    'flex_credentials' => $flex_lead_credentials
+                );
 
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $endpointFilter);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FAILONERROR, true);
-            $server_output = curl_exec($ch);
-            $response_data = json_decode($server_output, true);
-            $response['type'] = $type;
-            $response['data'] = $response_data;
-            curl_close($ch);
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $endpointFilter);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
+                $server_output = curl_exec($ch);
+                $response_data = json_decode($server_output, true);
+                $response['type']=$type;
+                $response['data']=$response_data;
+                curl_close($ch);
         }
-
+       
         wp_send_json($response);
         exit;
     }
@@ -5053,8 +4958,7 @@ function flex_idx_filter_page_xhr_fn()
     $params       = isset($_POST['idx']) ? $_POST['idx'] : array();
     $filter_ID    = isset($_POST['filter_ID']) ? (int) $_POST['filter_ID'] : 0;
     $filter_type    = isset($_POST['filter_type']) ? (int) $_POST['filter_type'] : 0;
-    if (!empty($_POST['limit'])) $limit    = $_POST['limit'];
-    else     $limit    = 'default';
+    if (!empty($_POST['limit'])) $limit    = $_POST['limit'];    else     $limit    = 'default';
     $access_token = flex_idx_get_access_token();
     $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
     $flex_credentials_exp  = explode('|', $flex_lead_credentials);
@@ -5065,19 +4969,19 @@ function flex_idx_filter_page_xhr_fn()
     $filter_token_ID     = get_post_meta($filter_ID, '_flex_filter_page_id', true);
     $filter_listing_type = get_post_meta($filter_ID, '_flex_filter_page_fl', true);
     if (empty($filter_token_ID)) {
-        $filter_token_ID = $_POST['filter_panel'];
+        $filter_token_ID= $_POST['filter_panel'];
     }
     if (isset($_POST['filter_panel_type'])) {
-        $enpoint = FLEX_IDX_API_TRACK_PROPERTY_AGENT_OR_OFFICE;
-        $filter_listing_type = $_POST['filter_panel_type_a'];
-    } else {
-        $enpoint = FLEX_IDX_API_MARKET;
+        $enpoint=FLEX_IDX_API_TRACK_PROPERTY_AGENT_OR_OFFICE;
+        $filter_listing_type=$_POST['filter_panel_type_a'];
+    }else{
+        $enpoint=FLEX_IDX_API_MARKET;
     }
-    if ('' != $filter_token_ID) {
+    if ('' != $filter_token_ID ) {
         $filter_listing_type = 0;
     }
-    if (empty($filter_listing_type) || $filter_listing_type == false) {
-        $filter_listing_type = $filter_type;
+    if (empty($filter_listing_type) || $filter_listing_type==false) {
+        $filter_listing_type=$filter_type;
     }
     $sendParams = array(
         'idx'              => $params,
@@ -5102,7 +5006,7 @@ function flex_idx_filter_page_xhr_fn()
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FAILONERROR, true);
+    curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
     $server_output = curl_exec($ch);
     curl_close($ch);
     $response = json_decode($server_output, true);
@@ -5123,7 +5027,7 @@ if (!function_exists('flex_idx_autocomplete_xhr_fn')) {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($sendParams));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_REFERER, ib_get_http_referer());
         $server_output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($server_output, true);
@@ -5135,243 +5039,239 @@ if (!function_exists('flex_idx_register_assets')) {
     function flex_idx_register_assets()
     {
         global $flex_idx_lead, $flex_idx_info, $wpdb;
-        $word_translate_setting = array('cancel' => __('Cancel', IDXBOOST_DOMAIN_THEME_LANG));
+    $word_translate_setting = array('cancel' => __('Cancel', IDXBOOST_DOMAIN_THEME_LANG));
 
-        $custom_strings = array(
-            'type' => __('Type', IDXBOOST_DOMAIN_THEME_LANG),
-            'city' => __('City', IDXBOOST_DOMAIN_THEME_LANG),
-            'close' => __('Close', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_size' => __('Any Size', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_bed' => __('Any Bed', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_beds' => __('Any Bed(s)', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_bath' => __('Any Bath', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_baths' => __('Any Bath(s)', IDXBOOST_DOMAIN_THEME_LANG),
-            'bed' => __('Bed(s)', IDXBOOST_DOMAIN_THEME_LANG),
-            'bath' => __('Bath(s)', IDXBOOST_DOMAIN_THEME_LANG),
-            'sbeds' => __('Beds', IDXBOOST_DOMAIN_THEME_LANG),
-            'sbaths' => __('Baths', IDXBOOST_DOMAIN_THEME_LANG),
-            'beds' => __('Bed(s)', IDXBOOST_DOMAIN_THEME_LANG),
-            'unit' => __('Unit', IDXBOOST_DOMAIN_THEME_LANG),
-            'more_schools' => __('more schools', IDXBOOST_DOMAIN_THEME_LANG),
-            'days_on_market' => __('Days on Market', IDXBOOST_DOMAIN_THEME_LANG),
-            'sold_date' => __('Sold Date', IDXBOOST_DOMAIN_THEME_LANG),
-            'sold_price' => __('Sold Price', IDXBOOST_DOMAIN_THEME_LANG),
-            'living_size' => __('Living Size', IDXBOOST_DOMAIN_THEME_LANG),
-            'asking_price' => __('Asking price', IDXBOOST_DOMAIN_THEME_LANG),
-            'price' => __('Price', IDXBOOST_DOMAIN_THEME_LANG),
-            'view' => __('View', IDXBOOST_DOMAIN_THEME_LANG),
-            'listings' => __('Listings', IDXBOOST_DOMAIN_THEME_LANG),
-            'thank_you' => __('Thank you', IDXBOOST_DOMAIN_THEME_LANG),
-            'baths' => __('Bath(s)', IDXBOOST_DOMAIN_THEME_LANG),
-            'your_info_has_been_saved' => __('Your info has been saved', IDXBOOST_DOMAIN_THEME_LANG),
-            'enter_you_new_password' => __('Enter you new Password', IDXBOOST_DOMAIN_THEME_LANG),
-            'invalid_email_address' => __('invalid email address', IDXBOOST_DOMAIN_THEME_LANG),
-            'please_fill_the_fields' => __('Please fill the fields', IDXBOOST_DOMAIN_THEME_LANG),
-            'show' => __('Show %d to %d of %s results', IDXBOOST_DOMAIN_THEME_LANG),
-            'reset_password' => __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG),
-            'invalid_credentials_try_again' => __('Invalid credentials, try again.', IDXBOOST_DOMAIN_THEME_LANG),
-            'logged_in_succesfully' => __('Logged in succesfully.', IDXBOOST_DOMAIN_THEME_LANG),
-            'your_account_has_been_created_successfully' => __('Your account has been created successfully.', IDXBOOST_DOMAIN_THEME_LANG),
-            'the_user_already_exists_try_another_email_address' => __('The user already exists, try another email address.', IDXBOOST_DOMAIN_THEME_LANG),
-            'rented' => __('rented', IDXBOOST_DOMAIN_THEME_LANG),
-            'save_favorite' => __('save favorite', IDXBOOST_DOMAIN_THEME_LANG),
-            'register_for_details' => __('Register for details', IDXBOOST_DOMAIN_THEME_LANG),
-            'remove_favorite' => __('remove favorite', IDXBOOST_DOMAIN_THEME_LANG),
-            'first_page' => __('First page', IDXBOOST_DOMAIN_THEME_LANG),
-            'last_page' => __('Last page', IDXBOOST_DOMAIN_THEME_LANG),
-            'showing' => __('Showing', IDXBOOST_DOMAIN_THEME_LANG),
-            'page' => __('Page', IDXBOOST_DOMAIN_THEME_LANG),
-            'edit' => __('Edit', IDXBOOST_DOMAIN_THEME_LANG),
-            'remove' => __('Remove', IDXBOOST_DOMAIN_THEME_LANG),
-            'email_sent' => __('Email Sent!', IDXBOOST_DOMAIN_THEME_LANG),
-            'your_email_was_sent_succesfully' => __('Your email was sent succesfully', IDXBOOST_DOMAIN_THEME_LANG),
-            'to' => __('to', IDXBOOST_DOMAIN_THEME_LANG),
-            'of' => __('of', IDXBOOST_DOMAIN_THEME_LANG),
-            'pag' => __('pag', IDXBOOST_DOMAIN_THEME_LANG),
-            'homes' => __('Homes', IDXBOOST_DOMAIN_THEME_LANG),
-            'similar_properties_for_rent' => __('Similar Properties For Rent', IDXBOOST_DOMAIN_THEME_LANG),
-            'Similar_properties_for_sale' => __('Similar Properties For Sale', IDXBOOST_DOMAIN_THEME_LANG),
-            'condos_for_sale' => __('Condos For Sale', IDXBOOST_DOMAIN_THEME_LANG),
-            'apartments_for_rent' => __('Apartments For Rent', IDXBOOST_DOMAIN_THEME_LANG),
-            'condos_pending' => __('Condos Pending', IDXBOOST_DOMAIN_THEME_LANG),
-            'condos_sold' => __('Condos Sold', IDXBOOST_DOMAIN_THEME_LANG),
-            'all_neighborhoods' => __('All Neighborhoods', IDXBOOST_DOMAIN_THEME_LANG),
-            'by_Name' => __('by Name', IDXBOOST_DOMAIN_THEME_LANG),
-            'show_more' => __('show more', IDXBOOST_DOMAIN_THEME_LANG),
-            'todays_prices' => __("Today's Prices", IDXBOOST_DOMAIN_THEME_LANG),
-            'month' => __("month", IDXBOOST_DOMAIN_THEME_LANG),
-            'searching' => __('Searching', IDXBOOST_DOMAIN_THEME_LANG),
-            'condominiums' => __('Condominiums', IDXBOOST_DOMAIN_THEME_LANG),
+    $custom_strings = array(
+        'type' => __('Type', IDXBOOST_DOMAIN_THEME_LANG),
+        'city' => __('City', IDXBOOST_DOMAIN_THEME_LANG),
+        'close' => __('Close', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_size' => __('Any Size', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_bed' => __('Any Bed', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_beds' => __('Any Bed(s)', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_bath' => __('Any Bath', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_baths' => __('Any Bath(s)', IDXBOOST_DOMAIN_THEME_LANG),
+        'bed' => __('Bed(s)', IDXBOOST_DOMAIN_THEME_LANG),
+        'bath' => __('Bath(s)', IDXBOOST_DOMAIN_THEME_LANG),
+        'sbeds' => __('Beds', IDXBOOST_DOMAIN_THEME_LANG),
+        'sbaths' => __('Baths', IDXBOOST_DOMAIN_THEME_LANG),
+        'beds' => __('Bed(s)', IDXBOOST_DOMAIN_THEME_LANG),
+        'unit' => __('Unit', IDXBOOST_DOMAIN_THEME_LANG),
+        'more_schools' => __('more schools', IDXBOOST_DOMAIN_THEME_LANG),
+        'days_on_market' => __('Days on Market', IDXBOOST_DOMAIN_THEME_LANG),
+        'sold_date' => __('Sold Date', IDXBOOST_DOMAIN_THEME_LANG),
+        'sold_price' => __('Sold Price', IDXBOOST_DOMAIN_THEME_LANG),
+        'living_size' => __('Living Size', IDXBOOST_DOMAIN_THEME_LANG),
+        'asking_price' => __('Asking price', IDXBOOST_DOMAIN_THEME_LANG),
+        'price' => __('Price', IDXBOOST_DOMAIN_THEME_LANG),
+        'view' => __('View', IDXBOOST_DOMAIN_THEME_LANG),
+        'listings' => __('Listings', IDXBOOST_DOMAIN_THEME_LANG),
+        'thank_you' => __('Thank you', IDXBOOST_DOMAIN_THEME_LANG),
+        'baths' => __('Bath(s)', IDXBOOST_DOMAIN_THEME_LANG),
+        'your_info_has_been_saved' => __('Your info has been saved', IDXBOOST_DOMAIN_THEME_LANG),
+        'enter_you_new_password' => __('Enter you new Password', IDXBOOST_DOMAIN_THEME_LANG),
+        'invalid_email_address' => __('invalid email address', IDXBOOST_DOMAIN_THEME_LANG),
+        'please_fill_the_fields' => __('Please fill the fields', IDXBOOST_DOMAIN_THEME_LANG),                
+        'show' => __('Show %d to %d of %s results', IDXBOOST_DOMAIN_THEME_LANG),
+        'reset_password' => __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG),
+        'invalid_credentials_try_again' => __('Invalid credentials, try again.', IDXBOOST_DOMAIN_THEME_LANG),
+        'logged_in_succesfully' => __('Logged in succesfully.', IDXBOOST_DOMAIN_THEME_LANG),
+        'your_account_has_been_created_successfully' => __('Your account has been created successfully.', IDXBOOST_DOMAIN_THEME_LANG),
+        'the_user_already_exists_try_another_email_address' => __('The user already exists, try another email address.', IDXBOOST_DOMAIN_THEME_LANG),
+        'rented' => __('rented', IDXBOOST_DOMAIN_THEME_LANG),
+        'save_favorite' => __('save favorite', IDXBOOST_DOMAIN_THEME_LANG),
+        'register_for_details' => __('Register for details', IDXBOOST_DOMAIN_THEME_LANG),
+        'remove_favorite' => __('remove favorite', IDXBOOST_DOMAIN_THEME_LANG),
+        'first_page' => __('First page', IDXBOOST_DOMAIN_THEME_LANG),
+        'last_page' => __('Last page', IDXBOOST_DOMAIN_THEME_LANG),
+        'showing' => __('Showing', IDXBOOST_DOMAIN_THEME_LANG),
+        'page' => __('Page', IDXBOOST_DOMAIN_THEME_LANG),
+        'edit' => __('Edit', IDXBOOST_DOMAIN_THEME_LANG),
+        'remove' => __('Remove', IDXBOOST_DOMAIN_THEME_LANG),
+        'email_sent' => __('Email Sent!', IDXBOOST_DOMAIN_THEME_LANG),
+        'your_email_was_sent_succesfully' => __('Your email was sent succesfully', IDXBOOST_DOMAIN_THEME_LANG),
+        'to' => __('to', IDXBOOST_DOMAIN_THEME_LANG),
+        'of' => __('of', IDXBOOST_DOMAIN_THEME_LANG),
+        'pag' => __('pag', IDXBOOST_DOMAIN_THEME_LANG),
+        'homes' => __('Homes', IDXBOOST_DOMAIN_THEME_LANG),
+        'similar_properties_for_rent' => __('Similar Properties For Rent', IDXBOOST_DOMAIN_THEME_LANG),
+        'Similar_properties_for_sale' => __('Similar Properties For Sale', IDXBOOST_DOMAIN_THEME_LANG),
+        'condos_for_sale' => __('Condos For Sale', IDXBOOST_DOMAIN_THEME_LANG),
+        'apartments_for_rent' => __('Apartments For Rent', IDXBOOST_DOMAIN_THEME_LANG),
+        'condos_pending' => __('Condos Pending', IDXBOOST_DOMAIN_THEME_LANG),
+        'condos_sold' => __('Condos Sold', IDXBOOST_DOMAIN_THEME_LANG),
+        'all_neighborhoods' => __('All Neighborhoods', IDXBOOST_DOMAIN_THEME_LANG),
+        'by_Name' => __('by Name', IDXBOOST_DOMAIN_THEME_LANG),
+        'show_more' => __('show more', IDXBOOST_DOMAIN_THEME_LANG),
+        'todays_prices' => __("Today's Prices", IDXBOOST_DOMAIN_THEME_LANG),
+        'month' => __("month", IDXBOOST_DOMAIN_THEME_LANG),
+        'searching' => __('Searching', IDXBOOST_DOMAIN_THEME_LANG),
+        'condominiums' => __('Condominiums', IDXBOOST_DOMAIN_THEME_LANG),
 
-            'sold_at' => __('Sold at', IDXBOOST_DOMAIN_THEME_LANG),
-            'for_sale_at' => __('For Sale at', IDXBOOST_DOMAIN_THEME_LANG),
-            'pending_at' => __('Pending at', IDXBOOST_DOMAIN_THEME_LANG),
-            'for_rent_at' => __('For Rent at', IDXBOOST_DOMAIN_THEME_LANG),
+        'sold_at' => __('Sold at', IDXBOOST_DOMAIN_THEME_LANG),
+        'for_sale_at' => __('For Sale at', IDXBOOST_DOMAIN_THEME_LANG),
+        'pending_at' => __('Pending at', IDXBOOST_DOMAIN_THEME_LANG),
+        'for_rent_at' => __('For Rent at', IDXBOOST_DOMAIN_THEME_LANG),
 
-            'condominium' => __('Condominium', IDXBOOST_DOMAIN_THEME_LANG),
-            'adult_congregate' => __('Adult Congregate', IDXBOOST_DOMAIN_THEME_LANG),
-            'agricultural' => __('Agricultural', IDXBOOST_DOMAIN_THEME_LANG),
-            'apartments' => __('Apartments', IDXBOOST_DOMAIN_THEME_LANG),
-            'automotive' => __('Automotive', IDXBOOST_DOMAIN_THEME_LANG),
-            "building" => __('Building', IDXBOOST_DOMAIN_THEME_LANG),
-            "business" => __('Business', IDXBOOST_DOMAIN_THEME_LANG),
-            "church" => __('Church', IDXBOOST_DOMAIN_THEME_LANG),
-            "commercial" => __('Commercial', IDXBOOST_DOMAIN_THEME_LANG),
-            "commercial_business_agricultural_industrial_land" => __("Commercial / Business / Agricultural / Industrial Land", IDXBOOST_DOMAIN_THEME_LANG),
-            "dock" => __('Dock', IDXBOOST_DOMAIN_THEME_LANG),
-            "dock_height" => __('Dock Height', IDXBOOST_DOMAIN_THEME_LANG),
-            "duplex_quad_plex_triplex" => __('Duplex / Quad Plex / Triplex', IDXBOOST_DOMAIN_THEME_LANG),
-            "franchise" => __('Franchise', IDXBOOST_DOMAIN_THEME_LANG),
-            "free_standing" => __('Free Standing', IDXBOOST_DOMAIN_THEME_LANG),
-            "hotel" => __('Hotel', IDXBOOST_DOMAIN_THEME_LANG),
-            "income" => __('Income', IDXBOOST_DOMAIN_THEME_LANG),
-            "industrial" => __('Industrial', IDXBOOST_DOMAIN_THEME_LANG),
-            "manufacturing" => __('Manufacturing', IDXBOOST_DOMAIN_THEME_LANG),
-            "medical" => __('Medical', IDXBOOST_DOMAIN_THEME_LANG),
-            "multifamily" => __('Multifamily', IDXBOOST_DOMAIN_THEME_LANG),
-            "office" => __('Office', IDXBOOST_DOMAIN_THEME_LANG),
-            "professional" => __('Professional', IDXBOOST_DOMAIN_THEME_LANG),
-            "residential_income" => __('Residential Income', IDXBOOST_DOMAIN_THEME_LANG),
-            "residential_Land_boat_docks" => __('Residential Land/Boat Docks', IDXBOOST_DOMAIN_THEME_LANG),
-            "restaurant" => __('Restaurant', IDXBOOST_DOMAIN_THEME_LANG),
-            "retail" => __('Retail', IDXBOOST_DOMAIN_THEME_LANG),
-            "school" => __('School', IDXBOOST_DOMAIN_THEME_LANG),
-            "service" => __('Service', IDXBOOST_DOMAIN_THEME_LANG),
-            "shopping_center" => __('Shopping Center', IDXBOOST_DOMAIN_THEME_LANG),
-            "showroom" => __('Showroom', IDXBOOST_DOMAIN_THEME_LANG),
-            "special" => __('Special', IDXBOOST_DOMAIN_THEME_LANG),
-            "store" => __('Store', IDXBOOST_DOMAIN_THEME_LANG),
-            "warehouse" => __('Warehouse', IDXBOOST_DOMAIN_THEME_LANG),
-            "housing_older_persons" => __('Housing Older Persons', IDXBOOST_DOMAIN_THEME_LANG),
-            "occupied" => __('Occupied', IDXBOOST_DOMAIN_THEME_LANG),
-            "vacant" => __('Vacant', IDXBOOST_DOMAIN_THEME_LANG),
+        'condominium' => __('Condominium', IDXBOOST_DOMAIN_THEME_LANG),
+        'adult_congregate' => __('Adult Congregate', IDXBOOST_DOMAIN_THEME_LANG),
+        'agricultural' => __('Agricultural', IDXBOOST_DOMAIN_THEME_LANG),
+        'apartments' => __('Apartments', IDXBOOST_DOMAIN_THEME_LANG),
+        'automotive' => __('Automotive', IDXBOOST_DOMAIN_THEME_LANG),
+        "building" => __('Building', IDXBOOST_DOMAIN_THEME_LANG),
+        "business" => __('Business', IDXBOOST_DOMAIN_THEME_LANG),
+        "church" => __('Church', IDXBOOST_DOMAIN_THEME_LANG),
+        "commercial" => __('Commercial', IDXBOOST_DOMAIN_THEME_LANG),
+        "commercial_business_agricultural_industrial_land" => __("Commercial / Business / Agricultural / Industrial Land", IDXBOOST_DOMAIN_THEME_LANG),
+        "dock" => __('Dock', IDXBOOST_DOMAIN_THEME_LANG), 
+        "dock_height" => __('Dock Height', IDXBOOST_DOMAIN_THEME_LANG), 
+        "duplex_quad_plex_triplex" => __('Duplex / Quad Plex / Triplex', IDXBOOST_DOMAIN_THEME_LANG), 
+        "franchise" => __('Franchise', IDXBOOST_DOMAIN_THEME_LANG), 
+        "free_standing" => __('Free Standing', IDXBOOST_DOMAIN_THEME_LANG), 
+        "hotel" => __('Hotel', IDXBOOST_DOMAIN_THEME_LANG), 
+        "income" => __('Income', IDXBOOST_DOMAIN_THEME_LANG), 
+        "industrial" => __('Industrial', IDXBOOST_DOMAIN_THEME_LANG), 
+        "manufacturing" => __('Manufacturing', IDXBOOST_DOMAIN_THEME_LANG), 
+        "medical" => __('Medical', IDXBOOST_DOMAIN_THEME_LANG), 
+        "multifamily" => __('Multifamily', IDXBOOST_DOMAIN_THEME_LANG), 
+        "office" => __('Office', IDXBOOST_DOMAIN_THEME_LANG), 
+        "professional" => __('Professional', IDXBOOST_DOMAIN_THEME_LANG), 
+        "residential_income" => __('Residential Income', IDXBOOST_DOMAIN_THEME_LANG), 
+        "residential_Land_boat_docks" => __('Residential Land/Boat Docks', IDXBOOST_DOMAIN_THEME_LANG), 
+        "restaurant" => __('Restaurant', IDXBOOST_DOMAIN_THEME_LANG), 
+        "retail" => __('Retail', IDXBOOST_DOMAIN_THEME_LANG), 
+        "school" => __('School', IDXBOOST_DOMAIN_THEME_LANG), 
+        "service" => __('Service', IDXBOOST_DOMAIN_THEME_LANG), 
+        "shopping_center" => __('Shopping Center', IDXBOOST_DOMAIN_THEME_LANG), 
+        "showroom" => __('Showroom', IDXBOOST_DOMAIN_THEME_LANG), 
+        "special" => __('Special', IDXBOOST_DOMAIN_THEME_LANG), 
+        "store" => __('Store', IDXBOOST_DOMAIN_THEME_LANG), 
+        "warehouse" => __('Warehouse', IDXBOOST_DOMAIN_THEME_LANG), 
+        "housing_older_persons" => __('Housing Older Persons', IDXBOOST_DOMAIN_THEME_LANG), 
+        "occupied" => __('Occupied', IDXBOOST_DOMAIN_THEME_LANG), 
+        "vacant" => __('Vacant', IDXBOOST_DOMAIN_THEME_LANG), 
 
-            'townhouses' => __('Townhouses', IDXBOOST_DOMAIN_THEME_LANG),
-            'multi_family' => __('Multi-Family', IDXBOOST_DOMAIN_THEME_LANG),
-            'vacant_land' => __('Vacant Land', IDXBOOST_DOMAIN_THEME_LANG),
-            'single_family_homes' => __('Single Family Homes', IDXBOOST_DOMAIN_THEME_LANG),
-            'river_front' => __('River Front', IDXBOOST_DOMAIN_THEME_LANG),
-            'point_lot' => __('Point Lot', IDXBOOST_DOMAIN_THEME_LANG),
-            'ocean_front' => __('Ocean Front', IDXBOOST_DOMAIN_THEME_LANG),
-            'bay_front' => __('Bay Front', IDXBOOST_DOMAIN_THEME_LANG),
-            'canal' => __('Canal', IDXBOOST_DOMAIN_THEME_LANG),
-            'fixed_bridge' => __('Fixed Bridge', IDXBOOST_DOMAIN_THEME_LANG),
-            'intracoastal' => __('Intracoastal', IDXBOOST_DOMAIN_THEME_LANG),
-            'lake_front' => __('Lake Front', IDXBOOST_DOMAIN_THEME_LANG),
-            'equestrian' => __('Equestrian', IDXBOOST_DOMAIN_THEME_LANG),
-            'pets' => __('Pets', IDXBOOST_DOMAIN_THEME_LANG),
-            'water_front' => __('Waterfront', IDXBOOST_DOMAIN_THEME_LANG),
-            // 'open_house' => __('Open House', IDXBOOST_DOMAIN_THEME_LANG),
-            'penthouse' => __('Penthouse', IDXBOOST_DOMAIN_THEME_LANG),
-            'lofts' => __('Lofts', IDXBOOST_DOMAIN_THEME_LANG),
-            'gated_community' => __('Gated Community', IDXBOOST_DOMAIN_THEME_LANG),
-            'tennis_courts' => __('Tennis Courts', IDXBOOST_DOMAIN_THEME_LANG),
-            'golf_course' => __('Golf Course', IDXBOOST_DOMAIN_THEME_LANG),
-            'swimming_pool' => __('Swimming Pool', IDXBOOST_DOMAIN_THEME_LANG),
-            'furnished' => __('Furnished', IDXBOOST_DOMAIN_THEME_LANG),
-            'ocean_access' => __('Ocean Access', IDXBOOST_DOMAIN_THEME_LANG),
-            'homes_condominiums_townhouses' => __('Homes, Condominiums, Townhouses', IDXBOOST_DOMAIN_THEME_LANG),
-            'homes_condominiums' => __('Homes, Condominiums', IDXBOOST_DOMAIN_THEME_LANG),
-            'condominiums_townhouses' => __('Condominiums, Townhouses', IDXBOOST_DOMAIN_THEME_LANG),
-            'next_page' => __('Next page', IDXBOOST_DOMAIN_THEME_LANG),
-            'previous_page' => __('Previous Page', IDXBOOST_DOMAIN_THEME_LANG),
-            'your_message_has_been_sent' => __('Your message has been sent!', IDXBOOST_DOMAIN_THEME_LANG),
-            'price_range' => __('Price range', IDXBOOST_DOMAIN_THEME_LANG),
-            'average_listing_price' => __('Average Listing Price', IDXBOOST_DOMAIN_THEME_LANG),
-            'average_rental_price' => __('Average Rental Price', IDXBOOST_DOMAIN_THEME_LANG),
-            'average_sold_price' => __('Average Sold Price', IDXBOOST_DOMAIN_THEME_LANG),
-            'average_pending_price' => __('Average Pending Price', IDXBOOST_DOMAIN_THEME_LANG),
-            'from' => __('from', IDXBOOST_DOMAIN_THEME_LANG),
-            'properties' => __('Properties', IDXBOOST_DOMAIN_THEME_LANG),
-            'loading_properties' => __('Loading Properties...', IDXBOOST_DOMAIN_THEME_LANG),
-            'and' => __('and', IDXBOOST_DOMAIN_THEME_LANG),
-            'in' => __('in', IDXBOOST_DOMAIN_THEME_LANG),
-            'new_listing' => __('new listing', IDXBOOST_DOMAIN_THEME_LANG),
-            'pending'  => __('pending', IDXBOOST_DOMAIN_THEME_LANG),
-            'boat_dock'  => __('Boat Dock', IDXBOOST_DOMAIN_THEME_LANG),
-            'short_sales'  => __('Short Sales', IDXBOOST_DOMAIN_THEME_LANG),
-            'foreclosures'  => __('Foreclosures', IDXBOOST_DOMAIN_THEME_LANG),
-            'any' => __('Any', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_price' => __('Any Price', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_price_max' => __('Any price', IDXBOOST_DOMAIN_THEME_LANG),
-            'any_type' => __('Any type', IDXBOOST_DOMAIN_THEME_LANG),
-            'up_to' => __('up to', IDXBOOST_DOMAIN_THEME_LANG),
-            'details' => __('View detail', IDXBOOST_DOMAIN_THEME_LANG),
-            'for_sale' => __('For Sale', IDXBOOST_DOMAIN_THEME_LANG),
-            'for_rent' => __('For Rent', IDXBOOST_DOMAIN_THEME_LANG),
-            'for_sold' => __('For Sold', IDXBOOST_DOMAIN_THEME_LANG),
+        'townhouses' => __('Townhouses', IDXBOOST_DOMAIN_THEME_LANG),
+        'multi_family' => __('Multi-Family', IDXBOOST_DOMAIN_THEME_LANG),
+        'vacant_land' => __('Vacant Land', IDXBOOST_DOMAIN_THEME_LANG),
+        'single_family_homes' => __('Single Family Homes', IDXBOOST_DOMAIN_THEME_LANG),
+        'river_front' => __('River Front', IDXBOOST_DOMAIN_THEME_LANG),
+        'point_lot' => __('Point Lot', IDXBOOST_DOMAIN_THEME_LANG),
+        'ocean_front' => __('Ocean Front', IDXBOOST_DOMAIN_THEME_LANG),
+        'bay_front' => __('Bay Front', IDXBOOST_DOMAIN_THEME_LANG),
+        'canal' => __('Canal', IDXBOOST_DOMAIN_THEME_LANG),
+        'fixed_bridge' => __('Fixed Bridge', IDXBOOST_DOMAIN_THEME_LANG),
+        'intracoastal' => __('Intracoastal', IDXBOOST_DOMAIN_THEME_LANG),
+        'lake_front' => __('Lake Front', IDXBOOST_DOMAIN_THEME_LANG),
+        'equestrian' => __('Equestrian', IDXBOOST_DOMAIN_THEME_LANG),
+        'pets' => __('Pets', IDXBOOST_DOMAIN_THEME_LANG),
+        'water_front' => __('Waterfront', IDXBOOST_DOMAIN_THEME_LANG),
+        // 'open_house' => __('Open House', IDXBOOST_DOMAIN_THEME_LANG),
+        'penthouse' => __('Penthouse', IDXBOOST_DOMAIN_THEME_LANG),
+        'lofts' => __('Lofts', IDXBOOST_DOMAIN_THEME_LANG),
+        'gated_community' => __('Gated Community', IDXBOOST_DOMAIN_THEME_LANG),
+        'tennis_courts' => __('Tennis Courts', IDXBOOST_DOMAIN_THEME_LANG),
+        'golf_course' => __('Golf Course', IDXBOOST_DOMAIN_THEME_LANG),
+        'swimming_pool' => __('Swimming Pool', IDXBOOST_DOMAIN_THEME_LANG),
+        'furnished' => __('Furnished', IDXBOOST_DOMAIN_THEME_LANG),
+        'ocean_access' => __('Ocean Access', IDXBOOST_DOMAIN_THEME_LANG),
+        'homes_condominiums_townhouses' => __('Homes, Condominiums, Townhouses', IDXBOOST_DOMAIN_THEME_LANG),
+        'homes_condominiums' => __('Homes, Condominiums', IDXBOOST_DOMAIN_THEME_LANG),
+        'condominiums_townhouses' => __('Condominiums, Townhouses', IDXBOOST_DOMAIN_THEME_LANG),
+        'next_page' => __('Next page', IDXBOOST_DOMAIN_THEME_LANG),
+        'previous_page' => __('Previous Page', IDXBOOST_DOMAIN_THEME_LANG),
+        'your_message_has_been_sent' => __('Your message has been sent!', IDXBOOST_DOMAIN_THEME_LANG),
+        'price_range' => __('Price range', IDXBOOST_DOMAIN_THEME_LANG),
+        'average_listing_price' => __('Average Listing Price', IDXBOOST_DOMAIN_THEME_LANG),
+        'average_rental_price' => __('Average Rental Price', IDXBOOST_DOMAIN_THEME_LANG),
+        'average_sold_price' => __('Average Sold Price', IDXBOOST_DOMAIN_THEME_LANG),
+        'average_pending_price' => __('Average Pending Price', IDXBOOST_DOMAIN_THEME_LANG),
+        'from' => __('from', IDXBOOST_DOMAIN_THEME_LANG),
+        'properties' => __('Properties', IDXBOOST_DOMAIN_THEME_LANG),
+        'loading_properties' => __('Loading Properties...', IDXBOOST_DOMAIN_THEME_LANG),
+        'and' => __('and', IDXBOOST_DOMAIN_THEME_LANG),
+        'in' => __('in', IDXBOOST_DOMAIN_THEME_LANG),
+        'new_listing' => __('new listing', IDXBOOST_DOMAIN_THEME_LANG),
+        'pending'  => __('pending', IDXBOOST_DOMAIN_THEME_LANG),
+        'boat_dock'  => __('Boat Dock', IDXBOOST_DOMAIN_THEME_LANG),
+        'short_sales'  => __('Short Sales', IDXBOOST_DOMAIN_THEME_LANG),
+        'foreclosures'  => __('Foreclosures', IDXBOOST_DOMAIN_THEME_LANG),
+        'any' => __('Any', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_price' => __('Any Price', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_price_max' => __('Any price', IDXBOOST_DOMAIN_THEME_LANG),
+        'any_type' => __('Any type', IDXBOOST_DOMAIN_THEME_LANG),
+        'up_to' => __('up to', IDXBOOST_DOMAIN_THEME_LANG),
+        'details' => __('View detail', IDXBOOST_DOMAIN_THEME_LANG),
+        'for_sale' => __('For Sale', IDXBOOST_DOMAIN_THEME_LANG),
+        'for_rent' => __('For Rent', IDXBOOST_DOMAIN_THEME_LANG),
+        'for_sold' => __('For Sold', IDXBOOST_DOMAIN_THEME_LANG),
+        
+        'condos_for_sale' => __('Condos For Sale', IDXBOOST_DOMAIN_THEME_LANG),
+        'condos_for_rent' => __('Condos For Rent', IDXBOOST_DOMAIN_THEME_LANG),
+        'condos_sold' => __('Condos Sold', IDXBOOST_DOMAIN_THEME_LANG),
+        'condos_pending' => __('Condos Pending', IDXBOOST_DOMAIN_THEME_LANG),
 
-            'condos_for_sale' => __('Condos For Sale', IDXBOOST_DOMAIN_THEME_LANG),
-            'condos_for_rent' => __('Condos For Rent', IDXBOOST_DOMAIN_THEME_LANG),
-            'condos_sold' => __('Condos Sold', IDXBOOST_DOMAIN_THEME_LANG),
-            'condos_pending' => __('Condos Pending', IDXBOOST_DOMAIN_THEME_LANG),
-
-            'sold' => __('Sold', IDXBOOST_DOMAIN_THEME_LANG),
-            'bname' => __('Building Name', IDXBOOST_DOMAIN_THEME_LANG),
-            'price_range' => __('Price Range', IDXBOOST_DOMAIN_THEME_LANG),
-            'bedrooms_units' => __('Bedrooms Units', IDXBOOST_DOMAIN_THEME_LANG),
-            'bedroom_condos' => __('Bedroom Condos', IDXBOOST_DOMAIN_THEME_LANG),
-            'bedroom_apartments' => __('Bedroom Apartments', IDXBOOST_DOMAIN_THEME_LANG),
-            'bedrooms' => __('Bedrooms', IDXBOOST_DOMAIN_THEME_LANG),
-            'units' => __('Units', IDXBOOST_DOMAIN_THEME_LANG),
-            'floors' => __('Floors', IDXBOOST_DOMAIN_THEME_LANG),
-            'address' => __('Address', IDXBOOST_DOMAIN_THEME_LANG),
-            'sqft' => __('Sq.Ft.', IDXBOOST_DOMAIN_THEME_LANG),
-            'check_your_mailbox' => __('Check your mailbox', IDXBOOST_DOMAIN_THEME_LANG),
-            'password_change' => __('Password Change', IDXBOOST_DOMAIN_THEME_LANG),
-            'deleted' => __('Deleted!', IDXBOOST_DOMAIN_THEME_LANG),
-            'yes_delete_it' => __('Yes, delete it!', IDXBOOST_DOMAIN_THEME_LANG),
-            'newconstruction' => __('New Construction', IDXBOOST_DOMAIN_THEME_LANG),
-            'preconstruction' => __('Preconstruction', IDXBOOST_DOMAIN_THEME_LANG),
-            'neighborhood' => __('Neighborhood', IDXBOOST_DOMAIN_THEME_LANG),
-            'good_job' => __('Good job!', IDXBOOST_DOMAIN_THEME_LANG),
-            'congratulations' => __('Congratulations', IDXBOOST_DOMAIN_THEME_LANG),
-            'cancel' => __('Cancel', IDXBOOST_DOMAIN_THEME_LANG),
-            'search_saved' => __('Search Saved!', IDXBOOST_DOMAIN_THEME_LANG),
-            'draw_your_map' => __('DRAW YOUR MAP', IDXBOOST_DOMAIN_THEME_LANG),
-            'current_value_must_be_less_than_or_equal_to' => __('current value must be less than or equal to', IDXBOOST_DOMAIN_THEME_LANG),
-            'are_you_sure_you_want_to_remove_this_property' => __("Are you sure you want to remove this property?", IDXBOOST_DOMAIN_THEME_LANG),
-            'your_search_has_been_saved_successfuly' => __('Your search has been saved successfuly', IDXBOOST_DOMAIN_THEME_LANG),
-            'you_cannot_save_search_with_more_than_500_properties' => __('You cannot save a search with more than 500 properties.', IDXBOOST_DOMAIN_THEME_LANG),
-            'youmust_selectat_least_one_checkbox_from_below' => __('You must select at least one checkbox from below.', IDXBOOST_DOMAIN_THEME_LANG),
-            'yoursearch_has_been_saved_successfully' => __('Your search has been saved successfully.', IDXBOOST_DOMAIN_THEME_LANG),
-            'you_must_provide_a_name_for_this_search' => __('You must provide a name for this search.', IDXBOOST_DOMAIN_THEME_LANG),
-            'the_saved_search_has_been_removed_from_your_alerts' => __('The saved search has been removed from your alerts', IDXBOOST_DOMAIN_THEME_LANG),
-            'are_you_sure' => __('Are you sure?', IDXBOOST_DOMAIN_THEME_LANG),
-            'the_building_has_been_removed_from_your_favorites' => __('The building has been removed from your favorites.', IDXBOOST_DOMAIN_THEME_LANG),
-            'are_you_sure_you_want_to_remove_this_building' => __('Are you sure you want to remove this building?', IDXBOOST_DOMAIN_THEME_LANG),
-            'the_property_has_been_removed_from_your_favorites' => __('The property has been removed from your favorites.', IDXBOOST_DOMAIN_THEME_LANG),
-            'are_you_sure_you_want_to_remove_this_saved_search' => __('Are you sure you want to remove this saved search?', IDXBOOST_DOMAIN_THEME_LANG),
-            'please_wait_youraccount_is_being_created' => __('Please wait your account is being created...', IDXBOOST_DOMAIN_THEME_LANG),
-            'your_account_is_being_created' => __('Your account is being created', IDXBOOST_DOMAIN_THEME_LANG),
-            'this_might_take_a_while_do_not_reload_thepage' => __('This might take a while. Do not reload the page.', IDXBOOST_DOMAIN_THEME_LANG),
-            'inq_details' => __('Inquire for details', IDXBOOST_DOMAIN_THEME_LANG),
-            'welcome_back' => __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG),
-            'welcome' => __('Welcome', IDXBOOST_DOMAIN_THEME_LANG),
-            'sign_in_below' => __('Sign in below', IDXBOOST_DOMAIN_THEME_LANG),
-            'oops' => __('Oops...', IDXBOOST_DOMAIN_THEME_LANG),
-            'join_to_save_listings_and_receive_updates' => __('Join to save listings and receive updates', IDXBOOST_DOMAIN_THEME_LANG),
-            'register' => __('Register', IDXBOOST_DOMAIN_THEME_LANG),
-            'logout' => __('Logout', IDXBOOST_DOMAIN_THEME_LANG),
-            'year' => __('Year', IDXBOOST_DOMAIN_THEME_LANG),
-        );
+        'sold' => __('Sold', IDXBOOST_DOMAIN_THEME_LANG),
+        'bname' => __('Building Name', IDXBOOST_DOMAIN_THEME_LANG),
+        'price_range' => __('Price Range', IDXBOOST_DOMAIN_THEME_LANG),
+        'bedrooms_units' => __('Bedrooms Units', IDXBOOST_DOMAIN_THEME_LANG),
+        'bedroom_condos' => __('Bedroom Condos', IDXBOOST_DOMAIN_THEME_LANG),
+        'bedroom_apartments' => __('Bedroom Apartments', IDXBOOST_DOMAIN_THEME_LANG),
+        'bedrooms' => __('Bedrooms', IDXBOOST_DOMAIN_THEME_LANG),
+        'units' => __('Units', IDXBOOST_DOMAIN_THEME_LANG),
+        'floors' => __('Floors', IDXBOOST_DOMAIN_THEME_LANG),
+        'address' => __('Address', IDXBOOST_DOMAIN_THEME_LANG),
+        'sqft' => __('Sq.Ft.', IDXBOOST_DOMAIN_THEME_LANG),
+        'check_your_mailbox' => __('Check your mailbox', IDXBOOST_DOMAIN_THEME_LANG),
+        'password_change' => __('Password Change', IDXBOOST_DOMAIN_THEME_LANG),
+        'deleted' => __('Deleted!', IDXBOOST_DOMAIN_THEME_LANG),
+        'yes_delete_it' => __('Yes, delete it!', IDXBOOST_DOMAIN_THEME_LANG),
+        'newconstruction' => __('New Construction', IDXBOOST_DOMAIN_THEME_LANG),
+        'preconstruction' => __('Preconstruction', IDXBOOST_DOMAIN_THEME_LANG),
+        'neighborhood' => __('Neighborhood', IDXBOOST_DOMAIN_THEME_LANG),
+        'good_job' => __('Good job!', IDXBOOST_DOMAIN_THEME_LANG),
+        'congratulations' => __('Congratulations', IDXBOOST_DOMAIN_THEME_LANG),
+        'cancel' => __('Cancel', IDXBOOST_DOMAIN_THEME_LANG),
+        'search_saved' => __('Search Saved!', IDXBOOST_DOMAIN_THEME_LANG),
+        'draw_your_map' => __('DRAW YOUR MAP', IDXBOOST_DOMAIN_THEME_LANG),
+        'current_value_must_be_less_than_or_equal_to' => __('current value must be less than or equal to', IDXBOOST_DOMAIN_THEME_LANG),
+        'are_you_sure_you_want_to_remove_this_property' => __("Are you sure you want to remove this property?", IDXBOOST_DOMAIN_THEME_LANG),
+        'your_search_has_been_saved_successfuly' => __('Your search has been saved successfuly', IDXBOOST_DOMAIN_THEME_LANG),
+        'you_cannot_save_search_with_more_than_500_properties' => __('You cannot save a search with more than 500 properties.', IDXBOOST_DOMAIN_THEME_LANG),
+        'youmust_selectat_least_one_checkbox_from_below' => __('You must select at least one checkbox from below.', IDXBOOST_DOMAIN_THEME_LANG),
+        'yoursearch_has_been_saved_successfully' => __('Your search has been saved successfully.', IDXBOOST_DOMAIN_THEME_LANG),
+        'you_must_provide_a_name_for_this_search' => __('You must provide a name for this search.', IDXBOOST_DOMAIN_THEME_LANG),
+        'the_saved_search_has_been_removed_from_your_alerts' => __('The saved search has been removed from your alerts', IDXBOOST_DOMAIN_THEME_LANG),
+        'are_you_sure' => __('Are you sure?', IDXBOOST_DOMAIN_THEME_LANG),
+        'the_building_has_been_removed_from_your_favorites' => __('The building has been removed from your favorites.', IDXBOOST_DOMAIN_THEME_LANG),
+        'are_you_sure_you_want_to_remove_this_building' => __('Are you sure you want to remove this building?', IDXBOOST_DOMAIN_THEME_LANG),
+        'the_property_has_been_removed_from_your_favorites' => __('The property has been removed from your favorites.', IDXBOOST_DOMAIN_THEME_LANG),
+        'are_you_sure_you_want_to_remove_this_saved_search' => __('Are you sure you want to remove this saved search?', IDXBOOST_DOMAIN_THEME_LANG),
+        'please_wait_youraccount_is_being_created' => __('Please wait your account is being created...', IDXBOOST_DOMAIN_THEME_LANG),
+        'your_account_is_being_created' => __('Your account is being created', IDXBOOST_DOMAIN_THEME_LANG),
+        'this_might_take_a_while_do_not_reload_thepage' => __('This might take a while. Do not reload the page.', IDXBOOST_DOMAIN_THEME_LANG),
+        'inq_details' => __('Inquire for details', IDXBOOST_DOMAIN_THEME_LANG),
+        'welcome_back' => __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG),
+        'welcome' => __('Welcome', IDXBOOST_DOMAIN_THEME_LANG),
+        'sign_in_below' => __('Sign in below', IDXBOOST_DOMAIN_THEME_LANG),
+        'oops' => __('Oops...', IDXBOOST_DOMAIN_THEME_LANG),
+        'join_to_save_listings_and_receive_updates' => __('Join to save listings and receive updates', IDXBOOST_DOMAIN_THEME_LANG),
+        'register' => __('Register', IDXBOOST_DOMAIN_THEME_LANG),
+        'logout' => __('Logout', IDXBOOST_DOMAIN_THEME_LANG),
+        'year' => __('Year', IDXBOOST_DOMAIN_THEME_LANG),
+    );
         // main styles
         wp_register_style('flex-idx-main-project', FLEX_IDX_URI . 'css/main.css', array(), iboost_get_mod_time("css/main.css"));
         // buildings
         wp_register_style('flex-idx-buildings', FLEX_IDX_URI . 'css/flex-idx-buildings.css', array(), iboost_get_mod_time("css/flex-idx-buildings.css"));
         wp_register_script('flex-idx-buildings-js', FLEX_IDX_URI . 'js/flex-idx-buildings.js', array('jquery'), iboost_get_mod_time("js/flex-idx-buildings.js"));
         // buyers and sellers
-        wp_register_script(
-            "iboost-buyers-sellers-js",
-            FLEX_IDX_URI . "js/buyers-and-sellers.js",
-            array("jquery", "google-maps-api"),
-            iboost_get_mod_time("js/buyers-and-sellers.js")
-        );
+        wp_register_script("iboost-buyers-sellers-js", FLEX_IDX_URI . "js/buyers-and-sellers.js", array("jquery", "google-maps-api"),
+        iboost_get_mod_time("js/buyers-and-sellers.js"));
         // sweetalert
         wp_enqueue_style('sweetalert-css', FLEX_IDX_URI . 'css/sweetalert.css', array(), iboost_get_mod_time("css/sweetalert.css"));
         wp_enqueue_script('sweetalert-js', FLEX_IDX_URI . 'js/sweetalert.min.js', array(), iboost_get_mod_time("js/sweetalert.min.js"), true);
-        wp_localize_script('sweetalert-js', 'idx_translate_setting', $word_translate_setting);
-
+        wp_localize_script('sweetalert-js', 'idx_translate_setting', $word_translate_setting );        
+        
 
 
         // underscore
@@ -5382,7 +5282,7 @@ if (!function_exists('flex_idx_register_assets')) {
         // cookies manager
         wp_register_script('flex-cookies-manager', FLEX_IDX_URI . 'js/js.cookie.min.js', array(), iboost_get_mod_time("js/js.cookie.min.js"), true);
         // pusher
-        wp_register_script('flex-pusher-js', 'https://js.pusher.com/4.1/pusher.min.js', array(), false, true);
+        wp_register_script('flex-pusher-js', '//js.pusher.com/4.1/pusher.min.js', array(), false, true);
         // auth check
         wp_register_script('flex-auth-check', FLEX_IDX_URI . 'js/flex-auth-check.js', array(
             'flex-pusher-js',
@@ -5395,7 +5295,7 @@ if (!function_exists('flex_idx_register_assets')) {
         // mini search
         wp_register_script('flex-mini-search', FLEX_IDX_URI . 'js/idx-mini-search.js', array('jquery', 'underscore', 'flex-auth-check'), iboost_get_mod_time("js/idx-mini-search.js"));
         wp_register_script('idx-mini-search-new', FLEX_IDX_URI . 'js/idx-mini-search-new.js', array('jquery', 'underscore', 'flex-auth-check'), iboost_get_mod_time("js/idx-mini-search-new.js"));
-
+        
         // handlebars
         wp_register_script('handlebars', FLEX_IDX_URI . 'js/handlebars-v4.1.2.js', array(), iboost_get_mod_time("js/handlebars-v4.1.2.js"));
         // flex idx search filter
@@ -5431,7 +5331,7 @@ if (!function_exists('flex_idx_register_assets')) {
             'google-maps-utility-library-infobubble',
             'flex-lazyload-plugin'
         ), iboost_get_mod_time("js/flex-idx-search-filter.js"));
-
+    
         wp_register_script('flex-idx-search-commercial-filter', FLEX_IDX_URI . 'js/flex-idx-search-commercial-filter.js', array(
             'jquery',
             'flex-idx-filter-jquery-ui-touch',
@@ -5458,7 +5358,7 @@ if (!function_exists('flex_idx_register_assets')) {
             'commercial_types' => $flex_idx_info['commercial_types'],
             'ajaxUrl'   => admin_url('admin-ajax.php'),
             'rk'         => get_option('flex_idx_alerts_keys'),
-            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
+            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),                        
             'agentFullName' => $flex_idx_info["agent"]["agent_first_name"] . " " . $flex_idx_info["agent"]["agent_last_name"],
             'agentPhoto' => $flex_idx_info["agent"]["agent_contact_photo_profile"],
             'agentPhone' => $flex_idx_info["agent"]["agent_contact_phone_number"],
@@ -5494,7 +5394,7 @@ if (!function_exists('flex_idx_register_assets')) {
 
         wp_localize_script('flex-idx-search-filter', '__flex_idx_search_filter', array(
             'rk'         => get_option('flex_idx_alerts_keys'),
-            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
+            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),                                    
             'ajaxUrl'   => admin_url('admin-ajax.php'),
             'hackbox' => $flex_idx_info["agent"]["hackbox"],
             'list_offmarket' => '',
@@ -5525,7 +5425,7 @@ if (!function_exists('flex_idx_register_assets')) {
         wp_localize_script('flex-idx-search-commercial-filter', '__flex_idx_search_filter', array(
             'commercial_types' => $flex_idx_info['commercial_types'],
             'rk'         => get_option('flex_idx_alerts_keys'),
-            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
+            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),                                    
             'ajaxUrl'   => admin_url('admin-ajax.php'),
             'hackbox' => $flex_idx_info["agent"]["hackbox"],
             'list_offmarket' => '',
@@ -5557,7 +5457,7 @@ if (!function_exists('flex_idx_register_assets')) {
             'ajaxUrl'   => admin_url('admin-ajax.php'),
             'hackbox' => $flex_idx_info["agent"]["hackbox"],
             'rk'         => get_option('flex_idx_alerts_keys'),
-            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
+            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),                        
             'agentFullName' => $flex_idx_info["agent"]["agent_first_name"] . " " . $flex_idx_info["agent"]["agent_last_name"],
             'agentPhoto' => $flex_idx_info["agent"]["agent_contact_photo_profile"],
             'agentPhone' => $flex_idx_info["agent"]["agent_contact_phone_number"],
@@ -5584,25 +5484,25 @@ if (!function_exists('flex_idx_register_assets')) {
         wp_register_script("ib-search-box", FLEX_IDX_URI . "js/ib-search-box.js", array("jquery"));
         // css for favorites
         wp_register_style('flex-favorites-css', FLEX_IDX_URI . 'css/jquery-ui-timepicker-addon.css');
-        $translation_array = $custom_strings;
-        wp_localize_script('flex-auth-check', 'word_translate', $translation_array);
+        $translation_array = $custom_strings;      
+        wp_localize_script('flex-auth-check', 'word_translate', $translation_array );        
 
-        // /*MAP STYLE IDXBOOST*/
-        // $tbl_idxboost_tools = $wpdb->prefix.'idxboost_setting';
-        // $idxboost_setting_tools_map_style = $wpdb->get_col("SELECT idx_map_style FROM {$tbl_idxboost_tools}; ");
-        // $descr_tools_map_style = [];
+        /*MAP STYLE IDXBOOST*/
+        $tbl_idxboost_tools = $wpdb->prefix.'idxboost_setting';
+        $idxboost_setting_tools_map_style = $wpdb->get_col("SELECT idx_map_style FROM {$tbl_idxboost_tools}; ");
+        $descr_tools_map_style = [];
 
-        // if (is_array($idxboost_setting_tools_map_style) && count($idxboost_setting_tools_map_style)>0) {
-        //     $descr_tools_map_style=$idxboost_setting_tools_map_style[0];
-        // }
-        // /*MAP STYLE IDXBOOST*/
-        // wp_localize_script('flex-auth-check', 'style_map_idxboost', $descr_tools_map_style );
+        if (is_array($idxboost_setting_tools_map_style) && count($idxboost_setting_tools_map_style)>0) {
+            $descr_tools_map_style=$idxboost_setting_tools_map_style[0];
+        }
+        /*MAP STYLE IDXBOOST*/
+        wp_localize_script('flex-auth-check', 'style_map_idxboost', $descr_tools_map_style );
 
         wp_localize_script('flex-auth-check', '__flex_g_settings', array(
             'fetchLeadActivitiesEndpoint' => FLEX_IDX_API_LEAD_FETCH_ACTIVITIES,
             'hideTooltipLeadEndpoint' => FLEX_IDX_API_LEAD_HIDE_TOOLTIP,
             'shareWithFriendEndpoint' => FLEX_IDX_API_SHARE_PROPERTY,
-            'signup_left_clicks' => (isset($flex_idx_info["agent"]["signup_left_clicks"]) && !empty($flex_idx_info["agent"]["signup_left_clicks"]) ? (int) $flex_idx_info["agent"]["signup_left_clicks"] : null),
+            'signup_left_clicks' => ( isset($flex_idx_info["agent"]["signup_left_clicks"]) && !empty($flex_idx_info["agent"]["signup_left_clicks"]) ? (int) $flex_idx_info["agent"]["signup_left_clicks"] : null),
             'force_registration_forced' => (isset($flex_idx_info["agent"]["force_registration_forced"]) && ("1" == $flex_idx_info["agent"]["force_registration_forced"])) ? "yes" : "no",
             'has_facebook_login_enabled' => (isset($flex_idx_info["agent"]["facebook_login_enabled"]) && ("1" == $flex_idx_info["agent"]["facebook_login_enabled"])) ? "yes" : "no",
             'checkLeadUsername' => FLEX_IDX_API_LEADS_CHECK_USERNAME,
@@ -5628,12 +5528,12 @@ if (!function_exists('flex_idx_register_assets')) {
             'force_registration' => $flex_idx_info["agent"]["force_registration"],
             'page_setting' => $flex_idx_info['pages'],
             'user_show_quizz' => $flex_idx_info["agent"]["user_show_quizz"],
-            'has_dynamic_ads' => isset($flex_idx_info['agent']['has_dynamic_ads']) ? (bool) $flex_idx_info['agent']['has_dynamic_ads'] : false,
-            'has_seo_client' => isset($flex_idx_info['agent']['has_seo_client']) ? (bool) $flex_idx_info['agent']['has_seo_client'] : false,
+            'has_dynamic_ads' => isset($flex_idx_info['agent']['has_dynamic_ads']) ? (boolean) $flex_idx_info['agent']['has_dynamic_ads'] : false,
+            'has_seo_client' => isset($flex_idx_info['agent']['has_seo_client']) ? (boolean) $flex_idx_info['agent']['has_seo_client'] : false,
             'google_recaptcha_public_key' => isset($flex_idx_info['agent']['google_captcha_public_key']) ? $flex_idx_info['agent']['google_captcha_public_key'] : ""
         ));
 
-        wp_register_script('google-maps-api', sprintf('https://maps.googleapis.com/maps/api/js?libraries=drawing,geometry,places&key=%s', $flex_idx_info["agent"]["google_maps_api_key"]));
+        wp_register_script('google-maps-api', sprintf('//maps.googleapis.com/maps/api/js?libraries=drawing,geometry,places&key=%s', $flex_idx_info["agent"]["google_maps_api_key"]));
         wp_register_script('google-maps-utility-library-richmarker', FLEX_IDX_URI . 'js/richmarker-compiled.js', array('google-maps-api'), iboost_get_mod_time("js/richmarker-compiled.js"));
         wp_register_script('google-maps-utility-library-infobubble', FLEX_IDX_URI . 'js/infobubble-compiled.js', array('google-maps-api'), iboost_get_mod_time("js/infobubble-compiled.js"));
         // styles for infowindows [google maps]
@@ -5669,20 +5569,16 @@ if (!function_exists('flex_idx_register_assets')) {
         wp_register_script('flex-idx-filter-jquery-ui-touch', FLEX_IDX_URI . 'js/jquery.ui.touch-punch.min.js', array('flex-idx-filter-jquery-ui'), iboost_get_mod_time("js/jquery.ui.touch-punch.min.js"));
         // quick search assets
         wp_register_style('idxboost-quick-search-css', FLEX_IDX_URI . 'css/idxboost-quick-search.css', array(), iboost_get_mod_time("css/idxboost-quick-search.css"));
-        wp_register_script(
-            'idxboost-quick-search-js',
-            FLEX_IDX_URI . 'js/idxboost-quick-search.js',
-            array('jquery', 'underscore', 'underscore-mixins', 'flex-idx-filter-jquery-ui-touch'),
-            iboost_get_mod_time("js/idxboost-quick-search.js")
-        );
+        wp_register_script('idxboost-quick-search-js', FLEX_IDX_URI . 'js/idxboost-quick-search.js', array('jquery', 'underscore', 'underscore-mixins', 'flex-idx-filter-jquery-ui-touch'),
+        iboost_get_mod_time("js/idxboost-quick-search.js"));
         wp_register_script('idxboost_filter_js', FLEX_IDX_URI . 'js/idxboost_filter.js', array(), iboost_get_mod_time("js/idxboost_filter.js"));
-
+        
         //wp_register_script('flex-idx-filter-handler', FLEX_IDX_URI . 'js/idxboost_handlers_modals.js',array('jquery'));
         wp_register_script('flex-idx-filter-handler', FLEX_IDX_URI . 'js/idxboost_handlers_modals.js', array(
             'jquery',
             'flex-idx-search-filter-slider',
             'handlebars',
-        ), iboost_get_mod_time("js/idxboost_handlers_modals.js"));
+        ), iboost_get_mod_time("js/idxboost_handlers_modals.js"));        
 
         wp_register_script('flex-idx-filter-js', FLEX_IDX_URI . 'js/dgt-filter-master.js', array(
             'underscore',
@@ -5705,7 +5601,7 @@ if (!function_exists('flex_idx_register_assets')) {
             'flex-idx-filter-jquery-ui-touch',
             'flex-lazyload-plugin',
             'google-maps-api', 'google-maps-utility-library-richmarker', 'google-maps-utility-library-infobubble',
-        ), iboost_get_mod_time("js/js-off-market-listing-collection.js"));
+        ), iboost_get_mod_time("js/js-off-market-listing-collection.js"));        
 
         wp_register_script('idx_off_market_listing_carrosel', FLEX_IDX_URI . 'js/off-market-listing-carrosel.js', array(
             'underscore',
@@ -5717,8 +5613,8 @@ if (!function_exists('flex_idx_register_assets')) {
             'flex-idx-filter-jquery-ui-touch',
             'flex-lazyload-plugin',
             'google-maps-api', 'google-maps-utility-library-richmarker', 'google-maps-utility-library-infobubble',
-        ), iboost_get_mod_time("js/off-market-listing-carrosel.js"));
-
+        ), iboost_get_mod_time("js/off-market-listing-carrosel.js"));  
+                
         wp_register_script('ib_slider_filter', FLEX_IDX_URI . 'js/ib-slider-filter.js', array(
             'underscore',
             'flex-idx-filter-handler',
@@ -5755,11 +5651,11 @@ if (!function_exists('flex_idx_register_assets')) {
         ), iboost_get_mod_time("js/flex-idx-slider-type.js"));
 
         $translation_array = $custom_strings;
-        wp_localize_script('flex-idx-filter-js', 'word_translate', $translation_array);
+        wp_localize_script('flex-idx-filter-js', 'word_translate', $translation_array );        
         // filter pages [end]
-
-        wp_register_script('flex-idx-building-inventory-js', FLEX_IDX_URI . 'js/idxboost-building-collection.js', array(
-            'underscore-mixins',
+        
+        wp_register_script('flex-idx-building-inventory-js', FLEX_IDX_URI . 'js/idxboost-building-collection.js',array(
+          'underscore-mixins',
             'underscore',
             'flex-idx-filter-handler',
             'flex-idx-filter-jquery-ui',
@@ -5770,8 +5666,39 @@ if (!function_exists('flex_idx_register_assets')) {
             //'flex-idx-slider',
         ), iboost_get_mod_time("js/idxboost-building-collection.js"));
 
-        wp_register_script('flex-idx-sub-area-inventory-js', FLEX_IDX_URI . 'js/idxboost-sub-area-collection.js', array(
-            'underscore-mixins',
+
+        wp_register_script('flex-idx-sub-area-js', FLEX_IDX_URI . 'js/idx-comunity-page.js', array(
+            'flex-idx-filter-js-scroll',
+            'flex-idx-filter-jquery-ui',
+            'flex-idx-filter-jquery-ui-touch',
+            'google-maps-api',
+            'google-maps-utility-library-richmarker',
+            'google-maps-utility-library-infobubble',
+            'flex-fusioncharts-plugin',
+            'flex-dataTablesbuilding-plugin',
+            'flex-idx-master',
+            'flex-propertiesbuilding-plugin',
+            'flex-condosbuilding-plugin',
+            'flex-lazyload-plugin',
+        ), iboost_get_mod_time("js/dgt-building-js.js"));
+        wp_localize_script('flex-idx-sub-area-js', 'flex_idx_filter_params', array(
+            'rk'         => get_option('flex_idx_alerts_keys'),
+            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
+            'saveListings' => FLEX_IDX_API_REGULAR_FILTER_SAVE,
+            'ajaxUrl'                 => admin_url('admin-ajax.php'),
+            'searchUrl'               => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
+            'siteUrl'                 => $flex_idx_info["website_url"],
+            'params'                  => $flex_idx_info['search'],
+            'boardId' => $flex_idx_info['board_id'],
+            'anonymous'               => ($flex_idx_lead === false) ? 'yes' : 'no',
+            'loginUrl'                => wp_login_url(),
+            'propertyDetailPermalink' => rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"),
+            'searchPermalink'         => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/")
+        ));
+
+
+        wp_register_script('flex-idx-sub-area-inventory-js', FLEX_IDX_URI . 'js/idxboost-sub-area-collection.js',array(
+          'underscore-mixins',
             'underscore',
             'flex-idx-filter-handler',
             'flex-idx-filter-jquery-ui',
@@ -5782,7 +5709,8 @@ if (!function_exists('flex_idx_register_assets')) {
             //'flex-idx-slider',
         ), iboost_get_mod_time("js/idxboost-sub-area-collection.js"));
 
-        wp_localize_script('flex-idx-building-inventory-js', 'word_translate', $translation_array);
+        wp_localize_script('flex-idx-building-inventory-js', 'word_translate', $translation_array );
+
         wp_localize_script('flex-idx-building-inventory-js', 'idxboost_collection_params', array(
             'ajaxUrl'                 => admin_url('admin-ajax.php'),
             'searchUrl'               => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
@@ -5793,6 +5721,8 @@ if (!function_exists('flex_idx_register_assets')) {
             'wpsite'                => get_permalink(),
             'propertyDetailPermalink' => rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"),
             'searchPermalink'         => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
+            'subarealink'         => rtrim($flex_idx_info["pages"]['flex_idx_sub_area']['guid'], "/"),
+            'offmarket'         => rtrim($flex_idx_info["pages"]['flex_idx_sub_area']['guid'], "/"),
             'underscore-mixins',
             'underscore',
             'flex-idx-master',
@@ -5800,7 +5730,7 @@ if (!function_exists('flex_idx_register_assets')) {
             'flex-lazyload-plugin'
         ));
 
-        wp_localize_script('flex-idx-sub-area-inventory-js', 'word_translate', $translation_array);
+        wp_localize_script('flex-idx-sub-area-inventory-js', 'word_translate', $translation_array );
         wp_localize_script('flex-idx-sub-area-inventory-js', 'idxboost_collection_params', array(
             'ajaxUrl'                 => admin_url('admin-ajax.php'),
             'searchUrl'               => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
@@ -5811,6 +5741,8 @@ if (!function_exists('flex_idx_register_assets')) {
             'wpsite'                => get_permalink(),
             'propertyDetailPermalink' => rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"),
             'searchPermalink'         => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
+            'subarealink'         => rtrim($flex_idx_info["pages"]['flex_idx_sub_area']['guid'], "/"),
+            'off_market_listing_link'         => rtrim($flex_idx_info["pages"]['flex_idx_off_market_listing']['guid'], "/"),
             'underscore-mixins',
             'underscore',
             'flex-idx-master',
@@ -5906,8 +5838,8 @@ if (!function_exists('flex_idx_register_assets')) {
             'leadPhoneNumber' => (!empty($flex_idx_lead["lead_info"]["phone_number"])) ? $flex_idx_lead["lead_info"]["phone_number"] : ""
         ));
 
-        $objoffmarket = get_post_type_object('idx-off-market');
-
+        $objoffmarket=get_post_type_object('idx-off-market');
+        
         wp_localize_script('idx_off_market_listing_carrosel', 'idx_param_off_market_slider', array(
             'rk'         => get_option('flex_idx_alerts_keys'),
             'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
@@ -5921,12 +5853,12 @@ if (!function_exists('flex_idx_register_assets')) {
             'searchFilterPermalink' => get_permalink(),
             'anonymous'               => ($flex_idx_lead === false) ? 'yes' : 'no',
             'loginUrl'                => wp_login_url(),
-            'propertyDetailPermalink'                => get_site_url() . '/' . @$objoffmarket->rewrite['slug'],
+            'propertyDetailPermalink'                => get_site_url().'/'.@$objoffmarket->rewrite['slug'],
             'searchPermalink'         => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
             'sitewp'         => get_permalink()
-        ));
+        ));   
 
-
+        
         wp_localize_script('idxboost_slider_type', 'idx_param_slider', array(
             'rk'         => get_option('flex_idx_alerts_keys'),
             'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
@@ -5943,7 +5875,7 @@ if (!function_exists('flex_idx_register_assets')) {
             'propertyDetailPermalink' => rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"),
             'searchPermalink'         => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
             'sitewp'         => get_permalink()
-        ));
+        ));   
 
         wp_localize_script('ib_slider_filter', 'idx_param_slider', array(
             'rk'         => get_option('flex_idx_alerts_keys'),
@@ -5961,7 +5893,7 @@ if (!function_exists('flex_idx_register_assets')) {
             'propertyDetailPermalink' => rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"),
             'searchPermalink'         => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
             'sitewp'         => get_permalink()
-        ));
+        ));   
 
         wp_localize_script('idxboost_exclusive_listing', 'flex_idx_filter_params', array(
             'rk'         => get_option('flex_idx_alerts_keys'),
@@ -5979,12 +5911,12 @@ if (!function_exists('flex_idx_register_assets')) {
             'propertyDetailPermalink' => rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"),
             'searchPermalink'         => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
             'sitewp'         => get_permalink()
-        ));
-
+        ));   
+        
         wp_localize_script('idx_off_market_listing', 'flex_idx_filter_params', array(
             'rk'         => get_option('flex_idx_alerts_keys'),
-            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
-            'saveListings' => FLEX_IDX_API_REGULAR_FILTER_SAVE,
+            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),                                    
+            'saveListings' => FLEX_IDX_API_REGULAR_FILTER_SAVE,            
             'lookupListingsDetail' => FLEX_IDX_API_SEARCH_LISTING,
             'ajaxUrl'                 => admin_url('admin-ajax.php'),
             'searchUrl'               => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
@@ -6001,8 +5933,8 @@ if (!function_exists('flex_idx_register_assets')) {
 
         wp_localize_script('flex-idx-filter-js', 'flex_idx_filter_params', array(
             'rk'         => get_option('flex_idx_alerts_keys'),
-            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),
-            'saveListings' => FLEX_IDX_API_REGULAR_FILTER_SAVE,
+            'wp_web_id'  => get_option('flex_idx_alerts_app_id'),                                    
+            'saveListings' => FLEX_IDX_API_REGULAR_FILTER_SAVE,            
             'lookupListingsDetail' => FLEX_IDX_API_SEARCH_LISTING,
             'ajaxUrl'                 => admin_url('admin-ajax.php'),
             'searchUrl'               => rtrim($flex_idx_info["pages"]["flex_idx_search"]["guid"], "/"),
@@ -6019,10 +5951,10 @@ if (!function_exists('flex_idx_register_assets')) {
         wp_register_script('flex-idx-jquery-ui-timepicker', FLEX_IDX_URI . 'js/jquery-ui-timepicker-addon.js', array('jquery'), iboost_get_mod_time("js/jquery-ui-timepicker-addon.js"));
         // saved listings
         wp_register_script('flex-idx-saved-listing', FLEX_IDX_URI . 'js/flex-idx-saved-listing.js', array(
-            'jquery',
-            'flex-idx-filter-jquery-ui',
-            'flex-idx-filter-jquery-ui-touch',
-            'flex-idx-jquery-ui-timepicker'
+          'jquery',
+          'flex-idx-filter-jquery-ui',
+          'flex-idx-filter-jquery-ui-touch',
+          'flex-idx-jquery-ui-timepicker'
         ), iboost_get_mod_time("js/flex-idx-saved-listing.js"));
         wp_localize_script('flex-idx-saved-listing', 'flex_idx_saved_listing', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -6051,7 +5983,7 @@ if (!function_exists('flex_idx_register_assets')) {
         ));
         // search results
         $translation_array = $custom_strings;
-        wp_localize_script('flex-idx-search-results-js', 'word_translate', $translation_array);
+        wp_localize_script('flex-idx-search-results-js', 'word_translate', $translation_array );
         wp_localize_script('flex-idx-search-results-js', 'flex_idx_search_params', array(
             'lookupSearch' => FLEX_IDX_API_SEARCH,
             'accessToken' => flex_idx_get_access_token(),
@@ -6081,33 +6013,36 @@ if (!function_exists('flex_idx_register_assets')) {
     }
 }
 /*****************************************/
-if (!function_exists('ib_tables_building_collection')) {
-    function ib_tables_building_collection()
-    {
-        wp_enqueue_script('flex-idx-building-inventory-js');
-        wp_enqueue_script('flex-fusioncharts-plugin');
-        wp_enqueue_script('flex-dataTablesbuilding-plugin');
+if (!function_exists('ib_tables_building_collection')){
+    function ib_tables_building_collection(){
+      wp_enqueue_script('flex-idx-building-inventory-js');
+      wp_enqueue_script('flex-fusioncharts-plugin');
+      wp_enqueue_script('flex-dataTablesbuilding-plugin');
     }
 }
 
-if (!function_exists('ib_tables_sub_area_collection')) {
-    function ib_tables_sub_area_collection()
-    {
-        wp_enqueue_script('flex-idx-sub-area-inventory-js');
-        wp_enqueue_script('flex-fusioncharts-plugin');
-        wp_enqueue_script('flex-dataTablesbuilding-plugin');
+if (!function_exists('ib_sub_area_footer')){
+    function ib_sub_area_footer(){
+        wp_enqueue_script('flex-idx-sub-area-js');
     }
 }
 
-if (!function_exists('greatsliderLoad')) {
-    function greatsliderLoad()
-    {
-        wp_enqueue_script('flex-print-area', FLEX_IDX_URI . 'js/jquery.PrintArea.js', array('flex-pusher-js', 'flex-cookies-manager', 'jquery'), iboost_get_mod_time("js/jquery.PrintArea.js"), true);
-        wp_register_script('greatslider', FLEX_IDX_URI . 'js/greatslider.jquery.min.js', array("jquery"), iboost_get_mod_time("js/greatslider.jquery.min.js"));
-        wp_register_script('flex-idx-slider-main', FLEX_IDX_URI . 'js/greatslider-main.js', array("jquery"), iboost_get_mod_time("js/greatslider-main.js"));
-        wp_enqueue_script('flex-idx-slider', FLEX_IDX_URI . 'js/greatslider-main.js', array('jquery', 'greatslider'), iboost_get_mod_time("js/greatslider-main.js"), true);
-        //wp_enqueue_script('modal-properties', FLEX_IDX_URI . 'js/modal-properties.js');
+if (!function_exists('ib_tables_sub_area_collection')){
+    function ib_tables_sub_area_collection(){
+      wp_enqueue_script('flex-idx-sub-area-inventory-js');
+      wp_enqueue_script('flex-fusioncharts-plugin');
+      wp_enqueue_script('flex-dataTablesbuilding-plugin');
     }
+}
+
+if (!function_exists('greatsliderLoad')){
+  function greatsliderLoad() {
+    wp_enqueue_script('flex-print-area', FLEX_IDX_URI . 'js/jquery.PrintArea.js', array('flex-pusher-js','flex-cookies-manager', 'jquery'), iboost_get_mod_time("js/jquery.PrintArea.js"), true);
+    wp_register_script('greatslider', FLEX_IDX_URI . 'js/greatslider.jquery.min.js', array("jquery"), iboost_get_mod_time("js/greatslider.jquery.min.js"));
+    wp_register_script('flex-idx-slider-main', FLEX_IDX_URI . 'js/greatslider-main.js', array("jquery"), iboost_get_mod_time("js/greatslider-main.js"));
+    wp_enqueue_script('flex-idx-slider', FLEX_IDX_URI . 'js/greatslider-main.js', array('jquery', 'greatslider'), iboost_get_mod_time("js/greatslider-main.js"), true );
+    //wp_enqueue_script('modal-properties', FLEX_IDX_URI . 'js/modal-properties.js');
+  }
 }
 add_action('wp_footer', 'greatsliderLoad');
 /*****************************************/
@@ -6136,6 +6071,7 @@ if (!function_exists('flex_idx_admin_register_assets')) {
         wp_localize_script('flex-idx-tools-js', 'idx_admin_tools', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
         ));
+
     }
 }
 if (!function_exists('flex_idx_admin_enqueue_assets')) {
@@ -6160,10 +6096,10 @@ if (!function_exists('flex_idx_admin_render_default_page')) {
     {
         $idxboost_registration_key = get_option('idxboost_registration_key');
         if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/default.php')) {
-            return include IDXBOOST_OVERRIDE_DIR . '/views/admin/default.php';
-        } else {
-            return include FLEX_IDX_PATH . '/views/admin/default.php';
-        }
+                    return include IDXBOOST_OVERRIDE_DIR . '/views/admin/default.php';
+                } else {
+                    return include FLEX_IDX_PATH . '/views/admin/default.php';
+                }
     }
 }
 
@@ -6171,54 +6107,54 @@ if (!function_exists('flex_idx_admin_render_tools_page')) {
     function flex_idx_admin_render_tools_page()
     {
         global $wpdb;
-        $tbl_idxboost_tools = $wpdb->prefix . 'idxboost_setting';
+        $tbl_idxboost_tools = $wpdb->prefix.'idxboost_setting';
         $descr_tools_map_style = [];
 
         /*create table*/
-        if ($wpdb->get_var("SHOW TABLES LIKE '$tbl_idxboost_tools'") != $tbl_idxboost_tools) {
-            $charset_collate = $wpdb->get_charset_collate();
-
-            $sql = "CREATE TABLE $tbl_idxboost_tools (
+        if($wpdb->get_var("SHOW TABLES LIKE '$tbl_idxboost_tools'") != $tbl_idxboost_tools) {
+             $charset_collate = $wpdb->get_charset_collate();
+         
+             $sql = "CREATE TABLE $tbl_idxboost_tools (
                   id int NOT NULL Primary KEY AUTO_INCREMENT,
                   idx_map_style MEDIUMTEXT NOT NULL,
                   UNIQUE KEY id (id)
              ) $charset_collate;";
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-            dbDelta($sql);
+             require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+             dbDelta( $sql );
         }
-        /*create table*/
+    /*create table*/
 
-        $idxboost_setting_tools_map_style = $wpdb->get_col("SELECT idx_map_style FROM {$tbl_idxboost_tools}; ");
-        if (is_array($idxboost_setting_tools_map_style) && count($idxboost_setting_tools_map_style) > 0) {
-            $descr_tools_map_style = $idxboost_setting_tools_map_style[0];
-        }
+    $idxboost_setting_tools_map_style = $wpdb->get_col("SELECT idx_map_style FROM {$tbl_idxboost_tools}; ");
+    if (is_array($idxboost_setting_tools_map_style) && count($idxboost_setting_tools_map_style)>0) {
+        $descr_tools_map_style=$idxboost_setting_tools_map_style[0];
+    }
 
-        if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/idx_tools.php')) {
-            return include IDXBOOST_OVERRIDE_DIR . '/views/admin/idx_tools.php';
-        } else {
-            return include FLEX_IDX_PATH . '/views/admin/idx_tools.php';
-        }
+      if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/idx_tools.php')) {
+        return include IDXBOOST_OVERRIDE_DIR . '/views/admin/idx_tools.php';
+      } else {
+        return include FLEX_IDX_PATH . '/views/admin/idx_tools.php';
+      }
     }
 }
 
 if (!function_exists('flex_idx_admin_render_importation_page')) {
     function flex_idx_admin_render_importation_page()
     {
-        if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/import_data.php')) {
-            return include IDXBOOST_OVERRIDE_DIR . '/views/admin/import_data.php';
-        } else {
-            return include FLEX_IDX_PATH . '/views/admin/import_data.php';
-        }
+      if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/import_data.php')) {
+        return include IDXBOOST_OVERRIDE_DIR . '/views/admin/import_data.php';
+      } else {
+        return include FLEX_IDX_PATH . '/views/admin/import_data.php';
+      }
     }
 }
 if (!function_exists('flex_idx_admin_render_documentation_page')) {
     function flex_idx_admin_render_documentation_page()
     {
-        if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/documentation.php')) {
-            return include IDXBOOST_OVERRIDE_DIR . '/views/admin/documentation.php';
-        } else {
-            return include FLEX_IDX_PATH . '/views/admin/documentation.php';
-        }
+      if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/documentation.php')) {
+        return include IDXBOOST_OVERRIDE_DIR . '/views/admin/documentation.php';
+      } else {
+        return include FLEX_IDX_PATH . '/views/admin/documentation.php';
+      }
     }
 }
 if (!function_exists('flex_idx_admin_render_launch_page')) {
@@ -6227,22 +6163,22 @@ if (!function_exists('flex_idx_admin_render_launch_page')) {
         wp_enqueue_script('flex-idx-admin-js');
         $flex_idx_registration_launch = get_option('flex_idx_registration_launch');
         if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/admin/launch.php')) {
-            return include IDXBOOST_OVERRIDE_DIR . '/views/admin/launch.php';
+          return include IDXBOOST_OVERRIDE_DIR . '/views/admin/launch.php';
         } else {
-            return include FLEX_IDX_PATH . '/views/admin/launch.php';
+          return include FLEX_IDX_PATH . '/views/admin/launch.php';
         }
     }
 }
 if (!function_exists('flex_idx_create_admin_root_menu')) {
     function flex_idx_create_admin_root_menu()
     {
-        $flex_idx_page = add_menu_page('IDX Boost - Settings', 'IDX Boost', 'administrator', 'flex-idx', 'flex_idx_admin_render_default_page', FLEX_IDX_URI . 'images/rocket.svg');
+        $flex_idx_page = add_menu_page('IDX Boost - Settings', 'IDX Boost', 'administrator', 'flex-idx', 'flex_idx_admin_render_default_page', FLEX_IDX_URI.'images/rocket.svg');
         add_action('admin_print_scripts-' . $flex_idx_page, 'flex_idx_admin_enqueue_assets');
         if (get_option('idxboost_client_status') == 'active') {
-            // $flex_idx_registration_launch = get_option('flex_idx_registration_launch');
-            // if ($flex_idx_registration_launch == false) {
-            //     $flex_idx_pages_admin_launch = add_submenu_page('flex-idx', 'IDX Boost - Launch', 'Launch My Site', 'administrator', 'flex-idx-launch', 'flex_idx_admin_render_launch_page');
-            // }
+            $flex_idx_registration_launch = get_option('flex_idx_registration_launch');
+            if ($flex_idx_registration_launch==false) {
+                $flex_idx_pages_admin_launch = add_submenu_page('flex-idx', 'IDX Boost - Launch', 'Launch My Site', 'administrator', 'flex-idx-launch', 'flex_idx_admin_render_launch_page');
+            }
             add_submenu_page('flex-idx', 'My IDX Pages - FlexIDX', 'My IDX Pages', 'administrator', 'edit.php?post_type=flex-idx-pages', null);
             add_submenu_page('flex-idx', 'My IDX Agents - FlexIDX', 'My IDX Agents', 'administrator', 'edit.php?post_type=idx-agents', null);
             add_submenu_page('flex-idx', 'My Buildings - FlexIDX', 'My IDX Buildings', 'administrator', 'edit.php?post_type=flex-idx-building', null);
@@ -6251,7 +6187,7 @@ if (!function_exists('flex_idx_create_admin_root_menu')) {
             add_submenu_page('flex-idx', 'My Off Market Listings - FlexIDX', 'My Off Market Listings', 'administrator', 'edit.php?post_type=idx-off-market', null);
             add_submenu_page('flex-idx', 'My Filter Pages - FlexIDX', 'My Filter Pages', 'administrator', 'edit.php?post_type=flex-filter-pages', null);
             $flex_idx_pages_admin = add_submenu_page('flex-idx', 'IDX Boost - Tools', 'My Tools', 'administrator', 'flex-idx-tools', 'flex_idx_admin_render_tools_page');
-            // $flex_idx_pages_admin = add_submenu_page('flex-idx', 'IDX Boost - Documentation', 'Documentation', 'administrator', 'flex-idx-settings', 'flex_idx_admin_render_documentation_page');
+            $flex_idx_pages_admin = add_submenu_page('flex-idx', 'IDX Boost - Documentation', 'Documentation', 'administrator', 'flex-idx-settings', 'flex_idx_admin_render_documentation_page');
             $flex_idx_pages_admin = add_submenu_page('flex-idx', 'IDX Boost - Import', 'Import Data', 'administrator', 'flex-idx-import-data', 'flex_idx_admin_render_importation_page');
             add_action('admin_print_scripts-' . $flex_idx_pages_admin, 'flex_idx_admin_pages_list_enqueue_assets');
         }
@@ -6556,47 +6492,47 @@ if (!function_exists('flex_idx_profile_extend_fn')) {
     function flex_idx_profile_extend_fn($user)
     {
         ?>
-        <h3>FlexIDX - Profile Info</h3>
+<h3>FlexIDX - Profile Info</h3>
 
-        <table class="form-table">
-            <tr>
-                <th><label for="flex_idx_profile_phone">Phone Number</label></th>
-                <td>
-                    <input type="text" name="flex_idx_profile_phone" id="flex_idx_profile_phone" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_phone', $user->ID)); ?>" class="regular-text" /><br />
-                    <span class="description">Please enter your Phone number.</span>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="flex_idx_profile_address">Address</label></th>
-                <td>
-                    <input type="text" name="flex_idx_profile_address" id="flex_idx_profile_address" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_address', $user->ID)); ?>" class="regular-text" /><br />
-                    <span class="description">Please enter your Address.</span>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="flex_idx_profile_city">City</label></th>
-                <td>
-                    <input type="text" name="flex_idx_profile_city" id="flex_idx_profile_city" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_city', $user->ID)); ?>" class="regular-text" /><br />
-                    <span class="description">Please enter your City.</span>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="flex_idx_profile_state">State</label></th>
-                <td>
-                    <input type="text" name="flex_idx_profile_state" id="flex_idx_profile_state" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_state', $user->ID)); ?>" class="regular-text" /><br />
-                    <span class="description">Please enter your State.</span>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="flex_idx_profile_zip">Zip Code</label></th>
-                <td>
-                    <input type="text" name="flex_idx_profile_zip" id="flex_idx_profile_zip" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_zip', $user->ID)); ?>" class="regular-text" /><br />
-                    <span class="description">Please enter your Zip Code.</span>
-                </td>
-            </tr>
-        </table>
-    <?php
-    }
+<table class="form-table">
+    <tr>
+        <th><label for="flex_idx_profile_phone">Phone Number</label></th>
+        <td>
+            <input type="text" name="flex_idx_profile_phone" id="flex_idx_profile_phone" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_phone', $user->ID)); ?>" class="regular-text" /><br />
+            <span class="description">Please enter your Phone number.</span>
+        </td>
+    </tr>
+    <tr>
+        <th><label for="flex_idx_profile_address">Address</label></th>
+        <td>
+            <input type="text" name="flex_idx_profile_address" id="flex_idx_profile_address" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_address', $user->ID)); ?>" class="regular-text" /><br />
+            <span class="description">Please enter your Address.</span>
+        </td>
+    </tr>
+    <tr>
+        <th><label for="flex_idx_profile_city">City</label></th>
+        <td>
+            <input type="text" name="flex_idx_profile_city" id="flex_idx_profile_city" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_city', $user->ID)); ?>" class="regular-text" /><br />
+            <span class="description">Please enter your City.</span>
+        </td>
+    </tr>
+    <tr>
+        <th><label for="flex_idx_profile_state">State</label></th>
+        <td>
+            <input type="text" name="flex_idx_profile_state" id="flex_idx_profile_state" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_state', $user->ID)); ?>" class="regular-text" /><br />
+            <span class="description">Please enter your State.</span>
+        </td>
+    </tr>
+    <tr>
+        <th><label for="flex_idx_profile_zip">Zip Code</label></th>
+        <td>
+            <input type="text" name="flex_idx_profile_zip" id="flex_idx_profile_zip" value="<?php echo esc_attr(get_the_author_meta('flex_idx_profile_zip', $user->ID)); ?>" class="regular-text" /><br />
+            <span class="description">Please enter your Zip Code.</span>
+        </td>
+    </tr>
+</table>
+<?php
+}
 }
 if (!function_exists('flex_idx_profile_save_fn')) {
     function flex_idx_profile_save_fn($user_id)
@@ -6622,8 +6558,8 @@ if (!function_exists('flex_idx_saved_search_url_params')) {
 
         if (isset($query_params["price"]) && !empty($query_params["price"])) {
             $price_exp = explode("-", $query_params["price"]);
-
-            if ((2 === count($price_exp)) && ("" !== $price_exp[1])) {
+            
+            if (  (2 === count($price_exp)) && ("" !== $price_exp[1]) ) {
                 $labels["price"] = sprintf('$%s - $%s', flex_idx_format_short_price_fn($price_exp[0]), flex_idx_format_short_price_fn($price_exp[1]));
             } else {
                 $labels["price"] = sprintf('$%s - Any Price', flex_idx_format_short_price_fn($price_exp[0]));
@@ -6634,8 +6570,8 @@ if (!function_exists('flex_idx_saved_search_url_params')) {
 
         if (isset($query_params["beds"]) && !empty($query_params["beds"])) {
             $beds_exp = explode("-", $query_params["beds"]);
-
-            if ((2 === count($beds_exp)) && ("" !== $beds_exp[1])) {
+            
+            if (  (2 === count($beds_exp)) && ("" !== $beds_exp[1]) ) {
                 $labels["beds"] = sprintf('%s - %s Bed(s)', number_format($beds_exp[0]), number_format($beds_exp[1]));
             } else {
                 $labels["beds"] = sprintf('%s - Any Bed', number_format($beds_exp[0]));
@@ -6646,8 +6582,8 @@ if (!function_exists('flex_idx_saved_search_url_params')) {
 
         if (isset($query_params["baths"]) && !empty($query_params["baths"])) {
             $baths_exp = explode("-", $query_params["baths"]);
-
-            if ((2 === count($baths_exp)) && ("" !== $baths_exp[1])) {
+            
+            if (  (2 === count($baths_exp)) && ("" !== $baths_exp[1]) ) {
                 $labels["baths"] = sprintf('%s - %s Bath(s)', number_format($baths_exp[0]), number_format($baths_exp[1]));
             } else {
                 $labels["baths"] = sprintf('%s - Any Bath', number_format($baths_exp[0]));
@@ -6658,8 +6594,8 @@ if (!function_exists('flex_idx_saved_search_url_params')) {
 
         if (isset($query_params["size"]) && !empty($query_params["size"])) {
             $size_exp = explode("-", $query_params["size"]);
-
-            if ((2 === count($size_exp)) && ("" !== $size_exp[1])) {
+            
+            if (  (2 === count($size_exp)) && ("" !== $size_exp[1]) ) {
                 $labels["size"] = sprintf('%s - %s Sq.Ft.', number_format($size_exp[0]), number_format($size_exp[1]));
             } else {
                 $labels["size"] = sprintf('%s - Any Size', number_format($size_exp[0]));
@@ -6744,33 +6680,21 @@ if (!function_exists('flex_idx_format_short_price_fn')) {
     function flex_idx_format_short_price_fn($input)
     {
         $returnPrice = '';
-        if ($input < 1000) {
-            return $input;
-        }
+        if ($input < 1000) {return $input;}
         if ($input < 10000) {
             $returnPrice = ceil($input / 100) / 10;
             return $returnPrice . 'K';
         } else {
             if ($input < 1000000) {
                 $returnPrice = ceil($input / 1000);
-                if ($returnPrice < 100) {
-                    return substr($returnPrice, 0, 2) . 'K';
-                }
-                if ($returnPrice >= 1000) {
-                    return '1M';
-                }
+                if ($returnPrice < 100) {return substr($returnPrice, 0, 2) . 'K';}
+                if ($returnPrice >= 1000) {return '1M';}
                 return $returnPrice . 'K';
             } else {
-                if ($input < 10000000) {
-                    $returnPrice = (ceil($input / 10000) / 100);
-                } else {
-                    $returnPrice = (ceil($input / 100000) / 10);
-                }
+                if ($input < 10000000) {$returnPrice = (ceil($input / 10000) / 100);} else { $returnPrice = (ceil($input / 100000) / 10);}
             }
         }
-        if (strpos($returnPrice, '.') != false) {
-            $returnPrice = substr($returnPrice, 0, 4);
-        }
+        if (strpos($returnPrice, '.') != false) {$returnPrice = substr($returnPrice, 0, 4);}
         return $returnPrice . 'M';
     }
 }
@@ -6793,30 +6717,28 @@ if (!function_exists('flex_agent_format_phone_number')) {
 if (!function_exists('idxboost_language_default_plugin')) {
     function idxboost_language_default_plugin($lang)
     {
-        $flex_idx_info         = flex_idx_get_info();
-        if (array_key_exists('search', $flex_idx_info)) {
-            if (array_key_exists('default_language', $flex_idx_info['search']))
-                if (!empty($flex_idx_info['search']['default_language']))
-                    $default_language = $flex_idx_info['search']['default_language'];
-                else
-                    $default_language = 'en';
+    $flex_idx_info         = flex_idx_get_info();
+    if(array_key_exists('search',$flex_idx_info)){
+        if(array_key_exists('default_language',$flex_idx_info['search']))
+            if (!empty($flex_idx_info['search']['default_language']))
+                $default_language =$flex_idx_info['search']['default_language'];
             else
-                $default_language = 'en';
-        } else {
-            $default_language = 'en';
-        }
-        if (!defined('IDXBOOST_DOMAIN_THEME_LANG')) {
-            define('IDXBOOST_DOMAIN_THEME_LANG', 'idxboost');
-        }
-
-        add_action('after_setup_theme', function () {
-            load_theme_textdomain(IDXBOOST_DOMAIN_THEME_LANG, FLEX_IDX_PATH . '/languages');
-        });
-        $text_language = '';
-        $text_language = $default_language . '_' . strtoupper($default_language);
-        return $text_language;
+                $default_language ='en';
+        else
+            $default_language ='en';
+      }else{
+        $default_language='en';
+      }
+      if (!defined('IDXBOOST_DOMAIN_THEME_LANG')) {
+        define('IDXBOOST_DOMAIN_THEME_LANG', 'idxboost');
+      }
+    
+      add_action('after_setup_theme', function () { load_theme_textdomain(IDXBOOST_DOMAIN_THEME_LANG, FLEX_IDX_PATH . '/languages'); });
+      $text_language='';
+      $text_language=$default_language.'_'.strtoupper($default_language);
+      return $text_language;
     }
-    add_filter('locale', 'idxboost_language_default_plugin');
+    add_filter( 'locale', 'idxboost_language_default_plugin' );
 }
 
 if (!function_exists('idxboost_save_options_after_update')) {
@@ -6824,62 +6746,59 @@ if (!function_exists('idxboost_save_options_after_update')) {
         'action' => 'update',
         'type' => 'plugin',
         'plugins' => array(0 => 'idxboost/idxboost.php')
-    );
+        );
 
-    function idxboost_save_options_after_update($upgrader_object, $options)
-    {
-        if ($options['action'] == 'update' && $options['type'] == 'plugin' && in_array('idxboost/idxboost.php', $options['plugins'])) {
-            $data_parameters = [];
+   function idxboost_save_options_after_update($upgrader_object, $options){
+        if ($options['action'] == 'update' && $options['type'] == 'plugin' && in_array('idxboost/idxboost.php', $options['plugins']) ){
+            $data_parameters=[];
             if (function_exists('is_wpe')) {
-                if (is_wpe() == 1) {
-                    $data_parameters['idx_environment_site'] = 'production';
-                } else {
-                    $data_parameters['idx_environment_site'] = 'staging';
+                if(is_wpe() == 1){
+                    $data_parameters['idx_environment_site']='production';
+                }else{
+                    $data_parameters['idx_environment_site']='staging';
                 }
             } else {
-                $data_parameters['idx_environment_site'] = 'production';
+                $data_parameters['idx_environment_site']='production';
             }
             //$data_parameters['idx_environment_site']='production';
-            $data_parameters['idx_map_style'] = '';
+            $data_parameters['idx_map_style']='';
             fc_idx_save_tools_admin($data_parameters);
         }
+
     }
-    add_action('upgrader_process_complete', 'idxboost_save_options_after_update', 10, 2);
+    add_action( 'upgrader_process_complete', 'idxboost_save_options_after_update', 10, 2 );
 }
 
 if (!function_exists("flex_idx_get_building_noscript_inventory")) {
-    function flex_idx_get_building_noscript_inventory($result_data_collection = [], $head_property = 'Sale', $type_data = 'sale')
-    { ?>
-        <noscript>
-            <?php
-            $arrebed = [];
-            foreach ($result_data_collection as $key => $value) {
-                if (strlen(array_search($value['bed'], $arrebed)) == 0) {
-                    $arrebed[] = $value['bed'];
-                }
-            }
-            arsort($arrebed);
-            array_unique($arrebed);
-            ?>
-            <?php $countar = 0;
-            foreach ($arrebed as $keybed => $valbed) {
-                $countar = $countar + 1; ?>
-                <h2 class="title-thumbs"><?php
-                                            if ($valbed == 0) {
-                                                echo __('Studio', IDXBOOST_DOMAIN_THEME_LANG);
-                                            } else {
-                                                if ($type_data == 'for_rent') {
-                                                    echo $valbed . __(' Bedroom Apartments ', IDXBOOST_DOMAIN_THEME_LANG) . $head_property . ' at ' . get_the_title();
-                                                } else {
-                                                    echo $valbed . __(' Bedroom Condos ', IDXBOOST_DOMAIN_THEME_LANG) . $head_property . ' at ' . get_the_title();
-                                                }
-                                            }
+    function flex_idx_get_building_noscript_inventory($result_data_collection=[],$head_property='Sale',$type_data='sale') { ?>
+                      <noscript>
+                        <?php
+                          $arrebed = [];
+                          foreach ($result_data_collection as $key => $value) {
+                            if( strlen(array_search($value['bed'],$arrebed))==0 ){
+                              $arrebed[]=$value['bed'];
+                            }
+                          }
+                          arsort($arrebed);
+                          array_unique($arrebed);
+                          ?>
+                        <?php $countar=0; foreach ($arrebed as $keybed => $valbed) { $countar=$countar+1; ?>
+                        <h2 class="title-thumbs"><?php 
+                        if($valbed==0) {
+                            echo __('Studio', IDXBOOST_DOMAIN_THEME_LANG); 
+                        }else {
+                            if ($type_data=='for_rent') {
+                                echo $valbed.__(' Bedroom Apartments ', IDXBOOST_DOMAIN_THEME_LANG).$head_property.' at '.get_the_title();                        
+                            }else{
+                                echo $valbed.__(' Bedroom Condos ', IDXBOOST_DOMAIN_THEME_LANG).$head_property.' at '.get_the_title();                        
+                            }
+                        }
 
-                                            ?></h2>
-                <div class="tbl_properties_wrapper">
-                    <table class="display" id="dataTable-pending-<?php echo $countar; ?>" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
+                        ?></h2>
+                        <div class="tbl_properties_wrapper">
+                          <table class="display" id="dataTable-pending-<?php echo $countar;?>" cellspacing="0" width="100%">
+                            <thead>
+                              <tr>
                                 <th class="dt-center sorting"><?php echo __('unit', IDXBOOST_DOMAIN_THEME_LANG); ?></th>
                                 <th class="dt-center sorting class_asking_prince"><?php echo __('Asking Price', IDXBOOST_DOMAIN_THEME_LANG); ?></th>
                                 <th class="dt-center sorting">% / $</th>
@@ -6887,49 +6806,48 @@ if (!function_exists("flex_idx_get_building_noscript_inventory")) {
                                 <th class="dt-center sorting show-desktop"><?php echo __('Living Size', IDXBOOST_DOMAIN_THEME_LANG); ?></th>
                                 <th class="dt-center sorting show-desktop"><?php echo __('Price', IDXBOOST_DOMAIN_THEME_LANG); ?> / Sq.Ft.</th>
                                 <th class="dt-center sorting show-desktop"><?php echo __('Days on Market', IDXBOOST_DOMAIN_THEME_LANG); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($result_data_collection as $key => $value) {
-                                if ($value['bed'] == $valbed) { ?>
-                                    <tr class="flex-tbl-link" data-permalink="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $value['slug']; ?>">
-                                        <td>
-                                            <div class="unit propertie" data-mls="<?php echo $value['mls_num']; ?>">
-                                                <button class="clidxboost-btn-check flex-favorite-btn">
-                                                    <span class="clidxboost-icon-check clidxboost-icon-check-list"></span>
-                                                </button>
-                                                <span><?php echo $value['unit']; ?></span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="asking-number blue">$<?php echo number_format($value['price']); ?></div>
-                                        </td>
-                                        <td>
-                                            <div class="porcentaje <?php if ($value['reduced'] !== '' && $value['reduced'] < 0) : ?>red<?php elseif ($value['reduced'] !== '' && $value['reduced'] >= 0) : ?>green<?php else : ?>black<?php endif; ?>"><?php if (strlen($value['reduced']) != 0) echo $value['reduced'] . '%';
-                                                                                                                                                                                                                                                        else echo 'N/A'; ?></div>
-                                        </td>
-                                        <td>
-                                            <div class="beds"><?php echo $value['bed']; ?> / <?php echo $value['bath']; ?> / <?php echo $value['baths_half']; ?></div>
-                                        </td>
-                                        <td class="table-beds show-desktop">
-                                            <div class="beds"><?php echo $value['sqft']; ?> Sq.Ft.</div>
-                                        </td>
-                                        <td class="table-beds show-desktop">
-                                            <div class="price">$<?php echo ($value['sqft'] > 0) ? number_format($value['price'] / $value['sqft']) : 0; ?></div>
-                                        </td>
-                                        <td class="table-beds show-desktop">
-                                            <div class="dayson"><?php echo $value['days_market']; ?></div>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                            <?php  } ?>
-                        </tbody>
-                    </table>
-                </div>
-            <?php  } ?>
-        </noscript>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                                foreach ($result_data_collection as $key => $value) {
+                                  if ($value['bed']==$valbed) { ?>
+                              <tr class="flex-tbl-link" data-permalink="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $value['slug']; ?>">
+                                <td>
+                                  <div class="unit propertie" data-mls="<?php echo $value['mls_num']; ?>">
+                                    <button class="clidxboost-btn-check flex-favorite-btn">
+                                    <span class="clidxboost-icon-check clidxboost-icon-check-list"></span>
+                                    </button>
+                                    <span><?php echo $value['unit'];?></span>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="asking-number blue">$<?php echo number_format($value['price']);?></div>
+                                </td>
+                                <td>
+                                  <div class="porcentaje <?php if ($value['reduced'] !== '' && $value['reduced'] < 0): ?>red<?php elseif($value['reduced'] !== '' && $value['reduced'] >= 0): ?>green<?php else: ?>black<?php endif; ?>"><?php if (strlen($value['reduced'])!=0) echo $value['reduced'].'%'; else echo 'N/A'; ?></div>
+                                </td>
+                                <td>
+                                  <div class="beds"><?php echo $value['bed'];?> / <?php echo $value['bath'];?> / <?php echo $value['baths_half']; ?></div>
+                                </td>
+                                <td class="table-beds show-desktop">
+                                  <div class="beds"><?php echo $value['sqft']; ?> Sq.Ft.</div>
+                                </td>
+                                <td class="table-beds show-desktop">
+                                  <div class="price">$<?php echo ($value['sqft'] > 0) ? number_format($value['price'] / $value['sqft']) : 0; ?></div>
+                                </td>
+                                <td class="table-beds show-desktop">
+                                  <div class="dayson"><?php echo $value['days_market'];?></div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php  } ?>
+                            </tbody>
+                          </table>
+                        </div>
+                        <?php  } ?>
+                      </noscript>        
 
-<?php
+        <?php
     }
 }

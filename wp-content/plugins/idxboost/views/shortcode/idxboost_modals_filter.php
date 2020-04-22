@@ -1,118 +1,111 @@
-<?php
-
-global $post, $flex_idx_info;
-
-$agent_registration_key = get_post_meta($post->ID, "_flex_agent_registration_key", true);
-?>
-
 <!-- modal property html -->
 <div id="flex_idx_modal_wrapper"></div>
 
-<?php
+<?php 
 $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']) ? sanitize_text_field($flex_idx_info['agent']['agent_contact_phone_number']) : '';
 ?>
 
 <!-- modal actions -->
 <div class="ib-modal-master" data-id="calculator" id="ib-mortage-calculator">
-  <div class="ib-mmcontent">
-    <div class="ib-mwrapper ib-mgeneric">
-      <div class="ib-mgheader">
-        <h4 class="ib-mghtitle"><?php echo __("Mortgage calculator", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
+<div class="ib-mmcontent">
+  <div class="ib-mwrapper ib-mgeneric">
+    <div class="ib-mgheader">
+      <h4 class="ib-mghtitle"><?php echo __("Mortgage calculator", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
+    </div>
+    <div class="ib-mgcontent"><?php echo __("Let's us know the best time for showing.", IDXBOOST_DOMAIN_THEME_LANG); ?>
+    <a href="tel:<?php echo preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" title="Call Us <?php echo flex_agent_format_phone_number(preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number'])); ?>"><?php echo flex_agent_format_phone_number(preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number'])); ?></a>
+      <div class="mb-mcform">
+        <form method="post" class="ib-property-mortgage-f">
+        <ul class="ib-mcinputs">
+          <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("Purchase Price", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+            <div class="ib-mgiwrapper">
+              <input class="ib-mcipurchase ib-property-mc-pp" value="" type="text" readonly>
+            </div>
+          </li>
+          <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("% Down Payment", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+            <div class="ib-mgiwrapper">
+              <input class="ib-mcidpayment ib-property-mc-dp" value="30" step="any" type="number" max="95" min="0">
+            </div>
+          </li>
+          <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("Term", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+            <div class="ib-mgiwrapper ib-mgwselect">
+              <select class="ib-mcsyears ib-property-mc-ty">
+                <option value="30"><?php echo __("30 Years", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                <option value="15"><?php echo __("15 Years", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+              </select>
+            </div>
+          </li>
+          <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("Interest Rate", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+            <div class="ib-mgiwrapper">
+              <input class="ib-mcidpayment ib-property-mc-ir" value="4" step="any" type="number" max="95" min="0">
+            </div>
+          </li>
+        </ul>
+        <button type="button" class="ib-mgsubmit ib-property-mortage-submit"><?php echo __("Calculate", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+        </form>
       </div>
-      <div class="ib-mgcontent"><?php echo __("Let's us know the best time for showing.", IDXBOOST_DOMAIN_THEME_LANG); ?>
-        <a href="tel:<?php echo preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" title="Call Us <?php echo flex_agent_format_phone_number(preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number'])); ?>"><?php echo flex_agent_format_phone_number(preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number'])); ?></a>
-        <div class="mb-mcform">
-          <form method="post" class="ib-property-mortgage-f">
-            <ul class="ib-mcinputs">
-              <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("Purchase Price", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                <div class="ib-mgiwrapper">
-                  <input class="ib-mcipurchase ib-property-mc-pp" value="" type="text" readonly>
-                </div>
-              </li>
-              <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("% Down Payment", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                <div class="ib-mgiwrapper">
-                  <input class="ib-mcidpayment ib-property-mc-dp" value="30" step="any" type="number" max="95" min="0">
-                </div>
-              </li>
-              <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("Term", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                <div class="ib-mgiwrapper ib-mgwselect">
-                  <select class="ib-mcsyears ib-property-mc-ty">
-                    <option value="30"><?php echo __("30 Years", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                    <option value="15"><?php echo __("15 Years", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                  </select>
-                </div>
-              </li>
-              <li class="ib-mcitem"><span class="ib-mgitxt"><?php echo __("Interest Rate", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                <div class="ib-mgiwrapper">
-                  <input class="ib-mcidpayment ib-property-mc-ir" value="4" step="any" type="number" max="95" min="0">
-                </div>
-              </li>
-            </ul>
-            <button type="button" class="ib-mgsubmit ib-property-mortage-submit"><?php echo __("Calculate", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-          </form>
-        </div>
-        <div class="mb-mcdata">
-          <h5 class="ib-mcsubtitle"><?php echo __("Mortgage breakdown", IDXBOOST_DOMAIN_THEME_LANG); ?></h5>
-          <ul class="ib-mcdlist">
-            <li class="ib-mcditem"><span class="ib-mcditxt"><?php echo __("Mortgage Amount", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span class="ib-mcdinumbers ib-calc-mc-mortgage"></span></li>
-            <li class="ib-mcditem"><span class="ib-mcditxt"><?php echo __("Down Payment Amount", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span class="ib-mcdinumbers ib-calc-mc-down-payment"></span></li>
-            <li class="ib-mcditem ib-mcdibig"><span class="ib-mcditxt"><?php echo __("Monthly Amount", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span class="ib-mcdinumbers ib-calc-mc-monthly"></span></li>
-            <li class="ib-mcditem ib-mcdibig">
-              <div class="ib-mcditxt"><?php echo __("Total Monthly Amount", IDXBOOST_DOMAIN_THEME_LANG); ?> <span class="ib-mcdibold"><?php echo __("(Principal &amp; Interest, and PMI)", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div><span class="ib-mcdinumbers ib-calc-mc-totalmonthly"></span>
-            </li>
-          </ul>
-        </div>
+      <div class="mb-mcdata">
+        <h5 class="ib-mcsubtitle"><?php echo __("Mortgage breakdown", IDXBOOST_DOMAIN_THEME_LANG); ?></h5>
+        <ul class="ib-mcdlist">
+          <li class="ib-mcditem"><span class="ib-mcditxt"><?php echo __("Mortgage Amount", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span class="ib-mcdinumbers ib-calc-mc-mortgage"></span></li>
+          <li class="ib-mcditem"><span class="ib-mcditxt"><?php echo __("Down Payment Amount", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span class="ib-mcdinumbers ib-calc-mc-down-payment"></span></li>
+          <li class="ib-mcditem ib-mcdibig"><span class="ib-mcditxt"><?php echo __("Monthly Amount", IDXBOOST_DOMAIN_THEME_LANG); ?></span><span class="ib-mcdinumbers ib-calc-mc-monthly"></span></li>
+          <li class="ib-mcditem ib-mcdibig">
+            <div class="ib-mcditxt"><?php echo __("Total Monthly Amount", IDXBOOST_DOMAIN_THEME_LANG); ?> <span class="ib-mcdibold"><?php echo __("(Principal &amp; Interest, and PMI)", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div><span class="ib-mcdinumbers ib-calc-mc-totalmonthly"></span>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="ib-mmclose"><span class="ib-mmctxt"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
   </div>
-  <div class="ib-mmbg"></div>
+  <div class="ib-mmclose"><span class="ib-mmctxt"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+</div>
+<div class="ib-mmbg"></div>
 </div>
 
 <div class="ib-modal-master" data-id="email-to-friend" id="ib-email-to-friend">
-  <div class="ib-mmcontent">
-    <div class="ib-mwrapper ib-mgeneric">
-      <div class="ib-mgheader">
-        <h4 class="ib-mghtitle"><?php echo __("Email to a friend", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
-      </div>
-      <form method="post" class="ib-property-share-friend-f iboost-secured-recaptcha-form">
-        <input type="hidden" name="mls_number" class="ib-property-share-mls-num" value="">
-        <div class="ib-mgcontent"><?php echo __("Recommend this to a friend, just enter their email bellow", IDXBOOST_DOMAIN_THEME_LANG); ?>
-          <div class="ib-meblock"><span class="ib-mgitxt"><?php echo __("Friend&#039s Information", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-            <div class="ib-mgiwrapper">
-              <input class="ib-meinput" name="friend_email" type="email" placeholder="<?php echo __("Friend&#039s Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
-            </div>
-            <div class="ib-mgiwrapper">
-              <input class="ib-meinput" name="friend_name" type="text" placeholder="<?php echo __("Friend&#039s Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
-            </div>
-          </div>
-          <div class="ib-meblock"><span class="ib-mgitxt"><?php echo __("Your Information", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-            <div class="ib-mgiwrapper">
-              <input class="ib-meinput" name="your_name" type="text" placeholder="<?php echo __("Your Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
-            </div>
-            <div class="ib-mgiwrapper">
-              <input class="ib-meinput" name="your_email" type="email" placeholder="<?php echo __("Your Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
-            </div>
-            <div class="ib-mgiwrapper ib-mgtextarea">
-              <textarea class="ib-metextarea" name="comments" type="text" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>*" required></textarea>
-            </div>
-          </div>
-          <span class="ib-merequired">* <?php echo __("Required fields", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-          <button type="submit" class="ib-mgsubmit"><?php echo __("Submit", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-        </div>
-      </form>
+<div class="ib-mmcontent">
+  <div class="ib-mwrapper ib-mgeneric">
+    <div class="ib-mgheader">
+      <h4 class="ib-mghtitle"><?php echo __("Email to a friend", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
     </div>
-    <div class="ib-mmclose"><span class="ib-mmctxt"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+    <form method="post" class="ib-property-share-friend-f iboost-secured-recaptcha-form">
+      <input type="hidden" name="mls_number" class="ib-property-share-mls-num" value="">
+      <div class="ib-mgcontent"><?php echo __("Recommend this to a friend, just enter their email bellow", IDXBOOST_DOMAIN_THEME_LANG); ?>
+        <div class="ib-meblock"><span class="ib-mgitxt"><?php echo __("Friend&#039s Information", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+          <div class="ib-mgiwrapper">
+            <input class="ib-meinput" name="friend_email" type="email" placeholder="<?php echo __("Friend&#039s Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
+          </div>
+          <div class="ib-mgiwrapper">
+            <input class="ib-meinput" name="friend_name" type="text" placeholder="<?php echo __("Friend&#039s Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
+          </div>
+        </div>
+        <div class="ib-meblock"><span class="ib-mgitxt"><?php echo __("Your Information", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+          <div class="ib-mgiwrapper">
+            <input class="ib-meinput" name="your_name" type="text" placeholder="<?php echo __("Your Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
+          </div>
+          <div class="ib-mgiwrapper">
+            <input class="ib-meinput" name="your_email" type="email" placeholder="<?php echo __("Your Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="" required>
+          </div>
+          <div class="ib-mgiwrapper ib-mgtextarea">
+            <textarea class="ib-metextarea" name="comments" type="text" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>*" required></textarea>
+          </div>
+        </div>
+        <span class="ib-merequired">* <?php echo __("Required fields", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+        <button type="submit" class="ib-mgsubmit"><?php echo __("Submit", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+      </div>
+    </form>
   </div>
-  <div class="ib-mmbg"></div>
+  <div class="ib-mmclose"><span class="ib-mmctxt"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+</div>
+<div class="ib-mmbg"></div>
 </div>
 
 <div class="ib-modal-master" data-id="submit" id="ib-email-thankyou">
-  <div class="ib-mmcontent">
-    <div class="ib-mgeneric ib-msubmit"><span class="ib-mssent ib-mstxt ib-icon-check"><?php echo __("Email Sent", IDXBOOST_DOMAIN_THEME_LANG); ?>! </span><span class="ib-mssucces ib-mstxt"><?php echo __("Your email was sent succesfully", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
-    <div class="ib-mmclose"><span class="ib-mmctxt"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
-  </div>
-  <div class="ib-mmbg"></div>
+<div class="ib-mmcontent">
+  <div class="ib-mgeneric ib-msubmit"><span class="ib-mssent ib-mstxt ib-icon-check"><?php echo __("Email Sent", IDXBOOST_DOMAIN_THEME_LANG); ?>! </span><span class="ib-mssucces ib-mstxt"><?php echo __("Your email was sent succesfully", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+  <div class="ib-mmclose"><span class="ib-mmctxt"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+</div>
+<div class="ib-mmbg"></div>
 </div>
 
 <div class="ib-modal-master" data-id="save-search" id="ib-fsearch-save-modal">
@@ -121,7 +114,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
       <div class="ib-mgheader">
         <h4 class="ib-mghtitle"><?php echo __("Save this search", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
       </div>
-      <div class="ib-mgcontent">
+      <div class="ib-mgcontent"> 
         <ul class="ib-msavesearch">
           <li class="ib-mssitem"><span class="ib-mssitxt"><?php echo __("Search Name(*)", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
             <div class="ib-mgiwrapper">
@@ -166,170 +159,170 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
 
 <!-- filter for mobile device -->
 <div class="ib-modal-filters-mobile" style="display:none;">
-  <div class="ib-content-modal-filters-mobile">
-    <!--Header modal-->
-    <div class="ib-header-modal-filters-mobile">
-      <!--<?php if (isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"])) : ?>
+    <div class="ib-content-modal-filters-mobile">
+        <!--Header modal-->
+        <div class="ib-header-modal-filters-mobile">
+            <!--<?php if ( isset($flex_idx_info["url_logo"]) && !empty($flex_idx_info["url_logo"]) ): ?>
           <img src="<?php echo $flex_idx_info["url_logo"]; ?>">
           <?php endif; ?>-->
-      <h3 class="ib-mtitle"><?php echo __('Filters', IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
-      <button class="ib-close-modal-filters-mobile"><span><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
-    </div>
-    <!--Boby modal-->
-    <div class="ib-body-modal-filters-mobile">
-      <div class="ib-wrap-collapse">
-        <!--PRICE RANGE FOR SALE-->
-        <div class="ib-item-collapse ib-item-collapse-saleib-item-collapse-sale ib-item-collapse-sale ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Price Range', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-min-price"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Min Price', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-              <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-max-price"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Max Price', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-            </div>
-          </div>
+          <h3 class="ib-mtitle"><?php echo __('Filters', IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
+          <button class="ib-close-modal-filters-mobile"><span><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
         </div>
+        <!--Boby modal-->
+        <div class="ib-body-modal-filters-mobile">
+            <div class="ib-wrap-collapse">
+                <!--PRICE RANGE FOR SALE-->
+                <div class="ib-item-collapse ib-item-collapse-saleib-item-collapse-sale ib-item-collapse-sale ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Price Range', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <div class="ib-wrap-fm">
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                              <select id="ib-min-price"></select>
+                              <span class="ib-label-wrap-fm"><?php echo __('Min Price', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                            <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                              <select id="ib-max-price"></select>
+                              <span class="ib-label-wrap-fm"><?php echo __('Max Price', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!--BEDROOMS-->
-        <div id="ib-bedrooms-collapse" class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Bedrooms', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-min-beds"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Min Beds', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-              <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-max-beds"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Max Beds', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--BATHROOMS-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Bathrooms', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-min-baths"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Min Baths', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-              <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-max-baths"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Max Baths', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--TYPE-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Type', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <ul class="ib-wrap-fm ib-cl-2" id="ib-flex-m-types"></ul>
-            </div>
-          </div>
-        </div>
-        <!--PARKING SPACES-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Parking Spaces', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <ul class="ib-wrap-fm" id="ib-flex-m-parking"></ul>
-          </div>
-        </div>
-        <!--LIVING SIZE-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Living Size', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-min-living"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Min Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-              <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-max-living"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Max Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--LAND SIZE-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Land Size', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-min-land"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Min Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-              <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-max-land"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Max Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--YEAR BUILT-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Year Built', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-min-year"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Min Year', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-              <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-max-year"></select>
-                <span class="ib-label-wrap-fm"><?php echo __('Max Year', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              </div>
-            </div>
-          </div>
-        </div>
+                <!--BEDROOMS-->
+                <div id="ib-bedrooms-collapse" class="ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Bedrooms', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <div class="ib-wrap-fm">
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                              <select id="ib-min-beds"></select>
+                              <span class="ib-label-wrap-fm"><?php echo __('Min Beds', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                            <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                              <select id="ib-max-beds"></select>
+                              <span class="ib-label-wrap-fm"><?php echo __('Max Beds', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--BATHROOMS-->
+                <div class="ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Bathrooms', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <div class="ib-wrap-fm">
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-min-baths"></select>
+                            <span class="ib-label-wrap-fm"><?php echo __('Min Baths', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                            <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-max-baths"></select>
+                            <span class="ib-label-wrap-fm"><?php echo __('Max Baths', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--TYPE-->
+                <div class="ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Type', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <div class="ib-wrap-fm">
+                            <ul class="ib-wrap-fm ib-cl-2" id="ib-flex-m-types"></ul>
+                        </div>
+                    </div>
+                </div>
+                <!--PARKING SPACES-->
+                <div class="ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Parking Spaces', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <ul class="ib-wrap-fm" id="ib-flex-m-parking"></ul>
+                    </div>
+                </div>
+                <!--LIVING SIZE-->
+                <div class="ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Living Size', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <div class="ib-wrap-fm">
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-min-living"></select>
+                                <span class="ib-label-wrap-fm"><?php echo __('Min Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                            <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-max-living"></select>
+                            <span class="ib-label-wrap-fm"><?php echo __('Max Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--LAND SIZE-->
+                <div class="ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Land Size', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <div class="ib-wrap-fm">
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-min-land"></select>
+                                <span class="ib-label-wrap-fm"><?php echo __('Min Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                            <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-max-land"></select>
+                            <span class="ib-label-wrap-fm"><?php echo __('Max Size', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--YEAR BUILT-->
+                <div class="ib-item-collapse">
+                    <h2 class="ib-header-collapse"><?php echo __('Year Built', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                    <div class="ib-body-collpase">
+                        <div class="ib-wrap-fm">
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-min-year"></select>
+                                <span class="ib-label-wrap-fm"><?php echo __('Min Year', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                            <div class="ib-item-wrap-fm ib-sp-fm ib-sp-fm-tp"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+                            <div class="ib-item-wrap-fm ib-wrap-content-select">
+                            <select id="ib-max-year"></select>
+                            <span class="ib-label-wrap-fm"><?php echo __('Max Year', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!--WATERFRONT DESCRIPTION-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Waterfront Description', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <div class="ib-item-wrap-fm ib-wrap-content-select">
-                <select id="ib-flex-waterfront-switch"></select></div>
+            <!--WATERFRONT DESCRIPTION-->
+            <div class="ib-item-collapse">
+                <h2 class="ib-header-collapse"><?php echo __('Waterfront Description', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                <div class="ib-body-collpase">
+                    <div class="ib-wrap-fm">
+                        <div class="ib-item-wrap-fm ib-wrap-content-select">
+                        <select id="ib-flex-waterfront-switch"></select></div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <!--FEATURES-->
-        <div class="ib-item-collapse">
-          <h2 class="ib-header-collapse"><?php echo __('Features', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
-          <div class="ib-body-collpase">
-            <div class="ib-wrap-fm">
-              <ul class="ib-wrap-fm ib-cl-2" id="ib-flex-m-features"></ul>
+            <!--FEATURES-->
+            <div class="ib-item-collapse">
+                <h2 class="ib-header-collapse"><?php echo __('Features', IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
+                <div class="ib-body-collpase">
+                    <div class="ib-wrap-fm">
+                        <ul class="ib-wrap-fm ib-cl-2" id="ib-flex-m-features"></ul>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <!--Footer modal-->
     <div class="ib-footer-modal-filters-mobile">
-      <div class="ib-group-buttons-content"><button id="ib-apply-clear"><?php echo __('Clear', IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+        <div class="ib-group-buttons-content"><button id="ib-apply-clear"><?php echo __('Clear', IDXBOOST_DOMAIN_THEME_LANG); ?></button>
         <button id="ib-apply-filters-btn"><?php echo __('View', IDXBOOST_DOMAIN_THEME_LANG); ?> <span>0 </span><?php echo __('Properties', IDXBOOST_DOMAIN_THEME_LANG); ?></button></div>
     </div>
-  </div>
+</div>
 </div>
 <!-- filter for mobile device -->
 <div id="printMessageBox">Please wait while we create your document</div>
 <script id="ib-modal-template" type="text/x-handlebars-template">
-  <div class="ib-modal-master ib-mmpd ib-md-active">
+<div class="ib-modal-master ib-mmpd ib-md-active">
       <div class="ib-mmcontent">
         <article class="ib-property-detail ib-pdmodal">
           <div class="ib-pcheader">
@@ -341,7 +334,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 <div class="ib-phomodal">
                   <a href="tel:<?php echo $idx_contact_phone; ?>" class="ib-pbtnphone"><?php echo __("Call Us", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
                   <div class="ib-requestinfo ib-phbtn"><?php echo __("Inquire", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
-                  <div class="ib-pbtnopen ib-phbtn" data-permalink="{{ propertyPermalinkOpen slug }}"><?php echo __("Open", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
+                  <div class="ib-pbtnopen ib-phbtn" data-permalink="{{ propertyPermalink slug }}"><?php echo __("Open", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                   <div class="ib-pbtnclose ib-phbtn"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                 </div>
               </div>
@@ -563,9 +556,6 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                   </div>
                   <div class="ib-pacform">
                     <form class="ib-cform ib-propery-inquiry-f gtm_more_info_property" method="post">
-                      <?php if (isset($agent_registration_key) && !empty($agent_registration_key)) : ?>
-                      <input type="hidden" name="registration_key" value="<?php echo $agent_registration_key; ?>">
-                      <?php endif; ?>
                       <input type="hidden" name="ib_tags" value="">
                       <input type="hidden" name="mls_number" value="{{mls_num}}">
                       <ul class="ib-cffields">
@@ -579,7 +569,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                           <input class="ib-cfinput" name="email_address" type="email" placeholder="<?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="{{ leadEmailAddress this }} " required>
                         </li>
                         <li class="ib-cffitem">
-                          <input class="ib-cfinput" name="phone_number" type="text" placeholder="<?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="{{ leadPhoneNumber this }}">
+                          <input class="ib-cfinput" name="phone_number" type="text" placeholder="<?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?>*" value="{{ leadPhoneNumber this }}" required>
                         </li>
                         <li class="ib-cffitem">
                           <textarea class="ib-cftextarea" name="message" type="text" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" required><?php echo __("I am interested in", IDXBOOST_DOMAIN_THEME_LANG); ?> {{address_short}} {{address_large}}</textarea>
@@ -596,9 +586,9 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                   </div>
                 </div>
                 <div class="ib-bdisclaimer">
-                <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])) : ?>
+                <?php if (isset($flex_idx_info["board_id"]) && ("7" == $flex_idx_info["board_id"])): ?>
                             <p>The multiple listing information is provided by the Houston Association of Realtors from a copyrighted compilation of listings. The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present TEXAS All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: <span class="ib-bdcourtesy">{{office_name}}</span></p>
-                            <?php else : ?>
+                            <?php else: ?>
                             <p>The multiple listing information is provided by the  {{board_name}}® from a copyrighted compilation of listings.
                             The compilation of listings and each individual listing are &copy;<?php echo date('Y'); ?>-present  {{board_name}}®.
                             All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose
@@ -651,27 +641,27 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
 </script>
 
 <script id="ib-aside-template" type="text/x-handlebars-template">
-  {{#each this}}
-    {{{ capturePositionHackbox @index }}}
-    <li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}">
-      <ul class="ib-piinfo">
+{{#each this}}
+{{{ capturePositionHackbox @index }}}
+<li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}">
+    <ul class="ib-piinfo">
         <li class="ib-piitem ib-piprice">{{ formatPrice price }}</li>
         <li class="ib-piitem ib-pibeds">{{ bed }} <?php echo __("bed(s)", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
         <li class="ib-piitem ib-pibaths">{{ bath }} <?php echo __("bath(s)", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
         <li class="ib-piitem ib-pisqft">{{ formatSqft sqft }} <?php echo __("Sq.Ft.", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
         <li class="ib-piitem ib-paddress">{{ address_short }} {{ address_large }}</li>
-      </ul>
-      <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}">
+    </ul>
+    <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}">
         <img class="ib-pifimg" src="{{ idxImage this }}" alt="{{ address_short }} {{ address_large }}">
         <div class="gs-container-navs">
-          <div class="gs-wrapper-arrows">
+        <div class="gs-wrapper-arrows">
             <button class="gs-prev-arrow"></button>
             <button class="gs-next-arrow"></button>
-          </div>
         </div>
-      </div>
-      <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-token-alert="{{token_alert}}"><?php /*<span>Add to Favorites</span> */ ?></div>
-      <a class="ib-pipermalink" href="#" title="<?php echo __("View Detail of", IDXBOOST_DOMAIN_THEME_LANG); ?> {{ address_short }} {{ address_large }}"><span>{{ address_short }} {{ address_large }}</span></a>
-    </li>
-  {{/each}}
+        </div>
+    </div>
+    <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-token-alert="{{token_alert}}"><?php /*<span>Add to Favorites</span> */ ?></div>
+    <a class="ib-pipermalink" href="#" title="<?php echo __("View Detail of", IDXBOOST_DOMAIN_THEME_LANG); ?> {{ address_short }} {{ address_large }}"><span>{{ address_short }} {{ address_large }}</span></a>
+</li>
+{{/each}}
 </script>
