@@ -331,24 +331,27 @@
 								var lat = $(this).attr('data-lat');
 								var lng = $(this).attr('data-lng');
 
-								var myLatLng = {
-									lat: parseFloat(lat),
-									lng: parseFloat(lng)
-								};
+								if(mapa !== undefined && lat !== undefined && lng !== undefined){
 
-								var newMap = new google.maps.Map(document.getElementById(mapa), {
-									zoom: 16,
-									center: myLatLng,
-									mapTypeControl: false,
-									fullscreenControl: false
-								});
+									var myLatLng = {
+										lat: parseFloat(lat),
+										lng: parseFloat(lng)
+									};
 
-								var marker = new google.maps.Marker({
-									position: myLatLng,
-									map: newMap
-								});
-								
-								$(this).removeAttr('data-img');
+									var newMap = new google.maps.Map(document.getElementById(mapa), {
+										zoom: 16,
+										center: myLatLng,
+										mapTypeControl: false,
+										fullscreenControl: false
+									});
+
+									var marker = new google.maps.Marker({
+										position: myLatLng,
+										map: newMap
+									});
+									
+									$(this).removeAttr('data-img');
+								}
 								item++;
 							}
 						}
