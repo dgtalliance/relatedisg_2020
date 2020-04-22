@@ -535,6 +535,17 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
     <div class="ms-wrap-form">
       <div class="ms-community-fr">
         <div class="form-content">
+
+          <div class="avatar-content">
+            <div class="content-avatar-image">
+              <img src="https://idxboost.s3.amazonaws.com/agent_profiles/1b976360717d.087dfe3f2e4e.jpg" alt="Francisco Aguirre">
+            </div>
+            <div class="avatar-information">
+              <span class="avt-title">Francisco Aguirre</span>
+              <a class="phone-avatar" href="tel:8885338736" title="Call to (888) 533-8736">Ph. (888) 533-8736</a>
+            </div>
+          </div>
+
           <?php echo do_shortcode('[flex_idx_contact_form]'); ?>
           <button class="ms-commuty-close-modal" data-modal="float-block">Close modal</button>
         </div>
