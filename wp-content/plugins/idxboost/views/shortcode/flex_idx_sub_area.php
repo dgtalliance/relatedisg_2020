@@ -545,9 +545,15 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
               <a class="phone-avatar" href="tel:8885338736" title="Call to (888) 533-8736">Ph. (888) 533-8736</a>
             </div>
           </div>
-
           <?php echo do_shortcode('[flex_idx_contact_form]'); ?>
           <button class="ms-commuty-close-modal" data-modal="float-block">Close modal</button>
+          <script type="text/javascript">
+            jQuery(".flex-content-form .pt-name .medium").attr('placeholder','Name*');
+            jQuery(".flex-content-form .pt-lname .medium").attr('placeholder','Last Name*');
+            jQuery(".flex-content-form .pt-email .medium").attr('placeholder','Email*');
+            jQuery(".flex-content-form .pt-phone .medium").attr('placeholder','Phone');
+            jQuery(".flex-content-form .textarea").attr('placeholder','Comment');
+          </script>
         </div>
       </div>
     </div>
