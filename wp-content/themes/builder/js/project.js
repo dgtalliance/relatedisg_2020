@@ -267,7 +267,7 @@
 
 	/*-----------------------------------------------------------------------------------------------------*/
 	/* Carga por demanda en el home
-	/*-----------------------------------------------------------------------------------------------------*/
+	/*-----------------------------------------------------------------------------------------------------
 	function chekSectionAnimate(){
 	  var elementSection = $('.ms-animate');
 	  if(elementSection.length){
@@ -290,6 +290,75 @@
 	      }
 	    });
 	  }
+	}*/
+
+
+	/*-----------------------------------------------------------------------------------------------------*/
+	/* Carga por demanda en el home
+	/*-----------------------------------------------------------------------------------------------------*/
+	function chekSectionAnimate(){
+		var elementSection = $('.ms-animate');
+		if (elementSection.length) {
+			elementSection.each(function(e) {
+				var sectionId = $("#" + $(this).attr('id'));
+				if (is_in_view(sectionId)) {
+					var item = 0, el = $(this);
+					sectionId.find('[data-img]').each(function(e) {
+						if ($(this).attr('data-real-type') == "image") {
+							if (is_in_view($(this))){
+								$(this).attr('src', $(this).attr('data-img')).on('load', function() {
+									$(this).removeAttr('data-img').addClass('ms-loaded');
+								});
+								item++;
+							}
+						} else if ($(this).attr('data-real-type') == "video") {
+							if (is_in_view($(this))){
+								var urlVideo = $(this).attr('data-img');
+								$(this).html("<video id='idx-video' autoplay='' loop='' muted='' controls='' class='ms-loaded' src='" + urlVideo + "'></video>");
+								$(this).removeAttr('data-img');
+								item++;
+							}
+						} else if ($(this).attr('data-real-type') == "youtube") {
+							if (is_in_view($(this))) {
+								var urlVideo = $(this).attr('data-img');
+								$(this).html("<iframe allowfullscreen='' src='" + urlVideo + "' frameborder='0' class='ms-loaded'></iframe>");
+								$(this).removeAttr('data-img');
+								item++;
+							}
+						} else if ($(this).attr('data-real-type') == "mapa") {
+							if (is_in_view($(this))) {
+								var mapa = $(this).attr('data-img');
+								var lat = $(this).attr('data-lat');
+								var lng = $(this).attr('data-lng');
+
+								var myLatLng = {
+									lat: parseFloat(lat),
+									lng: parseFloat(lng)
+								};
+
+								var newMap = new google.maps.Map(document.getElementById(mapa), {
+									zoom: 16,
+									center: myLatLng,
+									mapTypeControl: false,
+									fullscreenControl: false
+								});
+
+								var marker = new google.maps.Marker({
+									position: myLatLng,
+									map: newMap
+								});
+								
+								$(this).removeAttr('data-img');
+								item++;
+							}
+						}
+					});
+					if (item == sectionId.find('[data-img]').size()) {
+						el.addClass('ms-loaded-animate').removeClass('ms-animate');
+					}
+				}
+			});
+		}
 	}
 
 	function is_in_view(elem) {
