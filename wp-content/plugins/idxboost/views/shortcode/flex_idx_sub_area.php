@@ -484,7 +484,7 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
       </div>
 
       <?php if ( !empty($response['payload']['seo_download'])) { ?>
-        <p><?php echo $response['payload']['seo_download']; ?></p>  
+        <?php echo $response['payload']['seo_download']; ?>
       <?php } ?>
 
     </section>
