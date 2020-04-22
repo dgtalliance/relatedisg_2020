@@ -195,7 +195,7 @@
         </table>
 
         <div class="ms-float-actions">
-          <ul class="ms-float-btn ms-wrap-shared">
+          <!--<ul class="ms-float-btn ms-wrap-shared">
             <li>
               <button class="ms-btn-shared">Shared</button>
               <ul class="ms-shared">
@@ -205,7 +205,7 @@
               </ul>
             </li>
           </ul>
-          <!--<button class="ms-float-btn ms-btn-favorite">My favorite</button>-->
+          <button class="ms-float-btn ms-btn-favorite">My favorite</button>-->
           <button class="ms-float-btn ms-btn-form">Inquiere</button>
         </div>
 
