@@ -205,6 +205,8 @@
               </ul>
             </li>
           </ul>
+          <!--<button class="ms-float-btn ms-btn-favorite">My favorite</button>-->
+          <button class="ms-float-btn ms-btn-form">Inquiere</button>
         </div>
 
         <div id="boostBoxCentral">
@@ -532,8 +534,10 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
 
     <div class="ms-wrap-form">
       <div class="ms-community-fr">
-        <?php echo do_shortcode('[flex_idx_contact_form]'); ?>
-        <button class="ms-commuty-close-modal" data-modal="float-block">Close modal</button>
+        <div class="form-content">
+          <?php echo do_shortcode('[flex_idx_contact_form]'); ?>
+          <button class="ms-commuty-close-modal" data-modal="float-block">Close modal</button>
+        </div>
       </div>
     </div>
 
