@@ -462,62 +462,30 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
 
     <section class="ms-section ms-animate" id="downloads">
       <h2 class="ms-sub-title"><?php echo $sub_area_name; ?> Downloads</h2>
-      <ul class="ms-slider-dowload">
-
-        <?php
-
-         if( !empty($response['payload']['sheet_one']) ) { ?>
-          <li>
-            <div class="ms-dowload-item">
-              <a href="<?php echo $response['payload']['sheet_one']; ?>" class="ms-wrap-img" title="Line 01">
-                <img data-real-type="image" data-img="https://i.picsum.photos/id/1048/840/460.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="item1" class="ms-lazy">
-              </a>
-              <h3 class="ms-dowload-name">Fact Sheet</h3>
-            </div>
-          </li>          
+      <div class="cbtns">
+        <?php if( !empty($response['payload']['sheet_one']) ) { ?>
+          <div>
+            <h4 class="ms-title">Fact Sheet</h4>
+            <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_one']; ?>" target="_blank">VIEW FACT SHEET</a>
+          </div>      
         <?php } ?>
-
         <?php if( !empty($response['payload']['sheet_two']) ) { ?>
-          <li>
-            <div class="ms-dowload-item">
-              <a href="<?php echo $response['payload']['sheet_two']; ?>" class="ms-wrap-img" title="Line 01">
-                <img data-real-type="image" data-img="https://i.picsum.photos/id/1048/840/460.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="item2" class="ms-lazy">
-              </a>
-              <h3 class="ms-dowload-name">Brochure Sheet</h3>
-            </div>
-          </li>          
+          <div>
+            <h4 class="ms-title">Brochure Sheet</h4>
+            <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_two']; ?>" target="_blank">VIEW BROCHURE</a>
+          </div>
         <?php } ?>
-
-        <?php if( !empty($response['payload']['sheet_three']) ) { ?>       
-          <li>
-            <div class="ms-dowload-item">
-              <a href="<?php echo $response['payload']['sheet_three']; ?>" class="ms-wrap-img" title="Line 01">
-                <img data-real-type="image" data-img="https://i.picsum.photos/id/1048/840/460.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="item3" class="ms-lazy">
-              </a>
-              <h3 class="ms-dowload-name">Floor plans Sheet</h3>
-            </div>
-          </li>
+        <?php if( !empty($response['payload']['sheet_three']) ) { ?>
+          <div>
+            <h4 class="ms-title">Floorplans Sheet</h4>
+            <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_three']; ?>" target="_blank">VIEW FLOORPLANS</a>
+          </div>
         <?php } ?>
+      </div>
 
-      </ul>
       <?php if ( !empty($response['payload']['seo_download'])) { ?>
         <p><?php echo $response['payload']['seo_download']; ?></p>  
       <?php } ?>
-
-      <div class="cbtns">
-        <div>
-          <h4 class="ms-title">Fact Sheet</h4>
-          <a class="bmodal" download="" href="https://rossmilroygroup.com/wp-content/uploads/2019/11/Natiivo-Unbranded-FactSheet-V14.pdf" target="_blank">VIEW FACT SHEET</a>
-        </div>
-        <div>
-          <h4 class="ms-title">Brochure Sheet</h4>
-          <a class="bmodal" download="" href="https://rossmilroygroup.com/wp-content/uploads/2019/11/Natiivo_Bifold_Digital.pdf" target="_blank">VIEW BROCHURE</a>
-        </div>
-        <div>
-          <h4 class="ms-title">Floorplans Sheet</h4>
-          <a class="bmodal" download="" href="https://rossmilroygroup.com/wp-content/uploads/2019/11/floorplans_natiivo.pdf" target="_blank">VIEW FLOORPLANS</a>
-        </div>
-      </div>
 
     </section>
   </main>
