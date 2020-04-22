@@ -93,7 +93,7 @@ function ib_change_view(view,tab){
       if (boolcaracter=='/'){
         web_page=idxboost_collection_params.wpsite.slice(0,-1);
       }
-      web_page=web_page+builhash;
+      web_page=web_page;
 
       
       history.pushState(null, '', web_page );
@@ -334,7 +334,7 @@ function ib_init_script(){
                   status_xhmr.xhr1=true;
                   if (idxboostCollecBuil.payload.type_filter =='0' || idxboostCollecBuil.payload.type_filter =='1') {
                     $('.js-ms-price').html("From "+idxboostCollecBuil.payload.meta.sale_min_max_price.min+' - '+idxboostCollecBuil.payload.meta.sale_min_max_price.max);
-                  }                                 
+                  }                  
                   ib_generate_struct(idxboostCollecBuil);
                  }
              });
