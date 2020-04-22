@@ -506,15 +506,15 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
 
       <div class="cbtns">
         <div>
-          <h4 class="ms-title">Natiivo Fact Sheet</h4>
+          <h4 class="ms-title">Fact Sheet</h4>
           <a class="bmodal" download="" href="https://rossmilroygroup.com/wp-content/uploads/2019/11/Natiivo-Unbranded-FactSheet-V14.pdf" target="_blank">VIEW FACT SHEET</a>
         </div>
         <div>
-          <h4 class="ms-title">Natiivo Brochure</h4>
+          <h4 class="ms-title">Brochure Sheet</h4>
           <a class="bmodal" download="" href="https://rossmilroygroup.com/wp-content/uploads/2019/11/Natiivo_Bifold_Digital.pdf" target="_blank">VIEW BROCHURE</a>
         </div>
         <div>
-          <h4 class="ms-title">Natiivo Floorplans</h4>
+          <h4 class="ms-title">Floorplans Sheet</h4>
           <a class="bmodal" download="" href="https://rossmilroygroup.com/wp-content/uploads/2019/11/floorplans_natiivo.pdf" target="_blank">VIEW FLOORPLANS</a>
         </div>
       </div>
