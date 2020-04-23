@@ -1,6 +1,14 @@
   /**** SLIDER PRINCIPAL ****/
   var $sliderPrincipalCommunity = jQuery(".ms-community-slider");
   if($sliderPrincipalCommunity.length) {
+    var activeHand = "";
+    var widthSize = jQuery(window).width();
+    if(widthSize < 768){
+      activeHand = true;
+    }else{
+      activeHand = false;
+    }
+
     $sliderPrincipalCommunity.greatSlider({
       type: 'swipe',
       navSpeed: 1000,
@@ -9,6 +17,11 @@
       bullets: false,
       items: 1,
       autoDestroy: true,
+
+      dragHand: activeHand,
+			drag: activeHand,
+      touch: activeHand,
+      
       layout: {
         bulletDefaultStyles: false,
         wrapperBulletsClass: 'clidxboost-gs-wrapper-bullets',
