@@ -16,6 +16,13 @@
         arrowPrevContent: 'Prev',
         arrowNextContent: 'Next',
       },
+      breakPoints: {
+				768: {
+          dragHand: false,
+          drag: false,
+          touch: false,
+				}
+			}
     });
   }
 
