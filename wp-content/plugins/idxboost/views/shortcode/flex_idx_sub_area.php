@@ -138,7 +138,7 @@
           <div class="ms-community-slider" id="ms-slider-cm">
             <?php foreach ( $response['payload']['gallery_building'] as $key => $value) { ?>
               <div class="ms-item">
-                <img data-real-type="image" data-img="<?php echo $value['url_image']; ?>" alt="<?php echo $value['name_image']; ?>" class="ms-lazy">
+                <img data-real-type="image" data-img="<?php echo $value['url_image']; ?>" alt="<?php echo $value['name_image']; ?>" class="ms-lazy"  draggable="false">
               </div>              
             <?php } ?>
           </div>
