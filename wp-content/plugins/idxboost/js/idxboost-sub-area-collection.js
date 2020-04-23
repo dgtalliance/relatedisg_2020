@@ -1079,7 +1079,15 @@ function idxboostListCollectionForSold(element,ibstatus){
     }
 
     htmlgrid +='</div>';
-    htmlgrid +='<a class="view-detail " href="'+slug_property+'" data-modal="modal_property_detail" data-position="0" rel="nofollow">'+element['address_large']+'</a></li>';
+    
+    var classHiperlink='';
+    if (type_filter=='2') {
+      classHiperlink='';
+    }else{
+      classHiperlink='class="view-detail "';
+    }
+    
+    htmlgrid +='<a '+classHiperlink+' href="'+slug_property+'" data-modal="modal_property_detail" data-position="0" rel="nofollow">'+element['address_large']+'</a></li>';
     return htmlgrid;
 }
 
