@@ -135,12 +135,13 @@
     <div class="ms-community-info">
       <div class="ms-community-wrap-media ms-animate photo" id="media">
         <?php  if (count($response['payload']['gallery_building']) > 0) { ?>
-          <div class="ms-community-slider">
+          <div class="ms-community-slider" id="ms-slider-cm">
             <?php foreach ( $response['payload']['gallery_building'] as $key => $value) { ?>
               <div class="ms-item">
                 <img data-real-type="image" data-img="<?php echo $value['url_image']; ?>" alt="<?php echo $value['name_image']; ?>" class="ms-lazy">
               </div>              
             <?php } ?>
+            <button class="ms-full-screen">Full Screen</button>
           </div>
         <?php } ?>
 

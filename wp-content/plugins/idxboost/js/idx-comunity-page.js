@@ -145,6 +145,17 @@
     jQuery(tableElement).DataTable();
   }
 
+
+  /**** GENERANDO SLIDER TIPO MODAL****/
+  jQuery(document).on('click', '.ms-full-screen', function(e) {
+    e.preventDefault();
+    var parentId = "ms-slider-cm";
+    var elementSelected = jQuery("#ms-slider-cm").find(".gs-item-active").index();
+    sliderModal("#"+parentId,elementSelected);
+    jQuery("body").addClass("ms-active-mds");
+  });
+
+
   /**** GENERANDO MODAL Y SLIDER FLOORPLAN ****/
   function sliderModal(element,slideinit){
     var mySliderList, temporalImage = "";
