@@ -9,7 +9,6 @@
       bullets: false,
       items: 1,
       autoDestroy: true,
-      fullscreen: true,
       layout: {
         bulletDefaultStyles: false,
         wrapperBulletsClass: 'clidxboost-gs-wrapper-bullets',
