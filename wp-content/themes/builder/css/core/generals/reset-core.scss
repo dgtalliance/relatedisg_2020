@@ -112,4 +112,11 @@ body.ib-wrap-full-width #flex-filters-theme .gwr.c-flex {
 			border-color: #333
 		}
 	}
+
+	.ms-community-wrap-nav{
+		top: 100px;
+		@media screen and (min-width: 1024px){
+			top: 110px
+		}
+	}
 }
