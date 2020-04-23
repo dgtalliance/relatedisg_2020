@@ -976,7 +976,7 @@ function idxboostListCollectionForSold(element,ibstatus){
                         }
                         
                         responseitems +='<tr class="flex-tbl-link" data-mls="'+element['mls_num']+'" data-type="no-sold" data-permalink="'+slug_property+'" href="'+slug_property+'">';
-                        responseitems += '<td><div class="unit propertie" data-mls="'+element['mls_num']+'">';
+                        responseitems += '<td><div class="unit propertie" data-mls="'+element['mls_num']+'">'+address_large;
 
                         if (idxboostCollecBuil.payload.type_filter !='2') {
                           if (element['is_favorite']==1) {
@@ -1086,7 +1086,7 @@ function idxboostListCollectionForSold(element,ibstatus){
     }else{
       classHiperlink='class="view-detail "';
     }
-    
+
     htmlgrid +='<a '+classHiperlink+' href="'+slug_property+'" data-modal="modal_property_detail" data-position="0" rel="nofollow">'+element['address_large']+'</a></li>';
     return htmlgrid;
 }
