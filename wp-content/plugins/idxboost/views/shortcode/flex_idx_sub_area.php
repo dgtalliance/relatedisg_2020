@@ -141,7 +141,6 @@
                 <img data-real-type="image" data-img="<?php echo $value['url_image']; ?>" alt="<?php echo $value['name_image']; ?>" class="ms-lazy">
               </div>              
             <?php } ?>
-            <button class="ms-full-screen">Full Screen</button>
           </div>
         <?php } ?>
 
@@ -156,6 +155,7 @@
           ?>
           <button class="ms-btn-action" data-type="map" data-lat="43.542194" data-lng="-5.676875" data-map="videoMap">Map</button>
         </div>
+        <button class="ms-full-screen">Full Screen</button>
       </div>
 
       <div class="ms-community-wrap-submenu ms-animate" id="communityInfo">
