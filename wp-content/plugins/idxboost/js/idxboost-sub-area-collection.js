@@ -334,7 +334,10 @@ function ib_init_script(){
                   status_xhmr.xhr1=true;
                   if ((idxboostCollecBuil.payload.type_filter =='0' || idxboostCollecBuil.payload.type_filter =='1') && $('.js-ms-price').html().length<5 ) {
                     $('.js-ms-price').html("From "+idxboostCollecBuil.payload.meta.sale_min_max_price.min+' - '+idxboostCollecBuil.payload.meta.sale_min_max_price.max);
-                  }                  
+                  }
+                  //set the form contact
+                  $("#form_contact_sub_area input[name='ib_tags']").val(idxboostCollecBuil.payload.name);
+                  //set the form contact
                   ib_generate_struct(idxboostCollecBuil);
                  }
              });
@@ -466,6 +469,7 @@ $(function() {
 
         $(document).on("click", ".flex-tbl-link", function(event) {
           event.preventDefault();
+          if (idxboostCollecBuil.payload.type_filter !='2') {
             var mlsNumber = $(this).data('mls');
             var isSold = $(this).data('type');
             if (isSold=='sold'){
@@ -478,6 +482,13 @@ $(function() {
 
               loadPropertyInModal(mlsNumber);
             }
+          }else{
+              var permalink = $(this).data("permalink");
+              if (permalink.length) {
+                window.location.href = permalink;
+              }
+          }
+
         });
 
         $('.idxboost_collection_tab_sale, .idxboost_collection_tab_rent,.idxboost_collection_tab_pending').on('click','.view-detail ',function(event) {
@@ -744,6 +755,7 @@ responseitemsoldgrid='';
                           temp_sold=data_mls_sold.items;
                        }
                        */
+                       console.log(data_mls_sold);
                        temp_sold=data_mls_sold.items;
                        temp_sold.forEach(function(element,index) {
                         var bedfil=parseFloat(element['bed']);
@@ -909,13 +921,20 @@ var paginationHTML=[];
 
 function idxboostListCollectionForSold(element,ibstatus){
     var responseitems='',arraylist=[];
+
+    if (idxboostCollecBuil.payload.type_filter=='2') {
+      var slug_property=idxboost_collection_params.off_market_listing_link+'/'+element['slug'];
+    }else{
+      var slug_property=idxboost_collection_params["siteUrl"]+'/property/sold-'+element['slug'];
+    }
+
                         //LISTINI
                         address_large="";
                         if (element['address_short'] != '' && element['address_short'] != undefined ) {
                           address_large= element['address_short'];
                         }
                         
-                        responseitems +='<tr class="flex-tbl-link" data-mls="'+element['mls_num']+'" data-type="sold" data-permalink="'+idxboost_collection_params["siteUrl"]+'/property/sold-'+element['slug']+'">';
+                        responseitems +='<tr class="flex-tbl-link" data-mls="'+element['mls_num']+'" data-type="sold" data-permalink="'+slug_property+'">';
                         responseitems += '<td><div class="unit propertie" data-mls="'+element['mls_num']+'">';
                         
                         if (idxboostCollecBuil.payload.type_filter !='2') {
@@ -959,7 +978,7 @@ function idxboostListCollectionForSold(element,ibstatus){
   function idxboostListCollection(element,ibstatus,type_filter){
     var responseitems='',arraylist=[];
     if (type_filter=='2') {
-      var slug_property=idxboost_collection_params.subarealink+'/'+element['slug'];
+      var slug_property=idxboost_collection_params.off_market_listing_link+'/'+element['slug'];
     }else{
       var slug_property=idxboost_collection_params["siteUrl"]+'/property/'+element['slug'];
       /*
@@ -976,7 +995,7 @@ function idxboostListCollectionForSold(element,ibstatus){
                         }
                         
                         responseitems +='<tr class="flex-tbl-link" data-mls="'+element['mls_num']+'" data-type="no-sold" data-permalink="'+slug_property+'" href="'+slug_property+'">';
-                        responseitems += '<td><div class="unit propertie" data-mls="'+element['mls_num']+'">'+address_large;
+                        responseitems += '<td><div class="unit propertie" data-mls="'+element['mls_num']+'">';
 
                         if (idxboostCollecBuil.payload.type_filter !='2') {
                           if (element['is_favorite']==1) {
@@ -984,6 +1003,8 @@ function idxboostListCollectionForSold(element,ibstatus){
                           }else{
                             responseitems +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button><span>'+address_large+'</span>';
                           }                          
+                        }else{
+                          responseitems +=address_large;
                         }
                         
                         responseitems +='</div></td><td><div class="asking-number blue">$ '+_.formatPrice(element['price'])+'</div></td>';
@@ -1070,11 +1091,13 @@ function idxboostListCollectionForSold(element,ibstatus){
     htmlgrid +=elementgallery;
     htmlgrid +='</ul><button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button><button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>';
 
-    if (type_property!='sold'){
-      if(element['is_favorite']==1) {
-        htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'"><span class="clidxboost-icon-check clidxboost-icon-check-list active"></span></button>';
-      }else{
-        htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button>';
+    if (idxboostCollecBuil.payload.type_filter !='2') {
+      if (type_property!='sold'){
+        if(element['is_favorite']==1) {
+          htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'"><span class="clidxboost-icon-check clidxboost-icon-check-list active"></span></button>';
+        }else{
+          htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button>';
+        }
       }
     }
 

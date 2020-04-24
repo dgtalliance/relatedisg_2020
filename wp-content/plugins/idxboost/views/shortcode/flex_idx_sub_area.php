@@ -125,9 +125,23 @@
           <?php if( !empty($description_building) ) { ?><li><a href="#overview" title="Overview">Overview</a></li><?php } ?>
           <?php if( !empty($amenities_build) ) { ?><li><a href="#amenites" title="Amenities">Amenities</a></li><?php } ?>
           <li><a href="#available-homes" title="Available Homes">Available Homes</a></li>
+          
+          <?php if ( 
+            ( !empty($response['payload']['desc_location']) ) &&
+            ( !empty($response['payload']['lat_building']) ) &&
+            ( !empty($response['payload']['lng_building']) ) 
+          ) { ?>          
           <li><a href="#location" title="Location">Location</a></li>
+        <?php } ?>
           <li><a href="#floorplans" title="Floorplans">Floorplans</a></li>
-          <li><a href="#downloads" title="Downloads">Downloads</a></li>
+          
+          <?php if( 
+          (  !empty($response['payload']['sheet_one']) ) &&
+          (  !empty($response['payload']['sheet_two']) ) &&
+          (  !empty($response['payload']['sheet_three']) ) 
+          ) { ?>
+            <li><a href="#downloads" title="Downloads">Downloads</a></li>
+        <?php } ?>          
         </ul>
       </nav>
     </div>
@@ -243,18 +257,24 @@
     <?php echo do_shortcode('[idxboost_sub_area_inventory building_id="'.$atts['building_id'].'" load="ajax" template="detail-collection" ]'); ?>
   </div>
 
-    
+    <?php if ( 
+      ( !empty($response['payload']['desc_location']) ) &&
+      ( !empty($response['payload']['lat_building']) ) &&
+      ( !empty($response['payload']['lng_building']) ) 
+    ) { ?>
+
     <section class="ms-section ms-animate" id="location">
       <h2 class="ms-sub-title"><?php echo $sub_area_name; ?> Location</h2>
       <div class="ms-community-wrap-map">
         <div id="googleMap" class="ms-map" data-real-type="mapa" data-img="googleMap" data-lat="<?php echo $response['payload']['lat_building']; ?>" data-lng="<?php echo $response['payload']['lng_building']; ?>"></div>
       </div>
-
         <?php if ( !empty($response['payload']['desc_location'])) { ?>
           <p><?php echo $response['payload']['desc_location']; ?></p>  
         <?php } ?>
-
     </section>
+
+    <?php } ?>
+    
 
     <section class="ms-section ms-animate" id="floorplans">
       <h2 class="ms-sub-title"><?php echo $sub_area_name; ?> Floorplans</h2>
@@ -461,34 +481,44 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
 
     </section>
 
-    <section class="ms-section ms-animate" id="downloads">
-      <h2 class="ms-sub-title"><?php echo $sub_area_name; ?> Downloads</h2>
-      <div class="cbtns">
-        <?php if( !empty($response['payload']['sheet_one']) ) { ?>
-          <div>
-            <h4 class="ms-title">Fact Sheet</h4>
-            <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_one']; ?>" target="_blank">VIEW FACT SHEET</a>
-          </div>      
-        <?php } ?>
-        <?php if( !empty($response['payload']['sheet_two']) ) { ?>
-          <div>
-            <h4 class="ms-title">Brochure Sheet</h4>
-            <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_two']; ?>" target="_blank">VIEW BROCHURE</a>
-          </div>
-        <?php } ?>
-        <?php if( !empty($response['payload']['sheet_three']) ) { ?>
-          <div>
-            <h4 class="ms-title">Floorplans Sheet</h4>
-            <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_three']; ?>" target="_blank">VIEW FLOORPLANS</a>
-          </div>
-        <?php } ?>
-      </div>
 
-      <?php if ( !empty($response['payload']['seo_download'])) { ?>
-        <?php echo $response['payload']['seo_download']; ?>
-      <?php } ?>
+    <?php if( 
+    (  !empty($response['payload']['sheet_one']) ) &&
+    (  !empty($response['payload']['sheet_two']) ) &&
+    (  !empty($response['payload']['sheet_three']) ) 
+    ) { ?>
+    
+      <section class="ms-section ms-animate" id="downloads">
+        <h2 class="ms-sub-title"><?php echo $sub_area_name; ?> Downloads</h2>
+        <div class="cbtns">
+          <?php if( !empty($response['payload']['sheet_one']) ) { ?>
+            <div>
+              <h4 class="ms-title">Fact Sheet</h4>
+              <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_one']; ?>" target="_blank">VIEW FACT SHEET</a>
+            </div>      
+          <?php } ?>
+          <?php if( !empty($response['payload']['sheet_two']) ) { ?>
+            <div>
+              <h4 class="ms-title">Brochure Sheet</h4>
+              <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_two']; ?>" target="_blank">VIEW BROCHURE</a>
+            </div>
+          <?php } ?>
+          <?php if( !empty($response['payload']['sheet_three']) ) { ?>
+            <div>
+              <h4 class="ms-title">Floorplans Sheet</h4>
+              <a class="bmodal" download="" href="<?php echo $response['payload']['sheet_three']; ?>" target="_blank">VIEW FLOORPLANS</a>
+            </div>
+          <?php } ?>
+        </div>
 
-    </section>
+        <?php if ( !empty($response['payload']['seo_download'])) { ?>
+          <?php echo $response['payload']['seo_download']; ?>
+        <?php } ?>
+
+      </section>
+
+    <?php } ?>
+
   </main>
 
   <div class="ms-community-float-block ms-animate" id="float-block">
@@ -530,7 +560,7 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
               <a class="phone-avatar" href="tel:8885338736" title="Call to (888) 533-8736">Ph. (888) 533-8736</a>
             </div>
           </div>
-          <?php echo do_shortcode('[flex_idx_contact_form]'); ?>
+          <?php echo do_shortcode('[flex_idx_contact_form id_form="form_contact_sub_area"]'); ?>
           <button class="ms-commuty-close-modal" data-modal="float-block">Close modal</button>
           <script type="text/javascript">
             jQuery(".flex-content-form .pt-name .medium").attr('placeholder','Name*');
