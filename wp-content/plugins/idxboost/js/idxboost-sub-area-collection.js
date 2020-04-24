@@ -1122,10 +1122,10 @@ function idxboostListCollectionForSold(element,ibstatus){
 
     htmlgrid +='</div>';
     
-    var classHiperlink='',hasTargetBlank='target="_blank"';
+    var classHiperlink='',hasTargetBlank='';
     if (type_filter=='2') {
       classHiperlink='';
-      hasTargetBlank='';
+      hasTargetBlank='target="_blank"'
     }else{
       classHiperlink='class="view-detail "';
     }
