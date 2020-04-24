@@ -173,7 +173,19 @@
       </div>
 
       <div class="ms-community-wrap-submenu ms-animate" id="communityInfo">
-        <span class="ms-label ms-price js-ms-price"><?php  echo 'From $'.number_format($response['payload']['price_min']).' - $'.number_format($response['payload']['price_max']); ?></span>
+        <?php
+        $range_price='';
+        $status_price='js-price-upload';
+        if (
+          ( !empty($response['payload']['price_min']) && $response['payload']['price_min'] != '0') &&
+          ( !empty($response['payload']['price_max']) && $response['payload']['price_max'] != '0')
+        ) {
+          $range_price='From $'.number_format($response['payload']['price_min']).' - $'.number_format($response['payload']['price_max']);
+          $status_price='';
+        }
+
+        ?>
+        <span class="ms-label ms-price js-ms-price <?php echo $status_price;?>"><?php echo $range_price; ?></span>
         <table>
 
           <?php if( !empty($response['payload']['hoa']) ) {
