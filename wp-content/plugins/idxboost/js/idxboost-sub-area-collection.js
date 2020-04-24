@@ -475,7 +475,7 @@ $(function() {
             if (isSold=='sold'){
               var permalink = $(this).data("permalink");
               if (permalink.length) {
-                window.location.href = permalink;
+                window.open(permalink, '_blank');
               }
             }else{
                 originalPositionY = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
@@ -485,7 +485,7 @@ $(function() {
           }else{
               var permalink = $(this).data("permalink");
               if (permalink.length) {
-                window.location.href = permalink;
+                window.open(permalink, '_blank');
               }
           }
 
@@ -1122,14 +1122,15 @@ function idxboostListCollectionForSold(element,ibstatus){
 
     htmlgrid +='</div>';
     
-    var classHiperlink='';
+    var classHiperlink='',hasTargetBlank='target="_blank"';
     if (type_filter=='2') {
       classHiperlink='';
+      hasTargetBlank='';
     }else{
       classHiperlink='class="view-detail "';
     }
 
-    htmlgrid +='<a '+classHiperlink+' href="'+slug_property+'" data-modal="modal_property_detail" data-position="0" rel="nofollow">'+element['address_large']+'</a></li>';
+    htmlgrid +='<a '+classHiperlink+' href="'+slug_property+'" '+hasTargetBlank+' data-modal="modal_property_detail" data-position="0" rel="nofollow">'+element['address_large']+'</a></li>';
     return htmlgrid;
 }
 
