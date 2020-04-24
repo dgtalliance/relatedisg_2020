@@ -1084,10 +1084,16 @@ function idxboostListCollectionForSold(element,ibstatus){
 
     if (idxboostCollecBuil.payload.type_filter =='2') {
         element["gallery"].forEach(function(itemimage,aux) {
+          var pathImage=itemimage;
+
+          Array.isArray(itemimage){
+            pathImage=itemimage[0];
+          }
+
           if (aux==0) {
-            elementgallery +='<li class="flex-slider-current"><img class="flex-lazy-image" data-original="'+itemimage+'"></li>';
+            elementgallery +='<li class="flex-slider-current"><img class="flex-lazy-image" data-original="'+pathImage+'"></li>';
           }else{
-            elementgallery +='<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="'+itemimage+'"></li>';
+            elementgallery +='<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="'+pathImage+'"></li>';
           }
         });
 
