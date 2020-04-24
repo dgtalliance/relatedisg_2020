@@ -1086,7 +1086,7 @@ function idxboostListCollectionForSold(element,ibstatus){
         element["gallery"].forEach(function(itemimage,aux) {
           var pathImage=itemimage;
 
-          Array.isArray(itemimage){
+          if( Array.isArray(itemimage) ){
             pathImage=itemimage[0];
           }
 
