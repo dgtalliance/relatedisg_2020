@@ -333,7 +333,7 @@ function ib_init_script(){
                  },complete: function() {
                   status_xhmr.xhr1=true;
                   if ((idxboostCollecBuil.payload.type_filter =='0' || idxboostCollecBuil.payload.type_filter =='1') && $('.js-ms-price').html().length<5 ) {
-                    $('.js-ms-price').html("From "+idxboostCollecBuil.payload.meta.sale_min_max_price.min+' - '+idxboostCollecBuil.payload.meta.sale_min_max_price.max);
+                    $('.js-ms-price').html("From $"+_.formatPrice(idxboostCollecBuil.payload.meta.sale_min_max_price.min)+' - $'+_.formatPrice(idxboostCollecBuil.payload.meta.sale_min_max_price.max));
                   }
                   //set the form contact
                   $("#form_contact_sub_area input[name='ib_tags']").val(idxboostCollecBuil.payload.name);

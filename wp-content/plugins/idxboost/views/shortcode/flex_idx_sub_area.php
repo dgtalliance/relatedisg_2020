@@ -173,7 +173,7 @@
       </div>
 
       <div class="ms-community-wrap-submenu ms-animate" id="communityInfo">
-        <span class="ms-label ms-price js-ms-price"><?php  echo 'From '.$response['payload']['price_min'].' - '.$response['payload']['price_max']; ?></span>
+        <span class="ms-label ms-price js-ms-price"><?php  echo 'From $'.number_format($response['payload']['price_min']).' - $'.number_format($response['payload']['price_max']); ?></span>
         <table>
 
           <?php if( !empty($response['payload']['hoa']) ) {
