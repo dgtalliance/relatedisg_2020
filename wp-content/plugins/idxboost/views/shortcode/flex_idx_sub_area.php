@@ -535,10 +535,22 @@ if (array_key_exists('type_floor_plan', $response['payload']) && $response['payl
 
   <div class="ms-community-float-block ms-animate" id="float-block">
     <div class="ms-commuty-filters">
-      <button id="sale-count-uni-cons" class="ms-item-filter active" data-filter="ms-tab-sale">0 <span>For Sale</span></button>
-      <button id="rent-count-uni-cons" class="ms-item-filter" data-filter="ms-tab-rent">0 <span>For Rent</span></button>
-      <button id="pending-count-uni-cons" class="ms-item-filter" data-filter="ms-tab-pending">0 <span>Pending</span></button>
-      <button id="sold-count-uni-cons" class="ms-item-filter" data-filter="ms-tab-sold">0 <span>Sold</span></button>
+      <button id="sale-count-uni-cons" class="ms-item-filter fbc-group active-fbc sale-count-uni-cons">0 
+        <span><?php echo __("For Sale", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+      </button>
+
+      <button id="rent-count-uni-cons" class="ms-item-filter fbc-group rent-count-uni-cons">0 
+        <span><?php echo __("For Rent", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+      </button>
+
+      <button id="pending-count-uni-cons" class="fbc-group pending-count-uni-cons">0 
+        <span><?php echo __("Pending", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+      </button>
+
+      <button id="sold-count-uni-cons" class="ms-item-filter fbc-group sold-count-uni-cons">0 
+        <span><?php echo __("Sold", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+      </button>
+
     </div>
 
     <div id="boostBoxLateral" class="active">

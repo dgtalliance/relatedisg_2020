@@ -65,6 +65,7 @@
   });
 
   /**** FILTROS ****/
+  /*
   jQuery(document).on('click', '.ms-commuty-filters .ms-item-filter', function(e) {
     e.preventDefault();
     jQuery('.ms-item-filter').removeClass('active');
@@ -80,6 +81,7 @@
     var finalPosition = (sectionPosition.top - 140) * 1;
     jQuery('html, body').animate({scrollTop: finalPosition}, 900);
   });
+  */
 
   /**** REPRODUCTOR DE VIDEO ****/
   jQuery(document).on('click', '.ms-btn-action', function(e) {
