@@ -39,7 +39,7 @@
     jQuery(this).addClass('active');
     var idSection = jQuery(jQuery(this).attr('href'));
     var sectionPosition = idSection.offset();
-    var finalPosition = (sectionPosition.top - 120) * 1;
+    var finalPosition = (sectionPosition.top - 160) * 1;
     jQuery('html, body').animate({scrollTop: finalPosition}, 900);
   });
 
