@@ -124,7 +124,7 @@
         <ul>
           <?php if( !empty($description_building) ) { ?><li><a href="#overview" title="Overview">Overview</a></li><?php } ?>
           <?php if( !empty($amenities_build) ) { ?><li><a href="#amenites" title="Amenities">Amenities</a></li><?php } ?>
-          <li><a href="#available-homes" title="Available Homes">Available Homes</a></li>
+          <li><a href="#full-main" title="Available Homes">Available Homes</a></li>
           
           <?php if ( 
             ( !empty($response['payload']['desc_location']) ) &&
