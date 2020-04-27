@@ -1336,6 +1336,12 @@ select.medium{
 	background: url("../images/select.png") center right no-repeat;
 }
 
+@media screen and (min-width: 1024px){
+	.ms-community-float-block .ms-wrap-form {
+		top: 110px !important;
+	}
+}
+
 /*
 @media (max-width: 990px){
 	#agents-page{
