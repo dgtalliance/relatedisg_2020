@@ -72,6 +72,13 @@ $logo_img = $agent_full_info['info']['agent_logo_image'];
           </li>
         </ul>
         <div class="ms-wrap-mls">
+          <div class="ms-social">
+            <a href="#" class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" rel="nofollow"><span>Navigate to Facebook</span></a>
+            <a href="#" class="ms-link idx-icon-twitter" title="Navigate to Twitter" target="_blank" rel="nofollow"><span>Navigate to Twitter</span></a>
+            <a href="#" class="ms-link idx-icon-youtube-logo" title="Navigate to Youtube" target="_blank" rel="nofollow"><span>Navigate to Youtube</span></a>
+            <a href="#" class="ms-link idx-icon-instagram" title="Navigate to Instagram" target="_blank" rel="nofollow"><span>Navigate to Instagram</span></a>
+            <a href="#" class="ms-link idx-icon-linkedin2" title="Navigate to Linked In" target="_blank" rel="nofollow"><span>Navigate to Linked In</span></a>
+          </div>
           <img class="ms-img" alt="The Real Estate Marketing Group" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/ms-mls.png" src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
         </div>
       </div>
