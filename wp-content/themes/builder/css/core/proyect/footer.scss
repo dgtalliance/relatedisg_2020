@@ -610,3 +610,18 @@
     }
   }
 }
+
+
+@media screen and (min-width: 1220px){
+  #footer.ms-footer-agent .ms-wrap-footer .ms-info-footer .ms-wrap-mls{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .ms-social{
+      margin: 0 15px;
+    }
+    .ms-img{
+      flex-shrink: 0;
+    }
+  }
+}
