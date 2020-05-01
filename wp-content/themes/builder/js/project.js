@@ -314,28 +314,32 @@
 						} else if ($(this).attr('data-real-type') == "agentVideo") {
 							if (is_in_view($(this))){
 								var $urlVideo = $(this).attr('data-img');
-								$(this).removeAttr('data-img');
-								if ($urlVideo !== undefined) {
-									var $urlVideo = $urlVideo.toString();
-									if ($urlVideo.indexOf('youtube') !== -1) {
-										var et = $urlVideo.lastIndexOf('&')
-										if(et !== -1){
-											$urlVideo = $urlVideo.substring(0, et)
-										}
-										var embed = $urlVideo.indexOf('embed');
-										if (embed !== -1) {
-											$urlVideo = 'https://www.youtube.com/watch?v=' + $urlVideo.substring(embed + 6, embed + 17);
-										}
-										var srcVideo = 'https://www.youtube.com/embed/' + $urlVideo.substring($urlVideo.length - 11, $urlVideo.length) + '?autoplay=1;rel=0&showinfo=0&mute=1&loop=1';
-										$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '" frameborder="0" allowfullscreen></iframe>');
+								
+								setTimeout(function(){
+									if ($urlVideo !== undefined) {
+										var $urlVideo = $urlVideo.toString();
+										if ($urlVideo.indexOf('youtube') !== -1) {
+											var et = $urlVideo.lastIndexOf('&')
+											if(et !== -1){
+												$urlVideo = $urlVideo.substring(0, et)
+											}
+											var embed = $urlVideo.indexOf('embed');
+											if (embed !== -1) {
+												$urlVideo = 'https://www.youtube.com/watch?v=' + $urlVideo.substring(embed + 6, embed + 17);
+											}
+											var srcVideo = 'https://www.youtube.com/embed/' + $urlVideo.substring($urlVideo.length - 11, $urlVideo.length) + '?autoplay=1;rel=0&showinfo=0&mute=1&loop=1';
+											$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '" frameborder="0" allowfullscreen></iframe>');
 
-									} else if ($urlVideo.indexOf('vimeo') !== -1) { // es un video de Vimeo, EJM: https://vimeo.com/206418873
-										var srcVideo = 'https://player.vimeo.com/video/' + $urlVideo.substring(($urlVideo.indexOf('.com') + 5), $urlVideo.length).replace('/', '');
-										$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '?autoplay=1&amp;muted=1&loop=1" frameborder="0" allowfullscreen></iframe>');
-									} else {
-										$(this).html('<video controls autoplay muted loop src="' + $urlVideo + '" width="100%" height="100%">');
+										} else if ($urlVideo.indexOf('vimeo') !== -1) { // es un video de Vimeo, EJM: https://vimeo.com/206418873
+											var srcVideo = 'https://player.vimeo.com/video/' + $urlVideo.substring(($urlVideo.indexOf('.com') + 5), $urlVideo.length).replace('/', '');
+											$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '?autoplay=1&amp;muted=1&loop=1" frameborder="0" allowfullscreen></iframe>');
+										} else {
+											$(this).html('<video controls autoplay muted loop src="' + $urlVideo + '" width="100%" height="100%">');
+										}
 									}
-								}
+								}, 500);
+
+								$(this).removeAttr('data-img');
 								item++;
 							}
 
