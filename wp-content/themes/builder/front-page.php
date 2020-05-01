@@ -15,7 +15,8 @@
       <button class="ms-btn js-btn-sell-rent" title="Rent" data-value="1"><span>Rent</span></button>
     </div>
     <?php echo do_shortcode('[flex_autocomplete]'); ?>
-    <div class="ms-slider">
+
+    <!--<div class="ms-slider">
       <div class="gs-container-slider clidxboost-main-slider" data-gs='{"nav": true, "autoplay": true, "autoPlaySpeed": 4000}'>
         <?php
         if (false === get_theme_mod('idx_image_slider')) {
@@ -31,7 +32,7 @@
         <?php } ?>
         <?php  $aum=$aum+1; }  ?>
       </div>
-    </div>
+    </div>-->
 
     <button class="ms-next-step" data-step="#listings" aria-label="Skip to main content">
       <div class="chevron"></div>
@@ -44,7 +45,7 @@
     </div>-->
 
     <div class="ms-wrp-video">
-      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://www.youtube.com/watch?v=a9UKV_ED_xU"></div>
+      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://vimeo.com/315355170"></div>
     </div>
 
   </section>
