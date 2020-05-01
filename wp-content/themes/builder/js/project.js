@@ -338,6 +338,7 @@
 								}
 	
 								$(this).removeAttr('data-img');
+								el.addClass('ms-loaded-animate').removeClass('ms-animate');
 								item++;
 							}
 
