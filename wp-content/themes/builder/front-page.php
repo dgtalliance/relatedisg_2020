@@ -16,7 +16,7 @@
     </div>
     <?php echo do_shortcode('[flex_autocomplete]'); ?>
 
-    <!--<div class="ms-slider">
+    <div class="ms-slider">
       <div class="gs-container-slider clidxboost-main-slider" data-gs='{"nav": true, "autoplay": true, "autoPlaySpeed": 4000}'>
         <?php
         if (false === get_theme_mod('idx_image_slider')) {
@@ -32,21 +32,20 @@
         <?php } ?>
         <?php  $aum=$aum+1; }  ?>
       </div>
-    </div>-->
+    </div>
+
+    <!--
+    aqui dejo la estructura para el video, solo se debe reemplazar la url del video en el atributo data-img  
+    <div class="ms-wrp-video">
+      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://vimeo.com/315355170"></div>
+    </div>
+    -->
 
     <button class="ms-next-step" data-step="#listings" aria-label="Skip to main content">
       <div class="chevron"></div>
       <div class="chevron"></div>
       <div class="chevron"></div>
     </button>
-
-    <!--<div class="ms-chat-bubble">
-      <h3 class="ms-chat-title"><span>Contact Us</span>Let's chat</h3>
-    </div>-->
-
-    <div class="ms-wrp-video">
-      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://vimeo.com/315355170"></div>
-    </div>
 
   </section>
 
