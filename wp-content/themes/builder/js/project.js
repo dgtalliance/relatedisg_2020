@@ -313,36 +313,28 @@
 							
 						} else if ($(this).attr('data-real-type') == "agentVideo") {
 							if (is_in_view($(this))){
-								var urlVideo = $(this).attr('data-img');
-								$(this).html("<video id='idx-video' autoplay='' loop='' muted='' controls='' class='ms-loaded' src='" + urlVideo + "'></video>");
+								var $urlVideo = $(this).attr('data-img');
 								$(this).removeAttr('data-img');
-
-								//var $urlVideo = elBoton.attr('data-video');
-								if (urlVideo !== undefined) {
-									var urlVideo = urlVideo.toString();
-									if (urlVideo.indexOf('youtube') !== -1) {
-
-										var et = urlVideo.lastIndexOf('&')
+								if ($urlVideo !== undefined) {
+									var $urlVideo = $urlVideo.toString();
+									if ($urlVideo.indexOf('youtube') !== -1) {
+										var et = $urlVideo.lastIndexOf('&')
 										if(et !== -1){
-											urlVideo = urlVideo.substring(0, et)
+											$urlVideo = $urlVideo.substring(0, et)
 										}
-
-										var embed = urlVideo.indexOf('embed');
+										var embed = $urlVideo.indexOf('embed');
 										if (embed !== -1) {
-											urlVideo = 'https://www.youtube.com/watch?v=' + urlVideo.substring(embed + 6, embed + 17);
+											$urlVideo = 'https://www.youtube.com/watch?v=' + $urlVideo.substring(embed + 6, embed + 17);
 										}
+										var srcVideo = 'https://www.youtube.com/embed/' + $urlVideo.substring($urlVideo.length - 11, $urlVideo.length) + '?autoplay=1;rel=0&showinfo=0';
+										$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '" frameborder="0" allowfullscreen></iframe>');
 
-										var srcVideo = 'https://www.youtube.com/embed/' + urlVideo.substring(urlVideo.length - 11, urlVideo.length) + '?autoplay=1';
-									} else if (urlVideo.indexOf('vimeo') !== -1) { // es un video de Vimeo, EJM: https://vimeo.com/206418873
-										var srcVideo = 'https://player.vimeo.com/video/' + urlVideo.substring((urlVideo.indexOf('.com') + 5), urlVideo.length).replace('/', '');
+									} else if ($urlVideo.indexOf('vimeo') !== -1) { // es un video de Vimeo, EJM: https://vimeo.com/206418873
+										var srcVideo = 'https://player.vimeo.com/video/' + $urlVideo.substring(($urlVideo.indexOf('.com') + 5), $urlVideo.length).replace('/', '');
+										$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '" frameborder="0" allowfullscreen></iframe>');
 									} else {
-										var srcVideo = urlVideo;
+										$(this).html('<video controls autoplay src="' + $urlVideo + '" width="100%" height="100%">');
 									}
-
-									return '<video width="100%" autoplay loop="loop" style="max-height: 100%"><source src="' + srcVideo + '" type="video/mp4"></video>';
-									} else {
-									alert('No video assigned.');
-									return false;
 								}
 								item++;
 							}
