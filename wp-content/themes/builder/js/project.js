@@ -331,7 +331,7 @@
 
 									} else if ($urlVideo.indexOf('vimeo') !== -1) { // es un video de Vimeo, EJM: https://vimeo.com/206418873
 										var srcVideo = 'https://player.vimeo.com/video/' + $urlVideo.substring(($urlVideo.indexOf('.com') + 5), $urlVideo.length).replace('/', '');
-										$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '?autoplay=1&</wbr>muted=1" frameborder="0" allowfullscreen></iframe>');
+										$(this).html('<iframe allow="autoplay; encrypted-media" src="' + srcVideo + '?autoplay=1&amp;muted=1" frameborder="0" allowfullscreen></iframe>');
 									} else {
 										$(this).html('<video controls autoplay muted src="' + $urlVideo + '" width="100%" height="100%">');
 									}
