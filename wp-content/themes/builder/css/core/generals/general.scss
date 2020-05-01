@@ -1238,7 +1238,7 @@ body{
     height: 100%;
     z-index: 0;
 		background-color: #333;
-		iframe, video, .ms-video-foreground{
+		iframe, video{
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -1258,14 +1258,16 @@ body{
 			background-color: rgba(0,0,0,0.33);
 			z-index: 1;
 		}
-	}
 
-	@media (min-aspect-ratio: 16/9) {
-		.ms-video-foreground { height: 300%; top: -100%; }
-	}
-
-	@media (max-aspect-ratio: 16/9) {
-		.ms-video-foreground { width: 300%; left: -100%; }
+		.ms-video-foreground{
+			position: relative;
+			width: 100%;
+			&:after{
+				content: "";
+				display: block;
+				padding-bottom: 56.24%;
+			}
+		}
 	}
 }
 
