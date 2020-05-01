@@ -43,7 +43,9 @@
       <h3 class="ms-chat-title"><span>Contact Us</span>Let's chat</h3>
     </div>-->
 
-    <div class="ms-wrp-video" data-real-type="agentVideo" data-img="https://www.youtube.com/watch?v=a9UKV_ED_xU" style="opacity:0 !important; z-index: -2px !important"></div>
+    <div class="ms-wrp-video" style="opacity:0 !important; z-index: -2px !important">
+      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://www.youtube.com/watch?v=a9UKV_ED_xU"></div>
+    </div>
 
   </section>
 
