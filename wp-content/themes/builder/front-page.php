@@ -34,6 +34,13 @@
       </div>
     </div>
 
+    <!--
+    aqui dejo la estructura para el video, solo se debe reemplazar la url del video en el atributo data-img  
+    <div class="ms-wrp-video">
+      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://vimeo.com/315355170"></div>
+    </div>
+    -->
+
     <button class="ms-next-step" data-step="#listings" aria-label="Skip to main content">
       <div class="chevron"></div>
       <div class="chevron"></div>
