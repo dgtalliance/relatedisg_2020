@@ -1369,6 +1369,22 @@ select.medium{
 	}
 }
 
+.clidxboost-sc-filters{
+	#wrap-subfilters{
+		.gwr{
+			#sub-filters>{
+				li#filter-views>{
+					ul{
+						li.map {
+							display: none !important;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 /*
 @media (max-width: 990px){
 	#agents-page{
