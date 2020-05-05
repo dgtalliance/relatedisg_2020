@@ -69,7 +69,7 @@ $linkedin_social_url = $agent_full_info['info']['linkedin_social_url'];
         </a>
         <ul class="ms-wrap-gt">
           <li>
-             <span><?php echo $agent_full_info['info']['first_name']; ?> <?php echo $agent_full_info['info']['last_name']; ?></span> | <span>Broker dashboard</span>
+             <span><?php echo $agent_full_info['info']['first_name']; ?> <?php echo $agent_full_info['info']['last_name']; ?></span> | <a href="/broker-dashboard/" target="_blank">Broker dashboard</a>
           </li>
           <li>
             <span>Cell: <a class="ms-link" href="tel:<?php echo preg_replace('/[^\d+]/', '', $agent_full_info['info']['contact_phone']); ?>" title="<?php echo __('Call us ', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo flex_agent_format_phone_number($agent_full_info['info']['contact_phone']); ?>"><?php echo flex_agent_format_phone_number($agent_full_info['info']['contact_phone']); ?></a></span> | <span><a class="ms-link" href="mailto:<?php echo $agent_full_info['info']['contact_email']; ?>" title="<?php echo __('Email', IDXBOOST_DOMAIN_THEME_LANG); ?>:<?php echo $agent_full_info['info']['contact_email']; ?>"><?php echo $agent_full_info['info']['contact_email']; ?></a></span>
