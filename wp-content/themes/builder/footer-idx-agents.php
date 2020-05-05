@@ -32,6 +32,12 @@ $logo_title = $agent_full_info['info']['agent_logo_title'];
 $logo_slogan = $agent_full_info['info']['agent_logo_slogan'];
 $logo_img = $agent_full_info['info']['agent_logo_image'];
 
+$facebook_social_url = $agent_full_info['info']['facebook_social_url'];
+$twitter_social_url = $agent_full_info['info']['twitter_social_url'];
+$gplus_social_url = $agent_full_info['info']['gplus_social_url'];
+$youtube_social_url = $agent_full_info['info']['youtube_social_url'];
+$instagram_social_url = $agent_full_info['info']['instagram_social_url'];
+$linkedin_social_url = $agent_full_info['info']['linkedin_social_url'];
 
 ?>
 <?php if (get_post_type() !== 'flex-idx-pages') { ?>
@@ -71,14 +77,40 @@ $logo_img = $agent_full_info['info']['agent_logo_image'];
             <address><?php echo $agent_full_info['info']['office_info']['address']; ?></address>
           </li>
         </ul>
+        
         <div class="ms-wrap-mls">
-          <div class="ms-social">
-            <a href="#" class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" rel="nofollow"><span>Navigate to Facebook</span></a>
-            <a href="#" class="ms-link idx-icon-twitter" title="Navigate to Twitter" target="_blank" rel="nofollow"><span>Navigate to Twitter</span></a>
-            <a href="#" class="ms-link idx-icon-youtube-logo" title="Navigate to Youtube" target="_blank" rel="nofollow"><span>Navigate to Youtube</span></a>
-            <a href="#" class="ms-link idx-icon-instagram" title="Navigate to Instagram" target="_blank" rel="nofollow"><span>Navigate to Instagram</span></a>
-            <a href="#" class="ms-link idx-icon-linkedin2" title="Navigate to Linked In" target="_blank" rel="nofollow"><span>Navigate to Linked In</span></a>
-          </div>
+          <?php if (
+            !empty($facebook_social_url) || 
+            !empty($twitter_social_url) || 
+            !empty($youtube_social_url) || 
+            !empty($instagram_social_url) || 
+            !empty($linkedin_social_url) 
+          ) { ?>
+
+            <div class="ms-social">
+              <?php if (!empty($facebook_social_url)) { ?>
+                <a href="<?php echo $facebook_social_url; ?>" class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" rel="nofollow"><span>Navigate to Facebook</span></a>
+              <?php } ?>
+              
+              <?php if (!empty($twitter_social_url)) { ?>
+                <a href="<?php echo $twitter_social_url; ?>" class="ms-link idx-icon-twitter" title="Navigate to Twitter" target="_blank" rel="nofollow"><span>Navigate to Twitter</span></a>
+              <?php } ?>
+
+              <?php if (!empty($youtube_social_url)) { ?>
+                <a href="<?php echo $youtube_social_url; ?>" class="ms-link idx-icon-youtube-logo" title="Navigate to Youtube" target="_blank" rel="nofollow"><span>Navigate to Youtube</span></a>
+              <?php } ?>
+
+              <?php if (!empty($instagram_social_url)) { ?>
+                <a href="<?php echo $instagram_social_url; ?>" class="ms-link idx-icon-instagram" title="Navigate to Instagram" target="_blank" rel="nofollow"><span>Navigate to Instagram</span></a>
+              <?php } ?>
+
+              <?php if (!empty($linkedin_social_url)) { ?>
+                <a href="<?php echo $linkedin_social_url; ?>" class="ms-link idx-icon-linkedin2" title="Navigate to Linked In" target="_blank" rel="nofollow"><span>Navigate to Linked In</span></a>
+              <?php } ?>
+            </div>
+            
+          <?php } ?>
+
           <img class="ms-img" alt="The Real Estate Marketing Group" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/ms-mls.png" src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
         </div>
       </div>
