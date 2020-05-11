@@ -61,7 +61,7 @@ get_header();
     <div class="ms-wrap-slider">
       <div class="ms-slider" id="developments-page-slider">
 
-        <div class="ms-item">
+        <!--<div class="ms-item">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Aventura" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-alton-bay-compressor.jpg" 
@@ -77,7 +77,43 @@ get_header();
               </a>
             </div>
           </div>
-        </div>        
+        </div>-->
+
+        <div class="ms-item">
+          <div class="ms-wrap-img">
+            <img class="ms-lazy" alt="Residences By Armani Casa" data-real-type="image" 
+              data-img="<?php echo get_template_directory_uri(); ?>/images/developments/armani-compressor.jpg" 
+              src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
+          </div>
+          <div class="ms-info">
+            <h2 class="ms-item-title">Residences By Armani Casa</h2>
+            <address>318975 Collins Ave, Sunny Isles Beach, FL 33160</address>
+            <p>Pelli Clarke Pelli’s contemporary glass tower appears as one with the crystal-clear water of the Atlantic Ocean. Transparent terraces let you step into a dreamlike space suspended between earth and sky. Interiors by Armani/Casa create a world of serenity and elegance, and beautifully designed amenities offer the ultimate in true luxury. Residential interiors are modern and elegant yet truly relaxed with floor-to-ceiling windows offering incomparable views over countless miles of soft white sand and turquoise water.</p>
+            <div class="ms-wrap-btn">
+              <a class="ms-btn" href="/building/auberge-beach-residences-spa/">
+                <span>More Information</span>
+              </a>
+            </div>
+          </div>
+        </div> 
+
+        <div class="ms-item">
+          <div class="ms-wrap-img">
+            <img class="ms-lazy" alt="Auberge Beach Residences & SPA" data-real-type="image" 
+              data-img="<?php echo get_template_directory_uri(); ?>/images/developments/auberge-compressor.jpg" 
+              src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
+          </div>
+          <div class="ms-info">
+            <h2 class="ms-item-title">Auberge Beach Residences & SPA</h2>
+            <address>2200 North Ocean Boulevard, Ft. Lauderdale, Florida 33305</address>
+            <p>The innovative minds at the award-winning and internationally recognized design firm of Meyer Davis Design Studio have joined forces with Nichols Brosch Wurst Wolfe & Associates, the celebrated architectural firm renowned for their ground-breaking projects, to create the distinctive surroundings that will forever redefine luxury. Two striking towers with floor-to-ceiling glass allows spectacular views from every room of the flow-through floor plans and feature generous sunrise and sunset terraces to enjoy South Florida’s oceanfront breezes.</p>
+            <div class="ms-wrap-btn">
+              <a class="ms-btn" href="/building/auberge-beach-residences-spa/">
+                <span>More Information</span>
+              </a>
+            </div>
+          </div>
+        </div>     
 
         <div class="ms-item">
           <div class="ms-wrap-img">
@@ -115,7 +151,7 @@ get_header();
           </div>
         </div>
 
-        <div class="ms-item">
+        <!--<div class="ms-item">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Aventura" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-muse-compressor.jpg" 
@@ -131,7 +167,7 @@ get_header();
               </a>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <div class="ms-item">
           <div class="ms-wrap-img">
