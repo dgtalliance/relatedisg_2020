@@ -67,14 +67,14 @@
 		}
   }
   
-  @media screen and (min-width: 1220px){
+  @media screen and (min-width: 1024px){
     .ms-wrap-header{
       .ms-middle-header{
         justify-content: space-between;
-        .ms-item{
+        /*.ms-item{
           position: relative;
           padding: 0;
-        }
+        }*/
       }
 
       .ms-top-header{
