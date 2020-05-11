@@ -428,25 +428,25 @@
 					font-weight: bold;
 					letter-spacing: 1.2px;
 					text-transform: capitalize;
-					overflow: hidden;
+					/*overflow: hidden;
 					-o-text-overflow: ellipsis;
 					text-overflow: ellipsis;
-					white-space: nowrap;
+					white-space: nowrap;*/
 					width: 160px;
 					
 
 					@media screen and (min-width: 360px) {
 						font-size: 1rem;
-						width: auto;
+						//width: auto;
 					}
 
 					@media screen and (min-width: 1024px) {
 						font-size: 20/16*1rem;
-						max-width: 130px;
+						//max-width: 130px;
 					}
 
 					@media screen and (min-width: 1330px) {
-						max-width: 100%;
+						//max-width: 100%;
 					}
 				}
 
