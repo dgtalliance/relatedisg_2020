@@ -809,14 +809,16 @@
 						}
 					}
 
+					@media screen and (min-width: 1024px){
+						&.idx-agent {
+							display: none !important;
+						}
+					}
+
 					@media screen and (min-width: 1220px){
 						font-size: 26px;
 						width: 60px;
 						margin-right: 15px;
-
-						&.idx-agent {
-							display: none !important;
-						}
 					}
 				}
 
@@ -881,6 +883,10 @@
 						&:nth-child(3) {
 							animation: ease .7s bottom-2 forwards;
 						}*/
+					}
+
+					@media screen and (min-width: 1024px){
+						margin-left: 0;
 					}
 
 					@media screen and (min-width: 1220px){
