@@ -369,6 +369,8 @@
 				align-items: center;
 				flex-shrink: 0;
 				transition: all .3s;
+				width: 100%;
+				justify-content: center;
 
 				&:focus {
 					border-color: #80bdff;
@@ -424,7 +426,7 @@
 
 				.logo-content-agent-name {
 					font-family: $tiempos;
-					font-size: 14/16*1rem;
+					font-size: 13/16*1rem;
 					font-weight: bold;
 					letter-spacing: 1.2px;
 					text-transform: capitalize;
@@ -433,7 +435,6 @@
 					text-overflow: ellipsis;
 					white-space: nowrap;*/
 					width: 160px;
-					
 
 					@media screen and (min-width: 360px) {
 						font-size: 1rem;
