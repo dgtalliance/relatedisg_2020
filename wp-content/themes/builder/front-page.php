@@ -71,7 +71,7 @@
     <h2 class="ms-title">Exclusive Developments</h2>
     <div class="ms-wrap-slider">
       <div class="ms-slider" id="developments-slider">
-        <a href="/auberge-beach-residences-spa/ " class="ms-item">
+        <a href="/building/auberge-beach-residences-spa/ " class="ms-item">
           <div class="ms-wrap-img">
             <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/armani.jpeg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-layer ms-lazy" alt="Armani Casa">
           </div>
