@@ -3,7 +3,7 @@
 	/*-----------------------------------------------------------------------------------------------------*/
 	/* Cambiando el placeholder del input de autocomplete
 	/*-----------------------------------------------------------------------------------------------------*/
-	$("#flex_idx_single_autocomplete_input").attr('placeholder','City, Neighborhood, Address, School, ZIP, Agent, MLS#');
+	$("#flex_idx_single_autocomplete_input").attr('placeholder','City, Neighborhood, Address, ZIP, Agent, MLS#');
 
 	var $btnSellRent = $(".js-btn-sell-rent");
 	var $selectSellRent = $("#flex_ac_rental_slug");
