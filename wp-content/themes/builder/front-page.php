@@ -15,7 +15,6 @@
       <button class="ms-btn js-btn-sell-rent" title="Rent" data-value="1"><span>Rent</span></button>
     </div>
     <?php echo do_shortcode('[flex_autocomplete]'); ?>
-
     <div class="ms-slider">
       <div class="gs-container-slider clidxboost-main-slider" data-gs='{"nav": true, "autoplay": true, "autoPlaySpeed": 4000}'>
         <?php
@@ -34,19 +33,15 @@
       </div>
     </div>
 
-    <!--
-    aqui dejo la estructura para el video, solo se debe reemplazar la url del video en el atributo data-img  
-    <div class="ms-wrp-video">
-      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://vimeo.com/315355170"></div>
-    </div>
-    -->
-
     <button class="ms-next-step" data-step="#listings" aria-label="Skip to main content">
       <div class="chevron"></div>
       <div class="chevron"></div>
       <div class="chevron"></div>
     </button>
 
+    <!--<div class="ms-chat-bubble">
+      <h3 class="ms-chat-title"><span>Contact Us</span>Let's chat</h3>
+    </div>-->
   </section>
 
   <section id="listings" class="ms-section ms-animate">
@@ -71,7 +66,7 @@
     <h2 class="ms-title">Exclusive Developments</h2>
     <div class="ms-wrap-slider">
       <div class="ms-slider" id="developments-slider">
-        <a href="/building/auberge-beach-residences-spa/ " class="ms-item">
+        <a href="/building/residences-by-armani-casa/" class="ms-item">
           <div class="ms-wrap-img">
             <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/armani.jpeg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-layer ms-lazy" alt="Armani Casa">
           </div>

@@ -1,0 +1,524 @@
+#developments-page {
+  #welcome {
+    align-items: center;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    padding: 50px 20px;
+    text-align: center;
+    width: 100%;
+
+    @media screen and (min-width: 1024px) {
+      min-height: calc(100vh - 110px);
+    }
+
+    .ms-slider {
+      background-color: #333;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 0;      
+
+      .gs-container-slider {
+        height: 100%;
+      }
+  
+      .ms-item {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+
+        &:before {
+          background: rgb(0,0,0);
+          background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+          content: "";
+          display: block;
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          z-index: 1;
+        }
+
+        img {
+          height: 100%;
+          left: 0;
+          object-fit: cover;
+          position: absolute;
+          top: 0;
+          width: 100%;
+        }
+      } 
+      
+    }
+
+    .ms-title {
+      color: #fff;
+      font-family: $tiempos;
+      font-size: 22px;
+      font-size: 22/16*1rem;
+      font-weight: bold;
+      line-height: 1.1;
+      margin-top: 0;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 2;
+
+      span {
+        display: block;
+        font-size: 18px;
+        font-size: 22/18*1rem;
+        font-style: normal;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+
+      i {
+        font-weight: 300;
+      }
+
+      @media screen and (min-width: 640px) {
+        font-size: 30px;
+        font-size: 30/16*1rem;
+
+        span {
+          font-size: 22px;
+          font-size: 22/16*1rem;
+        }
+      }
+
+      @media screen and (min-width: 1024px) {
+        font-size: 40px;
+        font-size: 40/16*1rem;
+
+        span {
+          font-size: 30px;
+          font-size: 30/16*1rem;
+        }
+      }
+    }
+
+    .ms-st-title {
+      color: #fff;
+      font-family: $avenir;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      position: relative;
+      text-transform: uppercase;
+      z-index: 2;
+
+      @media screen and (min-width: 1024px) {
+        font-size: 18px;
+        font-size: 18/16*1rem;
+      }
+    }
+
+  }
+
+  #buildings{
+    width: 90%;
+    padding: 30px 0;
+    max-width: 1560px;
+
+    @media screen and (min-width: 640px) {
+      padding: 50px 0;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 70px 0;
+    }
+
+    .ms-wrap-slider {
+      width: 100%;
+      position: relative;
+
+      .ms-slider{
+        width: auto;
+        margin-left: -10px;
+        margin-right: -10px;
+
+        .ms-item {
+          padding: 0 10px;
+
+          .ms-wrap-img {
+            width: 100%;
+            position: relative;
+            margin-bottom: 30px;
+            background-color: #333;
+            &:after{
+              content: "";
+              display: block;
+              padding-bottom: 60%;
+            }
+
+            iframe,
+            img{
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+
+            img{
+              object-fit: cover;
+            }
+          }
+
+          .ms-info {
+            max-width: 255px;
+            margin: 0 auto;
+
+            .ms-item-title,
+            address {
+              color: #000;
+              font-family: $tiempos;
+              font-size: 18px;
+              font-size: 18/16*1rem;
+              font-style: normal;
+              font-weight: 600;
+              letter-spacing: 1.2px;
+              line-height: 1.5;
+              text-transform: uppercase;
+            }
+
+            address {
+              margin-bottom: 10px;
+              text-transform: inherit;
+            }
+
+            p {
+              font-family: $avenir;
+              font-size: 15px;
+              font-size: 15/16*1rem;
+              letter-spacing: 1.2px;
+              line-height: 1.8;
+            }
+
+            @media screen and (min-width: 640px) {
+              .ms-item-title {
+                font-size: 22px;
+                font-size: 22/16*1rem;
+              }
+
+              address {
+                margin-bottom: 20px;
+              }
+            }
+            
+            @media screen and (min-width: 1440px) {
+              p {
+                font-size: 18px;
+                font-size: 18/16*1rem;
+              }
+            }
+
+            .ms-separator{
+              width: 15px;
+              height: 1px;
+              background-color: #000;
+              display: block;
+              margin: 15px 0;
+              @media screen and (min-width: 640px) {
+                margin: 30px 0;
+              }
+            }
+
+            .ms-wrap-btn{
+              width: 100%;
+              text-align: left;
+              margin: 20px 0;
+              .ms-link{
+                font-family: $tiempos;
+                font-size: 15px;
+                font-size: 15/16*1rem;
+                font-style: italic;
+                position: relative;
+                display: inline-block;
+                background-color: transparent;
+                font-weight: 100;
+                &:after{
+                  content: "";
+                  display: block;
+                  width: 0;
+                  position: absolute;
+                  bottom: 0;
+                  height: 1px;
+                  background-color: #000;
+                  transition: all .4s;
+                }
+
+                &:hover{
+                  &:after{
+                    width: 100%;
+                  }
+                }
+              }
+
+              @media screen and (min-width: 640px) {
+                margin: 30px 0 40px 0;
+                .ms-link{
+                  font-size: 22px;
+                  font-size: 22/16*1rem;
+                }
+              }
+
+              @media screen and (min-width: 991px) {
+                margin: 30px 0 0 0;
+              }
+            }
+          }
+        }
+      }
+
+      .gs-wrapper-items{
+        &.gs-transition-swipe{
+          align-items: flex-start;
+        }
+      }
+
+      .gs-wrapper-arrows{
+        &.gs-style-arrow{
+          .gs-prev-arrow,
+          .gs-next-arrow{
+            background-color: transparent;
+            opacity: 1;
+            text-indent: -999999px;
+            right: -15px;
+            &:before{
+              background-image: none;
+              font-family: "idx-icons"!important;
+              text-indent: 0;
+              font-size: 30px;
+              color: #000;
+              content: "\e932" !important;
+              transform: rotate(-90deg);
+              width: 30px;
+              height: 30px;
+              top: 50%;
+              left: 50%;
+              margin: 0;
+              margin-top: -15px;
+              margin-left: -15px;
+              position: absolute;
+            }
+          }
+
+          .gs-prev-arrow{
+            right: auto;
+            left: -15px;
+            &:before{
+              transform: rotate(90deg);
+            }
+          }
+        }
+      }
+
+      .clidxboost-gs-wrapper-bullets{
+        margin: 15px auto 20px auto;
+        .gs-bullet{
+          width: 20px;
+          height: 20px;
+          text-indent: -999999px;
+          overflow: hidden;
+          display: block;
+          position: relative;
+          &:before{
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+          } 
+        }
+
+        @media screen and (min-width: 1440px) {
+          margin: 30px auto;
+        }
+      }
+
+      @media screen and (min-width: 640px) {
+        .gs-container-items {
+          width: auto;
+          margin: 0 -10px;
+          .gs-item-slider{
+            padding: 0 10px;
+          }
+        }
+
+        .ms-slider{
+          .ms-item{
+            .ms-wrap-img{
+              img{
+                object-fit: cover;
+              }
+            }
+  
+            .ms-info{
+              max-width: 355px;
+            }
+
+            .ms-agent-detail{
+              align-items: center;
+              .ms-wrap-img {
+                width: 90px;
+                height: 120px;
+                margin-bottom: 0;
+              }
+
+              .ms-min-info{
+                .ms-phone,
+                .ms-email,
+                .ms-sb-title{
+                  font-size: 20px;
+                  font-size: 20/16*1rem;
+                  margin-bottom: 7px;
+                }
+
+                .ms-email{
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @media screen and (min-width: 991px) {
+        .ms-slider {
+          margin: 0 auto;
+
+          .ms-item {
+            align-items: center;
+            border-bottom: 3px solid #000;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 40px;
+            padding: 0;
+            padding-bottom: 40px;
+
+            &:last-of-type {
+              border: 0;
+            }
+
+            .ms-info {
+              margin: 0;
+              max-width: 800px;
+            }
+
+            .ms-wrap-img {
+              margin-bottom: 0;
+              margin-right: 40px;
+              max-width: 700px;
+              width: 49%;
+              &:after{
+                padding-bottom: 100%;
+              }
+            }
+
+          }
+        }
+      }
+
+      @media screen and (min-width: 1440px) {
+        .ms-slider {
+          .ms-item {
+            .ms-wrap-img {
+              &:after {
+                padding-bottom: 57%;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+/*----------------------------------------------------------------------------------*/
+/* ANIMACIONES
+/*----------------------------------------------------------------------------------*/
+#developments-page {
+  #welcome {
+    .ms-st-title {
+      opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .3s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }
+
+    &.ms-loaded-animate {
+      .ms-st-title {
+        opacity: 1;
+        transform: matrix(1, 0, 0, 1, 0, 0);
+      }
+    }
+  }
+
+  #buildings {
+    @media screen and (min-width: 991px) {    
+      .ms-item {
+        .ms-wrap-img {
+          opacity: 0;
+          transition-property: opacity,transform,-webkit-transform,-o-transform;
+          transition-duration: 1s;
+          transition-delay: .3s;
+          transform: translate(-50px, 0) matrix(1, 0, 0, 1, 0, 0);
+        }
+
+        .ms-item-title,
+        address,
+        p,
+        .ms-wrap-btn {
+          opacity: 0;
+          transition-property: opacity,transform,-webkit-transform,-o-transform;
+          transition-duration: 1s;
+          transition-delay: .3s;
+          transform: translateX(50px) matrix(1, 0, 0, 1, 0, 0);
+        }
+
+        address {
+          transition-delay: .4s;
+        }
+
+        p {
+          transition-delay: .5;
+        }
+
+        .ms-wrap-btn {
+          transition-delay: .6s;
+        }
+      }
+
+      &.ms-loaded-animate {
+        .ms-item {
+          .ms-wrap-img {
+            opacity: 	1;
+            transform: translateX(0, 0) matrix(1, 0, 0, 1, 0, 0);
+          }
+
+          .ms-item-title,
+          address,
+          p,
+          .ms-wrap-btn {
+            opacity: 1;
+					  transform: translateX(0) matrix(1, 0, 0, 1, 0, 0);
+          }
+        }
+      }
+    }
+  }
+}

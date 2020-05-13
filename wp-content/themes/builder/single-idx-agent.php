@@ -26,7 +26,6 @@ $agent_page_slug = $post->post_name;
       <a href="#" class="ms-btn" title="rent"><span>rent</span></a>
     </div>
     <?php echo do_shortcode('[flex_autocomplete registration_key="'.$agent_registration_key.'" agent_page_slug="'.$agent_page_slug.'"]'); ?>
-
     <div class="ms-slider">
       <div class="gs-container-slider clidxboost-main-slider" data-gs='{"nav": true, "autoplay": true, "autoPlaySpeed": 4000}'>
         <?php
@@ -44,12 +43,6 @@ $agent_page_slug = $post->post_name;
         <?php  $aum = $aum+1; }  ?>
       </div>
     </div>
-    <!--
-    aqui dejo la estructura para el video, solo se debe reemplazar la url del video en el atributo data-img  
-    <div class="ms-wrp-video">
-      <div class="ms-video-foreground" data-real-type="agentVideo" data-img="https://vimeo.com/315355170"></div>
-    </div>
-    -->
 
     <button class="ms-next-step" data-step="#featured-properties" aria-label="Skip to main content">
       <div class="chevron"></div>

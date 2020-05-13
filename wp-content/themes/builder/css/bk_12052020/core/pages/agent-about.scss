@@ -1,0 +1,87 @@
+/*----------------------------------------------------------------------------------*/
+/* ABOUT AGENT - PAGE
+/*----------------------------------------------------------------------------------*/
+#flex-about-theme {
+	.gwr {
+    &.c-flex {
+			align-items: flex-start;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin-bottom: 1.25rem;
+      margin-top: 1.25rem;
+			max-width: 1430px;
+      width: 90%;
+      
+      @media screen and (min-width: 768px) {
+				margin-top: 3.125rem;
+				margin-bottom: 3.125rem;
+      }
+      
+      .flex-block-description {
+	    	order: 1;
+	    	width: 100%;
+	    	margin: 0;
+
+	    	@media screen and (min-width: 1024px) {
+					width: 50%;
+
+					h2, p {
+						width: 100%;
+						max-width: 550px;
+					}
+	    	}
+
+				.title-block {
+					font-family: $tiempos;
+					font-size: 1.5rem;
+					font-weight: 600;
+					letter-spacing: 1.2px;
+					margin-bottom: 20/16*1rem;
+					margin-top: 0;
+					text-align: left;
+
+					@media screen and (min-width: 640px) {
+						margin-top: 20/16*1rem;
+					}
+
+					@media screen and (min-width: 768px) {
+						font-size: 45/16*1rem;
+						line-height: 1.2;
+						margin-bottom: 45/16*1rem;
+					}
+
+					&:after{
+						display: none;
+					}
+				}
+
+				p, div {
+					font-family: $avenir;
+					font-size: 14/16*1rem;
+					letter-spacing: 1.2px;
+					line-height: 1.8;
+					margin-bottom: 0.625rem;
+					margin-left: 0;
+					text-align: justify;
+					text-align: left;
+
+					@media screen and (min-width: 768px) {
+						font-size: 1.125rem;
+						margin-bottom: 1.875rem;
+					}
+        }
+      }
+
+      img {
+				order: 2;
+				width: 100%;
+				height: auto;
+
+				@media screen and (min-width: 1024px){
+					width: 46%;
+	    	}
+			}
+    }
+  }
+}

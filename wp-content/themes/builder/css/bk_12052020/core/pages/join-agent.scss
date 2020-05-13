@@ -1,0 +1,667 @@
+/*----------------------------------------------------------------------------------*/
+/* SELL WHY RISG - PAGE
+/*----------------------------------------------------------------------------------*/
+#join-page {
+
+  .ms-img-xk{
+    width: auto;
+    max-width: 100%;
+  }
+
+  .ms-list-bs{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    .ms-sb-item{
+      margin-right: 10px;
+      @media screen and (min-width: 768px) {
+        margin-right: 20px;
+      }
+      &:last-child{
+        margin-right: 0;
+      }
+
+      .ms-bt-item{
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        background-color: #f9f7f7;
+        border-radius: 10px;
+        position: relative;
+        &:after{
+          content: "";
+          display: block;
+          position: absolute;
+          bottom: -100%;
+          right: -100%;
+          border-radius: 100%;
+          background-color: #f2f0f0;
+          width: 200%;
+          height: 200%;
+          margin-bottom: -3px;
+        }
+        .ms-icon-item{
+          background: url(../images/broker/sprite-broker.png) no-repeat;
+          background-size: cover;
+          content: "";
+          left: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          width: 33px;
+          height: 33px;
+          background-size: 42px 140px;
+
+          &.ms-icon-sumo{
+            background-position: 26.316% 1.86%;
+          }
+
+          &.ms-icon-app{
+            background-position: 17.857% 33.929%;
+            width: 28px;
+            height: 28px;
+          }
+
+          &.ms-icon-studio{
+            background-position: 38.462% 66.827%;
+            width: 36px;
+            height: 36px;
+          }
+
+          &.ms-icon-crm{
+            background-position: 100% 99.091%;
+            width: 42px;
+            height: 30px;
+          }
+        }
+
+        .ms-bs-title{
+          display: none;
+        }
+
+        @media screen and (min-width: 1024px) {
+          width: 80px;
+          height: 80px;
+
+          .ms-icon-item{
+            width: 40px;
+            height: 40px;
+            background-size: 50px 170px;
+  
+            &.ms-icon-sumo{
+              background-position: 26.316% 1.86%;
+              width: 40px;
+              height: 40px;
+            }
+  
+            &.ms-icon-app{
+              background-position: 17.857% 33.929%;
+              width: 35px;
+              height: 35px;
+            }
+  
+            &.ms-icon-studio{
+              background-position: 38.462% 66.827%;
+              width: 45px;
+              height: 45px;
+            }
+  
+            &.ms-icon-crm{
+              background-position: 100% 99.091%;
+              width: 52px;
+              height: 37px;
+            }
+          }
+        }
+
+        @media screen and (min-width: 1440px) {
+          width: 90px;
+          height: 90px;
+        }
+      }
+    }
+  }
+
+  #need-agent {
+    display: block;
+
+    @media screen and (max-width: 1023px) {
+      border-bottom: 1px solid #fff;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+    
+    .ms-section {
+      @media screen and (max-width: 1023px) {
+        align-items: center;
+        padding-right: 0;
+        text-align: center;
+      }
+
+      p {
+        span {
+          display: inline;
+
+          @media screen and (min-width: 1200px) {
+            display: block;
+          }
+        }
+      }
+
+      .ms-wrap-btn {
+        text-align: center;
+
+        @media screen and (min-width: 1024px) {
+          text-align: left;
+        }        
+      }
+
+      .ms-wrap-img {
+        @media screen and (max-width: 1023px) {
+          height: auto;
+          margin-bottom: 20px;
+          order: -1;
+          position: relative;
+          top: 0;
+          transform: translateY(0);
+          width: auto;
+        }
+      }
+    }    
+  }
+
+  #modal_contact_join {
+    .modal_cm {
+      background-color: #fff;
+
+      .close-modal {
+        span {
+          color: #000;
+        }
+      }
+    }
+
+    .form-search {
+      .flex-content-form {
+        .form-item {
+          margin-bottom: 0;
+
+          &:nth-child(4) {
+            margin-bottom: 20px;
+          }
+
+          &:nth-child(5) {
+            display: none;
+          }
+
+          &:nth-child(6) {
+            display: list-item;
+            margin-bottom: 20px;
+            
+            span {
+              display: none;
+            }
+
+            .radio-item {
+              display: none;
+            }
+
+            .ib-clabel {
+              &::after {
+                background-color: #333;
+              }
+            }
+          }
+
+          > span {
+            display: none;
+          }
+
+          .medium {
+            border: 0;
+            border-radius: 0;
+            border-bottom: 2px solid #000;
+          }
+
+          .clidxboost-btn-link {
+            span {
+              background-color: #000;
+              border-color: #000;
+            }
+
+            &:hover {
+              span {
+                background-color: #fff;
+                color: #000;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  #main-banner{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //max-height: calc(100vh - 110px);
+
+    .ms-wrap-img{
+      width: 100%;
+      position: relative;
+      background-color: #333;
+      line-height: 0;
+      height: calc(100vh - 110px);
+      max-height: 335px;
+      /*&:after{
+        content: "";
+        display: block;
+        padding-bottom: 56.25%;
+      }*/
+
+      &:before{
+        background: black;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,0.5) 100%);
+        content: "";
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+      }
+
+      img{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+
+    .ms-mt-title{
+      font-weight: bold;
+      font-size: 26px;
+      font-size: 26/16*1rem;
+      color: #FFF;
+      line-height: 1.1;
+      position: relative;
+      z-index: 2;
+      font-family: "Tiempos Headline";
+      text-align: center;
+      position: absolute;
+      top: auto;
+      left: auto;
+      letter-spacing: 1.2px;
+      span{
+        font-weight: normal;
+        font-style: italic;
+        display: block;
+      }
+    }
+  }
+
+  #listDetail{
+    width: 90%;
+    padding: 30px 0;
+    max-width: 1755px;
+    .ms-wrap-img{
+      width: 100%;
+      position: relative;
+      background-color: #333;
+      line-height: 0;
+      &:after{
+        content: "";
+        display: block;
+        padding-bottom: 56.25%;
+      }
+
+      img{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+
+    .ms-item{
+      border-bottom: 2px solid #000;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+
+      &:last-child{
+        border-bottom: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+
+      .ms-info{
+        order: -1;
+        .ms-item-title{
+          font-family: "Tiempos Headline";
+          letter-spacing: 1px;
+          font-size: 22px;
+          font-size: 22/16*1rem;
+          margin-bottom: 20px;
+          font-weight: 600;
+        }
+
+        p{
+          line-height: 1.6;
+          font-size: 15px;
+          font-size: 15/16*1rem;
+          font-family: "Avenir LT Std";
+          max-width: 100%;
+          letter-spacing: 1px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .ms-list-img{
+        position: relative;
+        width: 100%;
+        .ms-wrap-img{
+          margin-bottom: 15px;
+          &:last-child{
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    #main-banner{
+      .ms-wrap-img{
+        max-height: 530px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 991px) {
+
+    #main-banner{
+      .ms-wrap-img{
+        max-height: 730px;
+      }
+
+      .ms-mt-title{
+        font-size: 35px;
+        font-size: 35/16*1rem;
+      }
+    }
+
+    #listDetail{
+      .ms-item{
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-between;
+        .ms-wrap-img{
+          max-width: 410px;
+          flex-shrink: 0;
+          margin-right: 30px;
+        }
+
+        .ms-list-img{
+          max-width: 410px;
+          flex-shrink: 0;
+          margin-left: 30px;
+          .ms-wrap-img{
+            max-width: 100%;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+          }
+        }
+
+        &:nth-child(2n){
+          flex-direction: row;
+          .ms-wrap-img{
+            margin-right: auto;
+            margin-left: 30px;
+          }
+        }
+
+        &.ms-sp-fr{
+          text-align: right;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+
+    #main-banner{
+      .ms-mt-title{
+        font-size: 45px;
+        font-size: 45/16*1rem;
+        text-align: left;
+        left: auto;
+        width: 90%;
+        max-width: 1755px;
+        margin: 0 auto;
+        right: auto;
+      }
+
+      .ms-wrap-img{
+        max-height: 100%;
+      }
+    }
+
+    #listDetail{
+      padding-top: 50px;
+      padding-bottom: 50px;
+      .ms-item{
+        border-bottom: 4px solid #000;
+        padding-bottom: 50px;
+        margin-bottom: 50px;
+        .ms-info{
+          .ms-item-title {
+            font-size: 25px;
+            font-size: 25/16*1rem;
+            margin-bottom: 30px;
+          }
+        }
+
+        .ms-wrap-img{
+          margin-right: 50px;
+        }
+
+        .ms-list-img{
+          margin-left: 50px;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    #listDetail{
+      .ms-item{
+        .ms-info{
+          .ms-item-title {
+            font-size: 28px;
+            font-size: 28/16*1rem;
+          }
+          p{
+            line-height: 1.8;
+            font-size: 17px;
+            font-size: 17/16*1rem;
+          }
+        }
+
+        .ms-list-img,
+        .ms-wrap-img {
+          max-width: 600px;
+        }
+      }
+    }
+  }
+}
+
+/*----------------------------------------------------------------------------------*/
+/* ANIMACIONES
+/*----------------------------------------------------------------------------------*/
+#join-page {
+
+  #main-banner{
+    .ms-mt-title {
+      opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+      transition-delay: .25s;
+      transform: translateY(-10px);
+      @media screen and (min-width: 1024px) {
+        transform: translateY(0);
+        transform: translateX(-50px);
+      }
+    }
+
+    &.ms-loaded-animate {
+      .ms-mt-title {
+        opacity: 1;
+        transform: translateY(0);
+        @media screen and (min-width: 1024px) {
+          transform: translateY(0);
+          transform: translateX(0px);
+        }
+			}
+		}
+  }
+
+  #listDetail{
+    .ms-item{
+      .ms-item-title,
+      p,
+      .ms-wrap-img,
+      .ms-img-xk{
+        opacity: 0;
+        transition-property: opacity,transform,-webkit-transform,-o-transform;
+        transition-duration: 1s;
+        transform: translate(0%, 50%) matrix(1, 0, 0, 1, 0, 0);
+      }
+
+      .ms-item-title{
+        transition-delay: .25s;
+      }
+
+      p{
+        transition-delay: .35s;
+      }
+
+      .ms-img-xk{
+        transition-delay: .45s;
+      }
+
+      .ms-wrap-img{
+        transition-delay: .45s;
+      }
+
+      @media screen and (min-width: 1024px) {
+        .ms-wrap-img{
+          transform: translate(-10%, 0%) matrix(1, 0, 0, 1, 0, 0);
+        }
+
+        .ms-item-title, p, .ms-img-xk{
+          transform: translate(10%, 0%) matrix(1, 0, 0, 1, 0, 0);
+        }
+
+        &:nth-child(2n){
+          .ms-wrap-img{
+            transform: translate(10%, 0%) matrix(1, 0, 0, 1, 0, 0);
+          }
+  
+          .ms-item-title, p, .ms-img-xk{
+            transform: translate(-10%, 0%) matrix(1, 0, 0, 1, 0, 0);
+          }
+        }
+      }
+    }
+
+    &.ms-loaded-animate {
+      .ms-item{
+        .ms-item-title, p, .ms-wrap-img, .ms-img-xk{
+          opacity: 1;
+          transform: matrix(1, 0, 0, 1, 0, 0);  
+        }
+      }
+    }
+  }
+
+  #need-agent {
+    .ms-section {
+      @media screen and (min-width: 1024px) {
+        .ms-title, 
+        p,
+        .ms-wrap-btn {
+          opacity: 0;
+          transition-property: opacity,transform,-webkit-transform,-o-transform;
+          transition-duration: 1s;
+          transition-delay: .3s;
+          transform: translate(-50px, 0) matrix(1, 0, 0, 1, 0, 0);
+        }
+
+        p:nth-child(1) {
+          transition-delay: .4s;
+        }
+
+        p:nth-child(2) {
+          transition-delay: .5s;
+        }
+
+        p:nth-child(3) {
+          transition-delay: .6s;
+        }
+
+        p:nth-child(4) {
+          transition-delay: .7s;
+        }
+        
+        .ms-wrap-btn {
+          transition-delay: .6s;
+        }
+
+        .ms-wrap-img {
+          opacity: 0;
+          transition-property: opacity,transform,-webkit-transform,-o-transform;
+          transition-duration: 1s;
+          transition-delay: .3s;
+          transform: translate(50px, -50%) matrix(1, 0, 0, 1, 0, 0);
+        }
+      }
+		}
+
+		&.ms-loaded-animate {
+			.ms-section {
+        @media screen and (min-width: 1024px) {
+          .ms-title, 
+          p,
+          .ms-wrap-btn {
+            opacity: 1;
+            transform: matrix(1, 0, 0, 1, 0, 0);
+          }
+          
+          .ms-wrap-img {
+            opacity: 	1;
+            transform: translate(0, -50%) matrix(1, 0, 0, 1, 0, 0);
+          }
+        }
+			}
+		}
+  }
+}

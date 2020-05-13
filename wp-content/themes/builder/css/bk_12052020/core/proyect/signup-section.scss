@@ -1,0 +1,234 @@
+/*----------------------------------------------------------------------------------*/
+/* SIGN UP - SECTION
+/*----------------------------------------------------------------------------------*/
+#signUpSection{
+  background-color: #000;
+  padding: 15px 0;
+  border-bottom: 1px solid #FFF;
+  margin-top: 15px;
+  overflow: hidden;
+
+  .ms-wrap-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 640px) {
+    padding: 30px 0;
+    margin-top: 30px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    min-height: 498px;
+    &:before,
+    &:after{
+      content: "";
+      display: block;
+      height: 70px;
+      width: 100%;
+      background-color: #FFF;
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      top: 0;
+    }
+
+    &:after{
+      top: auto;
+      bottom: 0;
+    }
+
+    .ms-wrap-section{
+      width: 80%;
+      max-width: 1340px;
+      flex-direction: row-reverse;
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 50px 0;
+    &:before,
+    &:after{
+      height: 120px;
+    }
+  }
+
+  .ms-title{
+    margin: 15px auto;
+    font-size: 17px;
+    font-size: 17/16*1rem;
+    font-weight: 600;
+    text-align: center;
+    color: #FFF;
+    font-family: $tiempos;
+    letter-spacing: 1.1px;
+
+    @media screen and (min-width: 640px) {
+      font-size: 24px;
+      font-size: 24/16*1rem;
+    }
+
+    @media screen and (min-width: 1024px) {
+      text-align: left;
+      width: 100%;
+    }
+
+    @media screen and (min-width: 1440px) {
+      font-size: 38px;
+      font-size: 38/16*1rem;
+      margin-bottom: 20px;
+      span{
+        display: block;
+      }
+    }
+  }
+  
+  .ms-wrap-detail{
+    width: 90%;
+    margin: 0 auto 15px auto;
+    @media screen and (min-width: 640px) {
+      text-align: center;
+    }
+
+    @media screen and (min-width: 1024px) {
+      width: auto;
+      text-align: left;
+    }
+
+    p{
+      font-size: 13px;
+      font-size: 13/16*1rem;
+      line-height: 1.8;
+      text-align: center;
+      color: #FFF;
+      width: 80%;
+      max-width: 430px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+      font-family: $avenir;
+      letter-spacing: 1.1px;
+
+      @media screen and (min-width: 640px) {
+        font-size: 15px;
+        font-size: 15/16*1rem;
+        margin-bottom: 35px;
+      }
+
+      @media screen and (min-width: 1024px) {
+        text-align: left;
+        width: 100%;
+        max-width: 750px;
+      }
+
+      @media screen and (min-width: 1440px) {
+        max-width: 980px;
+        font-size: 18px;
+        font-size: 18/16*1rem;
+      }
+    }
+    
+    .ms-wrap-btn {
+      text-align: left;
+    }
+
+    .ms-btn {
+      border: 2px solid #FFF;
+      height: 40px;
+      width: 100%;
+      background-color: #000;
+      letter-spacing: 1.5px;
+      font-size: 13px;
+      font-size: 13/16*1rem;
+      font-weight: normal;
+      color: #FFF;
+      font-family: $avenir;
+
+      &:hover,
+      &:focus {
+        background-color: #fff;
+        color: #000;
+      }
+
+      @media screen and (min-width: 640px) {
+        width: auto;
+        height: 50px;
+        span{
+          padding: 0 30px;
+        }
+      }
+
+      @media screen and (min-width: 1440px) {
+        font-size: 15px;
+        font-size: 15/16*1rem;
+        height: 55px;
+      }
+    }
+  }
+
+  .ms-wrap-img{
+    order: -1;
+    width: 100%;
+    margin-top: -16px;
+    text-align: center;
+    position: relative;
+    img{
+      position: relative;
+      z-index: 1;
+      width: auto;
+      max-width: 200px;
+    }
+
+    &:before{
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: #FFF;
+      z-index: 0;
+    }
+
+    @media screen and (min-width: 640px) {
+      margin-top: -35px;
+      img{
+        max-width: 300px;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      margin-top: 0;
+      margin-bottom: -15px;
+      margin-right: -60px;
+
+      &:before{
+        display: none;
+      }
+
+      img{
+        max-width: 430px;
+        z-index: 2;
+      }
+    }
+
+    @media screen and (min-width: 1440px) {
+      img{
+        max-width: 750px;
+      }
+    }
+  }
+
+
+  @media (max-width: 1023px) {
+    .ms-wrap-detail .ms-wrap-btn{
+      display: flex !important;
+      justify-content: center !important;
+    }
+  }
+}

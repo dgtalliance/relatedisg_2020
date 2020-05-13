@@ -50,7 +50,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 rel="nofollow"><span>Pinterest</span></a>
             <?php endif; ?>
           </div>
-
+          
           <div class="ms-wrap-newsletter">
             <h3 class="ms-wrap-title">Receive the latest updates <span>in your inbox</span></h3>
             <form action="" method="POST">

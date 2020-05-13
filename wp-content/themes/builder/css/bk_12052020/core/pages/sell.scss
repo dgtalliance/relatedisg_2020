@@ -1,0 +1,242 @@
+/*----------------------------------------------------------------------------------*/
+/* SELL - PAGE
+/*----------------------------------------------------------------------------------*/
+#sell-page {
+  #main-banner {
+    @extend .main-banner;
+
+    .ms-mt-title {
+      color: #fff;
+      letter-spacing: 1.2px;
+
+      span {
+        display: block;
+      }
+
+      i {
+        font-weight: normal;
+      }
+
+      @media screen and (min-width: 1024px) {
+        color: #fff;
+        left: 0;
+        letter-spacing: 3.43px;
+        padding-left: 8%;
+        text-align: left;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  #find-home {
+    width: 90%;
+    padding: 30px 0;
+    max-width: 1560px;
+
+    @media screen and (min-width: 640px) {
+      padding: 50px 0;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 70px 0;
+    }
+
+    > p {
+      @extend .ms-paragraph;
+    }
+
+    .ms-wrap-btn {
+      text-align: left;
+    }
+
+  }
+
+  #why-sell {
+    width: 90%;
+    padding: 30px 0;
+    max-width: 1560px;
+
+    @media screen and (min-width: 640px) {
+      padding: 50px 0;
+    }
+
+    @media screen and (min-width: 1024px) {
+      padding: 70px 0;
+    }
+
+    .ms-st-title {
+      @extend .ms-st-title;
+      margin-bottom: 30px;
+      text-align: left;
+
+      span {
+        font-style: oblique;
+      }
+
+      @media screen and (min-width: 1024px) {
+        margin-bottom: 40px;
+      }
+    }
+
+    .why-sell-list {
+      @media screen and (min-width: 1024px) {
+        max-width: 860px;
+      }
+
+      @media screen and (min-width: 1440px) {
+        max-width: 960px;
+      }
+
+      li {
+
+        & + li {
+          margin-top: 30px;
+        }
+
+        @media screen and (min-width: 1024px) {
+          align-items: center;
+          display: flex;
+        }
+
+        .why-sell-item {
+          color: #000;
+          font-family: "Tiempos Headline";
+          font-weight: 600;
+          letter-spacing: 1.2px;
+          margin-bottom: 15px;
+          text-transform: uppercase;          
+
+          span + span {
+            margin-left: 6px;
+          }
+
+          @media screen and (min-width: 1024px) {
+            border-right: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            font-size: 32/16*1rem;
+            font-size: 32px;
+            margin-bottom: 0;
+            min-width: 160px;
+            padding: 10px 20px 10px 0;
+            text-align: center;
+
+            span + span {
+              margin-left: 0;
+            }
+          }
+        }
+
+        p {
+          @extend .ms-paragraph;
+          margin-bottom: 0;
+
+          @media screen and (min-width: 1024px) {
+            padding-left: 20px;
+          }
+        }
+
+      }
+    }
+  }
+
+  #need-agent{
+    @extend .ms-special-banner;
+
+    .ms-wrap-btn {
+      text-align: left;
+    }
+  }
+}
+
+/*----------------------------------------------------------------------------------*/
+/* ANIMACIONES
+/*----------------------------------------------------------------------------------*/
+#sell-page {
+  #main-banner {
+    .ms-mt-title {
+      opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .3s;
+      transform: translate(-50%, -30%) matrix(1, 0, 0, 1, 0, 0);
+      @media screen and (min-width: 1024px) {
+        transform: translate(0, -30%) matrix(1, 0, 0, 1, 0, 0);
+      }
+    }
+
+    &.ms-loaded-animate {
+      .ms-mt-title {
+				opacity: 1;
+        transform: translate(-50%, -50%) matrix(1, 0, 0, 1, 0, 0);
+        @media screen and (min-width: 1024px) {
+          transform: translate(0, 0) matrix(1, 0, 0, 1, 0, 0);
+        }
+      }
+    }
+  }
+
+  #find-home {
+		p {
+			opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .4s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }
+    
+    .ms-wrap-btn {
+			opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .3s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+		}
+
+		&.ms-loaded-animate{
+			p,
+			.ms-wrap-btn{
+				opacity: 1;
+				transform: matrix(1, 0, 0, 1, 0, 0);
+			}
+		}
+  }
+
+  #why-sell {
+    .ms-st-title {
+      opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .3s;
+			transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }
+
+    .why-sell-list .why-sell-item,
+    .why-sell-list p {
+			opacity: 0;
+			transition-property: opacity,transform,-webkit-transform,-o-transform;
+			transition-duration: 1s;
+			transition-delay: .4s;
+      transform: translate(0%, 20px) matrix(1, 0, 0, 1, 0, 0);
+    }
+
+    .why-sell-list li:nth-child(2) .why-sell-item,
+    .why-sell-list li:nth-child(2) p {
+      transition-delay: .5s;
+    }
+
+    .why-sell-list li:nth-child(3) .why-sell-item,
+    .why-sell-list li:nth-child(3) p {
+      transition-delay: .6s;
+    }
+    
+    &.ms-loaded-animate{
+      .ms-st-title,
+      .why-sell-list .why-sell-item,
+      .why-sell-list p {
+				opacity: 1;
+				transform: matrix(1, 0, 0, 1, 0, 0);
+      }
+		}
+  }
+}

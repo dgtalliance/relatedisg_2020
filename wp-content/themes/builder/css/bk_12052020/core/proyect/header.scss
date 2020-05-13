@@ -1,0 +1,86 @@
+/*----------------------------------------------------------------------------------*/
+/* Header
+/*----------------------------------------------------------------------------------*/
+#header{
+	transition: background-color .4s;
+	.ms-social{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		.ms-link{
+			width: 20px;
+			height: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 12px;
+			font-weight: 100;
+			margin: 0 4px;
+			transition: all .4s;
+			background-color: #a1a1a1;
+			border-radius: 3px;
+			color: #FFF	;
+
+			&:focus {
+				border-color: #80bdff;
+				box-shadow: 0 0 0 3.2px rgba(0, 123, 255, .25);
+				outline: 0;
+			}
+
+			span{
+				display: none;
+			}
+
+			&.idx-icon-facebook{
+				background-color: #3a5b9a;
+			}
+			&.idx-icon-twitter{
+				background-color: #5fcbf1;
+			}
+			&.idx-icon-google-plus{
+				background-color: #de4f42;
+			}
+			&.idx-icon-youtube-logo{
+				background-color: #bc2026;
+			}
+			&.idx-icon-instagram{
+				background-color: #0270ad;
+			}
+			&.idx-icon-linkedin2{
+				background-color: #3a5b9a;
+			}
+			&.idx-icon-pinterest-p{
+				background-color: #3a5b9a;
+			}
+		}
+
+		@media screen and (min-width: 1024px){
+			justify-content: flex-start;
+			.ms-link{
+				margin-left: 0;
+				margin-right: 10px;
+				&:last-child{
+					margin-right: 0;
+				}
+			}
+		}
+  }
+  
+  @media screen and (min-width: 1024px){
+    .ms-wrap-header{
+      .ms-middle-header{
+        justify-content: space-between;
+        .ms-item{
+          position: relative;
+          padding: 0;
+        }
+      }
+
+      .ms-top-header{
+      	padding: 0; 
+        position: relative;
+      }
+    }
+  }
+}

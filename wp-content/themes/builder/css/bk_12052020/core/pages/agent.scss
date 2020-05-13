@@ -1,0 +1,60 @@
+#agent {
+
+  #profile {
+    @extend .ms-special-banner;
+    display: block;
+
+    .ms-section {
+      @media screen and (max-width: 1023px) {
+        align-items: center;
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .ms-title {
+        margin-bottom: 0;
+      }
+  
+      .ms-sb-title {
+        color: #fff;
+        margin-bottom: 20px;
+      }
+  
+      .ms-contact {
+        color: #fff;
+        font-family: "Avenir LT Std";
+        font-size: 0.9375rem;
+        letter-spacing: 1.2px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+  
+        @media screen and (min-width: 1440px) {
+          font-size: 1.125rem;
+          margin-bottom: 30px;
+        }
+      }
+
+      p:last-child {
+        margin-bottom: 30px;
+
+        @media screen and (min-width: 1440px) {
+          margin-bottom: 40px;
+        }
+      }
+
+      .ms-wrap-img {
+        @media screen and (max-width: 1023px) {
+          height: auto;
+          margin-bottom: 20px;
+          order: -1;
+          position: relative;
+          top: 0;
+          transform: translateY(0);
+          width: auto;
+        }  
+      }
+
+    }
+  }
+
+}
