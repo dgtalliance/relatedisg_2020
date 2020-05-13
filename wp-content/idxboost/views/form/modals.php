@@ -51,7 +51,11 @@ global $flex_idx_info, $flex_idx_lead;
         <div class="body_md">
           <ul class="header-tab">
             <li>
-              <a href="javascript:void(0)" data-tab="tabLogin" class="ib-tabLogin active" data-text="<?php echo __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG); ?>" data-text-force="<?php echo __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+              <a href="javascript:void(0)" 
+              data-tab="tabLogin" 
+              class="ib-tabLogin active" 
+              data-text="<?php echo __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG); ?>" 
+              data-text-force="<?php echo __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG); ?>">
                 <?php echo __('Log in', IDXBOOST_DOMAIN_THEME_LANG); ?>
               </a>
             </li>
@@ -67,9 +71,9 @@ global $flex_idx_info, $flex_idx_lead;
             </li>
           </ul>
 
-          <div id="tabLogin" class="item_tab active">
+          <div id="tabLogin" class="item_tab active" data-text="<?php echo __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG); ?>">
             <div class="ms-text">
-              <?php echo __('Not registered yet?', IDXBOOST_DOMAIN_THEME_LANG); ?> <a href="javascript:void(0)" class="ms-strong ms-tab" data-tab="tabRegister"><?php echo __('Register now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+              <?php echo __('Not registered yet?', IDXBOOST_DOMAIN_THEME_LANG); ?> <a href="javascript:void(0)" class="ms-strong ms-tab" data-tab="tabRegister" data-text="<?php echo __('Register for a personalized experience', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Register now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
             </div>
             <div class="form_content">
               <form id="formLogin" method="post">
@@ -99,7 +103,7 @@ global $flex_idx_info, $flex_idx_lead;
             </div>
           </div>
 
-          <div id="tabRegister" class="item_tab">
+          <div id="tabRegister" class="item_tab"  data-text="<?php echo __('Register for a personalized experience', IDXBOOST_DOMAIN_THEME_LANG); ?>">
             <div class="ms-back">
               <button class="ms-icon-back">
                 <span></span>
@@ -127,7 +131,7 @@ global $flex_idx_info, $flex_idx_lead;
 
                   <ul class="pr-steps-container">
                     <li class="pr-step active">
-                      <span class="ms-sub-text"><?php echo __('Register with your email address', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                      <span class="ms-sub-text small"><?php echo __('Register with your email address', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                       <div class="wrapper-input">
                         <p class="dgt-email-error"><?php echo __('Looks like you already have an account with us.. Try logging in or resetting your password.', IDXBOOST_DOMAIN_THEME_LANG); ?></p>
                         <input id="agilefield-9" name="register_email" type="email" class="agile-height-default" placeholder="Email" required value="">
@@ -270,7 +274,7 @@ global $flex_idx_info, $flex_idx_lead;
             </div>
           </div>
 
-          <div id="tabReset" class="item_tab">
+          <div id="tabReset" class="item_tab"  data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>">
 
             <div class="ms-back">
               <button class="ms-icon-back">
@@ -286,7 +290,7 @@ global $flex_idx_info, $flex_idx_lead;
 
                 <ul class="form_md" id="cntResetForm">
                   <li class="form_input" id="ms-recovery-password">
-                    <label class="agile-label" for="agilefield-9"><?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <label class="agile-label ms-xt" for="agilefield-9"><?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="reset_email" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" name="reset_email" placeholder="<?php echo __("Enter E-mail", IDXBOOST_DOMAIN_THEME_LANG); ?>" required type="email" />
                   </li>
                   <li class="form_input" style="display: none" id="ms-new-password">
@@ -321,7 +325,7 @@ global $flex_idx_info, $flex_idx_lead;
                   </a>
                   <span class="ms-label" id="msRst">
                     <span id="ms-text"><?php echo __('Forgot your password?', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                    <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                    <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset"  data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
                   </span>
                 </li>
               <?php endif; ?>
@@ -332,7 +336,7 @@ global $flex_idx_info, $flex_idx_lead;
               <li>
                 <span class="ms-label" id="msRst">
                   <span id="ms-text"><?php echo __('Forgot your password?', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                  <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset"  data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
                 </span>
               </li>
             </ul>
@@ -349,12 +353,12 @@ global $flex_idx_info, $flex_idx_lead;
     <div class="ms-hidden-text">
       <span id="mstextRst">
         <span><?php echo __('Already registered?', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-        <a href="javascript:void(0)" class="ms-tab" data-tab="tabLogin"><?php echo __('Log in ', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+        <a href="javascript:void(0)" class="ms-tab" data-tab="tabLogin" data-text="<?php echo __('Welcome Back', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Log in ', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
       </span>
 
       <span id="mstextFst">
         <span><?php echo __('Forgot your password?', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-        <a href="javascript:void(0)" class="ms-tab" data-tab="tabReset"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+        <a href="javascript:void(0)" class="ms-tab" data-tab="tabReset" data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
       </span>
     </div>
   </div>
@@ -1956,6 +1960,8 @@ global $flex_idx_info, $flex_idx_lead;
 
       $(document).on('click', '.ms-tab', function() {
         var dataTab = $(this).attr('data-tab');
+        var titleText = $(this).attr('data-text');
+
         $(".header-tab a[data-tab='" + dataTab + "']").trigger("click");
 
         if ($('#modal_login .email-registration').hasClass('active') || $('#modal_login .pr-radio').hasClass('active')) {
@@ -1965,11 +1971,22 @@ global $flex_idx_info, $flex_idx_lead;
         if (dataTab == "tabReset") {
           $("#modal_login .content_md").removeClass('ms-hidden-extras');
         }
+
+        if(dataTab == "tabLogin"){
+          $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+        }else if(dataTab == "tabRegister"){
+          $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+        }else if(dataTab == "tabReset"){
+          $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+        }
       });
 
       $(document).on('click', '.ms-icon-back', function() {
         $(".header-tab a[data-tab='tabLogin']").trigger("click");
         $("#modal_login .content_md").removeClass('ms-hidden-extras');
+
+        var titleText = $(".header-tab a[data-tab='tabLogin']").attr('data-text')
+        $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
       });
 
     })
