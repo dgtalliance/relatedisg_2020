@@ -13,7 +13,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
         </div>
 
         <div class="ms-footer-social">
-          <!--<div class="ms-social">
+          <div class="ms-social">
             <?php if (!empty($flex_idx_info["social"]["facebook_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["facebook_social_url"]; ?>"
                 class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" 
@@ -49,14 +49,6 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 class="ms-link idx-icon-pinterest-p" title="Navigate to Pinterest" target="_blank"
                 rel="nofollow"><span>Pinterest</span></a>
             <?php endif; ?>
-          </div>-->
-
-          <div class="ms-social">
-            <a href="#" class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" rel="nofollow"><span>Navigate to Facebook</span></a>
-            <a href="#" class="ms-link idx-icon-twitter" title="Navigate to Twitter" target="_blank" rel="nofollow"><span>Navigate to Twitter</span></a>
-            <a href="#" class="ms-link idx-icon-youtube-logo" title="Navigate to Youtube" target="_blank" rel="nofollow"><span>Navigate to Youtube</span></a>
-            <a href="#" class="ms-link idx-icon-instagram" title="Navigate to Instagram" target="_blank" rel="nofollow"><span>Navigate to Instagram</span></a>
-            <a href="#" class="ms-link idx-icon-linkedin2" title="Navigate to Linked In" target="_blank" rel="nofollow"><span>Navigate to Linked In</span></a>
           </div>
 
           <div class="ms-wrap-newsletter">
