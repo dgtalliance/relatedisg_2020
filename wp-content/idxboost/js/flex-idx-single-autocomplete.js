@@ -70,7 +70,10 @@
     }
 
     function handleRedirectTo(term, type) {
-        var rentalType = $("#flex_ac_rental_slug").val();
+        //var rentalType = $("#flex_ac_rental_slug").val();
+        var rentalType = $('.js-btn-sell-rent.active:eq(0)').attr("title");
+
+        console.log(rentalType);
 
         if (typeof __ib_autocomplete !== "undefined") {
             var redirectTo = __ib_autocomplete.siteUrl + "/" + __ib_autocomplete.agent_page_slug + "/search";
@@ -78,7 +81,8 @@
             var redirectTo = __flex_g_settings.searchUrl;
         }
 
-        redirectTo += "?for=" + ( (0 == rentalType) ? "sale" : "rent" );
+        // redirectTo += "?for=" + ( (0 == rentalType) ? "sale" : "rent" );
+        redirectTo += "?for=" + ( ("rent" == rentalType.toLowerCase()) ? "rent" : "sale" );
 
         if (null !== type) {
             redirectTo += "&keyword=" + encodeURIComponent(term) + "_" + type.toLowerCase();
