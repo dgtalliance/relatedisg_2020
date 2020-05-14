@@ -1980,7 +1980,6 @@ if (!function_exists('flex_idx_filter_sc')) {
         // var_dump($sendParams);
         // exit;
 
-
         wp_enqueue_style('flex-idx-filter-pages-css');
 
         if (isset($atts["mode"]) && ($atts["mode"] != "slider")) {
@@ -2107,6 +2106,8 @@ if (!function_exists('flex_idx_filter_sc')) {
         // echo '</pre>';
         // exit;
 
+        //return '<pre>'.print_r($atts,true).'</pre>';
+
         if (isset($atts['mode']) && ($atts['mode'] === 'thumbs')) {
             $featured_filter_page = $wpdb->get_row("
             SELECT ID, post_title
@@ -2160,6 +2161,7 @@ if (!function_exists('flex_idx_filter_sc')) {
                 include FLEX_IDX_PATH . '/views/shortcode/flex_idx_filter_carrousel.php';
             }
         } else if (isset($atts["type"]) && ($atts["type"] === "2" || $atts["type"] === "1")) {
+            // return '<pre>'.print_r($atts,true).'</pre>';
             // exclusive
             if ( (isset($response) && is_array($response)) && $response['counter'] > 0 ) {
                 if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/shortcode/idxboost_exclusive_listing.php')) {

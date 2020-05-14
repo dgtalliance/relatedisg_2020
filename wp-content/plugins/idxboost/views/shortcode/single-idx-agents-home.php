@@ -101,10 +101,7 @@ if ("idx-agents" === $post->post_type) {
       <div class="chevron"></div>
     </button>
   </section>
-
-  <?php /*<pre><?php print_r($agent_full_info); ?></pre>*/ ?>
-
-  <?php if (empty($agent_full_info["agent_id"]) && empty($agent_full_info["office_id"])): ?>
+  <?php if (empty($agent_full_info['info']["agent_id"]) && empty($agent_full_info['info']["office_id"])): ?>
   <!-- no exclusive listings, temporary div TODO: benjamin -->
   <div style="height:100px;"></div>
   <?php else: ?>
@@ -112,10 +109,11 @@ if ("idx-agents" === $post->post_type) {
     <h2 class="ms-title">Featured Properties</h2>
     <div class="ms-wrap-slider">
       <?php
-      $filter_featured_page_token = flex_filter_has_featured_page();
-      if (null !== $filter_featured_page_token) {
-        echo do_shortcode(sprintf('[flex_idx_filter id="%s" agent_slug="' . $post->post_name . '" type="2" " mode="thumbs" registration_key="' . $agent_registration_key . '"]', $filter_featured_page_token));
-      }
+      // $filter_featured_page_token = flex_filter_has_featured_page();
+      // if (null !== $filter_featured_page_token) {
+      //   echo do_shortcode(sprintf('[flex_idx_filter id="%s" agent_slug="' . $post->post_name . '" type="2" " mode="thumbs" registration_key="' . $agent_registration_key . '"]', $filter_featured_page_token));
+      // }
+      echo do_shortcode('[flex_idx_filter agent_slug="' . $post->post_name . '" type="2" " mode="thumbs" registration_key="' . $agent_registration_key . '"]');
       ?>
     </div>
     <div class="ms-wrap-btn">

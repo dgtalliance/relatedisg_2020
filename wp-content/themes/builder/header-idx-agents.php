@@ -163,12 +163,12 @@ foreach ($bodyclasses as $class) {
               <ul id="menu-main-menu" class="">
                 <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo $agent_full_slugname; ?>">Home</a></li>
 
-                <?php if (empty($agent_full_info["agent_id"]) && empty($agent_full_info["office_id"])): ?>
+                <?php if (empty($agent_full_info['info']["agent_id"]) && empty($agent_full_info['info']["office_id"])): ?>
                 <?php else: ?>
                 <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo $agent_full_slugname; ?>/listings">Featured Listings</a></li>
                 <?php endif; ?>
 
-                <?php if (empty($agent_full_info["soldagent_id"]) && empty($agent_full_info["soldoffice_id"])): ?>
+                <?php if (empty($agent_full_info['info']["soldagent_id"]) && empty($agent_full_info['info']["soldoffice_id"])): ?>
                 <?php else: ?>
                 <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo $agent_full_slugname; ?>/sold-listings">Recently Sold</a></li>
                 <?php endif; ?>

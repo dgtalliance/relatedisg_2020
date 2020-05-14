@@ -1,4 +1,4 @@
-<?php if (isset($featured_filter_page) && !empty($featured_filter_page)) : ?>
+<?php // if (isset($featured_filter_page) && !empty($featured_filter_page)) : ?>
 
 	<section class="flex-block-description mtop-60" id="featured-section">
 		<?php if (empty(get_theme_mod('idx_txt_text_tit_property_front')))  $idx_txt_text_tit_property_front  = '';
@@ -118,7 +118,7 @@
 		else  $idx_txt_text_property_front  = get_theme_mod('idx_txt_text_property_front'); ?>
 		<a class="clidxboost-btn-link idx_txt_text_property_front" href="<?php echo get_permalink($featured_filter_page['ID']); ?>" title="<?php echo $idx_txt_text_property_front; ?>"> <span><?php echo $idx_txt_text_property_front; ?></span></a>
 	</section>
-<?php endif; ?>
+<?php // endif; ?>
 
 <script type="text/javascript">
 	var view_grid_type = '';
