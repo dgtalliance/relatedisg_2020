@@ -4509,9 +4509,12 @@ if (!function_exists('flex_idx_request_property_form_fn')) {
         );
         $ch = curl_init();
         $endpointinquire = FLEX_IDX_API_INQUIRY_PROPERTY_FORM;
-        if (!empty($flex_idx_type_form))
-            if ($flex_idx_type_form == 'off_market_listing')
+
+        if (!empty($flex_idx_type_form)) {
+            if ($flex_idx_type_form == 'off_market_listing') {
                 $endpointinquire = FLEX_IDX_API_INQUIRY_OFF_MARKET_LISTING_FORM;
+            }
+        }
 
         curl_setopt($ch, CURLOPT_URL, $endpointinquire);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -4519,6 +4522,7 @@ if (!function_exists('flex_idx_request_property_form_fn')) {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FAILONERROR, true);
         $server_output = curl_exec($ch);
+
         curl_close($ch);
         $response = json_decode($server_output, true);
         wp_send_json($response);

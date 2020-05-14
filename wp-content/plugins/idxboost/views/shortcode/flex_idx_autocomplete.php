@@ -39,7 +39,6 @@ global $flex_idx_info;
     </form>
 
     <button id="clidxboost-modal-search">Active modal</button>
-    
     <a class="flex-link" href="<?php echo $flex_idx_info["pages"]["flex_idx_search"]["guid"]; ?>" title="<?php echo __('Advanced search options', IDXBOOST_DOMAIN_THEME_LANG); ?>">
       + <?php echo __('Advanced search options', IDXBOOST_DOMAIN_THEME_LANG); ?>
     </a>
