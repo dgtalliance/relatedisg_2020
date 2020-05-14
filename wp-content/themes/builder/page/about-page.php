@@ -90,66 +90,66 @@ while ( have_posts() ) : the_post(); ?>
     <h2 class="ms-st-title">Leadership</h2>
     <ul class="ms-agent-list">
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_01-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Matt Allen">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Matt Allen</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Matt Allen</a></h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_02-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Craig Studnicky">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Craig Studnicky</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Craig Studnicky</a></h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_03-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Michael Ambrosio">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Michael Ambrosio</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Michael Ambrosio</a></h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_04-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Alex Vidal">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Alex Vidal</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Alex Vidal</a></h3>
         <h4 class="ms-agent-stattus">President</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_05-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Vice-President">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Alberto Carrillo</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Alberto Carrillo</a></h3>
         <h4 class="ms-agent-stattus">Vice-President</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_06-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Veronica Gorson">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Veronica Gorson</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Veronica Gorson</a></h3>
         <h4 class="ms-agent-stattus">Chief Marketing Officer</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_10-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Carolina Gerdts">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Carolina Gerdts</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Carolina Gerdts</a></h3>
         <h4 class="ms-agent-stattus">Sales Manager</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_07-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Liz Lopez">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Liz Lopez</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Liz Lopez</a></h3>
         <h4 class="ms-agent-stattus">Sales Manager</h4>
       </li>
       <li>
-        <a href="#" class="ms-wrap-img">
+        <a href="/" class="ms-wrap-img">
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_08-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
         </a>
-        <h3 class="ms-agent-title"><a href="#">Rowena Luna</a></h3>
+        <h3 class="ms-agent-title"><a href="/">Rowena Luna</a></h3>
         <h4 class="ms-agent-stattus">Marketing Director</h4>
       </li>
     </ul>
