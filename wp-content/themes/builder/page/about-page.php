@@ -115,7 +115,7 @@ while ( have_posts() ) : the_post(); ?>
           <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_04-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Alex Vidal">
         </a>
         <h3 class="ms-agent-title"><a href="#">Alex Vidal</a></h3>
-        <h4 class="ms-agent-stattus">Principal</h4>
+        <h4 class="ms-agent-stattus">President</h4>
       </li>
       <li>
         <a href="#" class="ms-wrap-img">
