@@ -102,7 +102,13 @@ if ("idx-agents" === $post->post_type) {
     </button>
   </section>
 
-  <section id="listings" class="ms-section ms-animate">
+  <?php /*<pre><?php print_r($agent_full_info); ?></pre>*/ ?>
+
+  <?php if (empty($agent_full_info["agent_id"]) && empty($agent_full_info["office_id"])): ?>
+  <!-- no exclusive listings, temporary div TODO: benjamin -->
+  <div style="height:100px;"></div>
+  <?php else: ?>
+    <section id="listings" class="ms-section ms-animate">
     <h2 class="ms-title">Featured Properties</h2>
     <div class="ms-wrap-slider">
       <?php
@@ -118,6 +124,7 @@ if ("idx-agents" === $post->post_type) {
       </a>
     </div>
   </section>
+  <?php endif; ?>
 
   <section id="profile" class="ms-animate">
     <article class="ms-section">

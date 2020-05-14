@@ -2019,6 +2019,8 @@ if (!function_exists('flex_idx_filter_sc')) {
 
             $server_output = curl_exec($ch);
             $response = json_decode($server_output, true);
+            // echo '<pre>' . print_r($response, true) . '</pre>';
+            // exit;
         
             // echo '<pre>';
             // var_dump($endpointFilter);
@@ -2158,10 +2160,15 @@ if (!function_exists('flex_idx_filter_sc')) {
                 include FLEX_IDX_PATH . '/views/shortcode/flex_idx_filter_carrousel.php';
             }
         } else if (isset($atts["type"]) && ($atts["type"] === "2" || $atts["type"] === "1")) {
-            if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/shortcode/idxboost_exclusive_listing.php')) {
-                include IDXBOOST_OVERRIDE_DIR . '/views/shortcode/idxboost_exclusive_listing.php';
+            // exclusive
+            if ( (isset($response) && is_array($response)) && $response['counter'] > 0 ) {
+                if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/shortcode/idxboost_exclusive_listing.php')) {
+                    include IDXBOOST_OVERRIDE_DIR . '/views/shortcode/idxboost_exclusive_listing.php';
+                } else {
+                    include FLEX_IDX_PATH . '/views/shortcode/idxboost_exclusive_listing.php';
+                }
             } else {
-                include FLEX_IDX_PATH . '/views/shortcode/idxboost_exclusive_listing.php';
+                return '<div style="width:90%;max-width:1630px;margin: 30px auto;"><h2>No available Listings</h2></div></div>';
             }
         } else {
             if (file_exists(IDXBOOST_OVERRIDE_DIR . '/views/shortcode/flex_idx_filter.php')) {

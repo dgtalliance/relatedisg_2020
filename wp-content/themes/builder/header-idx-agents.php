@@ -162,8 +162,17 @@ foreach ($bodyclasses as $class) {
             <nav id="menu-main" class="menu-main-menu-container">
               <ul id="menu-main-menu" class="">
                 <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo $agent_full_slugname; ?>">Home</a></li>
+
+                <?php if (empty($agent_full_info["agent_id"]) && empty($agent_full_info["office_id"])): ?>
+                <?php else: ?>
                 <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo $agent_full_slugname; ?>/listings">Featured Listings</a></li>
+                <?php endif; ?>
+
+                <?php if (empty($agent_full_info["soldagent_id"]) && empty($agent_full_info["soldoffice_id"])): ?>
+                <?php else: ?>
                 <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo $agent_full_slugname; ?>/sold-listings">Recently Sold</a></li>
+                <?php endif; ?>
+
                 <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo $agent_full_slugname; ?>/about">About</a></li>
                 <li class="menu-item menu-item-has-children menu-item-type-post_type menu-item-object-page">
                   <a href="#">Services</a>
