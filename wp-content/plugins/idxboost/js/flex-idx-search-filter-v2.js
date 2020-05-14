@@ -451,7 +451,11 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
   });
 
   Handlebars.registerHelper("propertyPermalink", function (slug) {
-    return __flex_idx_search_filter_v2.propertyDetailPermalink + "/" + slug;
+    if ("undefined" !== typeof IB_AGENT_PROPERTY_SLUG) {
+      return IB_AGENT_PROPERTY_SLUG + "/" + slug;
+    } else {
+      return __flex_idx_search_filter_v2.propertyDetailPermalink + "/" + slug;
+    }
   });
 
   Handlebars.registerHelper("agentPhoto", function (property) {
