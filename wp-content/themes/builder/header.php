@@ -122,15 +122,55 @@
                 </li>
               </ul>
               <ul class="social">
+              <?php if (!empty($flex_idx_info["social"]["facebook_social_url"])): ?>
                 <li>
-                  <a href="#" class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" rel="nofollow"><span>Navigate to Facebook</span></a>
+                  <a href="<?php echo $flex_idx_info["social"]["facebook_social_url"]; ?>"
+                  class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" 
+                  rel="nofollow"><span>Facebook</span></a>
                 </li>
+              <?php endif; ?>
+              <?php if (!empty($flex_idx_info["social"]["twitter_social_url"])): ?>
                 <li>
-                  <a href="#" class="ms-link idx-icon-instagram" title="Navigate to Instagram" target="_blank" rel="nofollow"><span>Navigate to Instagram</span></a>            
+                  <a href="<?php echo $flex_idx_info["social"]["twitter_social_url"]; ?>"
+                  class="ms-link idx-icon-twitter" title="Navigate to Twitter" target="_blank"
+                  rel="nofollow"><span>Twitter</span></a>
                 </li>
+              <?php endif; ?>
+              <?php if (!empty($flex_idx_info["social"]["gplus_social_url"])): ?>
                 <li>
-                  <a href="#" class="ms-link idx-icon-linkedin2" title="Navigate to Linked In" target="_blank" rel="nofollow"><span>Navigate to Linked In</span></a>
+                  <a href="<?php echo $flex_idx_info["social"]["gplus_social_url"]; ?>"
+                  class="ms-link idx-icon-google-plus" title="Navigate to Google+" target="_blank"
+                  rel="nofollow"><span>Google+</span></a>
                 </li>
+              <?php endif; ?>
+              <?php if (!empty($flex_idx_info["social"]["youtube_social_url"])): ?>
+                <li>
+                  <a href="<?php echo $flex_idx_info["social"]["youtube_social_url"]; ?>"
+                  class="ms-link idx-icon-youtube-logo" title="Navigate to Youtube" target="_blank"
+                  rel="nofollow"><span>YouTube</span></a>
+                </li>
+              <?php endif; ?>
+              <?php if (!empty($flex_idx_info["social"]["instagram_social_url"])): ?>
+                <li>
+                  <a href="<?php echo $flex_idx_info["social"]["instagram_social_url"]; ?>"
+                  class="ms-link idx-icon-instagram" title="Navigate to Instagram" target="_blank"
+                  rel="nofollow"><span>Instagram</span></a>
+                </li>
+              <?php endif; ?>
+              <?php if (!empty($flex_idx_info["social"]["linkedin_social_url"])): ?>
+                <li>
+                  <a href="<?php echo $flex_idx_info["social"]["linkedin_social_url"]; ?>"
+                  class="ms-link idx-icon-linkedin2" title="Navigate to Linked In" target="_blank"
+                  rel="nofollow"><span>Linked In</span></a>
+                </li>
+              <?php endif; ?>
+              <?php if (!empty($flex_idx_info["social"]["pinterest_social_url"])): ?>
+                <li>
+                  <a href="<?php echo $flex_idx_info["social"]["pinterest_social_url"]; ?>"
+                  class="ms-link idx-icon-pinterest-p" title="Navigate to Pinterest" target="_blank"
+                  rel="nofollow"><span>Pinterest</span></a>
+                </li>
+              <?php endif; ?>
               </ul>
             </div>
           </nav>
