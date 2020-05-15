@@ -233,7 +233,9 @@ else $viewfilter = $response['view'];
                 <h4 class="clidxboost-icon-arrow-select"><?php echo __("Price Range", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
                 <div class="wrap-item price_range_for_sale price_ranges_ct" <?php if ($response['info']['rental_type'] == 1) : ?> style="display:none;" <?php endif; ?>>
                   <div class="wrap-inputs">
+                    <label class="ms-hidden" for="price_from"><?php echo __("Price Range from", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="price_from" class="notranslate" type="text" value=""> <span><?php echo __("to", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <label class="ms-hidden" for="price_to"><?php echo __("Price Range to", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="price_to" class="notranslate" type="text" value="">
                   </div>
                   <div class="wrap-range">
@@ -242,7 +244,9 @@ else $viewfilter = $response['view'];
                 </div>
                 <div class="wrap-item price_range_for_rent price_ranges_ct" <?php if ($response['info']['rental_type'] == 0) : ?> style="display:none;" <?php endif; ?>>
                   <div class="wrap-inputs">
+                    <label class="ms-hidden" for="price_rent_from"><?php echo __("Price rent from", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="price_rent_from" class="notranslate" type="text" value=""><span><?php echo __("to", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <label class="ms-hidden" for="price_rent_to"><?php echo __("Price rent to", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="price_rent_to" class="notranslate" type="text" value="">
                   </div>
                   <div class="wrap-range">
@@ -330,7 +334,9 @@ else $viewfilter = $response['view'];
                 <h4 class="clidxboost-icon-arrow-select"><?php echo __("Living size", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
                 <div class="wrap-item">
                   <div class="wrap-inputs">
+                    <label class="ms-hidden" for="living_from"><?php echo __("Living size from", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="living_from" class="notranslate" type="text" name="" value=""><span><?php echo __("to", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <label class="ms-hidden" for="living_to"><?php echo __("Living size to", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="living_to" class="notranslate" type="text" name="" value="">
                   </div>
                   <div class="wrap-range">
@@ -344,7 +350,9 @@ else $viewfilter = $response['view'];
                 <h4 class="clidxboost-icon-arrow-select"><?php echo __("Year Built", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
                 <div class="wrap-item">
                   <div class="wrap-inputs">
+		    <label class="ms-hidden" for="year_from"><?php echo __("Year Built from", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="year_from" type="text" name="" value=""><span><?php echo __("to", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+		    <label class="ms-hidden" for="year_to"><?php echo __("Year Built to", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="year_to" type="text" name="" value="">
                   </div>
                   <div class="wrap-range">
@@ -358,6 +366,7 @@ else $viewfilter = $response['view'];
                 <h4 class="clidxboost-icon-arrow-select"><?php echo __("Waterfront description", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
                 <div class="wrap-item">
                   <div class="wrap-select clidxboost-icon-arrow-select">
+                    <label class="ms-hidden" for="flex_waterfront_switch">Waterfront options</label>
                     <select id="flex_waterfront_switch">
                       <option value="--"><?php echo __("Any", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                       <?php foreach ($search_params['waterfront_options'] as $waterfront_option) : ?>
@@ -394,6 +403,7 @@ else $viewfilter = $response['view'];
                 <h4 class="clidxboost-icon-arrow-select"><?php echo __("Parking spaces", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
                 <div class="wrap-item">
                   <div class="wrap-select clidxboost-icon-arrow-select">
+                    <label class="ms-hidden" for="flex_parking_switch">Parking spaces options</label>
                     <select id="flex_parking_switch">
                       <option value="--"><?php echo __("Any", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                       <?php foreach ($search_params['parking_options'] as $parking_option) : ?>
@@ -409,7 +419,9 @@ else $viewfilter = $response['view'];
                 <h4 class="clidxboost-icon-arrow-select"><?php echo __("Land size", IDXBOOST_DOMAIN_THEME_LANG); ?></h4>
                 <div class="wrap-item">
                   <div class="wrap-inputs">
+                    <label class="ms-hidden" for="land_from"><?php echo __("Land size from", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="land_from" class="notranslate" type="text" name="" value=""><span><?php echo __("to", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <label class="ms-hidden" for="land_to"><?php echo __("Land size to", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="land_to" class="notranslate" type="text" name="" value="">
                   </div>
                   <div class="wrap-range">
@@ -504,6 +516,7 @@ else $viewfilter = $response['view'];
         </li>
         <li id="filter-by" class="clidxboost-icon-arrow-select">
           <span class="filter-text"><?php echo __("Newest Listings", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+          <label class="ms-hidden" for="flex_idx_sort"><?php echo __("Newest Listings by", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
           <select id="flex_idx_sort" class="flex_idx_sort flex_idx_sort-<?php echo $class_multi; ?>" data-permalink="<?php the_permalink(); ?>" data-currpage="<?php echo $response['pagination']['current_page_number']; ?>" filtemid="<?php echo $class_multi; ?>">
             <option value="list_date-desc" <?php selected($response['order'], 'list_date-desc'); ?>><?php echo __("Newest Listings", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
             <option value="price-desc" <?php selected($response['order'], 'price-desc'); ?>><?php echo __("Highest Price", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
@@ -513,7 +526,8 @@ else $viewfilter = $response['view'];
           </select>
         </li>
         <li id="filter-views" class="filter-views filter-views-<?php echo $class_multi; ?> clidxboost-icon-arrow-select <?php echo $response['view']; ?>" filtemid="<?php echo $class_multi; ?>">
-          <select>
+          <label class="ms-hidden" for="flex_idx_type_view"><?php echo __("Display as", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+          <select id="flex_idx_type_view">
             <option value="grid" <?php selected($response['view'], 'grid'); ?>><?php echo __("Grid", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
             <option value="list" <?php selected($response['view'], 'list'); ?>><?php echo __("List", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
             <option value="map" <?php selected($response['view'], 'map'); ?>><?php echo __("Map", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
@@ -636,16 +650,16 @@ else $viewfilter = $response['view'];
                       <?php endif; ?>
                     <?php endforeach; ?>
                   </ul>
-                  <button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>
-                  <button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>
+                  <button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>
+                  <button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>
                   <?php if (isset($property['status'])) : ?>
                     <?php if ($property['is_favorite'] == true) : ?>
                       <?php $filter_favorite_idxboost = $filter_favorite_idxboost + 1; ?>
-                      <button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo $property['token_alert']; ?>">
+                      <button aria-label="Remove Favorite" class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo $property['token_alert']; ?>">
                         <span class="clidxboost-icon-check active"></span>
                       </button>
                     <?php else : ?>
-                      <button class="clidxboost-btn-check flex-favorite-btn">
+                      <button aria-label="Save Favorite" class="clidxboost-btn-check flex-favorite-btn">
                         <span class="clidxboost-icon-check"></span>
                       </button>
                     <?php endif; ?>

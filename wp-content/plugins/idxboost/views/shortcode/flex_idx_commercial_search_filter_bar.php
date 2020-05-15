@@ -7,7 +7,8 @@
   <div class="ib-fheader">
     <div class="ib-fhpa">
       <div class="ib-fhpa-minisearch">
-        <input class="ib-fmsearch ib-fmsearchsuggestions ib-fcitiesnon-hide" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" type="search" data-type="outer-ac" placeholder="<?php echo __('Enter Address, City, Zip Code, Subdivision', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+        <label for="ib-fmsearch-a" class="ms-hidden"><?php echo __('Enter Address, City, Zip Code, Subdivision', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+        <input id="ib-fmsearch-a" class="ib-fmsearch ib-fmsearchsuggestions ib-fcitiesnon-hide" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" type="search" data-type="outer-ac" placeholder="<?php echo __('Enter Address, City, Zip Code, Subdivision', IDXBOOST_DOMAIN_THEME_LANG); ?>">
         <div class="ib-fmsubmit ib-icon-search ib-kw-tg-search"><span class="ib-btext"><?php echo __('Search', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
         <div class="ib-fcities ib-fcitiesnon-hide">
           <ul class="ib-lcities"></ul>
@@ -35,9 +36,11 @@
               
               <div class="ib-price-range-wrap ib-price-range-wrap-sale">
                 <div class="ib-wimputs">
-                  <input class="notranslate ib-iffrom ib-ffrom-sale ib-rprice-sale-lbl-lt ib-comm-price-sale-outer-min" placeholder="Min"  type="text" value="">
+		  <label for="ms-price-a" class="ms-hidden"><?php echo __('Price Range', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                  <input class="notranslate ib-iffrom ib-ffrom-sale ib-rprice-sale-lbl-lt ib-comm-price-sale-outer-min" placeholder="Min"  type="text" value="" id="ms-price-a">
                   <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <input class="notranslate ib-ifto ib-ifto-sale ib-rprice-sale-lbl-rt ib-comm-price-sale-outer-max"  placeholder="Max"  type="text" value="">
+                  <label for="ms-price-b" class="ms-hidden"><?php echo __('Price Range', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+		  <input class="notranslate ib-ifto ib-ifto-sale ib-rprice-sale-lbl-rt ib-comm-price-sale-outer-max"  placeholder="Max"  type="text" value="" id="ms-price-b">
                 </div>
                 <?php /*
                 <div class="ib-wrange">
@@ -47,9 +50,11 @@
 
               <div class="ib-price-range-wrap ib-price-range-wrap-rent">
                 <div class="ib-wimputs">
-                    <input class="notranslate ib-iffrom ib-ffrom-rent ib-rprice-rent-lbl-lt ib-comm-price-rent-outer-min" placeholder="Min"  type="text"   value="">
+		    <label for="ms-price-c" class="ms-hidden"><?php echo __('Price Range', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input class="notranslate ib-iffrom ib-ffrom-rent ib-rprice-rent-lbl-lt ib-comm-price-rent-outer-min" placeholder="Min"  type="text"   value="" id="ms-price-c">
                     <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                    <input class="notranslate ib-ifto ib-ifto-rent ib-rprice-rent-lbl-rt ib-comm-price-rent-outer-max"  placeholder="Max"  type="text"   value="">
+		    <label for="ms-price-d" class="ms-hidden"><?php echo __('Price Range', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input class="notranslate ib-ifto ib-ifto-rent ib-rprice-rent-lbl-rt ib-comm-price-rent-outer-max"  placeholder="Max"  type="text"   value="" id="ms-price-d">
                 </div>
                 <?php /*
                 <div class="ib-wrange">
@@ -157,9 +162,11 @@
                   <div class="ib-ficontent ib-price-range-inner" style="padding-bottom:2px;">
                     <div class="ib-price-range-wrap ib-price-range-wrap-sale">
                     <div class="ib-wimputs">
-                      <input class="notranslate ib-iffrom ib-ffrom-sale ib-rprice-sale-lbl-lt ib-comm-price-sale-inner-min" placeholder="Min"  type="text"   value="">
+			<label for="ms-price-e" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input class="notranslate ib-iffrom ib-ffrom-sale ib-rprice-sale-lbl-lt ib-comm-price-sale-inner-min" placeholder="Min"  type="text"   value="" id="ms-price-e">
                       <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                      <input class="notranslate ib-ifto ib-ifto-sale ib-rprice-sale-lbl-rt ib-comm-price-sale-inner-max"  placeholder="Max"  type="text"   value="">
+			<label for="ms-price-f" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input class="notranslate ib-ifto ib-ifto-sale ib-rprice-sale-lbl-rt ib-comm-price-sale-inner-max"  placeholder="Max"  type="text"   value="" id="ms-price-f">
                     </div>
                     <?php /*
                     <div class="ib-wrange">
@@ -169,9 +176,11 @@
 
                   <div class="ib-price-range-wrap ib-price-range-wrap-rent">
                     <div class="ib-wimputs">
-                        <input class="notranslate ib-iffrom ib-ffrom-rent ib-rprice-rent-lbl-lt ib-comm-price-rent-inner-min" placeholder="Min"  type="text"   value="">
+			<label for="ms-price-g" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <input id="ms-price-g" class="notranslate ib-iffrom ib-ffrom-rent ib-rprice-rent-lbl-lt ib-comm-price-rent-inner-min" placeholder="Min"  type="text"   value="">
                         <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                        <input class="notranslate ib-ifto ib-ifto-rent ib-rprice-rent-lbl-rt ib-comm-price-rent-inner-max" placeholder="Max"  type="text"   value="">
+			<label for="ms-price-h" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <input id="ms-price-h" class="notranslate ib-ifto ib-ifto-rent ib-rprice-rent-lbl-rt ib-comm-price-rent-inner-max" placeholder="Max"  type="text"   value="">
                     </div>
                     <?php /*
                     <div class="ib-wrange">
@@ -186,9 +195,12 @@
                   <div class="ib-fititle"><?php echo __('Space Size (SF)', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                   <div class="ib-ficontent">
                     <div class="ib-wimputs">
-                      <input class="notranslate ib-iffrom ib-rliving-lbl-lt ib-comm-sqft-inner-min" type="text" placeholder="Min"  value="">
+			<label for="ms-size-a" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+
+                      <input id="ms-size-a" class="notranslate ib-iffrom ib-rliving-lbl-lt ib-comm-sqft-inner-min" type="text" placeholder="Min"  value="">
                       <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                      <input class="notranslate ib-ifto ib-rliving-lbl-rt ib-comm-sqft-inner-max" type="text"  placeholder="Max"  value="">
+<label for="ms-size-b" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input class="notranslate ib-ifto ib-rliving-lbl-rt ib-comm-sqft-inner-max" type="text"  placeholder="Max"  value="" id="ms-size-b">
                     </div>
                     <?php /*
                     <div class="ib-wrange">
@@ -201,9 +213,11 @@
                   <div class="ib-fititle"><?php echo __('Total Building Size (SF)', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                   <div class="ib-ficontent">
                     <div class="ib-wimputs">
-                        <input class="notranslate ib-iffrom ib-bsize-lbl-lt ib-comm-bsize-inner-min" type="text" placeholder="Min"  value="">
+<label for="ms-building-size-a" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <input class="notranslate ib-iffrom ib-bsize-lbl-lt ib-comm-bsize-inner-min" type="text" placeholder="Min"  value="" id="ms-building-size-a">
                         <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                        <input class="notranslate ib-ifto ib-bsize-lbl-rt ib-comm-bsize-inner-max" type="text" placeholder="Max"  value="">
+<label for="ms-building-size-b" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <input class="notranslate ib-ifto ib-bsize-lbl-rt ib-comm-bsize-inner-max" type="text" placeholder="Max"  value="" id="ms-building-size-b">
                     </div>
 
                     <?php /*
@@ -219,9 +233,11 @@
                   <div class="ib-fititle"><?php echo __('Total Lot Size Range', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                   <div class="ib-ficontent">
                     <div class="ib-wimputs">
-                      <input class="notranslate ib-iffrom ib-rland-lbl-lt ib-comm-lotsize-inner-min" type="text" placeholder="Min"  value="">
+<label for="ms-beds-range-a" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input class="notranslate ib-iffrom ib-rland-lbl-lt ib-comm-lotsize-inner-min" type="text" placeholder="Min"  value="" id="ms-beds-range-a">
                       <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                      <input class="notranslate ib-ifto ib-rland-lbl-rt ib-comm-lotsize-inner-max" type="text" placeholder="Max"  value="">
+<label for="ms-beds-range-b" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input class="notranslate ib-ifto ib-rland-lbl-rt ib-comm-lotsize-inner-max" type="text" placeholder="Max"  value="" id="ms-beds-range-b">
                     </div>
 
                       <div class="lotsize-measure-options" style="display:none !important;">
@@ -266,9 +282,11 @@
                   <div class="ib-ficontent" style="padding-bottom:2px;">
 
                   <div class="ib-wimputs">
-                    <input class="notranslate ib-iffrom ib-ubrange-lbl-lt ib-comm-beds-inner-min" type="text" value="" placeholder="Min">
+<label for="ms-range-ib-comm-beds-inner-min" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input class="notranslate ib-iffrom ib-ubrange-lbl-lt ib-comm-beds-inner-min" type="text" value="" placeholder="Min" id="ms-range-ib-comm-beds-inner-min">
                     <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                    <input class="notranslate ib-ifto ib-ubrange-lbl-rt ib-comm-beds-inner-max" type="text"   value="" placeholder="Max">
+<label for="ms-range-ib-comm-beds-inner-max" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input class="notranslate ib-ifto ib-ubrange-lbl-rt ib-comm-beds-inner-max" type="text"   value="" placeholder="Max" id="ms-range-ib-comm-beds-inner-max">
                   </div>
 
                   <?php /*
@@ -292,7 +310,8 @@
                   <div class="ib-ficontent">
                     <div class="ib-wimputs">
                     <div class="ib-item-wrap-fm ib-wrap-content-select">
-                      <select class="ib-comm-year-inner-min ib-ryear-lbl-lt">
+                        <label for="year-inner-min" class="ms-hidden"><?php echo __('Year Built', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <select class="ib-comm-year-inner-min ib-ryear-lbl-lt" id="year-inner-min">
                         <?php for($min_year = 1900; $min_year <= 2020; $min_year++): ?>
                         <option value="<?php echo $min_year; ?>"><?php echo $min_year; ?></option>
                         <?php endfor; ?>
@@ -300,7 +319,8 @@
                     </div>
                       <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                       <div class="ib-item-wrap-fm ib-wrap-content-select">
-                        <select class="ib-comm-year-inner-max ib-ryear-lbl-rt">
+                          <label for="year-inner-max" class="ms-hidden"><?php echo __('Year Built', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                          <select class="ib-comm-year-inner-max ib-ryear-lbl-rt" id="year-inner-max">
                         <?php for($max_year = 2020; $max_year >= 1900; $max_year--): ?>
                         <option value="<?php echo $max_year; ?>"><?php echo $max_year; ?></option>
                         <?php endfor; ?>
@@ -340,8 +360,11 @@
                   <div class="ib-fititle"><?php echo __('Cap Rate Range (%). ?', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                   <div class="ib-ficontent">
                     <div class="ib-wimputs">
-                      <input class="notranslate ib-iffrom ib-raterange-lbl-lt ib-comm-rate-inner-min" type="text" placeholder="Min"  value=""><span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                      <input class="notranslate ib-ifto ib-raterange-lbl-rt ib-comm-rate-inner-max" type="text" placeholder="Max"   value="">
+                      <label for="rate-inner-min" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input class="notranslate ib-iffrom ib-raterange-lbl-lt ib-comm-rate-inner-min" type="text" value="" placeholder="Min" id="rate-inner-min">
+                      <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                      <label for="rate-inner-max" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input class="notranslate ib-ifto ib-raterange-lbl-rt ib-comm-rate-inner-max" type="text" value="" placeholder="Max" id="rate-inner-max">
                     </div>
 
                     <div class="cap-rate-range-desc">
@@ -364,8 +387,8 @@
         </li>
       </ul>
       <div class="ib-fhpa-directbtns">
-        <div class="ib-dbitem ib-dbclear ib-icon-carrow"><span class="ib-btext"><?php echo __('Clear', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
-        <div class="ib-dbitem ib-dbsave ib-icon-save"><span class="ib-btext"><?php echo __('Save', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+        <button class="ib-dbitem ib-dbclear ib-icon-carrow" aria-label="<?php echo __('Clear', IDXBOOST_DOMAIN_THEME_LANG); ?>"><span class="ib-btext"><?php echo __('Clear', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+        <button class="ib-dbitem ib-dbsave ib-icon-save" aria-label="<?php echo __('Save', IDXBOOST_DOMAIN_THEME_LANG); ?>"><span class="ib-btext"><?php echo __('Save', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
       </div>
     </div>
     <div class="ib-fmobile">
@@ -376,9 +399,11 @@
 
               <div class="ib-price-range-wrap ib-price-range-wrap-sale">
                 <div class="ib-wimputs">
-                  <input class="notranslate ib-iffrom ib-ffrom-sale ib-rprice-sale-lbl-lt"   type="text" placeholder="Min"  value="">
+<label for="ms-price-i" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                  <input id="ms-price-i" class="notranslate ib-iffrom ib-ffrom-sale ib-rprice-sale-lbl-lt"   type="text" placeholder="Min"  value="">
                   <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <input class="notranslate ib-ifto ib-ifto-sale ib-rprice-sale-lbl-rt"   type="text" placeholder="Max"   value="">
+<label for="ms-price-j" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                  <input id="ms-price-j" class="notranslate ib-ifto ib-ifto-sale ib-rprice-sale-lbl-rt"   type="text" placeholder="Max"   value="">
                 </div>
                 <div class="ib-wrange">
                   <div class="ib-range ib-rprice-sale"></div>
@@ -387,9 +412,11 @@
 
               <div class="ib-price-range-wrap ib-price-range-wrap-rent">
                 <div class="ib-wimputs">
-                    <input class="notranslate ib-iffrom ib-ffrom-rent ib-rprice-rent-lbl-lt"   type="text" placeholder="Min"  value="">
+<label for="ms-price-k" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input id="ms-price-k" class="notranslate ib-iffrom ib-ffrom-rent ib-rprice-rent-lbl-lt"   type="text" placeholder="Min"  value="">
                     <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                    <input class="notranslate ib-ifto ib-ifto-rent ib-rprice-rent-lbl-rt"   type="text"  placeholder="Max"  value="">
+<label for="ms-price-l" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input id="ms-price-l" class="notranslate ib-ifto ib-ifto-rent ib-rprice-rent-lbl-rt"   type="text"  placeholder="Max"  value="">
                 </div>
                 <div class="ib-wrange">
                   <div class="ib-range ib-rprice-rent"></div>
@@ -444,8 +471,10 @@
           <div class="ib-fititle"><?php echo __('Space Size (SF)', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
           <div class="ib-ficontent">
             <div class="ib-wimputs">
-              <input class="notranslate ib-iffrom ib-rliving-lbl-lt" type="text"   value=""><span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              <input class="notranslate ib-ifto ib-rliving-lbl-rt" type="text"   value="">
+<label for="ms-price-o" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+              <input id="ms-price-o" class="notranslate ib-iffrom ib-rliving-lbl-lt" type="text"   value=""><span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+<label for="ms-price-p" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>              
+<input id="ms-price-p" class="notranslate ib-ifto ib-rliving-lbl-rt" type="text"   value="">
             </div>
             <div class="ib-wrange">
               <div class="ib-range ib-rliving"></div>
@@ -456,8 +485,10 @@
           <div class="ib-fititle"><?php echo __('Year Built', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
           <div class="ib-ficontent">
             <div class="ib-wimputs">
-              <input class="notranslate ib-iffrom ib-ryear-lbl-lt"   type="text" value=""><span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              <input class="notranslate ib-ifto ib-ryear-lbl-rt"   type="text" value="">
+<label for="ms-price-q" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+              <input id="ms-price-q" class="notranslate ib-iffrom ib-ryear-lbl-lt"   type="text" value=""><span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+<label for="ms-price-r" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>              
+<input id="ms-price-r" class="notranslate ib-ifto ib-ryear-lbl-rt"   type="text" value="">
             </div>
             <div class="ib-wrange">
               <div class="ib-range ib-ryear"></div>
@@ -468,8 +499,9 @@
           <div class="ib-fititle"><?php echo __('Waterfront Description', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
           <div class="ib-ficontent">
             <div class="ib-wselect ib-icon-darrow">
-              <select class="ib-fselect ib-waterfront-options">
-                <option value="--">Any</option>
+            <label class="ms-hidden" for="ib-waterfront-options-b"><?php echo __('Waterfront Description', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+            <select class="ib-fselect ib-waterfront-options" id="ib-waterfront-options-b">
+		<option value="--">Any</option>
               </select>
             </div>
           </div>
@@ -490,8 +522,11 @@
           <div class="ib-fititle"><?php echo __('Total Lot Size Range', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
           <div class="ib-ficontent">
             <div class="ib-wimputs">
-              <input class="notranslate ib-iffrom ib-rland-lbl-lt" type="text"   value=""><span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-              <input class="notranslate ib-ifto ib-rland-lbl-rt" type="text"   value="">
+            <label for="ms-price-y" class="ms-hidden"><?php echo __('Minimum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+            <input class="notranslate ib-iffrom ib-rland-lbl-lt" type="text" value="" id="ms-price-y" readonly>
+            <span class="ib-iftxt"><?php echo __('to', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+            <label for="ms-price-w" class="ms-hidden"><?php echo __('Maximum', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+            <input class="notranslate ib-ifto ib-rland-lbl-rt" type="text" value="" id="ms-price-w" readonly>
             </div>
             <div class="ib-wrange">
               <div class="ib-range ib-rland"></div>

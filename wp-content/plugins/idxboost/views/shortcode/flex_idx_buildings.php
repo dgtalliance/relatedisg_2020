@@ -87,11 +87,11 @@
                       <div class="info-sub-item">
                         <div class="info-a">
                           <div class="content-img">
-                            <img src="<?php echo $property['thumbnail']; ?>">
+                            <img src="<?php echo $property['thumbnail']; ?>" alt="<?php echo $property['addressShort']; ?>">
                           </div>
                         </div>
                         <div class="info-b">
-                          <h2><?php echo $property['name']; ?></h2>
+                          <h3 class="info-b-title"><?php echo $property['name']; ?></h2>
                           <div class="action-info-b">
                             <button class="clidxboost-btn-show"><span class="s1"><?php echo __('View more', IDXBOOST_DOMAIN_THEME_LANG); ?></span><span class="s2"><?php echo __('Less', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
                             <button data-building-id="<?php echo $property['codBuilding']; ?>" class="clidxboost-btn-remove dgt-remove-favorite"> <span><?php echo __('Remove', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>

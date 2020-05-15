@@ -99,54 +99,54 @@ if (array_key_exists('payload', $response)) {
       }
     }
   }
-  ?>
-  <main class="property-details theme-3">
-    <div id="full-main">
-      <section class="title-conteiner gwr animated fixed-box">
-        <div class="content-fixed simple-btn">
-          <div class="content-fixed-title">
-            <h1 class="title-page" data-title="<?php echo $response['payload']['name_building']; ?>"><?php echo $response['payload']['name_building']; ?><span><?php echo $building_default_address; ?></span></h1>
-            <input type="hidden" class="idx_name_building" value="<?php echo $response['payload']['name_building']; ?>">
-            <div class="breadcrumb-options">
-              <a href="javascript:void(0)" class="btn-request" id="form-request-a">
-                <?php echo __("INQUIRE", IDXBOOST_DOMAIN_THEME_LANG); ?>
-              </a>
-              <script type="text/javascript">
-                jQuery("#form-request-a").on("click", function() {
-                  jQuery(".aside .flex_idx_building_form .gfield:nth-child(1) input").focus();
-                });
-              </script>
-            </div>
+?>
+<main class="property-details theme-3">
+  <div id="full-main">
+    <section class="title-conteiner gwr animated fixed-box">
+      <div class="content-fixed simple-btn">
+        <div class="content-fixed-title">
+          <h1 class="title-page" data-title="<?php echo $response['payload']['name_building']; ?>"><?php echo $response['payload']['name_building']; ?><span><?php echo $building_default_address; ?></span></h1>
+          <input type="hidden" class="idx_name_building" value="<?php echo $response['payload']['name_building']; ?>">
+          <div class="breadcrumb-options">
+            <button class="btn-request" id="form-request-a">
+              <?php echo __("INQUIRE", IDXBOOST_DOMAIN_THEME_LANG); ?>
+            </button>
+            <script type="text/javascript">
+              jQuery("#form-request-a").on( "click", function() {
+                jQuery(".aside .flex_idx_building_form .gfield:nth-child(1) input").focus();
+              });
+            </script>
           </div>
-          <ul class="content-fixed-btn">
-            <li>
-              <!--
+        </div>
+        <ul class="content-fixed-btn">
+          <li>
+            <!--
             <button class="clidxboost-icon-envelope show-modal" data-modal="modal_email_to_friend">
             <span><?php echo __('Email to a friend', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
             </button>-->
 
-              <button class="btn-request" id="form-request"><?php echo __("INQUIRE", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-              <script type="text/javascript">
-                jQuery("#form-request").on("click", function() {
-                  jQuery(".form-content.large-form .medium:eq(0)").focus();
-                });
-              </script>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <div class="header-print">
-        <img src="<?php echo $logo_broker; ?>" title="idxboost">
-        <ul>
-          <li><?php echo __('Call me', IDXBOOST_DOMAIN_THEME_LANG); ?>: <?php echo flex_phone_number_filter($flex_idx_info['agent']['agent_contact_phone_number']); ?></li>
-          <li><?php echo $flex_idx_info['agent']['agent_contact_email_address'] ?></li>
+            <button class="btn-request" id="form-request"><?php echo __("INQUIRE", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+            <script type="text/javascript">
+              jQuery("#form-request").on( "click", function() {
+                jQuery(".form-content.large-form .medium:eq(0)").focus();
+              });
+            </script>
+          </li>
         </ul>
       </div>
-      <div id="imagen-print"></div>
+    </section>
+    <div class="header-print">
+      <img src="<?php echo $logo_broker; ?>" alt="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>">
+      <ul>
+        <li><?php echo __('Call me', IDXBOOST_DOMAIN_THEME_LANG); ?>: <?php echo flex_phone_number_filter($flex_idx_info['agent']['agent_contact_phone_number']); ?></li>
+        <li><?php echo $flex_idx_info['agent']['agent_contact_email_address'] ?></li>
+      </ul>
+    </div>
+    <div id="imagen-print"></div>
 
       <?php if (count($response['payload']['gallery_building']) > 0) { ?>
         <div id="full-slider">
-          <div class="gs-container-slider clidxboost-full-slider">
+          <div class="gs-container-slider clidxboost-full-slider" alt="<?php echo $property['name']; ?> <?php  echo $property['address']; ?>">
             <?php foreach ($response['payload']['gallery_building'] as $key => $value) { ?>
               <img data-lazy="<?php echo $value['url_image']; ?>" alt="<?php echo $value['name_image']; ?>" class="img-slider gs-lazy">
             <?php } ?>

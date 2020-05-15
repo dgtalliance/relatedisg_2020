@@ -142,9 +142,9 @@
     <a href="<?php echo $link_wp_Building; ?>" class="layout-img">
     <?php if ( count($value['list_gallery']) != 0  ) { ?>
     <?php foreach ($value['list_gallery'] as $kga => $vga) { ?>
-    <img src="<?php echo $vga; ?>" alt="Bayside Village" class="lazy-img active">
+    <img src="<?php echo $vga; ?>" class="lazy-img active" alt="<?php echo str_replace('# ' , '#', $rel_item['address_short']); ?>">
     <?php } }else{ ?>
-    <img src="//www.idxboost.com/i/default_thumbnail.jpg" alt="Bayside Village" class="lazy-img active">
+    <img src="//www.idxboost.com/i/default_thumbnail.jpg" class="lazy-img active" alt="<?php echo str_replace('# ' , '#', $rel_item['address_short']); ?>">
     <?php } ?>
     </a>
   </article>

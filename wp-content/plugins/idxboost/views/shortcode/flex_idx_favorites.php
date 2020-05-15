@@ -85,11 +85,11 @@
                       <div class="info-sub-item">
                         <div class="info-a">
                           <div class="content-img">
-                            <img src="<?php echo $property['thumbnail']; ?>">
+                            <img src="<?php echo $property['thumbnail']; ?>" alt="<?php echo $property['addressShort']; ?>">
                           </div>
                         </div>
                         <div class="info-b">
-                          <h2><?php echo $property['addressShort']; ?></h2>
+                          <h3 class="info-b-title"><?php echo $property['addressShort']; ?></h3>
                           <span><?php echo str_replace(array(' FL, ', ' IL, '), array(', FL ', ', IL '), $property['addressLarge']); ?></span>
                           
                           <?php /*

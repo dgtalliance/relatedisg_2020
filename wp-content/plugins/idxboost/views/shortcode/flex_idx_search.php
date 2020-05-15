@@ -704,8 +704,8 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 <!-- <img class="ib-pifimg" src="{{ idxImage this }}" alt="{{ full_address }}"> -->
                 <div class="gs-container-navs">
                     <div class="gs-wrapper-arrows">
-                        <button class="gs-prev-arrow"></button>
-                        <button class="gs-next-arrow"></button>
+                        <button class="gs-prev-arrow" tabindex="-1" aria-label="Prev"></button>
+                        <button class="gs-next-arrow" tabindex="-1" aria-label="Next"></button>
                     </div>
                 </div>
             </div>

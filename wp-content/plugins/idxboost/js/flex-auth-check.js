@@ -2520,17 +2520,31 @@ function scrollFixedElement(elemento) {
   /*------------------------------------------------------------------------------------------*/
   /* Boton de print
   /*------------------------------------------------------------------------------------------*/
-  $(document).on("click", "#print-btn", function (e) {
+  $(document).on('click', '#print-btn', function (e) {
     e.preventDefault();
-    var imgPrint = $("#full-slider .gs-wrapper-content:first-child").html();
+    var imgPrint = $('#full-slider .gs-wrapper-content:first-child').html();
     $("#imagen-print").html(imgPrint);
-    $("#printMessageBox").fadeIn();
-    $("#full-main").printArea({
+    $('#printMessageBox').fadeIn();
+    $('#full-main').printArea({
       onClose: function () {
-        $("#printMessageBox").fadeOut("fast");
-      },
+        $('#printMessageBox').fadeOut('fast');
+      }
     });
   });
+
+  /*$(document).on('click', '#print-btn', function (e) {
+    e.preventDefault();
+    printPage();
+    $('#printMessageBox').fadeIn();
+    $('body').css({'overflow':'hidden'});
+    $('#printZone').printArea({
+      onClose: function () {
+        $('#printMessageBox').fadeOut('fast');
+        $("#printZone").empty();
+        $('body').css({'overflow-y':'auto'});
+      }
+    });
+  });*/
 
   /*------------------------------------------------------------------------------------------*/
   /* Boton full screen
@@ -3010,3 +3024,103 @@ function scrollFixedElement(elemento) {
     });
   });
 })(jQuery);
+
+
+function printPage(){
+
+  var printLogo         = jQuery(".ms-header-print").attr("data-logo-print");
+  var printEmail        = jQuery(".ms-header-print").attr("data-email-print");
+  var printPhone        = jQuery(".ms-header-print").attr("data-phone-print");
+  var printAgent        = jQuery(".ms-header-print").attr("data-name-print");
+  var printAddress      = jQuery(".title-page").html();
+  var printImgProp      = jQuery("#full-slider .clidxboost-full-slider img:eq(0)").attr('src');
+  var printDescription  = jQuery("#property-description").html();
+
+  var printListDetail = "";
+  var tempPrintListDetail = "";
+  var listCount = 0;
+
+  jQuery(".property-information li").each(function () {
+    if (jQuery(this).hasClass('price-property')) {
+      var htmlSpan = '<tr><td colspan="2" align="center" valign="middle"><div style="padding:10px 0; border-bottom:1px solid #CCCCCC"><div style="font-size:18px; font-weight:bold; font-family:Arial; width: 100%">'+jQuery(this).html()+'</div></div></td></tr>';
+      printListDetail += htmlSpan.replace('<span>','<span style="font-size:12px; font-family:Arial; color:#999; display: block; text-transform: capitalize; font-weight: 100">');
+    }else if(!jQuery(this).hasClass('btn-save')){
+      listCount += 1;
+      if(listCount == 1){
+        tempPrintListDetail += '<tr>';
+      }else if(listCount == 3){
+        tempPrintListDetail += '</tr><tr>';
+        listCount += 0;
+      }
+      var htmlSpan = '<td width="137" align="center" valign="middle"><div style="padding:10px 0 5px 0"><div style="font-size:18px; font-weight:bold; font-family:Arial;">'+jQuery(this).html()+'</div></div></td>';
+      tempPrintListDetail += htmlSpan.replace('<span>','<span style="font-size:10px; font-family:Arial; color:#999; display: block; text-transform: uppercase; font-weight: 100">');
+    }
+  });
+
+  printListDetail += tempPrintListDetail; 
+
+  //Listando los amenities
+  var listHtml = '';
+  var ulCount = 0;
+  jQuery("#full-main .main>.gwr .main-content .list-details").each(function () {
+    ulCount += 1;
+    listHtml += '<div style="-webkit-print-color-adjust: exact; font-size:12px; font-weight:bold; font-family:Arial; padding:7px; background:#eaeaea; display:block;">'+jQuery(this).find(">h2").text()+'</div>';
+    listHtml += '<div>';
+
+    if (ulCount == 1) {
+      listHtml += '<ul style="display: flex;width: 100%;flex-wrap: wrap;justify-content: space-between;padding: 0;list-style: none;">';
+    }else{
+      listHtml += '<ul style="display: block ;width: 100%; padding: 0;list-style: none;">';
+    }
+
+    jQuery(this).find("ul li").each(function () {
+      if (jQuery(this).parent().hasClass('list-detail')) {
+        listHtml += '<li style="width:32%;font-size:12px;display:flex;justify-content: space-between;padding:5px 0;font-family:Arial;border-bottom:1px solid #eaeaea">'+jQuery(this).html()+'</li>';
+      }else{
+        listHtml += '<li style="font-size:12px;font-family:Arial; display: inline-block; padding: 5px 0;">'+jQuery(this).html()+', </li>';
+      }
+    });
+    listHtml += '</ul></div>';
+  });
+
+  var printPage =
+
+  '<table width="780" border="0" cellpadding="0" cellspacing="0" style="margin-left:auto; margin-right: auto; margin-top: -90px; margin-bottom: auto;">'+
+  '<tr>'+
+  '<td width="374" valign="middle">'+
+  '<img src="'+printLogo+'" style="width:120px">'+
+  '</td>'+
+
+  '<td width="374" height="60" align="right" valign="middle">'+
+  '<div style="font-size:14px; font-family:Arial;"><strong>'+printAgent+'</strong></div>'+
+  '<div style="font-size:12px; font-family:Arial;">Ph.'+printPhone+'</div>'+
+  '<div style="font-size:12px; font-family:Arial;">'+printEmail+'</div>'+
+  '</td>'+
+  '</tr>'+
+  '<tr>'+
+  '<td height="45" colspan="2" valign="top" style="border-top:4px solid #eaeaea;">'+
+  '<div style="font-size:18px; font-weight:bold; padding:15px 0 10px 0; font-family:Arial;">'+printAddress+'</div>'+
+  '</td>'+
+  '</tr>'+
+  '<tr>'+
+  '<td height="158" align="left" valign="top">'+
+  '<img src="'+printImgProp+'" width="340px" height="170px" />'+
+  '</td>'+
+  '<td align="right" valign="top">'+
+  '<div style="width:390px; height:170px; border: 1px solid #CCCCCC">'+
+  '<table width="100%" border="0" cellpadding="0" cellspacing="0" bordercolor="#CCCCCC">'+printListDetail+'</tr>'+
+  '</table>'+
+  '</div>'+
+  '</td>'+
+  '</tr>'+
+  '<tr>'+
+  '<td colspan="2" valign="top">'+
+  '<div style="font-size:12px; line-height:1.3; font-family:Arial; margin:10px 0">'+printDescription+'</div>'+
+  '</td>'+
+  '</tr>'+
+  '<tr>'+
+  '<td colspan="2" valign="top">'+listHtml+'</td>'+
+  '</tr>'+
+  '</table>';
+  jQuery("#printZone").empty().html(printPage);
+}

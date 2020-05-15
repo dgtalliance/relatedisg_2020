@@ -94,24 +94,24 @@ $('.propertie').on('click',function(event){
 	                        listingHTML.push('<div class="wrap-slider '+totgallery+'">');
 	                        listingHTML.push('<ul>');
 	                        for (var k = 0, m = item.gallery.length; k < m; k++) {
-	                            // listingHTML.push('<li><img src="' + item.gallery[k] + '" data-src="' + item.gallery[k] + '"></li>');
+	                            // listingHTML.push('<li><img src="' + item.gallery[k] + '" data-src="' + item.gallery[k] + '" alt="' + item.full_address + '"></li>');
 	                            if (k <= 0) {
-	                                listingHTML.push('<li class="flex-slider-current"><img class="flex-lazy-image" data-original="' + item.gallery[k] + '"></li>');
+	                                listingHTML.push('<li class="flex-slider-current"><img class="flex-lazy-image" data-original="' + item.gallery[k] + '" alt="' + item.full_address + '"></li>');
 	                            } else {
-	                                listingHTML.push('<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="' + item.gallery[k] + '"></li>');
+	                                listingHTML.push('<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="' + item.gallery[k] + '" alt="' + item.full_address + '"></li>');
 	                            }
 	                        }
 	                        listingHTML.push('</ul>');
 	                        if (item.gallery.length > 1) {
-	                            listingHTML.push('<button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>');
-	                            listingHTML.push('<button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>');
+	                            listingHTML.push('<button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>');
+	                            listingHTML.push('<button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>');
 	                        }
 
 	                        if (!item.hasOwnProperty("status")) {
 	                            if (item.is_favorite) {
-	                                listingHTML.push('<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check active"></span></button>');
+	                                listingHTML.push('<button class="clidxboost-btn-check flex-favorite-btn" aria-label="Remove Favorite"><span class="clidxboost-icon-check active"></span></button>');
 	                            } else {
-	                                listingHTML.push('<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check"></span></button>');
+	                                listingHTML.push('<button class="clidxboost-btn-check flex-favorite-btn" aria-label="Save Favorite"><span class="clidxboost-icon-check"></span></button>');
 	                            }
 	                        }
 

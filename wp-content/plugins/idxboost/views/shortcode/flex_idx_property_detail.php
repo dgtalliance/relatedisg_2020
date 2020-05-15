@@ -655,7 +655,9 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
               </div>
             </div>
             <form method="post" id="flex-idx-property-form" class="gtm_more_info_property iboost-secured-recaptcha-form">
-              <?php if (isset($_GET['ibref']) && !empty($_GET['ibref'])) : ?>
+<fieldset>
+            <legend><?php echo $agent_info_name; ?></legend>              
+<?php if (isset($_GET['ibref']) && !empty($_GET['ibref'])) : ?>
                 <input type="hidden" name="registration_key" value="<?php echo strip_tags($_GET['ibref']); ?>" />
               <?php endif; ?>
               <input type="hidden" name="ib_tags" value="">
@@ -673,9 +675,9 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
                   <?php if (array_key_exists('track_gender', $flex_idx_info['agent'])) {
                     if ($flex_idx_info['agent']['track_gender'] == true) {  ?>
                       <li class="gfield">
-                        <label class="gfield_label" for="first_name"><?php echo __("Gender", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                        <div class="ginput_container ginput_container_text sp-box">
-                          <select name="gender" class="gender">
+ <div class="ginput_container ginput_container_text sp-box">
+                        <label class="gfield_label" for="ms-gender"><?php echo __("Gender", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <select name="gender" class="gender" id="ms-gender">                          
                             <option value="<?php echo __('Mr.', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Mr.', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                             <option value="<?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                             <option value="<?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
@@ -685,42 +687,43 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
                       </li>
                     <?php } else { ?>
                       <li class="gfield">
-                        <label class="gfield_label" for="first_name"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        
                         <div class="ginput_container ginput_container_text">
+<label class="gfield_label" for="_ib_fn_inq"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                           <input required class="medium" name="first_name" id="_ib_fn_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])) : ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif; ?>" placeholder="<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
                         </div>
                       </li>
                     <?php  }
                   } else { ?>
                     <li class="gfield">
-                      <label class="gfield_label" for="first_name"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                       <div class="ginput_container ginput_container_text">
+                    <label class="gfield_label" for="_ib_fn_inq"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                         <input required class="medium" name="first_name" id="_ib_fn_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])) : ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif; ?>" placeholder="<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
                       </div>
                     </li>
                   <?php } ?>
                   <li class="gfield">
-                    <label class="gfield_label" for="first_name"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container ginput_container_text">
+                    <label class="gfield_label" for="_ib_ln_inq"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                       <input class="medium" name="last_name" id="_ib_ln_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['last_name'])) : ?><?php echo $flex_idx_lead['lead_info']['last_name']; ?><?php endif; ?>" placeholder="<?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
                     </div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label" for="email"><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container ginput_container_email">
+                    <label class="gfield_label" for="_ib_em_inq"><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                       <input required class="medium" name="email" id="_ib_em_inq" type="email" value="<?php if (isset($flex_idx_lead['lead_info']['email_address'])) : ?><?php echo $flex_idx_lead['lead_info']['email_address']; ?><?php endif; ?>" placeholder="<?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
                     </div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label" for="phone"><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container ginput_container_email">
+                    <label class="gfield_label" for="_ib_ph_inq"><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                       <input class="medium" name="phone" id="_ib_ph_inq" type="text" value="<?php if (isset($flex_idx_lead['lead_info']['phone_number'])) : ?><?php echo $flex_idx_lead['lead_info']['phone_number']; ?><?php endif; ?>" placeholder="<?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?>*">
                     </div>
                   </li>
                   <li class="gfield comments">
-                    <label class="gfield_label" for="message"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <div class="ginput_container">
-                      <textarea class="medium textarea" name="message" id="message" type="text" value="" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" rows="10" cols="50"><?php echo __("I am interested in", IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo str_replace('# ', '#', $property['address_short']); ?> <?php echo $property['address_large']; ?></textarea>
+                   <div class="ginput_container">
+                    <label class="gfield_label" for="ms-message"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <textarea class="medium textarea" name="message" id="ms-message" type="text" value="" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" rows="10" cols="50"><?php echo __("I am interested in", IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo str_replace('# ', '#', $property['address_short']); ?> <?php echo $property['address_large']; ?></textarea>
                     </div>
                   </li>
                   <li class="gfield requiredFields">* <?php echo __("Required Fields", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
@@ -729,6 +732,7 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
                   </div>
                 </ul>
               </div>
+</fieldset>
             </form>
           </div>
           <?php if (!empty($property['related_items'])) : ?>
@@ -738,11 +742,11 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
                 <?php foreach ($property['related_items'] as $rel_item) : ?>
                   <li>
                     <article>
-                      <h2>
+                      <h3 class="ms-title">
                         <a href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $rel_item['slug']; ?>" title="<?php echo str_replace('# ', '#', $rel_item['address_short']); ?>">
                           <?php echo str_replace('# ', '#', $rel_item['address_short']); ?>
                         </a>
-                      </h2>
+                      </h3>
                       <ul>
                         <li class="address"><span><?php echo $rel_item['address_large']; ?></span></li>
                         <li class="price">$<?php echo number_format($rel_item['price']); ?></li>
@@ -759,7 +763,7 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
                         <li> <span><?php echo number_format($rel_item['sqft']); ?> </span><?php echo __("Sq.Ft", IDXBOOST_DOMAIN_THEME_LANG); ?>.</li>
                       </ul>
                       <a class="layout-img" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $rel_item['slug']; ?>">
-                        <img class="lazy-img" data-src="<?php echo $rel_item['gallery'][0]; ?>">
+                        <img class="lazy-img" data-src="<?php echo $rel_item['gallery'][0]; ?>" alt="<?php echo str_replace('# ' , '#', $rel_item['address_short']); ?>">
                       </a>
                     </article>
                   </li>

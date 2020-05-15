@@ -25,14 +25,14 @@ global $flex_idx_info, $flex_idx_lead;
             <li class="close-modal"><button><span class="icon-close"><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></span></button></li>
           </ul>
           <span class="numeration"><span>2</span> <?php echo __('of', IDXBOOST_DOMAIN_THEME_LANG); ?> <span>14</span></span>
-          <img src="" class="img">
+          <img src="/" class="img" alt="Idxboost">
           <button class="prev nav"><span class="icon-arrow-select"></span></button>
           <button class="next nav"><span class="icon-arrow-select"> </span></button>
         </div>
       </div>
     </div>
     <div class="overlay_modal_closer" data-id="modal_img_propertie"></div>
-  </div>
+  </div> 
 
   <!-- REGISTER LOGIN registration_forced-->
   <div class="overlay_modal" id="modal_login">
@@ -85,25 +85,30 @@ global $flex_idx_info, $flex_idx_lead;
                 <?php
                 }
                 ?>
+<fieldset>
+                  <legend><?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
                 <input type="hidden" name="ib_tags" id="formLogin_ib_tags" value="">
                 <input type="hidden" name="window_width" class="formRegister_windowWidth" value="">
                 <input type="hidden" name="logon_type" value="email">
                 <input name="action" type="hidden" value="flex_idx_lead_signin">
                 <ul class="form_md" id="cntLoginForm">
                   <li class="form_input">
+		    <label for="txt_user"><?php echo __('Enter email', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="txt_user" autocomplete="disabled" autocorrect="off" autocapitalize="off" spellcheck="false" name="user_name" placeholder="<?php echo __('Enter email', IDXBOOST_DOMAIN_THEME_LANG); ?>" required type="email" value="">
                   </li>
                   <li class="form_input">
+		    <label for="txt_pwd"><?php echo __('Enter password', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="txt_pwd" name="user_pass" autocomplete="new-password" placeholder="<?php echo __('Enter password', IDXBOOST_DOMAIN_THEME_LANG); ?>" required type="password" value="">
                     <span action="hide" class="showpassord"></span>
                   </li>
                 </ul>
                 <button class="btn_form" id="clidxboost-btn-user-login" type="submit"><?php echo __('Continue with email', IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+		</fieldset>
               </form>
             </div>
           </div>
 
-          <div id="tabRegister" class="item_tab"  data-text="<?php echo __('Register for a personalized experience', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+          <div id="tabRegister" class="item_tab" data-text="<?php echo __('Register for a personalized experience', IDXBOOST_DOMAIN_THEME_LANG); ?>">
             <div class="ms-back">
               <button class="ms-icon-back">
                 <span></span>
@@ -122,6 +127,8 @@ global $flex_idx_info, $flex_idx_lead;
                   <?php
                   }
                   ?>
+<fieldset>
+                    <legend><?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
                   <input type="hidden" name="ib_tags" id="formRegister_ib_tags" value="">
                   <input type="hidden" name="logon_type" id="formRegister_logonType" value="email">
                   <input type="hidden" name="register_password" id="formRegister_password" value="">
@@ -131,7 +138,7 @@ global $flex_idx_info, $flex_idx_lead;
 
                   <ul class="pr-steps-container">
                     <li class="pr-step active">
-                      <span class="ms-sub-text small"><?php echo __('Register with your email address', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                      <label class="ms-sub-text small" for="agilefield-9"><?php echo __('Register with your email address', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                       <div class="wrapper-input">
                         <p class="dgt-email-error"><?php echo __('Looks like you already have an account with us.. Try logging in or resetting your password.', IDXBOOST_DOMAIN_THEME_LANG); ?></p>
                         <input id="agilefield-9" name="register_email" type="email" class="agile-height-default" placeholder="Email" required value="">
@@ -144,15 +151,15 @@ global $flex_idx_info, $flex_idx_lead;
                         <span class="ms-title-modal ms-no-mb"><?php echo __('Enter name and password', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                         <span class="pr-dgray"><?php echo __('Just a few more details so we can help you.', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                       </div>
-
+                      
                       <div class="name-input-content">
                         <div class="wrapper-input item-name">
-                          <label class="agile-label" for="agilefield-6"><?php echo __('First Name', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                          <input id="agilefield-6" name="register_name" type="text" class="agile-height-default" placeholder="<?php echo __('First Name', IDXBOOST_DOMAIN_THEME_LANG); ?>" required value="">
+                            <label class="agile-label" for="agilefield-6"><?php echo __('First Name', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                            <input id="agilefield-6" name="register_name" type="text" class="agile-height-default" placeholder="<?php echo __('First Name', IDXBOOST_DOMAIN_THEME_LANG); ?>" required value="">
                         </div>
                         <div class="wrapper-input item-name">
-                          <label class="agile-label" for="agilefield-6"><?php echo __('Last Name', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                          <input id="agilefield-7" name="register_last_name" type="text" class="agile-height-default" placeholder="<?php echo __('Last Name', IDXBOOST_DOMAIN_THEME_LANG); ?>" required value="">
+                            <label class="agile-label" for="agilefield-6"><?php echo __('Last Name', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                            <input id="agilefield-7" name="register_last_name" type="text" class="agile-height-default" placeholder="<?php echo __('Last Name', IDXBOOST_DOMAIN_THEME_LANG); ?>" required value="">
                         </div>
                       </div>
 
@@ -269,77 +276,80 @@ global $flex_idx_info, $flex_idx_lead;
 
                   </ul>
                   <span id="agile-error-msg"></span>
+		</fieldset>
                 </form>
               </div>
             </div>
           </div>
 
-          <div id="tabReset" class="item_tab"  data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>">
-
+          <div id="tabReset" class="item_tab" data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+            
             <div class="ms-back">
-              <button class="ms-icon-back">
+              <button class="ms-icon-back" aria-label="<?php echo __("Back", IDXBOOST_DOMAIN_THEME_LANG); ?>">
                 <span></span>
               </button>
             </div>
 
             <div class="form_content">
-              <form id="formReset" method="post" name="formReset">
-
+              <form  id="formReset" method="post" name="formReset">
+		<fieldset>
+                  <legend><?php echo __('Reset password', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
                 <p id="ms-recovery-password-text"><?php echo __("Enter your email address and we'll send you a link to be able to change your password", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
                 <p style="display: none" id="ms-new-password-text"><?php echo __("Enter your new password", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
 
                 <ul class="form_md" id="cntResetForm">
                   <li class="form_input" id="ms-recovery-password">
-                    <label class="agile-label ms-xt" for="agilefield-9"><?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <input id="reset_email" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" name="reset_email" placeholder="<?php echo __("Enter E-mail", IDXBOOST_DOMAIN_THEME_LANG); ?>" required type="email" />
+                    <label  for="reset_email" class="agile-label ms-xt" for="agilefield-9"><?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input id="reset_email" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" name="reset_email" placeholder="<?php echo __("Enter E-mail", IDXBOOST_DOMAIN_THEME_LANG); ?>" required type="email"/>
                   </li>
                   <li class="form_input" style="display: none" id="ms-new-password">
-                    <label class="agile-label" for="agilefield-9"><?php echo __("Use phone number as password", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <input id="reset_password" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" name="reset_password" placeholder="<?php echo __("Phone number", IDXBOOST_DOMAIN_THEME_LANG); ?>" type="password" />
+                    <label class="agile-label" for="reset_password"><?php echo __("Use phone number as password", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <input id="reset_password" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" name="reset_password" placeholder="<?php echo __("Phone number", IDXBOOST_DOMAIN_THEME_LANG); ?>" type="password"/>
                     <span action="hide" class="showpassord"></span>
                   </li>
                 </ul>
-
+                
                 <button class="btn_form" id="clidxboost-btn-user-reset" type="submit">
-                  <?php echo __("Send", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                <?php echo __("Send", IDXBOOST_DOMAIN_THEME_LANG); ?>
                 </button>
 
                 <input name="action" class="action" type="hidden" value="flex_idx_lead_resetpass">
                 <input name="tokepa" class="tokepa" type="hidden" value="">
+		</fieldset>
               </form>
             </div>
           </div>
-
+          
           <?php if (
-            (isset($flex_idx_info["agent"]["google_login_enabled"]) && "1" == $flex_idx_info["agent"]["google_login_enabled"]) ||
-            (isset($flex_idx_info["agent"]["facebook_login_enabled"]) && "1" == $flex_idx_info["agent"]["facebook_login_enabled"])
-          ) : ?>
+              (isset($flex_idx_info["agent"]["google_login_enabled"]) && "1" == $flex_idx_info["agent"]["google_login_enabled"]) ||
+          (isset($flex_idx_info["agent"]["facebook_login_enabled"]) && "1" == $flex_idx_info["agent"]["facebook_login_enabled"])
+          ): ?>
 
-            <div class="line_or"><span><?php echo __('or', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+          <div class="line_or"><span><?php echo __('or', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
 
-            <ul class="social_login">
-              <?php if (isset($flex_idx_info["agent"]["facebook_login_enabled"]) && "1" == $flex_idx_info["agent"]["facebook_login_enabled"]) : ?>
-                <li>
-                  <a class="ico-facebook flex-social-login-fb" href="#" onclick="fb_login();">
-                    <?php echo __('Login with Facebook', IDXBOOST_DOMAIN_THEME_LANG); ?>
-                  </a>
-                  <span class="ms-label" id="msRst">
-                    <span id="ms-text"><?php echo __('Forgot your password?', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                    <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset"  data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
-                  </span>
-                </li>
-              <?php endif; ?>
-            </ul>
-          <?php else : ?>
-            <div class="line_or"><span><?php echo __('or', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
-            <ul class="social_login">
-              <li>
+          <ul class="social_login">
+            <?php if (isset($flex_idx_info["agent"]["facebook_login_enabled"]) && "1" == $flex_idx_info["agent"]["facebook_login_enabled"]): ?>
+            <li>
+                <a class="ico-facebook flex-social-login-fb" href="#" onclick="fb_login();">
+                  <?php echo __('Login with Facebook', IDXBOOST_DOMAIN_THEME_LANG); ?>
+                </a>
                 <span class="ms-label" id="msRst">
                   <span id="ms-text"><?php echo __('Forgot your password?', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset"  data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                  <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset" data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
                 </span>
-              </li>
-            </ul>
+            </li>
+            <?php endif; ?>
+          </ul>
+          <?php else: ?>
+          <div class="line_or"><span><?php echo __('or', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+          <ul class="social_login">
+            <li>
+                <span class="ms-label" id="msRst">
+                  <span id="ms-text"><?php echo __('Forgot your password?', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                  <a id="ms-link" href="javascript:void(0)" class="ms-tab" data-tab="tabReset" data-text="<?php echo __('Reset Password', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Reset now', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                </span>
+            </li>
+          </ul>
           <?php endif; ?>
         </div>
 
@@ -376,29 +386,30 @@ global $flex_idx_info, $flex_idx_lead;
         <div class="body_md">
           <div class="form_content">
             <form id="form-save" method="POST">
+		<fieldset>
+                <legend><?php echo __('Save This Search', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
               <div class="gform_body">
                 <ul class="gform_fields">
                   <!--<li class="gfield field_sublabel_below">
                     Search Name(*)
                   </li>-->
                   <li class="gfield">
-                    <label class="gfield_label">
-                      <?php echo __("Search Name(*)", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                    <label class="gfield_label" for="input_sname_search">
+                    <?php echo __("Search Name(*)", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container">
                       <input class="medium" id="input_sname_search" name="input_sname" placeholder="<?php echo __("Search Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" required type="text" value="">
-                      </input>
                     </div>
                   </li>
                   <!--<li class="gfield field_sublabel_below">
                     Email Updates
                   </li>-->
                   <li class="gfield">
-                    <label class="gfield_label">
-                      <?php echo __("Email Updates", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                    <label class="gfield_label" for="iboost-alert-change-interval">
+                    <?php echo __("Email Updates", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container">
-                      <select class="iboost-alert-change-interval notification_day_class medium">
+                      <select class="iboost-alert-change-interval notification_day_class medium" id="iboost-alert-change-interval">
                         <option value="--">
                           <?php echo __("No Alert", IDXBOOST_DOMAIN_THEME_LANG); ?>
                         </option>
@@ -418,31 +429,28 @@ global $flex_idx_info, $flex_idx_lead;
                     Only Update Me On
                   </li>-->
                   <li class="gfield">
-                    <label class="gfield_label">
-                      <?php echo __("Only Update Me On", IDXBOOST_DOMAIN_THEME_LANG); ?>
-                    </label>
+                    <span class="gfield_label">
+                    <?php echo __("Only Update Me On", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                    </span>
                     <div class="ginput_container">
                       <ul class="list-check">
                         <li>
-                          <input class="flex-save-type-options" id="new-listing" name="notification_type[]" type="checkbox" value="new_listing" checked>
+                          <input  class="flex-save-type-options" id="new-listing" name="notification_type[]" type="checkbox" value="new_listing" checked>
                           <label for="new-listing">
-                            <?php echo __("New Listing (Always)", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                          <?php echo __("New Listing (Always)", IDXBOOST_DOMAIN_THEME_LANG); ?>
                           </label>
-                          </input>
                         </li>
                         <li>
-                          <input class="flex-save-type-options" id="price-change" name="notification_type[]" type="checkbox" value="price_change" checked>
+                          <input  class="flex-save-type-options" id="price-change" name="notification_type[]" type="checkbox" value="price_change" checked>
                           <label for="price-change">
-                            <?php echo __("Price Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                          <?php echo __("Price Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
                           </label>
-                          </input>
                         </li>
                         <li>
-                          <input class="flex-save-type-options" id="status-change" name="notification_type[]" type="checkbox" value="status_change" checked>
+                          <input  class="flex-save-type-options" id="status-change" name="notification_type[]" type="checkbox" value="status_change" checked>
                           <label for="status-change">
-                            <?php echo __("Status Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                          <?php echo __("Status Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
                           </label>
-                          </input>
                         </li>
                       </ul>
                     </div>
@@ -450,9 +458,9 @@ global $flex_idx_info, $flex_idx_lead;
                 </ul>
                 <div class="gform_footer">
                   <input class="form_submit_button_search gform_button button gform_submit_button_5" type="submit" value="<?php echo __('Save Search', IDXBOOST_DOMAIN_THEME_LANG); ?>">
-                  </input>
                 </div>
               </div>
+		</fieldset>
             </form>
           </div>
         </div>
@@ -472,20 +480,22 @@ global $flex_idx_info, $flex_idx_lead;
         <div class="body_md">
           <div class="form_content">
             <form id="form-update-alert" method="POST">
+		<fieldset>
+                <legend><?php echo __('Save Search', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
               <div class="gform_body">
                 <ul class="gform_fields">
                   <!--<li class="gfield field_sublabel_below">Saved Search Name(*)</li>-->
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __("Search Name(*)", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <label class="gfield_label" for="input_update_name_search"><?php echo __("Search Name(*)", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container">
                       <input class="medium" id="input_update_name_search" name="input_sname" placeholder="<?php echo __("Search Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" required type="text" value=""></input>
                     </div>
                   </li>
                   <!--<li class="gfield field_sublabel_below">Email Updates</li>-->
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __("Email Updates", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <label class="gfield_label" for="iboost-alert-change-interval-2"><?php echo __("Email Updates", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container">
-                      <select class="iboost-alert-change-interval notification_day_class_update medium">
+                      <select class="iboost-alert-change-interval notification_day_class_update medium" id="iboost-alert-change-interval-2">
                         <option value="0"><?php echo __("No Alert", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                         <option value="1"><?php echo __("Daily", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                         <option value="7"><?php echo __("Weekly", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
@@ -495,29 +505,26 @@ global $flex_idx_info, $flex_idx_lead;
                   </li>
                   <!--<li class="gfield field_sublabel_below">Only Update Me On</li>-->
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __("Only Update Me On", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <span class="gfield_label"><?php echo __("Only Update Me On", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                     <div class="ginput_container">
                       <ul class="list-check">
                         <li>
-                          <input class="flex-save-type-options" id="update-listing-alert" name="notification_type_update[]" type="checkbox" value="new_listing">
+                          <input  class="flex-save-type-options" id="update-listing-alert" name="notification_type_update[]" type="checkbox" value="new_listing">
                           <label for="update-listing-alert">
-                            <?php echo __("New Listing (Always)", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                          <?php echo __("New Listing (Always)", IDXBOOST_DOMAIN_THEME_LANG); ?>
                           </label>
-                          </input>
                         </li>
                         <li>
-                          <input class="flex-save-type-options" id="update-price-change-alert" name="notification_type_update[]" type="checkbox" value="price_change">
+                          <input  class="flex-save-type-options" id="update-price-change-alert" name="notification_type_update[]" type="checkbox" value="price_change">
                           <label for="update-price-change-alert">
-                            <?php echo __("Price Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                          <?php echo __("Price Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
                           </label>
-                          </input>
                         </li>
                         <li>
-                          <input class="flex-save-type-options" id="update-status-change-alert" name="notification_type_update[]" type="checkbox" value="status_change">
+                          <input  class="flex-save-type-options" id="update-status-change-alert" name="notification_type_update[]" type="checkbox" value="status_change">
                           <label for="update-status-change-alert">
-                            <?php echo __("Status Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                          <?php echo __("Status Change", IDXBOOST_DOMAIN_THEME_LANG); ?>
                           </label>
-                          </input>
                         </li>
                       </ul>
                     </div>
@@ -528,6 +535,7 @@ global $flex_idx_info, $flex_idx_lead;
                 </div>
               </div>
               <input type="hidden" name="token_alert" class="token_alert">
+		</fieldset>
             </form>
           </div>
         </div>
@@ -583,61 +591,71 @@ global $flex_idx_info, $flex_idx_lead;
           <p>
             <?php echo __("Please provide your contact information and one of our real estate professionals will be in touch.", IDXBOOST_DOMAIN_THEME_LANG); ?>
             <br>
-            <?php if (isset($flex_idx_info['agent']['agent_contact_phone_number'])) : ?>
-              <?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?>
-              <a href="tel:<?php echo preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo flex_phone_number_filter($flex_idx_info['agent']['agent_contact_phone_number']); ?></a>
+            <?php if (isset($flex_idx_info['agent']['agent_contact_phone_number'])): ?>
+            <?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?> 
+            <a href="tel:<?php echo preg_replace('/[^\d]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo flex_phone_number_filter($flex_idx_info['agent']['agent_contact_phone_number']); ?></a>
             <?php endif ?>
           </p>
           <div class="form_content">
             <form id="form-scheduled" method="post" class="gtm_schedule_a_consultation">
+		<fieldset>
+                <legend><?php echo __('Schedule a Consultation', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
               <input type="hidden" name="action" value="lead_submission_showing">
               <div class="gform_body">
                 <ul class="gform_fields">
                   <li class="gfield">
                     <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" class="medium" name="first_name" placeholder='<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])) : ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif; ?>" required />
+                      <label for="ms-autocomplete-name" class="ms-hidden"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <input id="ms-autocomplete-name" autocapitalize="off" spellcheck="false" class="medium" name="first_name" placeholder='<?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="text" value="<?php if (isset($flex_idx_lead['lead_info']['first_name'])): ?><?php echo $flex_idx_lead['lead_info']['first_name']; ?><?php endif;?>" required />
                     </div>
                   </li>
                   <li class="gfield">
                     <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" class="medium" name="last_name" placeholder='<?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="text" value="<?php if (isset($flex_idx_lead['lead_info']['last_name'])) : ?><?php echo $flex_idx_lead['lead_info']['last_name']; ?><?php endif; ?>" required />
+                      <label for="ms-autocomplete-lastname" class="ms-hidden"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <input id="ms-autocomplete-lastname" autocapitalize="off" spellcheck="false" class="medium" name="last_name" placeholder='<?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="text" value="<?php if (isset($flex_idx_lead['lead_info']['last_name'])): ?><?php echo $flex_idx_lead['lead_info']['last_name']; ?><?php endif;?>" required />
                     </div>
                   </li>
                   <li class="gfield">
                     <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" class="medium" name="email_address" placeholder='<?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="email" value="<?php if (isset($flex_idx_lead['lead_info']['email_address'])) : ?><?php echo $flex_idx_lead['lead_info']['email_address']; ?><?php endif; ?>" required />
+			<label for="ms-autocomplete-email" class="ms-hidden"><?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>                      
+			<input id="ms-autocomplete-email" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" class="medium" name="email_address" placeholder='<?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="email" value="<?php if (isset($flex_idx_lead['lead_info']['email_address'])): ?><?php echo $flex_idx_lead['lead_info']['email_address']; ?><?php endif;?>" required />
                     </div>
                   </li>
                   <li class="gfield">
                     <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" class="medium" name="phone_number" placeholder='<?php echo __("Phone Number", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="text" value="<?php if (isset($flex_idx_lead['lead_info']['phone_number'])) : ?><?php echo $flex_idx_lead['lead_info']['phone_number']; ?><?php endif; ?>" required />
+                      <label for="ms-autocomplete-phone" class="ms-hidden"><?php echo __("Phone Number", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <input id="ms-autocomplete-phone" autocapitalize="off" spellcheck="false" class="medium" name="phone_number" placeholder='<?php echo __("Phone Number", IDXBOOST_DOMAIN_THEME_LANG); ?>' type="text" value="<?php if (isset($flex_idx_lead['lead_info']['phone_number'])): ?><?php echo $flex_idx_lead['lead_info']['phone_number']; ?><?php endif;?>" required />
                     </div>
                   </li>
                   <li class="gfield comments">
                     <div class="ginput_container">
-                      <textarea autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" class="medium textarea" cols="50" name="comments" placeholder='<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>' rows="10"></textarea>
+                      <label for="ms-autocomplete-comments" class="ms-hidden"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <textarea id="ms-autocomplete-comments" autocapitalize="off" spellcheck="false" class="medium textarea" cols="50" name="comments" placeholder='<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>' rows="10"></textarea>
                     </div>
                   </li>
                   <li class="gfield field_sublabel_below"><?php echo __("Prefered Time and Date", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
                   <li class="gfield time">
                     <div class="ginput_container ginput_container_time">
-                      <select name="preferred_time" class="medium" id="ss_preferred_time">
-                        <option selected value="Morning" selected="selected"><?php echo __("Morning", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                        <option value="Afternoon"><?php echo __("Afternoon", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                        <option value="Evening"><?php echo __("Evening", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
-                      </select>
+			<label for="ss_preferred_time" class="ms-hidden"><?php echo __("Morning", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        <select name="preferred_time" class="medium" id="ss_preferred_time">
+                          <option value="Morning" selected><?php echo __("Morning", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                          <option value="Afternoon"><?php echo __("Afternoon", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                          <option value="Evening"><?php echo __("Evening", IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                        </select>
                     </div>
                   </li>
                   <li class="gfield date">
                     <div class="ginput_container ginput_container_date">
+			<label for="ss_preferred_date" class="ms-hidden"><?php echo __("Choose Date", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                       <input type="text" name="preferred_date" id="ss_preferred_date" value="" placeholder='<?php echo __("Choose Date", IDXBOOST_DOMAIN_THEME_LANG); ?>' class="medium">
                     </div>
                   </li>
                 </ul>
                 <div class="gform_footer">
-                  <input class="gform_button button gform_submit_button_6" type="submit" value="<?php echo __('Submit', IDXBOOST_DOMAIN_THEME_LANG); ?>" />
+                  <input class="gform_button button gform_submit_button_6" type="submit" value="<?php echo __('Submit', IDXBOOST_DOMAIN_THEME_LANG); ?>"/>
                 </div>
               </div>
+		</fieldset>
             </form>
           </div>
         </div>
@@ -696,6 +714,8 @@ global $flex_idx_info, $flex_idx_lead;
                   $type_lookup = 'active';
                 }
               ?>
+<fieldset>
+                <legend><?php echo __('Email to a friend', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
                 <input type="hidden" name="share_type" value="property">
                 <input type="hidden" name="mls_number" value="<?php echo $mls_num; ?>">
                 <input type="hidden" name="status" value="">
@@ -708,34 +728,38 @@ global $flex_idx_info, $flex_idx_lead;
                     <?php echo __("Friend&#039s Information", IDXBOOST_DOMAIN_THEME_LANG); ?>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __("Friend&#039s email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <label class="gfield_label" for="ms-friend-email"><?php echo __("Friend&#039s email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="friend_email" placeholder="<?php echo __("Friend&#039s Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="email" value="" />
+                      <input id="ms-friend-email" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="friend_email" placeholder="<?php echo __("Friend&#039s Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="email" value="" />
                     </div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __("Friend name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    
                     <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="friend_name" placeholder="<?php echo __("Friend&#039s Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="text" value="">
+		      <label class="gfield_label" for="ms-friend-name"><?php echo __("Friend name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input id="ms-friend-name" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="friend_name" placeholder="<?php echo __("Friend&#039s Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="text" value="">
                     </div>
                   </li>
                   <li class="gfield field_sublabel_below"><?php echo __("Your Information", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __("Your Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                    <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="your_name" placeholder="<?php echo __("Your Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="text" value="">
+                    
+                    <div class="ginput_container ginput_container_email">		
+		      <label for="ms-your-name" class="gfield_label"><?php echo __("Your Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input id="ms-your-name" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="your_name" placeholder="<?php echo __("Your Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="text" value="">
                     </div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __("Your Email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    
                     <div class="ginput_container ginput_container_email">
-                      <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="your_email" placeholder="<?php echo __("Your Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="email" value="">
+			<label for="ms-your-email" class="gfield_label"><?php echo __("Your Email", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <input id="ms-your-email" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" required class="medium" name="your_email" placeholder="<?php echo __("Your Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*" type="email" value="">
                     </div>
                   </li>
                   <li class="gfield comments">
-                    <label class="gfield_label"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    
                     <div class="ginput_container">
-                      <textarea autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium textarea" cols="50" name="comments" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" rows="10" type="text"></textarea>
+			<label class="gfield_label" for="ms-friend-comments"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                      <textarea id="ms-friend-comments" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium textarea" cols="50" name="comments" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" rows="10" type="text"></textarea>
                     </div>
                   </li>
                   <li class="gfield requiredFields">* <?php echo __("Required Fields", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
@@ -744,6 +768,7 @@ global $flex_idx_info, $flex_idx_lead;
                   <input class="gform_button button gform_submit_button_6" type="submit" value="<?php echo __("Submit", IDXBOOST_DOMAIN_THEME_LANG); ?>">
                 </div>
               </div>
+		</fieldset>
             </form>
           </div>
         </div>
@@ -768,45 +793,45 @@ global $flex_idx_info, $flex_idx_lead;
           <ul class="contact-opt">
             <li>
               <a href="tel:<?php echo preg_replace('/[^\d]+/', '', $flex_idx_info['agent']['agent_contact_phone_number']) ?>">
-                <?php echo $flex_idx_info['agent']['agent_contact_phone_number']; ?>
+              <?php echo $flex_idx_info['agent']['agent_contact_phone_number']; ?>
               </a>
             </li>
-            <?php if (false !== $flex_idx_lead) { ?>
-              <li>
-                <a href="mailto:<?php echo isset($flex_idx_lead['lead_info']['agent_contact_email_address']) ? esc_attr($flex_idx_lead['lead_info']['agent_contact_email_address']) : ""; ?>" class="mail_login">
-                  <?php echo isset($flex_idx_lead['lead_info']['agent_contact_email_address']) ? esc_attr($flex_idx_lead['lead_info']['agent_contact_email_address']) : ""; ?>
-                </a>
-              </li>
+            <?php if (false !== $flex_idx_lead) {?>
+            <li>
+              <a href="mailto:<?php echo isset($flex_idx_lead['lead_info']['agent_contact_email_address']) ? esc_attr($flex_idx_lead['lead_info']['agent_contact_email_address']) : ""; ?>" class="mail_login">
+              <?php echo isset($flex_idx_lead['lead_info']['agent_contact_email_address']) ? esc_attr($flex_idx_lead['lead_info']['agent_contact_email_address']) : ""; ?>
+              </a>
+            </li>
             <?php } ?>
           </ul>
           <div class="form_content">
             <form id="form-calculator">
+		<fieldset>
+                <legend><?php echo __('Mortgage calculator', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
               <div class="gform_body">
                 <ul class="gform_fields">
                   <li class="gfield">
-                    <label class="gfield_label">
-                      <?php echo __("Purchase Price", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                    <label class="gfield_label" for="ms-purchase">
+                    <?php echo __("Purchase Price", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container ginput_container_email">
                       <input class="medium purchase_price_txt" name="input_1" readonly="" type="text" value="<?php echo isset($property['price']) ? '$' . number_format($property['price']) : ''; ?>">
-                      </input>
                     </div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label">
-                      % <?php echo __("Down Payment", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                    <label class="gfield_label" for="down_payment_txt">
+                    % <?php echo __("Down Payment", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container ginput_container_payment">
                       <input class="medium down_payment_txt" max="95" min="0" name="input_2 down_payment_txt" step="any" type="number" value="30">
-                      </input>
                     </div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label">
-                      <?php echo __("Term", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                    <label class="gfield_label" for="term_txt">
+                    <?php echo __("Term", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container ginput_container_years">
-                      <select class="medium term_txt">
+                      <select class="medium term_txt" id="term_txt">
                         <option value="30">
                           30 <?php echo __("Years", IDXBOOST_DOMAIN_THEME_LANG); ?>
                         </option>
@@ -817,8 +842,8 @@ global $flex_idx_info, $flex_idx_lead;
                     </div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label">
-                      <?php echo __("Interest Rate", IDXBOOST_DOMAIN_THEME_LANG); ?>
+                    <label class="gfield_label" for="interest_rate_txt">
+                    <?php echo __("Interest Rate", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container ginput_container_rate">
                       <input class="medium interest_rate_txt" id="" max="95" min="0" name="input_3" step="any" type="number" value="4">
@@ -1885,7 +1910,8 @@ global $flex_idx_info, $flex_idx_lead;
                 </div>-->
               </li>
             </ul>
-            <span id="agile-error-msg"></span>
+            <span class="agile-error-msg"></span>
+		</fieldset>
           </form>
           <div class="footer_md terms-md">
             <p><?php echo __("In agreement with our", IDXBOOST_DOMAIN_THEME_LANG); ?> <a target="_blank" href="<?php echo $flex_idx_info["website_url"]; ?>/terms-and-conditions/"><?php echo __("Terms of Use", IDXBOOST_DOMAIN_THEME_LANG); ?></a> <span><?php echo __("and", IDXBOOST_DOMAIN_THEME_LANG); ?> <a href="<?php echo $flex_idx_info["website_url"]; ?>/terms-and-conditions/#atospp-privacy"><?php echo __("Privacy Policy", IDXBOOST_DOMAIN_THEME_LANG); ?></a></span></p>

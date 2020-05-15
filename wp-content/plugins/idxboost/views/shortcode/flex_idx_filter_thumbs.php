@@ -81,21 +81,21 @@
 										<?php endforeach; ?>
 									</ul>
 
-									<?php if (count($property['gallery']) > 1) { ?>
-										<button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>
-										<button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>
-									<?php } ?>
+					<?php if ( count($property['gallery'])>1 ) { ?>
+						<button class="prev flex-slider-prev" tabindex="-1" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>
+						<button class="next flex-slider-next" tabindex="-1" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>
+					<?php } ?>
 
-									<?php if ($property['is_favorite'] == true) : ?>
-										<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo $property['token_alert']; ?>">
-											<span class="clidxboost-icon-check active"></span>
-										</button>
-									<?php else : ?>
+					<?php if ($property['is_favorite'] == true): ?>
+						<button aria-label="Remove Favorite" class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo $property['token_alert']; ?>" tabindex="-1">
+							<span class="clidxboost-icon-check active"></span>
+						</button>
+					<?php else: ?>
 
-										<button class="clidxboost-btn-check flex-favorite-btn">
-											<span class="clidxboost-icon-check"></span>
-										</button>
-									<?php endif; ?>
+						<button aria-label="Save Favorite" class="clidxboost-btn-check flex-favorite-btn" tabindex="-1">
+							<span class="clidxboost-icon-check"></span>
+						</button>
+					<?php endif; ?>
 
 								</div>
 								<?php if ((isset($atts['registration_key']) && !empty($atts['registration_key'])) && isset($atts['agent_slug'])) : ?>

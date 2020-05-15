@@ -535,83 +535,90 @@ else $viewfilter = $response['view'];
 
                 <h2 title="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>"> <span><?php echo $final_address_parceada; ?></span> </h2>
 
-                <ul class="features">
-                  <li class="address"><?php echo $property['address_large']; ?></li>
-                  <li class="price">$<?php echo number_format($property['price']); ?></li>
-                  <?php if ($property['reduced'] == '') : ?>
-                    <li class="pr"><?php echo $property['reduced']; ?></li>
-                  <?php elseif ($property['reduced'] < 0) : ?>
-                    <li class="pr down"><?php echo $property['reduced']; ?>%</li>
-                  <?php else : ?>
-                    <li class="pr up"><?php echo $property['reduced']; ?>%</li>
-                  <?php endif; ?>
-                  <li class="beds"><?php echo $property['bed']; ?> <span>
-                      <?php if ($property['bed'] > 1) {
-                        echo __('Beds', IDXBOOST_DOMAIN_THEME_LANG);
-                      } else {
-                        echo __('Bed', IDXBOOST_DOMAIN_THEME_LANG);
-                      } ?>
-                    </span></li>
-                  <li class="baths"><?php echo $property['bath']; ?> <span>
-                      <?php
-                      if ($property['bath'] > 1) {
-                        echo __('Baths', IDXBOOST_DOMAIN_THEME_LANG);
-                      } else {
-                        echo __('Bath', IDXBOOST_DOMAIN_THEME_LANG);
-                      }
-                      ?></span></li>
-                  <li class="living-size"> <span><?php echo number_format($property['sqft']); ?></span>Sq.Ft <span>(<?php echo $property['living_size_m2']; ?> m2)</span></li>
-                  <li class="price-sf"><span>$<?php echo $property['price_sqft']; ?></span>/ Sq.Ft<span>($<?php echo $property['price_sqft_m2']; ?> m2)</span></li>
-                  <?php if (!empty($property['subdivision'])) : ?>
-                    <li class="development"><span><?php echo $property['subdivision']; ?></span></li>
-                  <?php elseif (!empty($property['development'])) : ?>
-                    <li class="development"><span><?php echo $property['development']; ?></span></li>
-                  <?php else : ?>
-                    <li class="development"><span><?php echo $property['complex']; ?></span></li>
-                  <?php endif; ?>
-                </ul>
-                <div class="wrap-slider">
-                  <ul>
-                    <?php foreach ($property['gallery'] as $key => $property_photo) : ?>
-                      <?php if ($key === 0) : ?>
-                        <li class="flex-slider-current">
-                          <img class="flex-lazy-image" data-original="<?php echo $property_photo; ?>" title="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>" alt="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>"></li>
-                      <?php else : ?>
-                        <li class="flex-slider-item-hidden">
-                          <img class="flex-lazy-image" data-original="<?php echo $property_photo; ?>" title="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>" alt="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>"></li>
-                      <?php endif; ?>
+                        <ul class="features">
+                            <li class="address"><?php echo $property['address_large']; ?></li>
+                            <li class="price">$<?php echo number_format($property['price']); ?></li>
+                            <?php if ($property['reduced'] == ''): ?>
+                                <li class="pr"><?php echo $property['reduced']; ?></li>
+                            <?php elseif($property['reduced'] < 0): ?>
+                                <li class="pr down"><?php echo $property['reduced']; ?>%</li>
+                            <?php else: ?>
+                                <li class="pr up"><?php echo $property['reduced']; ?>%</li>
+                            <?php endif; ?>
+                            <li class="beds"><?php echo $property['bed']; ?> <span>
+                              <?php if ($property['bed']>1) {
+                                echo __('Beds', IDXBOOST_DOMAIN_THEME_LANG);
+                              }else {
+                                echo __('Bed', IDXBOOST_DOMAIN_THEME_LANG);
+                              } ?>
+                               </span></li>
+                            <li class="baths"><?php echo $property['bath']; ?> <span>
+                              <?php
+                              if ($property['bath']>1) {
+                                echo __('Baths', IDXBOOST_DOMAIN_THEME_LANG);
+                              }else{
+                                echo __('Bath', IDXBOOST_DOMAIN_THEME_LANG);
+                              }
+                              ?></span></li>
+                            <li class="living-size"> <span><?php echo number_format($property['sqft']); ?></span>Sq.Ft <span>(<?php echo $property['living_size_m2']; ?> m2)</span></li>
+                            <li class="price-sf"><span>$<?php echo $property['price_sqft']; ?></span>/ Sq.Ft<span>($<?php echo $property['price_sqft_m2']; ?> m2)</span></li>
+                            <?php if (!empty($property['subdivision'])): ?>
+                                <li class="development"><span><?php echo $property['subdivision']; ?></span></li>
+                            <?php elseif (!empty($property['development'])): ?>
+                                <li class="development"><span><?php echo $property['development']; ?></span></li>
+                            <?php else: ?>
+                                <li class="development"><span><?php echo $property['complex']; ?></span></li>
+                            <?php endif; ?>
+                        </ul>
+                        <div class="wrap-slider">
+                            <ul>
+                                <?php foreach($property['gallery'] as $key => $property_photo): ?>
+                                    <?php if ($key === 0): ?>
+                                    <li class="flex-slider-current">
+                                    <img
+                                    class="flex-lazy-image"
+                                    data-original="<?php echo $property_photo; ?>"
+                                    title="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>"
+                                    alt="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>"></li>
+                                    <?php else: ?>
+                                    <li class="flex-slider-item-hidden">
+                                    <img
+                                    class="flex-lazy-image"
+                                    data-original="<?php echo $property_photo; ?>"
+                                    title="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>"
+                                    alt="<?php echo $property['address_short']; ?> <?php echo $property['address_large']; ?>"></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                            <button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>
+                            <button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>
+                        </div>
+                        <?php if (!isset($property['status'])): ?>
+                            <?php if ($property['is_favorite'] == true): ?>
+                            <?php $filter_favorite_idxboost=$filter_favorite_idxboost+1; ?>
+                            <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check active" data-alert-token="<?php echo $property['token_alert'];?>" ></span></button><a href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>" class="view-detail"><?php echo __('View details', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                            <?php else: ?>
+                            <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check"></span></button><a href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>" class="view-detail"><?php echo __('View details', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if (isset($property["status"])): ?>
+                          <?php if (2 == $property["status"]): ?>
+                            <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
+                          <?php elseif(5 == $property["status"]): ?>
+                            <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
+                          <?php elseif(6 == $property["status"]): ?>
+                            <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/pending-<?php echo $property['slug']; ?>"></a>
+                          <?php else: ?>
+                            <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
+                          <?php endif; ?>
+                         <?php else: ?>
+                          <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
+                        <?php endif; ?>
+                    </li>
+                    <?php //if ( (is_numeric($atts['limit']) && $atts['limit'] !='default')  && $atts['limit']<=$countimte ) { break; }  ?>
                     <?php endforeach; ?>
-                  </ul>
-                  <button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>
-                  <button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>
-                </div>
-                <?php if (!isset($property['status'])) : ?>
-                  <?php if ($property['is_favorite'] == true) : ?>
-                    <?php $filter_favorite_idxboost = $filter_favorite_idxboost + 1; ?>
-                    <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check active" data-alert-token="<?php echo $property['token_alert']; ?>"></span></button><a href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>" class="view-detail"><?php echo __('View details', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
-                  <?php else : ?>
-                    <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check"></span></button><a href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>" class="view-detail"><?php echo __('View details', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
-                  <?php endif; ?>
                 <?php endif; ?>
-                <?php if (isset($property["status"])) : ?>
-                  <?php if (2 == $property["status"]) : ?>
-                    <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
-                  <?php elseif (5 == $property["status"]) : ?>
-                    <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
-                  <?php elseif (6 == $property["status"]) : ?>
-                    <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/pending-<?php echo $property['slug']; ?>"></a>
-                  <?php else : ?>
-                    <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
-                  <?php endif; ?>
-                <?php else : ?>
-                  <a class="view-detail" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $property['slug']; ?>"></a>
-                <?php endif; ?>
-              </li>
-              <?php //if ( (is_numeric($atts['limit']) && $atts['limit'] !='default')  && $atts['limit']<=$countimte ) { break; }  
-              ?>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </ul>
+            </ul>
 
       </div>
       <div id="wrap-map">

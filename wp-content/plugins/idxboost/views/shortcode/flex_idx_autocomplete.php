@@ -24,14 +24,16 @@ global $flex_idx_info;
       <input type="hidden" name="action" value="flex_idx_single_autocomplete">
 
       <div class="form-item">
+        <label for="flex_ac_rental_slug" class="ms-hidden">Select</label>
         <select name="rental" id="flex_ac_rental_slug">
           <option value="0" <?php selected(0, $search_params['rental_types']); ?>><?php echo __('For Sale', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
           <option value="1" <?php selected(1, $search_params['rental_types']); ?>><?php echo __('For Rent', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
         </select>
         <span class="select-arrow"></span>
       </div>
+      <label for="flex_idx_single_autocomplete_input" class="ms-hidden"><?php echo __('Enter an address, city, zip code or MLS number', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
       <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="off"  id="flex_idx_single_autocomplete_input" class="notranslate" type="search" name="autocomplete" placeholder="<?php echo __('Enter an address, city, zip code or MLS number', IDXBOOST_DOMAIN_THEME_LANG); ?>">
-      <button id="clidxboost-btn-search" type="submit">
+      <button id="clidxboost-btn-search" type="submit" aria-label="Search Property">
         <span class="clidxboost-icon-search"></span>
       </button>
 
@@ -39,6 +41,7 @@ global $flex_idx_info;
     </form>
 
     <button id="clidxboost-modal-search">Active modal</button>
+    
     <a class="flex-link" href="<?php echo $flex_idx_info["pages"]["flex_idx_search"]["guid"]; ?>" title="<?php echo __('Advanced search options', IDXBOOST_DOMAIN_THEME_LANG); ?>">
       + <?php echo __('Advanced search options', IDXBOOST_DOMAIN_THEME_LANG); ?>
     </a>
@@ -46,10 +49,10 @@ global $flex_idx_info;
   <div class="flex-content-btn">
     <?php if (!empty($has_button)) { ?>
       <?php if(!empty($idx_text_button1_search_bar)){ ?>
-      <a href="<?php echo $idx_link_button1_search_bar; ?>" class="flex-btn-link"><span><?php echo $idx_text_button1_search_bar; ?></span></a>
+      <a href="<?php echo $idx_link_button1_search_bar; ?>" class="flex-btn-link" title="<?php echo $idx_text_button1_search_bar; ?>"><span><?php echo $idx_text_button1_search_bar; ?></span></a>
       <?php } ?>
       <?php if(!empty($idx_text_button2_search_bar)){ ?>
-        <a href="<?php echo $idx_link_button2_search_bar; ?>" class="flex-btn-link"><span><?php echo $idx_text_button2_search_bar; ?></span></a>
+        <a href="<?php echo $idx_link_button2_search_bar; ?>" class="flex-btn-link" title="<?php echo $idx_text_button2_search_bar; ?>"><span><?php echo $idx_text_button2_search_bar; ?></span></a>
       <?php } ?>
     <?php } ?>
   </div>

@@ -11,13 +11,26 @@
 			nav: true,
 			bullets: false,
 			layout: {
-				arrowDefaultStyles: false
+				arrowDefaultStyles: false,
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
 			},
 			breakPoints: {
 				768: {
 					destroy: true
 				}
-			}
+			},
+			onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
+	    }
 		});
 	}
 	
@@ -33,7 +46,10 @@
 			nav: true,
 			lazyLoad: true,
 			layout: {
-				bulletDefaultStyles: false
+				bulletDefaultStyles: false,
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
 			},
 			breakPoints: {
 				768: {
@@ -47,7 +63,18 @@
 						if($dataLazy !== undefined) $(this).attr('src', $dataLazy).removeAttr('data-lazy');
 					});
 				}, 1000);
-			}
+			},
+
+			onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoodsGM.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
+	    }
 		});
 	}
 
@@ -66,8 +93,22 @@
 			autoplaySpeed: 5000,*/
 			layout: {
 				bulletDefaultStyles: false,
-				wrapperBulletsClass: 'clidxboost-gs-wrapper-bullets'
-			}
+				wrapperBulletsClass: 'clidxboost-gs-wrapper-bullets',
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
+			},
+
+			onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $mainSlider.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
+	    }
 		});
 	}
 
@@ -139,6 +180,16 @@
 	      		$(this).attr("data-was-processed","true").attr("src",dataImage).addClass("initial loaded");
 	      	}
 	      });
+	    },
+	    onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $propertiesSlider.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -156,8 +207,21 @@
 			autoDestroy: true,
 			layout: {
 				bulletDefaultStyles: false,
-				wrapperBulletsClass: 'clidxboost-gs-wrapper-bullets'
-			}
+				wrapperBulletsClass: 'clidxboost-gs-wrapper-bullets',
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
+			},
+	    onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $testimonialSlider.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
+	    }
 		});
 	}
 
@@ -180,7 +244,10 @@
 			drag: false,
 			touch: false,
 			layout: {
-				arrowDefaultStyles: false
+				arrowDefaultStyles: false,
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
 			},
 			breakPoints: {
 		      640: {
@@ -191,12 +258,21 @@
 		      }
 		    },
 		    onInited: function(){
-		    	var $showSlider = $fullSlider.parents('#full-slider');
-		    	if($showSlider.length) $showSlider.addClass('show-slider-psl');
-		    	// anidando FS con click sobre la imagen
-		    	$fullSlider.find('.gs-item-slider').on('click', function(){
-		            $fsSlider.fullscreen('in', $(this).index() + 1);
-		        });
+					var $showSlider = $fullSlider.parents('#full-slider');
+					if($showSlider.length) $showSlider.addClass('show-slider-psl');
+					// anidando FS con click sobre la imagen
+					$fullSlider.find('.gs-item-slider').on('click', function(){
+						$fsSlider.fullscreen('in', $(this).index() + 1);
+					});
+
+					var $a = 0;
+		    	var $bulletBtn = $fullSlider.find(".gs-bullet");
+		    	if($bulletBtn.length){
+						$bulletBtn.each(function() {
+							$a += 1;
+							$(this).text($a);
+						});
+		    	}
 		    },
 		    onFullscreenIn: ()=> {
 				// creando el título en FS
@@ -232,7 +308,10 @@
 			bullets: true,
 			lazyLoad: true,
 			layout: {
-				bulletDefaultStyles: false
+				bulletDefaultStyles: false,
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
 			},
 			breakPoints: {
 	      640: {
@@ -244,6 +323,16 @@
 	      1280: {
 	        items: idx_develop_slider_item_large,
 	      }	      
+	    },
+	    onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $developmentSlider.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -261,10 +350,24 @@
 			bullets: false,
 			lazyLoad: true,
 			autoDestroy: true,
+			layout: {
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
+			},
 			breakPoints: {
 	      768: {
 	        items: 8,
 	      }
+	    },
+	    onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $neighborhoodSlider.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -279,13 +382,26 @@ function idxloadSliderneighborhoods(elemento){
 			nav: true,
 			bullets: false,
 			layout: {
-				arrowDefaultStyles: false
+				arrowDefaultStyles: false,
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
 			},
 			breakPoints: {
 				768: {
 					destroy: true
 				}
-			}
+			},
+	    onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeigh.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
+	    }
 		});
 	}
 }
@@ -303,7 +419,10 @@ function loadFullSlider(elemento){
 			fullscreen: true,
 			autoHeight: false,
 			layout: {
-				arrowDefaultStyles: false
+				arrowDefaultStyles: false,
+
+				arrowPrevContent: 'Prev',
+				arrowNextContent: 'Next',
 			},
 			breakPoints: {
 	      640: {
@@ -319,6 +438,15 @@ function loadFullSlider(elemento){
 	    	var $showSlider = $fullSliderModal.parents('#full-slider');
 	    	if($showSlider.length){
 	    		$showSlider.addClass('show-slider-psl');
+	    	}
+
+	    	var $a = 0;
+	    	var $bulletBtn = $fullSliderModal.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
 	    	}
 	    }
 		});

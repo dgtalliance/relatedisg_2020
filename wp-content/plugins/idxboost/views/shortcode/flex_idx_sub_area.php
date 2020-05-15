@@ -121,7 +121,7 @@ if (array_key_exists('payload', $response)) {
           <ul class="content-fixed-btn">
             <li>
               <!--
-            <button class="clidxboost-icon-envelope show-modal" data-modal="modal_email_to_friend">
+            <button class="clidxboost-icon-envelope show-modal" data-modal="modal_email_to_friend" aria-label="<?php echo __('Email to a friend', IDXBOOST_DOMAIN_THEME_LANG); ?>">
             <span><?php echo __('Email to a friend', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
             </button>-->
 

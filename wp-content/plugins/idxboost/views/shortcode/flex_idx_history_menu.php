@@ -42,7 +42,7 @@
       <span class="ms-arrow ib-lead-firstname">&nbsp;</span>
     </button>
 
-    <button class="ms-btn-hidden">
+    <button class="ms-btn-hidden" aria-label="<?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?>">
         <span class="ms-close"><?php echo __("Close", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
     </button>
   </div>
@@ -51,9 +51,9 @@
     <div class="ms-profile-list">
 
       <div class="ms-header-tab" id="_ib_lead_activity_tab">
-          <button class="ms-tab ms-tab-history active" data-tab="history"><span><?php echo __("History", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
-          <button class="ms-tab ms-tab-favorites" data-tab="favorites"><span><?php echo __("Favorites", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
-          <button class="ms-tab ms-tab-searches" data-tab="searches"><span><?php echo __("Saved Searches", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+          <button class="ms-tab ms-tab-history active" data-tab="history" aria-label="<?php echo __("History", IDXBOOST_DOMAIN_THEME_LANG); ?>"><span><?php echo __("History", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+          <button class="ms-tab ms-tab-favorites" data-tab="favorites" aria-label="<?php echo __("Favorites", IDXBOOST_DOMAIN_THEME_LANG); ?>"><span><?php echo __("Favorites", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
+          <button class="ms-tab ms-tab-searches" data-tab="searches" aria-label="<?php echo __("Saved Searches", IDXBOOST_DOMAIN_THEME_LANG); ?>"><span><?php echo __("Saved Searches", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
       </div>
 
       <div class="ms-body-tab">

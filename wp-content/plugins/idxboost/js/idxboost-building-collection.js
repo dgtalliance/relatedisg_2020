@@ -868,19 +868,19 @@ function idxboostListCollectionForSold(element){
     var elementgallery='';
     element["gallery"].forEach(function(itemimage,aux) {
       if (aux==0) {
-        elementgallery +='<li class="flex-slider-current"><img class="flex-lazy-image" data-original="'+itemimage+'"></li>';
+        elementgallery +='<li class="flex-slider-current"><img class="flex-lazy-image" data-original="'+itemimage+'" alt="'+element['address_short']+' '+element['address_large']+'"></li>';
       }else{
-        elementgallery +='<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="'+itemimage+'"></li>';
+        elementgallery +='<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="'+itemimage+'" alt="'+element['address_short']+' '+element['address_large']+'"></li>';
       }
     });
     htmlgrid +=elementgallery;
-    htmlgrid +='</ul><button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button><button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>';
+    htmlgrid +='</ul><button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button><button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>';
 
     if (type_property!='sold'){
       if(element['is_favorite']==1) {
-        htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'"><span class="clidxboost-icon-check clidxboost-icon-check-list active"></span></button>';
+        htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="'+element['token_alert']+'" aria-label="Remove Favorite"><span class="clidxboost-icon-check clidxboost-icon-check-list active"></span></button>';
       }else{
-        htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button>';
+        htmlgrid +='<button class="clidxboost-btn-check flex-favorite-btn" aria-label="Save Favorite"><span class="clidxboost-icon-check clidxboost-icon-check-list"></span></button>';
       }
     }
 

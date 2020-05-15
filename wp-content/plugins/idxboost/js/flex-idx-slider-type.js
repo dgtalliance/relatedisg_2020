@@ -146,13 +146,13 @@ function idx_slider_html(info_item,type){
                 html_response.push('</ul>');
 
                 if (info_item.gallery.length>1){
-	                html_response.push('<button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>');
-	                html_response.push('<button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>');
+	                html_response.push('<button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>');
+	                html_response.push('<button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>');
                 }
                 if (info_item.is_favorite==1){
-                	html_response.push('<button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="'+info_item.token_alert+'"></span></button>');
+                	html_response.push('<button class="clidxboost-btn-check" aria-label="Remove Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="'+info_item.token_alert+'"></span></button>');
                 }else{
-                	html_response.push('<button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>');
+                	html_response.push('<button class="clidxboost-btn-check" aria-label="Save Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>');
                 }
               html_response.push('</div>');
               html_response.push('<a class="ib-view-detailt" href="'+slug_post+'" rel="nofollow">'+word_translate.details+'</a>');

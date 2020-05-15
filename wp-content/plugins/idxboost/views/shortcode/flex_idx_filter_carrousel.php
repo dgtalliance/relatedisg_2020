@@ -66,16 +66,16 @@ var NO_REFRESH_F_AJAX = true;
                 <?php endforeach; ?>
             </ul>
             <?php if ( count($property['gallery'])>1 ) { ?>
-            <button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>
-            <button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>
+            <button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>
+            <button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>
             <?php } ?>
         
           <?php if ($property['is_favorite'] == true): ?>
-            <button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo $property['token_alert']; ?>">
+            <button aria-label="Remove Favorite" class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo $property['token_alert']; ?>">
               <span class="clidxboost-icon-check active"></span>
             </button>
           <?php else: ?>
-            <button class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo isset($property['token_alert']) ? $property['token_alert'] : ''; ?>">
+            <button aria-label="Save Favorite" class="clidxboost-btn-check flex-favorite-btn" data-alert-token="<?php echo isset($property['token_alert']) ? $property['token_alert'] : ''; ?>">
               <span class="clidxboost-icon-check"></span>
             </button>
           <?php endif; ?>

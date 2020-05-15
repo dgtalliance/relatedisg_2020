@@ -636,39 +636,39 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
 
 <script id="ib-aside-template" type="text/x-handlebars-template">
     {{#each this}}
-        <li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
-            <ul class="ib-piinfo">
-                <li class="ib-piitem ib-piprice">{{ formatPrice price }}{{ isRentalTypeListing is_rental }}</li>
-                <li class="ib-piitem ib-pibeds">{{ bed }} <?php echo __('Bed(s)', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                <li class="ib-piitem ib-pibaths">{{ bath }}{{ formatBathsHalf baths_half }} <?php echo __('Bath(s)', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                <li class="ib-piitem ib-pisqft">{{ formatSqft sqft }} <?php echo __('Sq.Ft.', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                <li class="ib-piitem ib-paddress">{{ full_address }}</li>
-                {{{ handleStatusProperty this }}}
-            </ul>
-            <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
-                {{{ idxGalleryImages this }}}
-                <div class="gs-container-navs">
-                    <div class="gs-wrapper-arrows">
-                        <button class="gs-prev-arrow"></button>
-                        <button class="gs-next-arrow"></button>
-                    </div>
+    <li class="ib-pitem" data-geocode="{{ lat }}:{{ lng }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
+        <ul class="ib-piinfo">
+            <li class="ib-piitem ib-piprice">{{ formatPrice price }}{{ isRentalTypeListing is_rental }}</li>
+            <li class="ib-piitem ib-pibeds">{{ bed }} <?php echo __('Bed(s)', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
+            <li class="ib-piitem ib-pibaths">{{ bath }}{{ formatBathsHalf baths_half }} <?php echo __('Bath(s)', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
+            <li class="ib-piitem ib-pisqft">{{ formatSqft sqft }} <?php echo __('Sq.Ft.', IDXBOOST_DOMAIN_THEME_LANG); ?></li>
+            <li class="ib-piitem ib-paddress">{{ full_address }}</li>
+            {{{ handleStatusProperty this }}}
+        </ul>
+        <div class="ib-pislider {{ idxImageEmpty this }} gs-container-slider" data-img-cnt="{{ img_cnt }}" data-mls="{{ mls_num }}" data-status="{{ status }}">
+            {{{ idxGalleryImages this }}}
+            <div class="gs-container-navs">
+                <div class="gs-wrapper-arrows">
+                    <button class="gs-prev-arrow" tabindex="-1" aria-label="Prev"></button>
+                    <button class="gs-next-arrow" tabindex="-1" aria-label="Next"></button>
                 </div>
             </div>
-            <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-status="{{ status }}" data-token-alert="{{token_alert}}"></div>
-            <?php if (isset($atts["oh"]) && (1 == $atts["oh"])) : ?>
-                {{#if oh}}
-                    <div class="ms-open ib-sf-p-oh" style="display:block !important;">
-                        <span class="ms-wrap-open">
-                            <span class="ms-open-title">Open House</span>
-                            <span class="ms-open-date">{{ oh_date }}</span>
-                            <span class="ms-open-time">{{ oh_time }}</span>
-                        </span>
-                    </div>
-                {{/if}}
-            <?php endif; ?>
-            <a class="ib-pipermalink" href="{{ idxPermalink this }}" title="<?php echo __('View Detail of', IDXBOOST_DOMAIN_THEME_LANG); ?> {{ full_address }}"><span>{{ full_address }}</span></a>
-        </li>
-        {{{ capturePositionHackbox @index }}}
+        </div>
+        <div class="ib-pfavorite {{ idxFavoriteClass this }}" data-mls="{{ mls_num }}" data-status="{{ status }}" data-token-alert="{{token_alert}}"></div>
+        <?php if (isset($atts["oh"]) && (1 == $atts["oh"])): ?>
+        {{#if oh}}
+        <div class="ms-open ib-sf-p-oh" style="display:block !important;">
+            <span class="ms-wrap-open">
+                <span class="ms-open-title">Open House</span>
+                <span class="ms-open-date">{{ oh_date }}</span>
+                <span class="ms-open-time">{{ oh_time }}</span>
+            </span>
+        </div>
+        {{/if}}
+        <?php endif; ?>
+        <a class="ib-pipermalink" href="{{ idxPermalink this }}" title="<?php echo __('View Detail of', IDXBOOST_DOMAIN_THEME_LANG); ?> {{ full_address }}"><span>{{ full_address }}</span></a>
+    </li>
+    {{{ capturePositionHackbox @index }}}
     {{/each}}
 </script>
 

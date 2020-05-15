@@ -82,18 +82,18 @@
                   <ul>
                     <?php foreach ($value['gallery'] as $kga => $vga) { ?>
                     <?php if ($kga === 0): ?>
-                    <li class="flex-slider-current"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>"></li>
+                    <li class="flex-slider-current"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>" alt="<?php echo $value['address_short']; ?> <?php echo $value['address_large']; ?>"></li>
                     <?php else: ?>
-                    <li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>"></li>
+                    <li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>" alt="<?php echo $value['address_short']; ?> <?php echo $value['address_large']; ?>"></li>
                     <?php endif; ?>
                     <?php } ?>
                   </ul>
-                  <button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>
-                  <button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>
+                  <button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>
+                  <button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>
                   <?php if ($value['is_favorite'] == 1): ?>
-                  <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="<?php echo $value['token_alert']; ?>"></span></button>
+                  <button class="clidxboost-btn-check" aria-label="Remove Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="<?php echo $value['token_alert']; ?>"></span></button>
                   <?php else: ?>
-                  <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>
+                  <button class="clidxboost-btn-check" aria-label="Save Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>
                   <?php endif; ?>                                                  
                 </div>
                 <a class="view-detail show-modal" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $value['slug']; ?>" data-modal="modal_property_detail" data-position="0" rel="nofollow"><?php echo __("View detail", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
@@ -139,18 +139,18 @@
                 <ul>
                   <?php foreach ($value['gallery'] as $kga => $vga) { ?>
                   <?php if ($kga === 0): ?>
-                  <li class="flex-slider-current"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>"></li>
+                  <li class="flex-slider-current"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>" alt="<?php echo $value['address_short']; ?> <?php echo $value['address_large']; ?>"></li>
                   <?php else: ?>
-                  <li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>"></li>
+                  <li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>" alt="<?php echo $value['address_short']; ?> <?php echo $value['address_large']; ?>"></li>
                   <?php endif; ?>
                   <?php } ?>
                 </ul>
-                <button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>
-                <button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>
+                <button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>
+                <button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>
                 <?php if ($value['is_favorite'] == 1): ?>
-                <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="<?php echo $value['token_alert']; ?>"></span></button>
+                <button class="clidxboost-btn-check" aria-label="Remove Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="<?php echo $value['token_alert']; ?>"></span></button>
                 <?php else: ?>
-                <button class="clidxboost-btn-check"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>
+                <button class="clidxboost-btn-check" aria-label="Save Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>
                 <?php endif; ?>                                    
               </div>
               <a class="view-detail show-modal" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/<?php echo $value['slug']; ?>" data-modal="modal_property_detail" data-position="0" rel="nofollow"><?php echo __("View detail", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
@@ -187,14 +187,14 @@
                 <ul>
                   <?php foreach ($value['gallery'] as $kga => $vga) { ?>
                   <?php if ($kga === 0): ?>
-                  <li class="flex-slider-current"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>"></li>
+                  <li class="flex-slider-current"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>" alt="<?php echo $value['address_short']; ?> <?php echo $value['address_large']; ?>"></li>
                   <?php else: ?>
-                  <li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>"></li>
+                  <li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="<?php echo $vga; ?>" alt="<?php echo $value['address_short']; ?> <?php echo $value['address_large']; ?>"></li>
                   <?php endif; ?>
                   <?php } ?>
                 </ul>
-                <button class="prev flex-slider-prev"><span class="clidxboost-icon-arrow-select"></span></button>
-                <button class="next flex-slider-next"><span class="clidxboost-icon-arrow-select"></span></button>                                 
+                <button class="prev flex-slider-prev" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>
+                <button class="next flex-slider-next" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>                                 
               </div>
               <a class="view-detail show-modal" href="<?php echo rtrim($flex_idx_info["pages"]["flex_idx_property_detail"]["guid"], "/"); ?>/sold-<?php echo $value['slug']; ?>" data-modal="modal_property_detail" data-position="0" rel="nofollow"><?php echo __("View detail", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
             </li>

@@ -5,6 +5,9 @@
     <input type="hidden" name="registration_key" value="<?php echo strip_tags($atts["registration_key"]); ?>">
     <?php endif; ?>
     <input type="hidden" name="ib_tags" value="">
+
+<fieldset>
+      <legend><?php echo __("What are you looking to rent?", IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
     <input type="hidden" name="action" value="lead_submission_rent">
     <div class="ib-form-wrapper">
       <ul class="ib-fsteps">
@@ -113,16 +116,20 @@
           <h4 class="ib-fstitle"><?php echo __("Contact Information", IDXBOOST_DOMAIN_THEME_LANG); ?></h4><span class="ib-ftext"><?php echo __("Please provide your contact information below and we will be in touch very soon!", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
           <ul class="ib-fsinformation">
             <li class="ib-fsftem">
-              <input required class="ib-fsinput" type="email" name="email" placeholder="<?php echo __("Email*", IDXBOOST_DOMAIN_THEME_LANG); ?>">
+                <label for="ms-fsinput-email" class="ms-hidden"><?php echo __("Email*", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <input required class="ib-fsinput" type="email" name="email" placeholder="<?php echo __("Email*", IDXBOOST_DOMAIN_THEME_LANG); ?>" id="ms-fsinput-email">
             </li>
             <li class="ib-fsftem">
-              <input required class="ib-fsinput" type="text" name="name" placeholder="<?php echo __("Name*", IDXBOOST_DOMAIN_THEME_LANG); ?>">
+                <label for="ms-fsinput-name" class="ms-hidden"><?php echo __("Name*", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <input required class="ib-fsinput" type="text" name="name" placeholder="<?php echo __("Name*", IDXBOOST_DOMAIN_THEME_LANG); ?>" id="ms-fsinput-name">
             </li>
             <li class="ib-fsftem">
-              <input required class="ib-fsinput" type="text" name="phone" placeholder="<?php echo __("Phone*", IDXBOOST_DOMAIN_THEME_LANG); ?>">
+                <label for="ms-fsinput-phone" class="ms-hidden"><?php echo __("Phone*", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <input required class="ib-fsinput" type="text" name="phone" placeholder="<?php echo __("Phone*", IDXBOOST_DOMAIN_THEME_LANG); ?>" id="ms-fsinput-phone">
             </li>
             <li class="ib-fsftem ib-fsftem-textarea">
-              <textarea class="ib-fstextarea" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" name="comments"></textarea>
+                <label for="ms-fsinput-comments" class="ms-hidden"><?php echo __("Phone*", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                <textarea class="ib-fstextarea" placeholder="<?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?>" name="comments" id="ms-fsinput-comments"></textarea>
             </li>
           </ul>
         </li>
@@ -136,5 +143,6 @@
         <input class="ib-fsubmit ib-fbtn" id="lead_submission_rent_submit" type="submit" value="<?php echo __("Submit", IDXBOOST_DOMAIN_THEME_LANG); ?>">
       </div>
     </div>
+    </fieldset>
   </form>
 </article>

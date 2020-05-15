@@ -80,29 +80,57 @@
                         <form class="form-shared-saved" method="post" id="flex_idx_profile_form">
                            <input type="hidden" name="action" value="flex_profile_save">
                            <ul class="body-form">
-                              <li class="content-form"><label><?php echo __("Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label><input type="text" class="input-form" name="flex_idx_profile_name" id="flex_idx_profile_name" value="<?php echo esc_attr($flex_idx_lead['lead_info']['first_name']); ?>" required></li>
-                              <li class="content-form"><label><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label><input type="text" class="input-form" name="flex_idx_profile_last_name" id="flex_idx_profile_last_name" value="<?php echo esc_attr($flex_idx_lead['lead_info']['last_name']); ?>" required></li>
-                              <li class="content-form"><label><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label><input type="email" <?php if('email' !== $flex_idx_lead['lead_info']['logon_type']): ?> readonly <?php endif; ?>  class="input-form" name="flex_idx_profile_email" id="flex_idx_profile_email" value="<?php echo esc_attr($flex_idx_lead['lead_info']['email_address']); ?>" required></li>
-                              <li class="content-form"><label><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label><input type="text" class="input-form" name="flex_idx_profile_phone" id="flex_idx_profile_phone" value="<?php echo esc_attr($flex_idx_lead['lead_info']['phone_number']); ?>"></li>
-                              <li class="content-form"><label><?php echo __("Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label><input type="text" class="input-form" name="flex_idx_profile_address" id="flex_idx_profile_address" value="<?php echo esc_attr($flex_idx_lead['lead_info']['address']); ?>"></li>
-                              <li class="content-form"><label><?php echo __("City", IDXBOOST_DOMAIN_THEME_LANG); ?></label><input type="text" class="input-form" name="flex_idx_profile_city" id="flex_idx_profile_city" value="<?php echo esc_attr($flex_idx_lead['lead_info']['city']); ?>"></li>
-                              <li class="content-form"><label><?php echo __("State", IDXBOOST_DOMAIN_THEME_LANG); ?></label><input type="text" class="input-form" name="flex_idx_profile_state" id="flex_idx_profile_state" value="<?php echo esc_attr($flex_idx_lead['lead_info']['state']); ?>"></li>
-                              <li class="content-form"><label><?php echo __("Zip Code", IDXBOOST_DOMAIN_THEME_LANG); ?></label><input type="text" class="input-form" name="flex_idx_profile_zip" id="flex_idx_profile_zip" value="<?php echo esc_attr($flex_idx_lead['lead_info']['zip_code']); ?>"></li>
-                           </ul>
+<li class="content-form">
+  <label for="flex_idx_profile_name"><?php echo __("Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label>
+  <input type="text" class="input-form" name="flex_idx_profile_name" id="flex_idx_profile_name" value="<?php echo esc_attr($flex_idx_lead['lead_info']['first_name']); ?>" required>
+</li>
+<li class="content-form">
+  <label for="flex_idx_profile_last_name"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label>
+  <input type="text" class="input-form" name="flex_idx_profile_last_name" id="flex_idx_profile_last_name" value="<?php echo esc_attr($flex_idx_lead['lead_info']['last_name']); ?>" required></li>
+<li class="content-form">
+  <label for="flex_idx_profile_email"><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label>
+  <input type="email" <?php if('email' !== $flex_idx_lead['lead_info']['logon_type']): ?> readonly <?php endif; ?>  class="input-form" name="flex_idx_profile_email" id="flex_idx_profile_email" value="<?php echo esc_attr($flex_idx_lead['lead_info']['email_address']); ?>" required>
+</li>
+<li class="content-form">
+  <label for="flex_idx_profile_phone"><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label>
+  <input type="text" class="input-form" name="flex_idx_profile_phone" id="flex_idx_profile_phone" value="<?php echo esc_attr($flex_idx_lead['lead_info']['phone_number']); ?>">
+</li>
+<li class="content-form">
+  <label for="flex_idx_profile_address"><?php echo __("Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+  <input type="text" class="input-form" name="flex_idx_profile_address" id="flex_idx_profile_address" value="<?php echo esc_attr($flex_idx_lead['lead_info']['address']); ?>">
+</li>
+<li class="content-form">
+  <label for="flex_idx_profile_city"><?php echo __("City", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+  <input type="text" class="input-form" name="flex_idx_profile_city" id="flex_idx_profile_city" value="<?php echo esc_attr($flex_idx_lead['lead_info']['city']); ?>">
+</li>
+<li class="content-form">
+  <label for="flex_idx_profile_state"><?php echo __("State", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+  <input type="text" class="input-form" name="flex_idx_profile_state" id="flex_idx_profile_state" value="<?php echo esc_attr($flex_idx_lead['lead_info']['state']); ?>">
+</li>
+<li class="content-form">
+  <label for="flex_idx_profile_zip"><?php echo __("Zip Code", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+  <input type="text" class="input-form" name="flex_idx_profile_zip" id="flex_idx_profile_zip" value="<?php echo esc_attr($flex_idx_lead['lead_info']['zip_code']); ?>">
+</li>                           
+</ul>
 
                            <?php if ('email' === $flex_idx_lead['lead_info']['logon_type']): ?>
                              <div class="header-title-profile">
                                 <h2 class="title-profile"><?php echo __("Change Password", IDXBOOST_DOMAIN_THEME_LANG); ?></h2>
                              </div>
                              <ul class="body-form">
-                                <li class="content-form"><label><?php echo __("New Password", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label><input type="password" name="new_password" class="input-form"></li>
-                                <li class="content-form"><label><?php echo __("Confirm Password", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label><input type="password" name="confirm_password" class="input-form"></li>
+                                
+<li class="content-form">
+<label for="flex_idx_new_password"><?php echo __("New Password", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label>
+<input type="password" name="new_password" class="input-form" id="flex_idx_new_password"></li>
+                                <li class="content-form">
+<label for="flex_idx_confirm_password"><?php echo __("Confirm Password", IDXBOOST_DOMAIN_THEME_LANG); ?>*</label>
+<input type="password" name="confirm_password" class="input-form" id="flex_idx_confirm_password"></li>
                              </ul>
                            <?php endif; ?>
 
                            <p>*<?php echo __("Required fields. Your personal information is strictly confidential and will not be shared with any outside organizations.", IDXBOOST_DOMAIN_THEME_LANG); ?> </p>
                            <div class="content-btn">
-                              <button type="button" onclick="javascript:location.reload();" class="clidxboost-btn-general clidxboost-btn-cancel"><span><?php echo __("Cancel", IDXBOOST_DOMAIN_THEME_LANG); ?></span></a>
+                              <button type="button" onclick="javascript:location.reload();" class="clidxboost-btn-general clidxboost-btn-cancel" aria-label="<?php echo __("Cancel", IDXBOOST_DOMAIN_THEME_LANG); ?>"><span><?php echo __("Cancel", IDXBOOST_DOMAIN_THEME_LANG); ?></span></a>
                               <button type="submit" class="clidxboost-btn-general"><span><?php echo __("Save profile", IDXBOOST_DOMAIN_THEME_LANG); ?></span></button>
                            </div>
                         </form>
