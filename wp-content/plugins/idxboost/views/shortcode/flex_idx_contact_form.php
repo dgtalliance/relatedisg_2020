@@ -7,7 +7,7 @@
     <legend>Contact</legend>
   <input type="hidden" name="ib_tags" value="">
   <input type="hidden" name="action" value="idxboost_contact_inquiry">
-  <h3><?php echo __("Email Us", IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
+  <h3 class="ms-hidden"><?php echo __("Email Us", IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
   <?php  
     global $flex_idx_info;
     if (array_key_exists('track_gender', $flex_idx_info['agent'])) {
