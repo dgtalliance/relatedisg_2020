@@ -67,7 +67,17 @@ function genMultiSlider(element){
             $(this).attr("data-was-processed","true").attr("src",dataImage).addClass("initial loaded");
           }
         });
-      }
+      },
+	    onInited: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $multiSlider.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text($a);
+					});
+	    	}
+	    }
     });
   }
 }
