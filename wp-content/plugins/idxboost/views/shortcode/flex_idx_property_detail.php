@@ -254,7 +254,7 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
       <div class="gs-container-slider clidxboost-full-slider">
         <?php if ($property['img_cnt'] > 0) : ?>
           <?php foreach ($property['gallery'] as $thumbnail) : ?>
-            <img data-lazy="<?php echo $thumbnail; ?>" class="img-slider gs-lazy">
+            <img data-lazy="<?php echo $thumbnail; ?>" class="img-slider gs-lazy" alt="<?php echo str_replace('# ', '#', $property['address_short']).','.$property['address_large']; ?>">
           <?php endforeach; ?>
         <?php endif; ?>
       </div>
