@@ -30,12 +30,11 @@
             <option value="<?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG);?>"><?php echo __('Mrs.', IDXBOOST_DOMAIN_THEME_LANG);?></option>
             <option value="<?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG);?>"><?php echo __('Miss', IDXBOOST_DOMAIN_THEME_LANG);?></option>
           </select>
-          <label class="ms-hidden" for="for_user_firstname">First name</label>
+          <label class="ms-hidden" for="for_user_firstname"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
           <input class="medium" name="name" id="for_user_firstname" type="text" value="" required>
         </div>
         <?php }else{ ?>
-        <span><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?> *</span>
-        <label class="ms-hidden" for="for_user_firstname"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+        <label class="ms-hidden" for="for_user_firstname"><?php echo __("First Name", IDXBOOST_DOMAIN_THEME_LANG); ?> *</label>
         <input class="medium" name="name" id="for_user_firstname" type="text" value="" required>
         <?php  } ?>
       </li>
