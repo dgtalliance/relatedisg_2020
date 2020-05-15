@@ -727,9 +727,9 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
                     </div>
                   </li>
                   <li class="gfield requiredFields">* <?php echo __("Required Fields", IDXBOOST_DOMAIN_THEME_LANG); ?></li>
-                  <div class="gform_footer">
+                  <li class="gform_footer">
                     <input class="gform_button button gform_submit_button_5" type="submit" value="<?php echo __("Request Information", IDXBOOST_DOMAIN_THEME_LANG); ?>">
-                  </div>
+                  </li>
                 </ul>
               </div>
 </fieldset>
