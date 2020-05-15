@@ -41,10 +41,19 @@
       <?php  } ?>
     </li>
     
-      <li class="form-item pt-lname"><label class="ms-hidden" for="for_user_lastname"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?></label><span><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?> *</span><input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium" name="lastname" id="for_user_lastname" type="text" value="" required></li>
-      <li class="form-item pt-email"><label class="ms-hidden" for="for_user_email"><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?></label><span><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?> *</span><input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium" name="email" id="for_user_email" type="email" value="" required></li>
-      <li class="form-item pt-phone"><label class="ms-hidden" for="for_user_phone"><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?></label><span><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?></span><input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium" name="phone" id="for_user_phone" type="" value=""></li>
-      <li class="form-item full-item"><label class="ms-hidden" for="for_user_comments"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label><span><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></span><textarea autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="textarea medium" name="message" id="for_user_comments"></textarea></li>
+      <li class="form-item pt-lname">
+        <label class="ms-hidden" for="for_user_lastname"><?php echo __("Last Name", IDXBOOST_DOMAIN_THEME_LANG); ?> *</label>
+        <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium" name="lastname" id="for_user_lastname" type="text" value="" required>
+      </li>
+      <li class="form-item pt-email">
+        <label class="ms-hidden" for="for_user_email"><?php echo __("Email", IDXBOOST_DOMAIN_THEME_LANG); ?>  *</label>
+        <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium" name="email" id="for_user_email" type="email" value="" required></li>
+      <li class="form-item pt-phone">
+        <label class="ms-hidden" for="for_user_phone"><?php echo __("Phone", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+        <input autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="medium" name="phone" id="for_user_phone" type="" value=""></li>
+      <li class="form-item full-item">
+        <label class="ms-hidden" for="for_user_comments"><?php echo __("Comments", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+        <textarea autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" autocomplete="disabled" class="textarea medium" name="message" id="for_user_comments"></textarea></li>
       <li class="form-item full-item"><span><?php echo __("Best Time to Reach You", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
       <ul class="opt-list">
         <li class="opt-item radio-item"><input name="option_time" type="radio" value="am" id="choice_1_<?php echo $atts['id_form']; ?>" checked><label for="choice_1_<?php echo $atts['id_form']; ?>"><?php echo __('am', IDXBOOST_DOMAIN_THEME_LANG);?></label></li>
