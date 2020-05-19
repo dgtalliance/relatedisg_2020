@@ -284,6 +284,9 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
   });
 
   Handlebars.registerHelper("formatPriceSqft", function (property) {
+
+    cosnole.log(property);
+
     if (property.sqft > 0 && property.price > 0) {
       return _.formatPrice(property.price / property.sqft);
     } else {
@@ -300,20 +303,20 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
           images.push(
             '<img onerror="this.src=\'https://www.idxboost.com/i/default_thumbnail.jpg\';" src="' +
               property.gallery[i] +
-              '" class="ib-pifimg">'
+              '" class="ib-pifimg" >'
           );
         } else {
           images.push(
             '<img onerror="this.src=\'https://www.idxboost.com/i/default_thumbnail.jpg\';" data-lazy="' +
               property.gallery[i] +
-              '" class="gs-lazy">'
+              '" class="gs-lazy" >'
           );
         }
       }
 
       return images.join("");
     } else {
-      return '<img src="https://www.idxboost.com/i/default_thumbnail.jpg" class="ib-pifimg">';
+      return '<img src="https://www.idxboost.com/i/default_thumbnail.jpg" class="ib-pifimg" >';
     }
   });
 
