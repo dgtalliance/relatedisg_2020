@@ -1240,7 +1240,7 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
           infobox_content.push(
             '<div class="ib-ibpb"><img onerror="this.src=\'https://www.idxboost.com/i/default_thumbnail.jpg\';" class="ib-ibimg" src="' +
               property_group.thumbnail +
-              '"></div>'
+              '" alt="'+ property_group.address_short +'"></div>'
           );
 
           // if ((null != property_group.image) && (property_group.image.length > 0) ) {
