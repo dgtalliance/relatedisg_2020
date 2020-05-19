@@ -284,9 +284,6 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
   });
 
   Handlebars.registerHelper("formatPriceSqft", function (property) {
-
-    cosnole.log(property);
-
     if (property.sqft > 0 && property.price > 0) {
       return _.formatPrice(property.price / property.sqft);
     } else {
@@ -295,6 +292,9 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
   });
 
   Handlebars.registerHelper("idxGalleryImages", function (property) {
+
+    console.log(property);
+
     if (property.gallery.length > 0) {
       var images = [];
 
