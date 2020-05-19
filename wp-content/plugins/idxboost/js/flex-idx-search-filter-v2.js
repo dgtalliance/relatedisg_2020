@@ -293,8 +293,6 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
 
   Handlebars.registerHelper("idxGalleryImages", function (property) {
 
-    console.log(property);
-
     if (property.gallery.length > 0) {
       var images = [];
 
