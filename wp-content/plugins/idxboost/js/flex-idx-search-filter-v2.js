@@ -303,20 +303,20 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
           images.push(
             '<img onerror="this.src=\'https://www.idxboost.com/i/default_thumbnail.jpg\';" src="' +
               property.gallery[i] +
-              '" class="ib-pifimg" >'
+              '" class="ib-pifimg" alt="'+property.full_address+'">'
           );
         } else {
           images.push(
             '<img onerror="this.src=\'https://www.idxboost.com/i/default_thumbnail.jpg\';" data-lazy="' +
               property.gallery[i] +
-              '" class="gs-lazy" >'
+              '" class="gs-lazy" alt="'+property.full_address+'">'
           );
         }
       }
 
       return images.join("");
     } else {
-      return '<img src="https://www.idxboost.com/i/default_thumbnail.jpg" class="ib-pifimg" >';
+      return '<img src="https://www.idxboost.com/i/default_thumbnail.jpg" class="ib-pifimg" alt="'+property.full_address+'">';
     }
   });
 
