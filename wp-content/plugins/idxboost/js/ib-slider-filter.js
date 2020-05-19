@@ -171,13 +171,14 @@ function idx_slider_html(info_item,type){
               html_response.push('<div class="wrap-slider">');
                 html_response.push('<ul>');
 
-				info_item.gallery.forEach(function(gallery,index_gallery){
-					if (index_gallery==0){
-						html_response.push('<li class="flex-slider-current"><img class="flex-lazy-image" data-original="'+gallery+'"></li>');
-					}else{
-						html_response.push('<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="'+gallery+'"></li>');
-					}				
-				});
+                info_item.gallery.forEach(function(gallery,index_gallery){
+                  if (index_gallery==0){
+                    html_response.push('<li class="flex-slider-current"><img class="flex-lazy-image" data-original="'+gallery+'" alt="'+info_item.address_short+' '+info_item.address_large+'"></li>');
+                  }else{
+                    html_response.push('<li class="flex-slider-item-hidden"><img class="flex-lazy-image" data-original="'+gallery+'" alt="'+info_item.address_short+' '+info_item.address_large+'"></li>');
+                  }				
+                });
+                
                 html_response.push('</ul>');
 
                 if (info_item.gallery.length>1){
