@@ -215,6 +215,11 @@ $(document).ready(function(event){
             
                         $("#modal_login h2").html($("#modal_login").find('[data-tab]:eq(1)').data("text-force"));
                         countClickAnonymous = 0;
+
+                        /*Asigamos el texto personalizado*/
+                        var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
+                        $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+                        
                     }
                 }
             }

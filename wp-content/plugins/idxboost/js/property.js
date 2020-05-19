@@ -1224,12 +1224,21 @@
     $(".item_tab").removeClass("active");
     $(".header-tab li a[data-tab='tabRegister']").addClass("active");
     $("#tabRegister").addClass("active");
+
+    /*Asigamos el texto personalizado*/
+    var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
+    $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+
   });
   $(document).on("click", ".login", function () {
     $(".header-tab li a").removeClass("active");
     $(".item_tab").removeClass("active");
     $(".header-tab li a[data-tab='tabLogin']").addClass("active");
     $("#tabLogin").addClass("active");
+
+    /*Asigamos el texto personalizado*/
+    var titleText = $(".header-tab a[data-tab='tabLogin']").attr('data-text')
+    $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
   });
 
   $(document).on("click", ".close-message", function () {

@@ -257,7 +257,13 @@ $(document).ready(function(event){
                         $(".overlay_modal").css("background-color", "rgba(0,0,0,0.8);");
             
                         $("#modal_login h2").html($("#modal_login").find('[data-tab]:eq(1)').data("text-force"));
+
+                        /*Asigamos el texto personalizado*/
+                        var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
+                        $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+
                         countClickAnonymous = 0;
+                        
                     }
                 }
             }
