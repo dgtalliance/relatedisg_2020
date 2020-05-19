@@ -232,3 +232,13 @@
     }
   }
 }
+
+#footer .ms-wrap-footer .ms-footer-social .ms-wrap-newsletter form label{
+  display: block !important;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  }
