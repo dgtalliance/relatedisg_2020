@@ -108,14 +108,16 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
                 .find(".item_tab")
                 .removeClass("active");
 
-              $("#tabRegister")
-                .addClass("active");
+              $("#tabRegister").addClass("active");
 
               $("#modal_login #msRst").empty().html($("#mstextRst").html());
               $("button.close-modal").addClass("ib-close-mproperty");
               $(".overlay_modal").css("background-color", "rgba(0,0,0,0.8);");
-
               $("#modal_login h2").html($("#modal_login").find('[data-tab]:eq(1)').data("text-force"));
+
+              /*Asigamos el texto personalizado*/
+              var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
+              $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
 
             }
           } else {
@@ -134,6 +136,11 @@ if ("1" == $flex_idx_info["agent"]["force_registration"]) : ?>
               var $registerText = $dataTextForce;
               jQuery("#modal_login h2").html($registerText);
               jQuery("#modal_login #msRst").empty().html(jQuery("#mstextRst").html());
+
+              /*Asigamos el texto personalizado*/
+              var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
+              $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+
             }
           }
         });

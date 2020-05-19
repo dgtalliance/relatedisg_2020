@@ -784,6 +784,10 @@ if ("undefined" === typeof loadPropertyInModal) {
                   $("#modal_login").find("[data-tab]:eq(1)").data("text-force")
                 );
 
+                /*Asigamos el texto personalizado*/
+                var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
+                $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+
                 // reset to default clicks
                 //IB_CURRENT_LEFT_CLICKS = IB_DEFAULT_LEFT_CLICKS;
               }
@@ -824,6 +828,11 @@ if ("undefined" === typeof loadPropertyInModal) {
                       .find("[data-tab]:eq(1)")
                       .data("text-force")
                   );
+
+
+                  /*Asigamos el texto personalizado*/
+                  var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
+                  $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
                   // }
                 }
               }
