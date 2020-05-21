@@ -180,7 +180,7 @@ global $flex_idx_info, $flex_idx_lead;
 
           <div id="tabRegister" class="item_tab" data-text="<?php echo __('Register for a personalized experience', IDXBOOST_DOMAIN_THEME_LANG); ?>">
             <div class="ms-back">
-              <button class="ms-icon-back">
+              <button class="ms-icon-back" aria-label="<?php echo __("Back", IDXBOOST_DOMAIN_THEME_LANG); ?>">
                 <span></span>
               </button>
             </div>
