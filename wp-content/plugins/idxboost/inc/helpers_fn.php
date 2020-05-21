@@ -978,6 +978,113 @@ if (!function_exists('idx_import_tgbuilding_update_xhr_fn')) {
     }
 }
 
+if (!function_exists('flex_idx_get_alert_lead_xhr_fn')) {
+    function flex_idx_get_alert_lead_xhr_fn()
+    {
+
+
+        $response = [];
+        $access_token = flex_idx_get_access_token();
+        $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
+        $client_ip = get_client_ip_server();
+        $token_alert = isset($_POST["token_alert"]) ?  $_POST["token_alert"] : '';       
+        $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
+        $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
+        $agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
+
+        $params = [
+            "access_token" => $access_token,
+            "lead_token" => $lead_token,
+            "token_alert" => $token_alert,           
+            "client_ip" => $client_ip,
+            "url_referer" => $referer,
+            "url_origin" => $origin,
+            "user_agent" => $agent
+        ];
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_VERIFY_CREDENTIALS_ALERT);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+        
+        $response = json_decode($output, true);
+
+        wp_send_json($response);
+        exit;
+
+
+    }
+}
+
+
+if (!function_exists('alert_lead_update_preference_xhr_fn')) {
+    function alert_lead_update_preference_xhr_fn()
+    {
+
+
+        $response = [];
+        $access_token = flex_idx_get_access_token();
+        $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
+        $client_ip = get_client_ip_server();
+        
+        $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
+        $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
+        $agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
+
+        $token_alert = isset($_POST["token_alert"]) ?  $_POST["token_alert"] : '';
+        $subject = isset($_POST["subject"]) ?  $_POST["subject"] : '';
+        $criterial_time = isset($_POST["criterial_time"]) ?  $_POST["criterial_time"] : '';
+        $criterial_event = isset($_POST["criterial_event"]) ?  $_POST["criterial_event"] : '';
+
+        $search_url = isset($_POST["search_url"]) ?  $_POST["search_url"] : '';
+        $search_count = isset($_POST["search_count"]) ?  $_POST["search_count"] : '0';
+        $search_condition = isset($_POST["search_condition"]) ?  $_POST["search_condition"] : '';
+        $search_filter_params = isset($_POST["search_filter_params"]) ?  $_POST["search_filter_params"] : '';
+        $search_filter_ID = isset($_POST["token_alert"]) ?  $_POST["search_filter_ID"] : '';
+
+        $params = [
+            "access_token" => $access_token,
+            "lead_token" => $lead_token,
+            "token_alert" => $token_alert,
+            "subject" => $subject,
+            "criterial_time" => $criterial_time,
+            "criterial_event" => $criterial_event,
+            "client_ip" => $client_ip,
+            "url_referer" => $referer,
+            "url_origin" => $origin,
+            "user_agent" => $agent,
+            "search_url" => $search_url,
+            "search_count" => $search_count,
+            "search_condition" => $search_condition,
+            "search_filter_params" => $search_filter_params,
+            "search_filter_ID" => $search_filter_ID,
+
+        ];
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_ALERT_UPDATE_LEAD);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+        
+        $response = json_decode($output, true);
+
+        wp_send_json($response);
+        exit;
+
+
+    }
+}
+
 if (!function_exists('idxboost_import_building_xhr_fn')) {
     function idxboost_import_building_xhr_fn()
     {
@@ -5492,6 +5599,9 @@ if (!function_exists('flex_idx_register_assets')) {
 
 
         // underscore
+        //alert
+        wp_register_script('flex-idx-alert', FLEX_IDX_URI . 'js/idxboost-alert-notification.js', array('jquery'));
+
         // wp_register_script('underscore', FLEX_IDX_URI . 'vendor/underscore/underscore.js', array());
         wp_register_script('underscore-mixins', FLEX_IDX_URI . 'js/underscore.mixins.js', array('underscore'), iboost_get_mod_time("js/underscore.mixins.js"));
         // mortgage calculator
@@ -5506,7 +5616,8 @@ if (!function_exists('flex_idx_register_assets')) {
             'flex-cookies-manager',
             'jquery',
             'flex-idx-filter-jquery-ui',
-            'flex-idx-filter-jquery-ui-touch'
+            'flex-idx-filter-jquery-ui-touch',
+            'flex-idx-alert',
         ), iboost_get_mod_time("js/flex-auth-check.js"), true);
         wp_enqueue_script('flex-auth-check');
         // mini search

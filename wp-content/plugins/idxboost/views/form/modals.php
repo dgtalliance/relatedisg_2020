@@ -15,6 +15,76 @@ global $flex_idx_info, $flex_idx_lead;
 <!--MODAL GALLERY-->
 <div id="content-modals">
 
+<div class="overlay_modal" id="modal_edit_alert_information">
+  <div class="modal_cm">
+    <div class="ms-header-close">
+      <button data-id="modal_edit_alert_information" class="close close-modal" data-frame="modal_mobile">Close <span></span></button>
+      <p>If you want to update <br>your filter <a href="#">click here</a></p>
+    </div>
+    <div class="content_md">
+      <div class="heder_md">
+        <span class="ms-modal-title"><?php echo __('EDIT PREFERENCES', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+      </div>
+      <div class="body_md">
+        <div class="form_content" id="ib-edit-alert-st">
+          <form class="js-form-alert-lead-update" method="POST">
+            <fieldset>
+              <legend><?php echo __('EDIT PREFERENCES', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
+              <div class="gform_body">
+                <ul class="gform_fields">
+                  <li class="gfield">
+                    <label class="gfield_label"><?php echo __('Search Name(*)', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <div class="ginput_container"><input class="medium js-alert-subject" id="input_update_name_search_token" name="input_sname" placeholder="Search Name*" required type="text" value="" /></div>
+                  </li>
+                  <li class="gfield">
+                    <label class="gfield_label"><?php echo __('Email Updates', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <div class="ginput_container">
+                      <select class="iboost-alert-change-interval notification_day_update_flo medium js-alert-event">
+                        <option value="0"><?php echo __('No Alert', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                        <option value="1"><?php echo __('Daily (each morning)', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                        <option value="7"><?php echo __('Weekly', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                        <option value="30"><?php echo __('Monthly', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
+                      </select>
+                    </div>
+                  </li>
+                  <li class="gfield">
+                    <label class="gfield_label"><?php echo __('Only Update Me On', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <div class="ginput_container">
+                      <ul class="list-check js-alert-list-status">
+                        <li><input type_event="new_listings" class="flex-save-type-options js-alert-status" id="update-listing-alert" name="notification_type_update_token[]" type="checkbox" value="new_listing">
+                          <label for="update-listing-alert"><?php echo __('New Listing (Always)', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        </li>
+                        <li><input type_event="price_changes" class="flex-save-type-options js-alert-status" id="update-price-change-alert" name="notification_type_update_token[]" type="checkbox" value="price_changes">
+                          <label for="update-price-change-alert"><?php echo __('Price Changes', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        </li>
+                        <li><input type_event="status_changes" class="flex-save-type-options js-alert-status" id="update-status-change-alert" name="notification_type_update_token[]" type="checkbox" value="status_changes">
+                          <label for="update-status-change-alert"><?php echo __('status changes', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                        </li>
+                      </ul>
+                      <div class="gform_footer"><input class="form_submit_button_search gform_button button gform_submit_button_5" type="submit" value="<?php echo __('Update', IDXBOOST_DOMAIN_THEME_LANG); ?>"></div>
+                    </div>
+                  </li>
+                </ul>
+                <div>
+                  <?php 
+                  $token_alert='';
+                  if( !empty($_GET) && array_key_exists('token_alert',$_GET) && !empty($_GET['token_alert']) ){
+                    $token_alert=$_GET['token_alert'];
+                  }
+                  ?>
+                  <input type="hidden" name="token_alert_flo" class="token_alert_flo" value="<?php echo $token_alert; ?>">
+                  <input type="hidden" name="type_alert" class="type_alert" value="update">
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay_modal_closer" data-frame="modal_mobile" data-id="modal_edit_alert_information"></div>
+</div>
+
   <!-- FULL SLIDER -->
   <div class="overlay_modal" id="modal_img_propertie">
     <div class="content-modal-full-slider">

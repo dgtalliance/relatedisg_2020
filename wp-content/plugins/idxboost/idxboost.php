@@ -36,9 +36,9 @@ if (isset($_ENV["IDXBOOST_BASE_URL"])) {
     !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) ||
       php_sapi_name() === 'cli-server')
   ) {
-    define('FLEX_IDX_BASE_URL', 'https://api.staging.idxboost.com');
-    define('FLEX_IDX_CPANEL_URL', 'https://cpanel.staging.idxboost.com');
-    define('FLEX_IDX_BACKOFFICE_CPANEL_URL', 'https://backoffice.staging.idxboost.com');
+    define('FLEX_IDX_BASE_URL', 'https://api.idxboost.com');
+    define('FLEX_IDX_CPANEL_URL', 'https://cpanel.idxboost.com');
+    define('FLEX_IDX_BACKOFFICE_CPANEL_URL', 'https://backoffice.idxboost.com');  
   } else { // Running on localhost
     define('FLEX_IDX_BASE_URL', 'http://api.idxboost.l');
     define('FLEX_IDX_CPANEL_URL', 'http://cpanel.idxboost.l');
@@ -101,6 +101,8 @@ define('FLEX_IDX_API_HISTORY', FLEX_IDX_BASE_URL . '/building_history_count');
 define('FLEX_IDX_API_BUILDING_IMPORT', FLEX_IDX_BASE_URL . '/building/import_data');
 define('FLEX_IDX_API_TERMS_CONDITIONS', FLEX_IDX_BASE_URL . '/terms_conditions');
 define('FLEX_IDX_API_REGISTER_QUIZZ_SAVE', FLEX_IDX_BASE_URL . '/lead/quizz/save');
+define('FLEX_IDX_API_VERIFY_CREDENTIALS_ALERT', FLEX_IDX_BASE_URL . '/lead/verify/alert');
+define('FLEX_IDX_API_ALERT_UPDATE_LEAD', FLEX_IDX_BASE_URL . '/lead/update/alert');
 define('FLEX_IDX_API_LEAD_HIDE_LISTING', FLEX_IDX_BASE_URL . '/lead/hide/listing');
 define('FLEX_IDX_API_SEARCH_V2_LOOKUP', FLEX_IDX_BASE_URL . '/search_lookup');
 define('FLEX_IDX_API_COMMERCIAL_SEARCH_V2_LOOKUP', FLEX_IDX_BASE_URL . '/commercial_search_lookup');

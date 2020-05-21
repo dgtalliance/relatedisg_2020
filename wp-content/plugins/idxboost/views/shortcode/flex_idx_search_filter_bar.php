@@ -27,7 +27,7 @@
       </div>
       <div class="ib-fhpa-directbtns">
         <div class="ib-dbitem ib-dbclear ib-icon-carrow"><span class="ib-btext"><?php echo __('Clear', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
-        <div class="ib-dbitem ib-dbsave ib-icon-save"><span class="ib-btext"><?php echo __('Save', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+        <div class="ib-dbitem ib-dbsave ib-icon-save js-alert-update-preferences"><span class="ib-btext"><?php echo __('Save', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
       </div>
     </div>
     <div class="ib-fhpb">
@@ -275,7 +275,7 @@
       </ul>
       <div class="ib-fhpa-directbtns">
         <div class="ib-dbitem ib-dbclear ib-icon-carrow"><span class="ib-btext"><?php echo __('Clear', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
-        <div class="ib-dbitem ib-dbsave ib-icon-save"><span class="ib-btext"><?php echo __('Save', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
+        <div class="ib-dbitem ib-dbsave ib-icon-save js-alert-update-preferences"><span class="ib-btext"><?php echo __('Save', IDXBOOST_DOMAIN_THEME_LANG); ?></span></div>
       </div>
     </div>
     <div class="ib-fmobile">

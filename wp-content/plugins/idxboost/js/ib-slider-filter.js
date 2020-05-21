@@ -261,9 +261,8 @@ $(document).ready(function(event){
                         /*Asigamos el texto personalizado*/
                         var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
                         $("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
-
-                        countClickAnonymous = 0;
                         
+                        countClickAnonymous = 0;
                     }
                 }
             }

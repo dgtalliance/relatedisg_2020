@@ -248,3 +248,9 @@ add_action('wp_head', 'iboost_print_analytics_script');
 add_action('idx_gtm_head', 'iboost_print_googlegtm_head_script',0);
 
 add_action('idx_gtm_body', 'iboost_print_googlegtm_body_script',0);
+
+add_action('wp_ajax_flex_idx_get_alert_lead', 'flex_idx_get_alert_lead_xhr_fn');
+add_action('wp_ajax_nopriv_flex_idx_get_alert_lead', 'flex_idx_get_alert_lead_xhr_fn');
+
+add_action('wp_ajax_ alert_lead_update_preference', 'alert_lead_update_preference_xhr_fn');
+add_action('wp_ajax_nopriv_alert_lead_update_preference', 'alert_lead_update_preference_xhr_fn');

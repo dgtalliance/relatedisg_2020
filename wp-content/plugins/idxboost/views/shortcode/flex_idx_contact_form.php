@@ -19,7 +19,7 @@
     }else{
       $nclass = "";
     }
-  ?>
+    ?>
     <ul class="flex-content-form <?php echo $nclass; ?>">
       <li class="form-item pt-name">
         <?php if ($nclass !== '') { ?>
