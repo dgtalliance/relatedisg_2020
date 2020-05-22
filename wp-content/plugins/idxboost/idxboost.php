@@ -40,9 +40,9 @@ if (isset($_ENV["IDXBOOST_BASE_URL"])) {
     define('FLEX_IDX_CPANEL_URL', 'https://cpanel.staging.idxboost.com');
     define('FLEX_IDX_BACKOFFICE_CPANEL_URL', 'https://backoffice.idxboost.com');  
   } else { // Running on localhost
-    define('FLEX_IDX_BASE_URL', 'http://api.idxboost.l');
-    define('FLEX_IDX_CPANEL_URL', 'http://cpanel.idxboost.l');
-    define('FLEX_IDX_BACKOFFICE_CPANEL_URL', 'http://backoffice.idxboost.l');
+    define('FLEX_IDX_BASE_URL', 'https://api.staging.idxboost.com');
+    define('FLEX_IDX_CPANEL_URL', 'https://cpanel.staging.idxboost.com');
+    define('FLEX_IDX_BACKOFFICE_CPANEL_URL', 'https://backoffice.idxboost.com');  
   }
 }
 
