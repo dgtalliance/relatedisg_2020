@@ -1012,7 +1012,11 @@ if (!function_exists('flex_idx_get_alert_lead_xhr_fn')) {
         $output = curl_exec($ch);
         curl_close($ch);
         
-        $response = json_decode($output, true);
+        $response = @json_decode($output, true);
+
+        if ( empty($response) || !is_array($response) ) {
+            $response= ['status'=> false ];
+        }
 
         wp_send_json($response);
         exit;

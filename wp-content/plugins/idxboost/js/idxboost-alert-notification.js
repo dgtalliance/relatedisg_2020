@@ -1,5 +1,6 @@
 //token_alert --- variable
 var respon=[];
+var notify_criteria;
 var alert_event_click=false;
 var url_params_alert = new URLSearchParams(window.location.search);
 var type = url_params_alert.get('type');
@@ -56,28 +57,40 @@ function idx_get_token_alert(){
         },
         dataType: "json",
         success: function(response) {
-            if(response['status']){
+
+            if( response.hasOwnProperty('status') && response['status']){
                 jQuery('.js-alert-subject').val(response['data']['search_name']);
                 jQuery('.js-alert-event').val(response['data']['wp_user_period_alert']);               
                 
-                var notify_criteria = JSON.parse(response['data']['notify_criteria']);
-
+                notify_criteria = JSON.parse(response['data']['notify_criteria']);
+                console.log(notify_criteria);
                 jQuery('.js-alert-status').each(function(){
                     var type_event=jQuery(this).attr('type_event');                    
-                    if( notify_criteria.hasOwnProperty('status_change') && notify_criteria['status_change'] ){
-                        if(type_event=='status_changes')
+                    
+                    if(type_event=='status_changes'){
+                        if( (typeof notify_criteria == 'object') && notify_criteria.hasOwnProperty('status_change') && notify_criteria['status_change'] ){
+                                jQuery(this).prop('checked',true);
+                        }else if(Array.isArray(notify_criteria) && notify_criteria.includes("status_change") ){
                             jQuery(this).prop('checked',true);
+                        }
                     }
 
-                    if( notify_criteria.hasOwnProperty('new_listing') && notify_criteria['new_listing'] ){
-                        if(type_event=='new_listings')
+                    if(type_event=='new_listings') {
+                        if( (typeof notify_criteria == 'object') && notify_criteria.hasOwnProperty('new_listing') && notify_criteria['new_listing'] ){
                             jQuery(this).prop('checked',true);
-                    }
-                    
-                    if( notify_criteria.hasOwnProperty('price_change') && notify_criteria['price_change'] ){
-                        if(type_event=='price_changes')
+                        }else if(Array.isArray(notify_criteria) && notify_criteria.includes("new_listing") ){
                             jQuery(this).prop('checked',true);
+                        }
                     }
+
+                    if(type_event=='price_changes'){
+                        if( (typeof notify_criteria == 'object') && notify_criteria.hasOwnProperty('price_change') && notify_criteria['price_change'] ){
+                            jQuery(this).prop('checked',true);
+                        }else if( Array.isArray(notify_criteria) && notify_criteria.includes("price_change") ){
+                            jQuery(this).prop('checked',true);
+                        }
+                    }
+
                 });
             }
 

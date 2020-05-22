@@ -36,8 +36,8 @@ if (isset($_ENV["IDXBOOST_BASE_URL"])) {
     !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) ||
       php_sapi_name() === 'cli-server')
   ) {
-    define('FLEX_IDX_BASE_URL', 'https://api.idxboost.com');
-    define('FLEX_IDX_CPANEL_URL', 'https://cpanel.idxboost.com');
+    define('FLEX_IDX_BASE_URL', 'https://api.staging.idxboost.com');
+    define('FLEX_IDX_CPANEL_URL', 'https://cpanel.staging.idxboost.com');
     define('FLEX_IDX_BACKOFFICE_CPANEL_URL', 'https://backoffice.idxboost.com');  
   } else { // Running on localhost
     define('FLEX_IDX_BASE_URL', 'http://api.idxboost.l');
