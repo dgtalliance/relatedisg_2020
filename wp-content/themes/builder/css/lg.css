@@ -1277,7 +1277,8 @@ select.medium {
 
 .idxboost_subscribe {
   width: 494px;
-  margin: auto; }
+  margin: auto;
+  padding: 40px 0; }
 
 .idxboost_tile {
   font-size: 26px;
