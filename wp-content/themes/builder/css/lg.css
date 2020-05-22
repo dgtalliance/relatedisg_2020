@@ -1275,6 +1275,73 @@ select.medium {
 .clidxboost-sc-filters #wrap-subfilters .gwr #sub-filters > li#filter-views > ul li.map {
   display: none !important; }
 
+.idxboost_subscribe {
+  width: 494px;
+  margin: auto;
+  padding: 40px 0 !important; }
+
+.idxboost_tile {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  font-weight: 600; }
+
+.idxboost_tile h2:after {
+  content: "";
+  width: 34px;
+  height: 2px;
+  display: block;
+  margin: 10px auto 0 auto;
+  background-color: #333; }
+
+.idxboost_description,
+.idxboost_description_footer {
+  text-align: center;
+  font-size: 0.885rem; }
+
+.idxboost_description p {
+  padding-top: 5px; }
+
+.idxboost_description {
+  margin-bottom: 26px; }
+
+.idxboost_footer_resbuscribe,
+.idxboost_footer_thank {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  padding-bottom: 5px; }
+
+.idxboost_footer_resbuscribe p,
+.form_submit_button_search_desuscribe.gform_button.button.gform_submit_button_5 {
+  float: left;
+  position: relative;
+  padding-left: 6px; }
+
+.idxboost_footer_thank p {
+  padding-bottom: 4px; }
+
+.idxboost_footer_thank {
+  margin-top: 18px; }
+
+.form_submit_button_search_desuscribe.gform_button.button.gform_submit_button_5 {
+  cursor: pointer;
+  color: #434343;
+  font-weight: bold; }
+
+@media screen and (max-width: 530px) {
+  .idxboost_subscribe {
+    width: 100%;
+    padding: 5px; } }
+
+.ib-st-modal-pg {
+  background-color: transparent;
+  font-size: 14px; }
+
+.ib-st-modal-pg .gform_footer {
+  margin-top: 15px; }
+
 /*
 @media (max-width: 990px){
 	#agents-page{
