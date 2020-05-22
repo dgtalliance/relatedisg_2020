@@ -78,7 +78,7 @@ if ($unsubscribe) {
         </div>
         <div class="idxboost_description">
           <p><?php echo __('You’ve been unsubscribed from My Saved Search.', IDXBOOST_DOMAIN_THEME_LANG); ?></p>
-          <p><?php echo __('You’ll still receive other ', IDXBOOST_DOMAIN_THEME_LANG); ?><?php echo get_bloginfo(); ?> <?php echo __('emails that you have subscribed to.', IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+          <p><?php echo __('You’ll still receive other ', IDXBOOST_DOMAIN_THEME_LANG); ?><?php echo $agent_full_info['info']['first_name']; ?> <?php echo $agent_full_info['info']['last_name']; ?> <?php echo __('emails that you have subscribed to.', IDXBOOST_DOMAIN_THEME_LANG); ?></p>
         </div>
       </div>
 
@@ -118,7 +118,7 @@ if ($unsubscribe) {
             <div class="confirm-message alt-ss">
               <h3 class="alt-ss-title"><?php echo __('SUBSCRIBE ALERT', IDXBOOST_DOMAIN_THEME_LANG); ?></h3>
               <p><?php echo __('Hooray! You have resubscribied. Thanks for staying with us.', IDXBOOST_DOMAIN_THEME_LANG); ?></p>
-              <a href="<?php echo home_url('/'); ?>" class="btn-link"><?php echo __('Continue searching for homes', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+              <a href="<?php echo $agent_full_info['info']['agent_url'].'/search'; ?>" class="btn-link"><?php echo __('Continue searching for homes', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
             </div>
           </div>
         </div>
