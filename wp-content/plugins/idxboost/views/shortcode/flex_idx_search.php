@@ -1,6 +1,6 @@
 <?php
 
-global $agent_registration_key;
+global $agent_registration_key, $agent_full_info;
 
 ?>
 
@@ -375,7 +375,11 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                         </header>
                         <div class="ib-phcta">
                             <div class="ib-phomodal">
+                                <?php if (isset($agent_full_info) && !empty($agent_full_info['info']['contact_phone'])): ?>
+                                <a href="tel:+1<?php echo preg_replace('/[^\d]+/', '', $agent_full_info['info']['contact_phone']); ?>" class="ib-pbtnphone"><?php echo __("Call Us", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                                <?php else: ?>
                                 <a href="tel:<?php echo $idx_contact_phone; ?>" class="ib-pbtnphone"><?php echo __("Call Us", IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                                <?php endif; ?>
                                 <div class="ib-requestinfo ib-phbtn"><?php echo __("Inquire", IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                                 <div class="ib-pbtnopen ib-phbtn" data-permalink="{{ propertyPermalinkOpen slug }}"><?php echo __('Open', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
                                 <div class="ib-pbtnclose ib-phbtn"><?php echo __('Close', IDXBOOST_DOMAIN_THEME_LANG); ?></div>
