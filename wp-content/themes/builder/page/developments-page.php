@@ -159,7 +159,7 @@ get_header();
           </div>
           <div class="ms-info">
             <h2 class="ms-item-title">Residences By Armani Casa</h2>
-            <address>318975 Collins Ave, Sunny Isles Beach, FL 33160</address>
+            <address>18975 Collins Ave, Sunny Isles Beach, FL 33160</address>
             <p>Pelli Clarke Pelli’s contemporary glass tower appears as one with the crystal-clear water of the Atlantic Ocean. Transparent terraces let you step into a dreamlike space suspended between earth and sky. Interiors by Armani/Casa create a world of serenity and elegance, and beautifully designed amenities offer the ultimate in true luxury. Residential interiors are modern and elegant yet truly relaxed with floor-to-ceiling windows offering incomparable views over countless miles of soft white sand and turquoise water.</p>
             <div class="ms-wrap-btn">
               <a class="ms-btn" href="/building/residences-by-armani-casa/">
