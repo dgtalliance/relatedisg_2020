@@ -81,24 +81,6 @@ get_header();
 
         <div class="ms-item">
           <div class="ms-wrap-img">
-            <img class="ms-lazy" alt="Residences By Armani Casa" data-real-type="image" 
-              data-img="<?php echo get_template_directory_uri(); ?>/images/developments/armani-compressor.jpg" 
-              src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
-          </div>
-          <div class="ms-info">
-            <h2 class="ms-item-title">Residences By Armani Casa</h2>
-            <address>318975 Collins Ave, Sunny Isles Beach, FL 33160</address>
-            <p>Pelli Clarke Pelli’s contemporary glass tower appears as one with the crystal-clear water of the Atlantic Ocean. Transparent terraces let you step into a dreamlike space suspended between earth and sky. Interiors by Armani/Casa create a world of serenity and elegance, and beautifully designed amenities offer the ultimate in true luxury. Residential interiors are modern and elegant yet truly relaxed with floor-to-ceiling windows offering incomparable views over countless miles of soft white sand and turquoise water.</p>
-            <div class="ms-wrap-btn">
-              <a class="ms-btn" href="/building/residences-by-armani-casa/">
-                <span>More Information</span>
-              </a>
-            </div>
-          </div>
-        </div> 
-
-        <div class="ms-item">
-          <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Auberge Beach Residences & SPA" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/auberge-compressor.jpg" 
               src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
@@ -118,6 +100,24 @@ get_header();
         <div class="ms-item">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Aventura" data-real-type="image" 
+              data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-hyde-beach-compressor.jpg" 
+              src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
+          </div>
+          <div class="ms-info">
+            <h2 class="ms-item-title">Hyde Beach House Hollywood</h2>
+            <address>2801 E Hallandale Beach Blvd, Hallandale Beach, FL 33009</address>
+            <p>Hyde Beach House pairs sophisticated design elements with the ultimate array of beach-inspired amenities and on-demand services to create Hollywood’s hottest residential-style resort. Steps from the pristine Atlantic Ocean, this sparkling glass-clad jewel features a private rooftop park with an al fresco movie theater, exclusive access to watersport rentals, and an expansive pool deck overlooking the Intracoastal Waterway.</p>
+            <div class="ms-wrap-btn">
+              <a class="ms-btn" href="/building/the-residences-at-hyde-beach-house/">
+                <span>More Information</span>
+              </a>
+            </div>
+          </div>
+        </div> 
+
+        <div class="ms-item">
+          <div class="ms-wrap-img">
+            <img class="ms-lazy" alt="Aventura" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-brickell-compressor.jpg" 
               src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
           </div>
@@ -127,24 +127,6 @@ get_header();
             <p>A luxury residential tower in the heart of Miami, Rise Brickell City Centre features finished luxury residences with city-view terraces and a nearly one-acre amenity deck. Focused on sophisticated details and understated style, this is an address to be envied, the go-to destination for the discerning buyer.</p>
             <div class="ms-wrap-btn">
               <a class="ms-btn" href="/building/reach-rise-residences-at-brickell-city-centre/">
-                <span>More Information</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="ms-item">
-          <div class="ms-wrap-img">
-            <img class="ms-lazy" alt="Aventura" data-real-type="image" 
-              data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-hyde-beach-compressor.jpg" 
-              src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
-          </div>
-          <div class="ms-info">
-            <h2 class="ms-item-title">Hyde Beach Hollywood</h2>
-            <address>2801 E Hallandale Beach Blvd, Hallandale Beach, FL 33009</address>
-            <p>Hyde Beach House pairs sophisticated design elements with the ultimate array of beach-inspired amenities and on-demand services to create Hollywood’s hottest residential-style resort. Steps from the pristine Atlantic Ocean, this sparkling glass-clad jewel features a private rooftop park with an al fresco movie theater, exclusive access to watersport rentals, and an expansive pool deck overlooking the Intracoastal Waterway.</p>
-            <div class="ms-wrap-btn">
-              <a class="ms-btn" href="/building/the-residences-at-hyde-beach-house/">
                 <span>More Information</span>
               </a>
             </div>
@@ -168,6 +150,24 @@ get_header();
             </div>
           </div>
         </div>-->
+
+        <div class="ms-item">
+          <div class="ms-wrap-img">
+            <img class="ms-lazy" alt="Residences By Armani Casa" data-real-type="image" 
+              data-img="<?php echo get_template_directory_uri(); ?>/images/developments/armani-compressor.jpg" 
+              src="<?php echo get_template_directory_uri(); ?>/images/temp.png">
+          </div>
+          <div class="ms-info">
+            <h2 class="ms-item-title">Residences By Armani Casa</h2>
+            <address>318975 Collins Ave, Sunny Isles Beach, FL 33160</address>
+            <p>Pelli Clarke Pelli’s contemporary glass tower appears as one with the crystal-clear water of the Atlantic Ocean. Transparent terraces let you step into a dreamlike space suspended between earth and sky. Interiors by Armani/Casa create a world of serenity and elegance, and beautifully designed amenities offer the ultimate in true luxury. Residential interiors are modern and elegant yet truly relaxed with floor-to-ceiling windows offering incomparable views over countless miles of soft white sand and turquoise water.</p>
+            <div class="ms-wrap-btn">
+              <a class="ms-btn" href="/building/residences-by-armani-casa/">
+                <span>More Information</span>
+              </a>
+            </div>
+          </div>
+        </div>
 
         <div class="ms-item">
           <div class="ms-wrap-img">
