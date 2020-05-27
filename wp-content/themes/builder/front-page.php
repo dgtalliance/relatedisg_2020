@@ -66,17 +66,17 @@
     <h2 class="ms-title">Exclusive Developments</h2>
     <div class="ms-wrap-slider">
       <div class="ms-slider" id="developments-slider">
-        <a href="/building/residences-by-armani-casa/" class="ms-item">
-          <div class="ms-wrap-img">
-            <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/armani.jpeg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-layer ms-lazy" alt="Armani Casa">
-          </div>
-          <h3 class="ms-item-title">Residences by <span>Armani Casa</span></h3>
-        </a>
         <a href="/building/auberge-beach-residences-spa/" class="ms-item">
           <div class="ms-wrap-img">
             <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/auberge.jpeg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-layer ms-lazy" alt="Auberge Beach">
           </div>
           <h3 class="ms-item-title">Auberge Beach <span>Residences & Spa</span></h3>
+        </a>
+        <a href="/building/the-residences-at-hyde-beach-house/" class="ms-item">
+          <div class="ms-wrap-img">
+            <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/3.PNG" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-layer ms-lazy" alt="Hyde Beach House Hollywood">
+          </div>
+          <h3 class="ms-item-title">Hyde Beach House <span>Hollywood</span></h3>
         </a>
         <a href="/building/reach-rise-residences-at-brickell-city-centre/" class="ms-item">
           <div class="ms-wrap-img">
@@ -84,11 +84,11 @@
           </div>
           <h3 class="ms-item-title">Reach and Rise, Residences at <span>Brickell City Center</span></h3>
         </a>
-        <a href="/building/the-residences-at-hyde-beach-house/" class="ms-item">
+        <a href="/building/residences-by-armani-casa/" class="ms-item">
           <div class="ms-wrap-img">
-            <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/3.PNG" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-layer ms-lazy" alt="Hyde Beach Hollywood">
+            <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/home/armani.jpeg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-layer ms-lazy" alt="Armani Casa">
           </div>
-          <h3 class="ms-item-title">Hyde Beach <span>Hollywood</span></h3>
+          <h3 class="ms-item-title">Residences by <span>Armani Casa</span></h3>
         </a>
         <a href="/building/w-residences-fort-lauderdale/" class="ms-item">
           <div class="ms-wrap-img">
