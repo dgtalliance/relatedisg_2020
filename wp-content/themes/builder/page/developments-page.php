@@ -57,7 +57,7 @@ get_header();
     </div>
   </section>
 
-  <section class="ms-section ms-animate" id="buildings">
+  <section class="ms-section" id="buildings">
     <div class="ms-wrap-slider">
       <div class="ms-slider" id="developments-page-slider">
 
@@ -79,7 +79,7 @@ get_header();
           </div>
         </div>-->
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-1">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Auberge Beach Residences & SPA" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/auberge-compressor.jpg" 
@@ -97,7 +97,7 @@ get_header();
           </div>
         </div>          
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-2">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Aventura" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-hyde-beach-compressor.jpg" 
@@ -115,7 +115,7 @@ get_header();
           </div>
         </div> 
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-3">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Aventura" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-brickell-compressor.jpg" 
@@ -151,7 +151,7 @@ get_header();
           </div>
         </div>-->
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-4">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Residences By Armani Casa" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/armani-compressor.jpg" 
@@ -169,7 +169,7 @@ get_header();
           </div>
         </div>
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-1">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Aventura" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-fort-lauderdale-compressor.jpg" 
