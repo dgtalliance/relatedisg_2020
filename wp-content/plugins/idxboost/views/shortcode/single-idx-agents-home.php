@@ -53,11 +53,13 @@ if ("idx-agents" === $post->post_type) {
 
 <main id="agent">
   <section id="welcome" class="ms-section ms-animate">
-    <?php if (!empty($banner_title)) {
-      echo '<h1 class="ms-title">' . $banner_title . '</h1>';
-    } else {
-      echo '<h1 class="ms-title">Welcome to ' . $agent_full_info['info']['first_name'] . ' website</h1>';
-    } ?>
+    <?php //if (!empty($banner_title)) {
+      //echo '<h1 class="ms-title">' . $banner_title . '</h1>';
+    //} else {
+    //  echo '<h1 class="ms-title">Welcome to ' . $agent_full_info['info']['first_name'] . ' website</h1>';
+    //} ?>
+    
+    <h1 class="ms-title">Find what <span>moves you.</span></h1>
 
     <?php if (!empty($banner_sub_title)) {
       echo '<h2 class="ms-subtitle">' . $banner_sub_title . '</h2>';
