@@ -593,14 +593,16 @@
       }
     }
 
-    &.ms-loaded-animate {
-      .ms-item{
+    //&.ms-loaded-animate {
+    .ms-item{
+      &.ms-loaded-animate {
         .ms-item-title, p, .ms-wrap-img, .ms-img-xk{
           opacity: 1;
           transform: matrix(1, 0, 0, 1, 0, 0);  
         }
       }
     }
+    //}
   }
 
   #need-agent {

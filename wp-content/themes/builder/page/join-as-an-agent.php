@@ -20,10 +20,10 @@ get_header();
     <h2 class="ms-mt-title">Are you ready to make <span>your next move?</span></h2>
   </section>
 
-  <section class="ms-section ms-animate" id="listDetail">
+  <section class="ms-section" id="listDetail">
     <div class="ms-wrap-slider">
       <div class="ms-slider">
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-1">
           <div class="ms-wrap-img">
             <img class="ms-lazy" 
             alt="The Power of Relationships" 
@@ -42,7 +42,7 @@ get_header();
           </div>
         </div>
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-2">
           <div class="ms-wrap-img">
             <img class="ms-lazy" 
             alt="Our Culture" 
@@ -56,7 +56,7 @@ get_header();
           </div>
         </div>
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-3">
           <div class="ms-wrap-img">
             <img class="ms-lazy" 
             alt="Our Marketing" 
@@ -70,7 +70,7 @@ get_header();
           </div>
         </div>
 
-        <div class="ms-item ms-sp-fr">
+        <div class="ms-item ms-sp-fr ms-animate" id="item-4">
           <div class="ms-list-img">
             <div class="ms-wrap-img">
               <img class="ms-lazy" 
@@ -109,7 +109,7 @@ get_header();
           </div>
         </div>
 
-        <div class="ms-item">
+        <div class="ms-item ms-animate" id="item-5">
           <div class="ms-wrap-img">
             <img class="ms-lazy" 
             alt="Our Technology" 
