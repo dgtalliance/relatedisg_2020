@@ -66,8 +66,9 @@ if ("idx-agents" === $post->post_type) {
     } ?>
 
     <div class="ms-wrap-btn">
-      <a href="#" class="ms-btn js-btn-sell-rent active" title="buy"><span>buy</span></a>
-      <a href="#" class="ms-btn js-btn-sell-rent" title="rent"><span>rent</span></a>
+      <a href="#" class="ms-btn js-btn-sell-rent active" title="Buy"><span>Buy</span></a>
+      <a href="#" class="ms-btn js-btn-sell-rent" title="Rent"><span>Rent</span></a>
+      <a href="/sell/" class="ms-btn" title="Sell"><span>Sell</span></a>
     </div>
     <?php echo do_shortcode('[flex_autocomplete registration_key="' . $agent_registration_key . '" agent_page_slug="' . $agent_page_slug . '"]'); ?>
 
