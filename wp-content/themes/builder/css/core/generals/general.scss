@@ -1136,8 +1136,13 @@ body{
 		p{
 			color: #FFF;
 			@extend .ms-paragraph;
-			span{
+			/*span{
 				display: block;
+			}*/
+
+			@media screen and (min-width: 1024px) {
+				max-width: 500px;
+				width: 100%;
 			}
 		}
 

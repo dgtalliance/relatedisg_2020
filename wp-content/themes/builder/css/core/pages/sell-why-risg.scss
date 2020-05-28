@@ -312,9 +312,14 @@
         span {
           display: inline;
 
-          @media screen and (min-width: 1200px) {
+          /*@media screen and (min-width: 1200px) {
             display: block;
-          }
+          }*/
+        }
+
+        @media screen and (min-width: 1200px) {
+          max-width: 500px;
+          width: 100%;
         }
       }
 
