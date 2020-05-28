@@ -169,7 +169,7 @@ get_header();
           </div>
         </div>
 
-        <div class="ms-item ms-animate" id="item-1">
+        <div class="ms-item ms-animate" id="item-5">
           <div class="ms-wrap-img">
             <img class="ms-lazy" alt="Aventura" data-real-type="image" 
               data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-fort-lauderdale-compressor.jpg" 
