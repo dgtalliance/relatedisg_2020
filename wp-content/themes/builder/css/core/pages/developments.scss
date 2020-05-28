@@ -503,8 +503,9 @@
         }
       }
 
-      &.ms-loaded-animate {
-        .ms-item {
+      //&.ms-loaded-animate {
+      .ms-item {
+        &.ms-loaded-animate {
           .ms-wrap-img {
             opacity: 	1;
             transform: translateX(0, 0) matrix(1, 0, 0, 1, 0, 0);
@@ -515,10 +516,11 @@
           p,
           .ms-wrap-btn {
             opacity: 1;
-					  transform: translateX(0) matrix(1, 0, 0, 1, 0, 0);
+            transform: translateX(0) matrix(1, 0, 0, 1, 0, 0);
           }
         }
       }
+      //}
     }
   }
 }
