@@ -13,7 +13,7 @@
     <div class="ms-wrap-btn">
       <button class="ms-btn js-btn-sell-rent active" title="Buy" data-value="0"><span>buy</span></button>
       <button class="ms-btn js-btn-sell-rent" title="Rent" data-value="1"><span>Rent</span></button>
-      <a href="/sell/" class="ms-btn" title="Sell"><span>Sell</span></a>
+      <a href="/sell/" class="ms-btn ml" title="Sell"><span>Sell</span></a>
     </div>
     <?php echo do_shortcode('[flex_autocomplete]'); ?>
     <div class="ms-slider">

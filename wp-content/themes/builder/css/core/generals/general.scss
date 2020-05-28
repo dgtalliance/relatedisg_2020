@@ -1497,3 +1497,11 @@ select.medium{
     font-size: 14px;
 	}
 }
+
+#welcome{
+	.ms-wrap-btn{
+		.ms-btn.ml{
+			border-left: 1px solid #3e3e3e;
+		}
+	}
+}
