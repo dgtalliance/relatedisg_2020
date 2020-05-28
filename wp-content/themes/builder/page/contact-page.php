@@ -131,7 +131,7 @@ while ( have_posts() ) : the_post(); ?>
           <h2 class="ms-item-title">Fort Lauderdale</h2>
           <address class="ms-address">123 Main Street <span>Suite 103</span> Fort Lauderdale, FL 33137</address>
           <span class="ms-separator"></span>
-          <span class="ms-phone">Phone <a href="tel:1234567890">123.456.7890</a></span>
+          <span class="ms-phone">Phone <a href="tel:3059326365">305.932.6365</a></span>
           <div class="ms-wrap-btn"><button class="ms-link">View on map</button></div>
         </div>
       </div>

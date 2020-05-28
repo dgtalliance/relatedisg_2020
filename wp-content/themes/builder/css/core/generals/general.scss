@@ -1141,7 +1141,7 @@ body{
 			}*/
 
 			@media screen and (min-width: 1024px) {
-				max-width: 500px;
+				max-width: 550px;
 				width: 100%;
 			}
 		}
@@ -1486,3 +1486,14 @@ select.medium{
 		}
 	}
 }*/
+
+.flex-wrap-contact-form{
+	label.ms-hidden{
+    height: auto;
+		width: 100%;
+		overflow: visible;
+    position: relative;
+    color: #FFF;
+    font-size: 14px;
+	}
+}
