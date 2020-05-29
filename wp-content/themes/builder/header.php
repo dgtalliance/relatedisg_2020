@@ -93,6 +93,11 @@
               aria-label="<?php echo __('Show menu', IDXBOOST_DOMAIN_THEME_LANG); ?>">
               Menu <span></span>
             </button>
+
+            <a class="ms-btn-search" href="/search" aria-label="<?php echo __('Search a Property', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+              <span></span>
+              <?php echo __('Search a Property', IDXBOOST_DOMAIN_THEME_LANG); ?>
+            </a>
             <?php //echo do_shortcode('[idxboost_lead_activities]'); ?>
           </div>
         </div>
