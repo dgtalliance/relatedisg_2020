@@ -140,6 +140,7 @@ while ( have_posts() ) : the_post(); ?>
         <div class="ms-info">
           <h2 class="ms-item-title">Weston</h2>
           <address class="ms-address">1528 Weston Road <span>Weston, FL 33326</span></address>
+          <span class="ms-temporal-br"></span>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3059085550">305.908.5550</a></span>
           <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/1528+Weston+Rd,+Weston,+FL+33326,+EE.+UU./@26.0997045,-80.3682624,17z/data=!3m1!4b1!4m5!3m4!1s0x88d90a01ca08a101:0x3bb39e8143bcc83f!8m2!3d26.0996997!4d-80.3660737" class="ms-link" target="_blank">View on map</a></div>
