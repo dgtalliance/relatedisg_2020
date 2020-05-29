@@ -1518,6 +1518,7 @@ select.medium{
 
 	.form-content{
 		padding: 15px 20px !important;
+		margin-bottom: 0;
 		.gform_body .gform_fields .gfield{
 			margin-bottom: 10px;
 			label{
@@ -1562,15 +1563,17 @@ select.medium{
 	}
 
 	.form-content .gform_footer .gform_button{
-		height: 50px !important;
-		font-size: 14px !important;
-		margin-bottom: 0;
+    height: 50px!important;
+    font-size: 14px!important;
+    margin-bottom: 0;
+    width: 100%;
+    margin-right: 0;
 	}
 
 	.gform_wrapper .gform_footer{
 		padding: 0;
 		margin: 0;
-		margin-top: 15px;
+		margin-top: 0;
 	}
 
 	.flex-text-img-content{
@@ -1579,6 +1582,23 @@ select.medium{
 
 	.flex-wrap-information .flex-agent-form{
 		margin-top: 20px;
+	}
+
+	.flex-wrap-information .flex-agent-description .flex-ag-title {
+		font-weight: 700;
+		font-size: 30px;
+	}
+
+	.flex-wrap-information .flex-agent-form {
+		height: auto !important;
+	}
+
+	.gform_wrapper ul.gform_fields li.gfield {
+		padding-right: 0;
+	}
+
+	.form-content .gform_body .gform_fields .gfield .medium{
+		height: 45px;
 	}
 }
 //Contact Information
