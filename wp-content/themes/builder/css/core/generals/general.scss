@@ -1512,12 +1512,57 @@ select.medium{
 }
 
 #flex-agent-information{
-	.form-content .gform_body .gform_fields .gfield label{
-		height: auto;
-		overflow: visible;
-		position: relative;
-		font-size: 13px;
-		font-weight: 600;
-		width: 100%;
+	.gform_wrapper ul li.gfield{
+		margin-top: 10px !important;
+	}
+
+	.form-content{
+		padding: 15px 20px !important;
+		.gform_body .gform_fields .gfield{
+			margin-bottom: 10px;
+			label{
+				height: auto;
+				overflow: visible;
+				position: relative;
+				font-size: 13px;
+				font-weight: 600;
+				width: 100%;
+			}
+		}
+	}
+
+	.gform_wrapper{
+		margin-top: 0 !important;
+		.gform_footer {
+			padding: 0;
+			font-size: 14px;
+			height: 50px;
+		}
+	}
+
+	.flex-wrap-information{
+		.flex-agent-form{
+			.avatar-content{
+				.avatar-information{
+					h2{
+						font-weight: 700;
+						font-size: 20px !important;
+						letter-spacing: 0 !important;
+						margin-top: 10px;
+					}
+				}
+			}
+		}
+
+		.flex-agent-description{
+			.idx-ag-content {
+				height: auto !important;
+			}
+		}
+	}
+
+	#btn-read{
+		display: none !important;
 	}
 }
+//Contact Information
