@@ -1534,3 +1534,10 @@
 		transform: translateX(0);
 	}
 }
+
+#header .ms-wrap-header .ms-middle-header .ms-item .ms-btn-search.pc{
+	display: block;
+	@media screen and (min-width: 1024px){
+		display: none;
+	}
+}

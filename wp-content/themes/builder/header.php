@@ -89,7 +89,7 @@
               <?php wp_nav_menu(array('theme_location' => 'primary','menu' => 'Primary Menu', 'menu_class' => '', 'menu_id' => '', 'container' => 'nav', 'container_class' => '', 'container_id' => 'menu-main')); ?>
             </div>
 
-            <button class="ms-btn-menu" id="show-mobile-menu" aria-expanded="false"
+            <button class="ms-btn-menu pc" id="show-mobile-menu" aria-expanded="false"
               aria-label="<?php echo __('Show menu', IDXBOOST_DOMAIN_THEME_LANG); ?>">
               Menu <span></span>
             </button>
