@@ -1510,3 +1510,13 @@ select.medium{
 	height: 11px;
 	display: block;
 }
+
+#flex-agent-information{
+	.form-content .gform_body .gform_fields .gfield label{
+		height: auto;
+		overflow: visible;
+		position: relative;
+		font-size: 13px;
+		font-weight: 600;
+	}
+}
