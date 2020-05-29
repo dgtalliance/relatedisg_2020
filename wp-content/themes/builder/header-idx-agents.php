@@ -110,6 +110,8 @@ foreach ($bodyclasses as $class) {
               </ul>
             <?php endif; ?>
           </div>
+
+          <a href="/search/" class="ms-link">Search</a>
         </div>
         <!-- FINAL LOGIN Y REGISTER -->
 
