@@ -1600,5 +1600,17 @@ select.medium{
 	.form-content .gform_body .gform_fields .gfield .medium{
 		height: 45px;
 	}
+
+	.form-content .gform_body .gform_fields .gfield{
+		margin-bottom: 0;
+	}
+
+	#field_2_5{
+		width: 100%;
+		.textarea.medium{
+			min-height: 120px;
+			margin-bottom: 10px;
+		}
+	}
 }
 //Contact Information
