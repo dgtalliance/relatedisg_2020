@@ -192,11 +192,16 @@ foreach ($bodyclasses as $class) {
           </div>
           <!-- FINAL MENU -->
 
-          <!-- INICIO BOTON MENU -->
+          <!-- INICIO BOTON MENU
           <button class="ms-btn-menu" id="show-mobile-menu" aria-expanded="false" aria-label="<?php echo __('Show menu', IDXBOOST_DOMAIN_THEME_LANG); ?>">
             <span></span>
             <span></span>
             <span></span>
+          </button> -->
+
+          <button class="ms-btn-menu" id="show-mobile-menu" aria-expanded="false"
+              aria-label="<?php echo __('Show menu', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+              Menu <span></span>
           </button>
           <!-- FINAL BOTON MENU -->
 
