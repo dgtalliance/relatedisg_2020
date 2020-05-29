@@ -1533,11 +1533,6 @@ select.medium{
 
 	.gform_wrapper{
 		margin-top: 0 !important;
-		.gform_footer {
-			padding: 0;
-			font-size: 14px;
-			height: 50px;
-		}
 	}
 
 	.flex-wrap-information{
@@ -1563,6 +1558,11 @@ select.medium{
 
 	#btn-read{
 		display: none !important;
+	}
+
+	.form-content .gform_footer .gform_button{
+		height: 50px !important;
+		font-size: 14px !important;
 	}
 }
 //Contact Information
