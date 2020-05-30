@@ -91,63 +91,81 @@ while ( have_posts() ) : the_post(); ?>
     <ul class="ms-agent-list">
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_01-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Matt Allen">
+            <a href="<?php bloginfo('url');?>/leadership/matt-allen/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_01-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Matt Allen">
+            </a>
         </div>
         <h3 class="ms-agent-title">Matt Allen</h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_02-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Craig Studnicky">
+            <a href="<?php bloginfo('url');?>/leadership/craig-studnicky/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_02-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Craig Studnicky">
+            </a>
         </div>
         <h3 class="ms-agent-title">Craig Studnicky</h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_03-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Michael Ambrosio">
+            <a href="<?php bloginfo('url');?>/leadership/michael-ambrosio/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_03-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Michael Ambrosio">
+            </a>
         </div>
         <h3 class="ms-agent-title">Michael Ambrosio</h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_04-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Alex Vidal">
+            <a href="<?php bloginfo('url');?>/leadership/alex-vidal/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_04-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Alex Vidal">
+            </a>
         </div>
         <h3 class="ms-agent-title">Alex Vidal</h3>
         <h4 class="ms-agent-stattus">President</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_05-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Vice-President">
+            <a href="<?php bloginfo('url');?>/leadership/alberto-carrillo/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_05-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Vice-President">
+            </a>
         </div>
         <h3 class="ms-agent-title">Alberto Carrillo</h3>
         <h4 class="ms-agent-stattus">Vice-President</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_06-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Veronica Gorson">
+            <a href="<?php bloginfo('url');?>/leadership/veronica-gorson/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_06-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Veronica Gorson">
+            </a>
         </div>
         <h3 class="ms-agent-title">Veronica Gorson</h3>
         <h4 class="ms-agent-stattus">Chief Marketing Officer</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_10-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Carolina Gerdts">
+            <a href="<?php bloginfo('url');?>/leadership/carolina-gerdts/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_10-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Carolina Gerdts">
+            </a>
         </div>
         <h3 class="ms-agent-title">Carolina Gerdts</h3>
         <h4 class="ms-agent-stattus">Sales Manager</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_07-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Liz Lopez">
+            <a href="<?php bloginfo('url');?>/leadership/liz-lopez/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_07-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Liz Lopez">
+            </a>
         </div>
         <h3 class="ms-agent-title">Liz Lopez</h3>
         <h4 class="ms-agent-stattus">Sales Manager</h4>
       </li>
       <li>
         <div class="ms-wrap-img">
-          <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_08-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
+            <a href="<?php bloginfo('url');?>/leadership/rowena-luna/">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_08-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
+            </a>
         </div>
         <h3 class="ms-agent-title">Rowena Luna</h3>
         <h4 class="ms-agent-stattus">Marketing Director</h4>
