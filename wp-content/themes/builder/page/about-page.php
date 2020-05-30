@@ -90,20 +90,20 @@ while ( have_posts() ) : the_post(); ?>
     <h2 class="ms-st-title">Leadership</h2>
     <ul class="ms-agent-list">
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/matt-allen/">
+          <a href="<?php bloginfo('url');?>/leadership/matt-allen/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_01-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Matt Allen">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Matt Allen</h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/craig-studnicky/">
+          <a href="<?php bloginfo('url');?>/leadership/craig-studnicky/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_02-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Craig Studnicky">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Craig Studnicky</h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
