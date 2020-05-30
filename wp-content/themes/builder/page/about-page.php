@@ -135,11 +135,11 @@ while ( have_posts() ) : the_post(); ?>
         <h4 class="ms-agent-stattus">Vice-President</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/veronica-gorson/">
+          <a href="<?php bloginfo('url');?>/leadership/veronica-gorson/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_06-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Veronica Gorson">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Veronica Gorson</h3>
         <h4 class="ms-agent-stattus">Chief Marketing Officer</h4>
       </li>
