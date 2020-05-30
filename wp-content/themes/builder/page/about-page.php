@@ -108,29 +108,29 @@ while ( have_posts() ) : the_post(); ?>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/michael-ambrosio/">
+          <a href="<?php bloginfo('url');?>/leadership/michael-ambrosio/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_03-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Michael Ambrosio">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Michael Ambrosio</h3>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/alex-vidal/">
+          <a href="<?php bloginfo('url');?>/leadership/alex-vidal/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_04-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Alex Vidal">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Alex Vidal</h3>
         <h4 class="ms-agent-stattus">President</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/alberto-carrillo/">
+          <a href="<?php bloginfo('url');?>/leadership/alberto-carrillo/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_05-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Vice-President">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Alberto Carrillo</h3>
         <h4 class="ms-agent-stattus">Vice-President</h4>
       </li>
@@ -144,29 +144,29 @@ while ( have_posts() ) : the_post(); ?>
         <h4 class="ms-agent-stattus">Chief Marketing Officer</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/carolina-gerdts/">
+          <a href="<?php bloginfo('url');?>/leadership/carolina-gerdts/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_10-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Carolina Gerdts">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Carolina Gerdts</h3>
         <h4 class="ms-agent-stattus">Sales Manager</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/liz-lopez/">
+          <a href="<?php bloginfo('url');?>/leadership/liz-lopez/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_07-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Liz Lopez">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Liz Lopez</h3>
         <h4 class="ms-agent-stattus">Sales Manager</h4>
       </li>
       <li>
-        <div class="ms-wrap-img">
-            <a href="<?php bloginfo('url');?>/leadership/rowena-luna/">
+          <a href="<?php bloginfo('url');?>/leadership/rowena-luna/">
+            <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_08-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
-            </a>
-        </div>
+            </div>
+          </a>
         <h3 class="ms-agent-title">Rowena Luna</h3>
         <h4 class="ms-agent-stattus">Marketing Director</h4>
       </li>
