@@ -369,7 +369,7 @@ global $flex_idx_info, $flex_idx_lead;
 
                 <ul class="form_md" id="cntResetForm">
                   <li class="form_input" id="ms-recovery-password">
-                    <label  for="reset_email" class="agile-label ms-xt" for="agilefield-9"><?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <label  for="reset_email" class="agile-label ms-xt"><?php echo __("Email Address", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <input id="reset_email" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="disabled" name="reset_email" placeholder="<?php echo __("Enter E-mail", IDXBOOST_DOMAIN_THEME_LANG); ?>" required type="email"/>
                   </li>
                   <li class="form_input" style="display: none" id="ms-new-password">
@@ -893,7 +893,7 @@ global $flex_idx_info, $flex_idx_lead;
                     % <?php echo __("Down Payment", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container ginput_container_payment">
-                      <input class="medium down_payment_txt" max="95" min="0" name="input_2 down_payment_txt" step="any" type="number" value="30">
+                      <input class="medium down_payment_txt" max="95" min="0" name="input_2 down_payment_txt" step="any" type="number" value="30" id="down_payment_txt">
                     </div>
                   </li>
                   <li class="gfield">
@@ -916,7 +916,7 @@ global $flex_idx_info, $flex_idx_lead;
                     <?php echo __("Interest Rate", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container ginput_container_rate">
-                      <input class="medium interest_rate_txt" id="" max="95" min="0" name="input_3" step="any" type="number" value="4">
+                      <input class="medium interest_rate_txt" id="interest_rate_txt" max="95" min="0" name="input_3" step="any" type="number" value="4">
                       </input>
                     </div>
                   </li>
@@ -1870,118 +1870,120 @@ global $flex_idx_info, $flex_idx_lead;
         <div id="ib-push-registration">
           <button class="ms-skip ms-close ms-close-step"><span></span></button>
           <form id="ib-register-form-quizz" method="post">
-            <input type="hidden" name="action" value="ib_register_quizz_save">
-            <input type="hidden" id="__quizz_type" name="__quizz_type" value="regular">
-            <input type="hidden" class="ib_property_signup_price" name="__property_signup_price" value="">
+            <fieldset>
+              <legend><?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
+              <input type="hidden" name="action" value="ib_register_quizz_save">
+              <input type="hidden" id="__quizz_type" name="__quizz_type" value="regular">
+              <input type="hidden" class="ib_property_signup_price" name="__property_signup_price" value="">
 
-            <ul class="ib-pr-steps-container">
-              <li class="pr-step facebook-registration" id="__quizz_type_phone_ct" style="display: none">
-                <div class="ms-header-md">
-                  <span class="ms-title-modal ms-no-mb"><?php echo __('Thank you for registering!', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <span class="ms-sub-title"><?php echo __('Use Phone Number For Password', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                </div>
+              <ul class="ib-pr-steps-container">
+                <li class="pr-step facebook-registration" id="__quizz_type_phone_ct" style="display: none">
+                  <div class="ms-header-md">
+                    <span class="ms-title-modal ms-no-mb"><?php echo __('Thank you for registering!', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <span class="ms-sub-title"><?php echo __('Use Phone Number For Password', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                  </div>
 
-                <div class="name-input-content">
-                  <div class="wrapper-input">
-                    <label class="agile-label" for="__signup_fb_phone">
-                      <?php echo __('Phone number', IDXBOOST_DOMAIN_THEME_LANG); ?>
-                      <span class="txtgray">(<?php echo __('Used as password', IDXBOOST_DOMAIN_THEME_LANG); ?>)</span>
-                    </label>
-                    <input id="__signup_fb_phone" name="register_phone_facebook" type="text" class="agile-height-default ib-input-only-numeric" placeholder="Phone number" required value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                  <div class="name-input-content">
+                    <div class="wrapper-input">
+                      <label class="agile-label" for="__signup_fb_phone">
+                        <?php echo __('Phone number', IDXBOOST_DOMAIN_THEME_LANG); ?>
+                        <span class="txtgray">(<?php echo __('Used as password', IDXBOOST_DOMAIN_THEME_LANG); ?>)</span>
+                      </label>
+                      <input id="__signup_fb_phone" name="register_phone_facebook" type="text" class="agile-height-default ib-input-only-numeric" placeholder="Phone number" required value="" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                    </div>
                   </div>
-                </div>
-                <button class="pr-redbtn pr-populate-phone pr-registering" type="button"><?php echo __("I'm finished", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
-                <div class="ms-center">
-                  <a href="javascript:void(0)" class="ms-skip">Skip this step</a>
-                </div>
-              </li>
-              <li class="ib-pr-step ib-pr-radio ib-active" id="__quizz_cancel_on_fb">
-                <div class="ms-header-md">
-                  <span class="ms-title-modal ms-no-mb"><?php echo __("Thank You For Registering", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <div class="ms-text">
-                    <p><?php echo __("Just a few more details so we can help you", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
-                    <p><?php echo __("(All fields are required)", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                  <button class="pr-redbtn pr-populate-phone pr-registering" type="button"><?php echo __("I'm finished", IDXBOOST_DOMAIN_THEME_LANG); ?></button>
+                  <div class="ms-center">
+                    <a href="javascript:void(0)" class="ms-skip">Skip this step</a>
                   </div>
-                  <div class="ms-icon ms-time"></div>
-                  <span class="ms-sub-title ms-no-mb"><?php echo __("When are you looking to purchase?", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                </div>
-                <ul class="ib-pr-radio-list">
-                  <li>
-                    <input class="ibregister-btn" id="inline_quizz_radios_1513789754550-0" type="radio" name="timeline_for_purchase" value="1_3_months">
-                    <label class="i-checks ib-rquizz-step2" for="inline_quizz_radios_1513789754550-0"><?php echo __("Within 1-3 months", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                  <li>
-                    <input class="ibregister-btn" id="inline_quizz_radios_1513789754550-1" type="radio" name="timeline_for_purchase" value="3_6_months">
-                    <label class="i-checks ib-rquizz-step2" for="inline_quizz_radios_1513789754550-1"><?php echo __("Within 3-6 months", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                  <li>
-                    <input class="ibregister-btn" id="inline_quizz_radios_1513789754550-2" type="radio" name="timeline_for_purchase" value="6_months_more">
-                    <label class="i-checks ib-rquizz-step2" for="inline_quizz_radios_1513789754550-2"><?php echo __("More than 6 months", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                </ul>
-                <!--<div class="ms-center">
-                  <a href="javascript:void(0)" class="ms-skip ms-close-step skip-quizz-btn">Skip this step</a>
-                </div>-->
-              </li>
-              <li class="ib-pr-step ib-pr-radio">
-                <div class="ms-header-md">
-                  <span class="ms-title-modal ms-no-mb"><?php echo __("Thank You For Registering", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <div class="ms-text">
-                    <p><?php echo __("Just a few more details so we can help you", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
-                    <p><?php echo __("(All fields are required)", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                </li>
+                <li class="ib-pr-step ib-pr-radio ib-active" id="__quizz_cancel_on_fb">
+                  <div class="ms-header-md">
+                    <span class="ms-title-modal ms-no-mb"><?php echo __("Thank You For Registering", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <div class="ms-text">
+                      <p><?php echo __("Just a few more details so we can help you", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                      <p><?php echo __("(All fields are required)", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                    </div>
+                    <div class="ms-icon ms-time"></div>
+                    <span class="ms-sub-title ms-no-mb"><?php echo __("When are you looking to purchase?", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                   </div>
-                  <div class="ms-icon ms-financing"></div>
-                  <span class="ms-sub-title ms-no-mb"><?php echo __("Need assistance with financing?", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                </div>
-                <ul class="ib-pr-radio-list">
-                  <li>
-                    <input class="ibregister-btn" id="inline_quizz_radios_1513789825341-0" type="radio" name="mortgage_approved" value="yes">
-                    <label class="i-checks ib-rquizz-step3" for="inline_quizz_radios_1513789825341-0"><?php echo __("I am pre-approved", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                  <li>
-                    <input class="ibregister-btn" id="inline_quizz_radios_1513789825341-1" type="radio" name="mortgage_approved" value="no">
-                    <label class="i-checks ib-rquizz-step3" for="inline_quizz_radios_1513789825341-1"><?php echo __("Not pre-approved yet", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                  <li>
-                    <input class="ibregister-btn" id="inline_quizz_radios_1513789825341-2" type="radio" name="mortgage_approved" value="buying_with_cash">
-                    <label class="i-checks ib-rquizz-step3" for="inline_quizz_radios_1513789825341-2"><?php echo __("I prefer to buy with cash", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                </ul>
-                <!--<div class="ms-center">
-                  <a href="javascript:void(0)" class="ms-skip ms-close-step skip-quizz-btn">Skip this step</a>
-                </div>-->
-              </li>
-              <li class="ib-pr-step ib-pr-radio">
-                <div class="ms-header-md">
-                  <span class="ms-title-modal ms-no-mb"><?php echo __("Thank You For Registering", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  <div class="ms-text">
-                    <p><?php echo __("Just a few more details so we can help you", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
-                    <p><?php echo __("(All fields are required)", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                  <ul class="ib-pr-radio-list">
+                    <li>
+                      <input class="ibregister-btn" id="inline_quizz_radios_1513789754550-0" type="radio" name="timeline_for_purchase" value="1_3_months">
+                      <label class="i-checks ib-rquizz-step2" for="inline_quizz_radios_1513789754550-0"><?php echo __("Within 1-3 months", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                    <li>
+                      <input class="ibregister-btn" id="inline_quizz_radios_1513789754550-1" type="radio" name="timeline_for_purchase" value="3_6_months">
+                      <label class="i-checks ib-rquizz-step2" for="inline_quizz_radios_1513789754550-1"><?php echo __("Within 3-6 months", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                    <li>
+                      <input class="ibregister-btn" id="inline_quizz_radios_1513789754550-2" type="radio" name="timeline_for_purchase" value="6_months_more">
+                      <label class="i-checks ib-rquizz-step2" for="inline_quizz_radios_1513789754550-2"><?php echo __("More than 6 months", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                  </ul>
+                  <!--<div class="ms-center">
+                    <a href="javascript:void(0)" class="ms-skip ms-close-step skip-quizz-btn">Skip this step</a>
+                  </div>-->
+                </li>
+                <li class="ib-pr-step ib-pr-radio">
+                  <div class="ms-header-md">
+                    <span class="ms-title-modal ms-no-mb"><?php echo __("Thank You For Registering", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <div class="ms-text">
+                      <p><?php echo __("Just a few more details so we can help you", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                      <p><?php echo __("(All fields are required)", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                    </div>
+                    <div class="ms-icon ms-financing"></div>
+                    <span class="ms-sub-title ms-no-mb"><?php echo __("Need assistance with financing?", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                   </div>
-                  <div class="ms-icon ms-sale"></div>
-                  <span class="ms-sub-title ms-no-mb"><?php echo __("Need to also sell your property?", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                </div>
-                <ul class="ib-pr-radio-list">
-                  <li>
-                    <input id="inline_quizz_radios_15137898580630-0" type="radio" name="sell_a_home" value="yes">
-                    <label class="ibregister-tg-submit-quizz" for="inline_quizz_radios_15137898580630-0"><?php echo __("Looking to sell too", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                  <li>
-                    <input id="inline_quizz_radios_15137898580631-1" type="radio" name="sell_a_home" value="no">
-                    <label class="ibregister-tg-submit-quizz" for="inline_quizz_radios_15137898580631-1"><?php echo __("Not looking to sell", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                  <li>
-                    <input id="inline_quizz_radios_15137898580632-2" type="radio" name="sell_a_home" value="not_sure_yet">
-                    <label class="ibregister-tg-submit-quizz" for="inline_quizz_radios_15137898580632-2"><?php echo __("Not sure yet", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
-                  </li>
-                </ul>
-                <!--<div class="ms-center">
-                  <a href="javascript:void(0)" class="ms-skip ms-close-step skip-quizz-btn">Skip this step</a>
-                </div>-->
-              </li>
-            </ul>
-            <span class="agile-error-msg"></span>
-		</fieldset>
+                  <ul class="ib-pr-radio-list">
+                    <li>
+                      <input class="ibregister-btn" id="inline_quizz_radios_1513789825341-0" type="radio" name="mortgage_approved" value="yes">
+                      <label class="i-checks ib-rquizz-step3" for="inline_quizz_radios_1513789825341-0"><?php echo __("I am pre-approved", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                    <li>
+                      <input class="ibregister-btn" id="inline_quizz_radios_1513789825341-1" type="radio" name="mortgage_approved" value="no">
+                      <label class="i-checks ib-rquizz-step3" for="inline_quizz_radios_1513789825341-1"><?php echo __("Not pre-approved yet", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                    <li>
+                      <input class="ibregister-btn" id="inline_quizz_radios_1513789825341-2" type="radio" name="mortgage_approved" value="buying_with_cash">
+                      <label class="i-checks ib-rquizz-step3" for="inline_quizz_radios_1513789825341-2"><?php echo __("I prefer to buy with cash", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                  </ul>
+                  <!--<div class="ms-center">
+                    <a href="javascript:void(0)" class="ms-skip ms-close-step skip-quizz-btn">Skip this step</a>
+                  </div>-->
+                </li>
+                <li class="ib-pr-step ib-pr-radio">
+                  <div class="ms-header-md">
+                    <span class="ms-title-modal ms-no-mb"><?php echo __("Thank You For Registering", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                    <div class="ms-text">
+                      <p><?php echo __("Just a few more details so we can help you", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                      <p><?php echo __("(All fields are required)", IDXBOOST_DOMAIN_THEME_LANG); ?></p>
+                    </div>
+                    <div class="ms-icon ms-sale"></div>
+                    <span class="ms-sub-title ms-no-mb"><?php echo __("Need to also sell your property?", IDXBOOST_DOMAIN_THEME_LANG); ?></span>
+                  </div>
+                  <ul class="ib-pr-radio-list">
+                    <li>
+                      <input id="inline_quizz_radios_15137898580630-0" type="radio" name="sell_a_home" value="yes">
+                      <label class="ibregister-tg-submit-quizz" for="inline_quizz_radios_15137898580630-0"><?php echo __("Looking to sell too", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                    <li>
+                      <input id="inline_quizz_radios_15137898580631-1" type="radio" name="sell_a_home" value="no">
+                      <label class="ibregister-tg-submit-quizz" for="inline_quizz_radios_15137898580631-1"><?php echo __("Not looking to sell", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                    <li>
+                      <input id="inline_quizz_radios_15137898580632-2" type="radio" name="sell_a_home" value="not_sure_yet">
+                      <label class="ibregister-tg-submit-quizz" for="inline_quizz_radios_15137898580632-2"><?php echo __("Not sure yet", IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    </li>
+                  </ul>
+                  <!--<div class="ms-center">
+                    <a href="javascript:void(0)" class="ms-skip ms-close-step skip-quizz-btn">Skip this step</a>
+                  </div>-->
+                </li>
+              </ul>
+              <span class="agile-error-msg"></span>
+		        </fieldset>
           </form>
           <div class="footer_md terms-md">
             <p><?php echo __("In agreement with our", IDXBOOST_DOMAIN_THEME_LANG); ?> <a target="_blank" href="<?php echo $flex_idx_info["website_url"]; ?>/terms-and-conditions/"><?php echo __("Terms of Use", IDXBOOST_DOMAIN_THEME_LANG); ?></a> <span><?php echo __("and", IDXBOOST_DOMAIN_THEME_LANG); ?> <a href="<?php echo $flex_idx_info["website_url"]; ?>/terms-and-conditions/#atospp-privacy"><?php echo __("Privacy Policy", IDXBOOST_DOMAIN_THEME_LANG); ?></a></span></p>
