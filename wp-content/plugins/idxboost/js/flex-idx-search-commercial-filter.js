@@ -6684,7 +6684,7 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
         if ("complex" === item.type) {
           return $("<li>")
             .append(
-              "<div>" +
+              "<div title="+item.label+">" +
                 item.label +
                 '<span class="autocomplete-item-type">Complex / Subdivision</span></div>'
             )
@@ -6692,7 +6692,7 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
         } else {
           return $("<li>")
             .append(
-              "<div>" +
+              "<div title="+item.label+">" +
                 item.label +
                 '<span class="autocomplete-item-type">' +
                 item.type +

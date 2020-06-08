@@ -221,11 +221,11 @@
             ib_autocomplete.autocomplete("instance")._renderItem = function( ul, item ) {
                 if ("complex" === item.type) {
                     return $('<li>')
-                    .append('<div>' + item.label + '<span class="autocomplete-item-type">Complex / Subdivision</span></div>')
+                    .append('<div title="'+item.label+'">' + item.label + '<span class="autocomplete-item-type">Complex / Subdivision</span></div>')
                     .appendTo(ul);
                 } else {
                     return $('<li>')
-                    .append('<div>' + item.label + '<span class="autocomplete-item-type">' + item.type + '</span></div>')
+                    .append('<div title="'+item.label+'">' + item.label + '<span class="autocomplete-item-type">' + item.type + '</span></div>')
                     .appendTo(ul);
                 }
             };
