@@ -33,13 +33,13 @@ global $flex_idx_info, $flex_idx_lead;
               <div class="gform_body">
                 <ul class="gform_fields">
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __('Search Name(*)', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <label class="gfield_label" for="input_update_name_search_token"><?php echo __('Search Name(*)', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container"><input class="medium js-alert-subject" id="input_update_name_search_token" name="input_sname" placeholder="Search Name*" required type="text" value="" /></div>
                   </li>
                   <li class="gfield">
-                    <label class="gfield_label"><?php echo __('Email Updates', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                    <label class="gfield_label" for="select-js-alert-event"><?php echo __('Email Updates', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container">
-                      <select class="iboost-alert-change-interval notification_day_update_flo medium js-alert-event">
+                      <select class="iboost-alert-change-interval notification_day_update_flo medium js-alert-event" id="select-js-alert-event">
                         <option value="0"><?php echo __('No Alert', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                         <option value="1"><?php echo __('Daily (each morning)', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
                         <option value="7"><?php echo __('Weekly', IDXBOOST_DOMAIN_THEME_LANG); ?></option>
@@ -228,7 +228,7 @@ global $flex_idx_info, $flex_idx_lead;
                             <input id="agilefield-6" name="register_name" type="text" class="agile-height-default" placeholder="<?php echo __('First Name', IDXBOOST_DOMAIN_THEME_LANG); ?>" required value="">
                         </div>
                         <div class="wrapper-input item-name">
-                            <label class="agile-label" for="agilefield-6"><?php echo __('Last Name', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                            <label class="agile-label" for="agilefield-7"><?php echo __('Last Name', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                             <input id="agilefield-7" name="register_last_name" type="text" class="agile-height-default" placeholder="<?php echo __('Last Name', IDXBOOST_DOMAIN_THEME_LANG); ?>" required value="">
                         </div>
                       </div>
@@ -885,7 +885,7 @@ global $flex_idx_info, $flex_idx_lead;
                     <?php echo __("Purchase Price", IDXBOOST_DOMAIN_THEME_LANG); ?>
                     </label>
                     <div class="ginput_container ginput_container_email">
-                      <input class="medium purchase_price_txt" name="input_1" readonly="" type="text" value="<?php echo isset($property['price']) ? '$' . number_format($property['price']) : ''; ?>">
+                      <input class="medium purchase_price_txt" name="input_1" readonly="" type="text" value="<?php echo isset($property['price']) ? '$' . number_format($property['price']) : ''; ?>" id="ms-purchase">
                     </div>
                   </li>
                   <li class="gfield">
@@ -1883,7 +1883,7 @@ global $flex_idx_info, $flex_idx_lead;
 
                 <div class="name-input-content">
                   <div class="wrapper-input">
-                    <label class="agile-label" for="agilefield-6">
+                    <label class="agile-label" for="__signup_fb_phone">
                       <?php echo __('Phone number', IDXBOOST_DOMAIN_THEME_LANG); ?>
                       <span class="txtgray">(<?php echo __('Used as password', IDXBOOST_DOMAIN_THEME_LANG); ?>)</span>
                     </label>
