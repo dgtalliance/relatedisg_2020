@@ -470,11 +470,12 @@
 			$(".ms-login-access .login").trigger("click");
 			var titleText = $(".header-tab a[data-tab='tabLogin']").attr('data-text')
 			$("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
-
+			$("#formLogin #txt_user").focus();
 		}else{
 			$(".ms-login-access .register").trigger("click");
 			var titleText = $(".header-tab a[data-tab='tabRegister']").attr('data-text')
-    	$("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+			$("#modal_login .modal_cm .content_md .heder_md .ms-title-modal").html(titleText);
+			$("#formRegister #agilefield-9").focus();
 		}
 	});
 
