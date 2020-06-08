@@ -51,14 +51,17 @@ global $flex_idx_info, $flex_idx_lead;
                     <label class="gfield_label"><?php echo __('Only Update Me On', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
                     <div class="ginput_container">
                       <ul class="list-check js-alert-list-status">
-                        <li><input type_event="new_listings" class="flex-save-type-options js-alert-status" id="update-listing-alert" name="notification_type_update_token[]" type="checkbox" value="new_listing">
+                        <li>
                           <label for="update-listing-alert"><?php echo __('New Listing (Always)', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                          <input type_event="new_listings" class="flex-save-type-options js-alert-status" id="update-listing-alert" name="notification_type_update_token[]" type="checkbox" value="new_listing">
                         </li>
-                        <li><input type_event="price_changes" class="flex-save-type-options js-alert-status" id="update-price-change-alert" name="notification_type_update_token[]" type="checkbox" value="price_changes">
+                        <li>
                           <label for="update-price-change-alert"><?php echo __('Price Changes', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                          <input type_event="price_changes" class="flex-save-type-options js-alert-status" id="update-price-change-alert" name="notification_type_update_token[]" type="checkbox" value="price_changes">
                         </li>
-                        <li><input type_event="status_changes" class="flex-save-type-options js-alert-status" id="update-status-change-alert" name="notification_type_update_token[]" type="checkbox" value="status_changes">
+                        <li>
                           <label for="update-status-change-alert"><?php echo __('status changes', IDXBOOST_DOMAIN_THEME_LANG); ?></label>
+                          <input type_event="status_changes" class="flex-save-type-options js-alert-status" id="update-status-change-alert" name="notification_type_update_token[]" type="checkbox" value="status_changes">
                         </li>
                       </ul>
                       <div class="gform_footer"><input class="form_submit_button_search gform_button button gform_submit_button_5" type="submit" value="<?php echo __('Update', IDXBOOST_DOMAIN_THEME_LANG); ?>"></div>
