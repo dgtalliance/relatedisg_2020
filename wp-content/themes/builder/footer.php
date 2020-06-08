@@ -104,10 +104,10 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 <a href="/offices/" title="Offices">Offices</a>
               </li>
               <li>
-                <a href="#" title="Login" class="ms-lg-btn" data-login="login">Login</a>
+                <a href="/login" title="Login" class="ms-lg-btn" data-login="login">Login</a>
               </li>
               <li>
-                <a href="#" title="Register" class="ms-lg-btn" data-login="register">Register</a>
+                <a href="/register" title="Register" class="ms-lg-btn" data-login="register">Register</a>
               </li>
               <li>
                 <a href="/contact/" title="Contact">Contact</a>

@@ -14,7 +14,7 @@ global $flex_idx_info;
 </form>
 <ul id="auc_city_dropdown" class="notranslate" style="display:none;">
 <?php foreach ($flex_idx_info['search']['cities'] as $auc_city): ?>
-<li><?php echo $auc_city['name']; ?></li>
+<li title="<?php echo $auc_city['name']; ?>"><?php echo $auc_city['name']; ?></li>
 <?php endforeach; ?>
 </ul>
               </div>

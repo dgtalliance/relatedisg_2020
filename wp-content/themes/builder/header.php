@@ -113,8 +113,8 @@
             <div class="ms-menu-responsive-bottom">
               <ul class="actions">
                 <li>
-                  <button class="btn-action js-btn-signup" aria-label="Sign Up">Sign Up</button>
-                  <button class="btn-action" aria-label="Login">Login</button>
+                  <a href="/login" class="btn-action js-btn-signup" title="Sign Up">Sign Up</button>
+                  <a href="/register" class="btn-action" title="Login">Login</button>
                 </li>
                 <li>
                   <a class="btn-action btn-action-alt" href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" title="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
