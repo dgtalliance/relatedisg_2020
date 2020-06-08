@@ -19,7 +19,7 @@ global $flex_idx_info, $flex_idx_lead;
   <div class="modal_cm">
     <div class="ms-header-close">
       <button data-id="modal_edit_alert_information" class="close close-modal" data-frame="modal_mobile">Close <span></span></button>
-      <p>If you want to update <br>your filter <a href="#">click here</a></p>
+      <p>If you want to update <br>your filter <a href="#" title="click here">click here</a></p>
     </div>
     <div class="content_md">
       <div class="heder_md">
