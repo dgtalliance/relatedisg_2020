@@ -533,6 +533,7 @@
 
 	$(document).on('click', '#menu-main .menu-item-has-children>a', function(e){
 		e.preventDefault();
+		$(this).find(".sub-menu li:eq(0)").focus();
 	});
   
 }(jQuery));
