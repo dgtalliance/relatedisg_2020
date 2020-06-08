@@ -509,6 +509,10 @@
 		}
 	}
 
+	$(document).on('click', '#menu-main .menu-item-has-children>a', function(e){
+		e.preventDefault();
+	});
+
   /*-----------------------------------------------------------------------------------------------------*/
 	/* ANIMACION TEXTO HOME
 	/*-----------------------------------------------------------------------------------------------------*/
@@ -530,9 +534,4 @@
 			.delay(4000)
 			.fadeOut(900, showNextQuote);
 	}
-
-	$(document).on('click', '#menu-main .menu-item-has-children>a', function(e){
-		e.preventDefault();
-	});
-  
 }(jQuery));
