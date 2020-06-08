@@ -1942,7 +1942,7 @@ function get_custom_logo_header_boots()
       $html = sprintf('<a href="%1$s" class="' . 'idx_site_text' . '" rel="home" itemprop="url" title="' . get_bloginfo('name') . '">%2$s</a>', esc_url(home_url('/')), '<div class="text-logo"><h1 class="idx_site_text_tit" title="' . get_bloginfo('name') . '" > ' . $idx_site_text . '</h1><span>' . $idx_site_text_slogan . '</span></div>');
     } elseif (is_customize_preview()) {
       $html = sprintf(
-        '<a href="%1$s" class="idx_image_logo logo-content" style="display:none;"></a>',
+        '<a href="%1$s" class="idx_image_logo logo-content" style="display:none;" title="' . get_bloginfo('name') . '"></a>',
         esc_url(home_url('/'))
       );
     }
@@ -1956,13 +1956,13 @@ function get_custom_logo_header_boots()
 
     if ($idx_theme_broker) {
       if (is_front_page()) {
-        $html = sprintf('<a href="%1$s" class="' . 'idx_image_logo' . ' logo-content" rel="home" itemprop="url">%2$s</a>', esc_url(home_url('/')), '<img alt="' . get_bloginfo('name') . '" src="' . $idx_theme_broker . '" >');
+        $html = sprintf('<a href="%1$s" class="' . 'idx_image_logo' . ' logo-content" rel="home" itemprop="url" title="' . get_bloginfo('name') . '">%2$s</a>', esc_url(home_url('/')), '<img alt="' . get_bloginfo('name') . '" src="' . $idx_theme_broker . '" >');
       } else {
-        $html = sprintf('<a href="%1$s" class="' . 'idx_image_logo' . ' logo-content" rel="home" itemprop="url">%2$s</a>', esc_url(home_url('/')), '<img alt="' . get_bloginfo('name') . '" src="' . $idx_image_logo_interior . '" >');
+        $html = sprintf('<a href="%1$s" class="' . 'idx_image_logo' . ' logo-content" rel="home" itemprop="url" title="' . get_bloginfo('name') . '">%2$s</a>', esc_url(home_url('/')), '<img alt="' . get_bloginfo('name') . '" src="' . $idx_image_logo_interior . '" >');
       }
     } elseif (is_customize_preview()) {
       $html = sprintf(
-        '<a href="%1$s" class="' . 'idx_image_logo' . ' logo-content" style="display:none;"><img /></a>',
+        '<a href="%1$s" class="' . 'idx_image_logo' . ' logo-content" style="display:none;" title="' . get_bloginfo('name') . '"><img /></a>',
         esc_url(home_url('/'))
       );
     }
