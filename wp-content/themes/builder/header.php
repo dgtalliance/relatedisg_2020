@@ -34,11 +34,8 @@
     <header id="header" class="ms-header ms-bottom-shadow">
       <div class="ms-wrap-header">
         <div class="ms-top-header">
-
-
           <div class="ms-item ms-wp-login">
-
-            <a href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" class="ms-btn-phone">
+            <a href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" class="ms-btn-phone" title="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>">
               <?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $idx_contact_phone; ?>
             </a>
 
@@ -76,9 +73,7 @@
               </ul>
               <?php endif; ?>
             </div>
-
-            <a href="/search/" class="ms-link">Search</a>
-
+            <a href="/search/" class="ms-link" title="Search">Search</a>
           </div>
         </div>
 
@@ -94,7 +89,7 @@
               Menu <span></span>
             </button>
 
-            <a class="ms-btn-search pc" href="/search" aria-label="<?php echo __('Search a Property', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+            <a class="ms-btn-search pc" href="/search" title="<?php echo __('Search a Property', IDXBOOST_DOMAIN_THEME_LANG); ?>">
               <span></span>
               <?php echo __('Search a Property', IDXBOOST_DOMAIN_THEME_LANG); ?>
             </a>
@@ -106,7 +101,6 @@
       <div class="wrap-menu">
         <div class="ms-menu-responsive">
           <img class="wrap-menu-logo" src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="Realted">
-          
           <nav>
             <?php wp_nav_menu(array(
             'theme_location' => 'primary',
@@ -119,11 +113,11 @@
             <div class="ms-menu-responsive-bottom">
               <ul class="actions">
                 <li>
-                  <a class="btn-action js-btn-signup" href="#">Sign Up</a>
-                  <a class="btn-action" href="#">Login</a>
+                  <button class="btn-action js-btn-signup" aria-label="Sign Up">Sign Up</button>
+                  <button class="btn-action" aria-label="Login">Login</button>
                 </li>
                 <li>
-                  <a class="btn-action btn-action-alt" href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                  <a class="btn-action btn-action-alt" href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" title="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
                 </li>
               </ul>
               <ul class="social">

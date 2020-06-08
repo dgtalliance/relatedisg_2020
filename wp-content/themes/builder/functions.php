@@ -1939,7 +1939,7 @@ function get_custom_logo_header_boots()
     else  $idx_site_text_slogan = get_theme_mod('idx_site_text_slogan');
 
     if ($idx_site_text) {
-      $html = sprintf('<a href="%1$s" class="' . 'idx_site_text' . '" rel="home" itemprop="url">%2$s</a>', esc_url(home_url('/')), '<div class="text-logo"><h1 class="idx_site_text_tit" title="' . get_bloginfo('name') . '" > ' . $idx_site_text . '</h1><span>' . $idx_site_text_slogan . '</span></div>');
+      $html = sprintf('<a href="%1$s" class="' . 'idx_site_text' . '" rel="home" itemprop="url" title="' . get_bloginfo('name') . '">%2$s</a>', esc_url(home_url('/')), '<div class="text-logo"><h1 class="idx_site_text_tit" title="' . get_bloginfo('name') . '" > ' . $idx_site_text . '</h1><span>' . $idx_site_text_slogan . '</span></div>');
     } elseif (is_customize_preview()) {
       $html = sprintf(
         '<a href="%1$s" class="idx_image_logo logo-content" style="display:none;"></a>',
