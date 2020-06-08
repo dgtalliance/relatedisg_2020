@@ -650,6 +650,8 @@
 								}
 
 								&.menu-item-has-children{
+									&:focus,
+									&:active,
 									&:hover{
 										.sub-menu{
 											opacity: 1;
