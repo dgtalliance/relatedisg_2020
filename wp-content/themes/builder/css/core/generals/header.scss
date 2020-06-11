@@ -377,8 +377,8 @@
 				}
 
 				&:focus {
-					border-color: #80bdff;
-					box-shadow: 0 0 0 3.2px rgba(0,123,255,.25);
+					border-color: #0066ff;
+					box-shadow: 0 0 0 3.2px rgba($color: #0066ff, $alpha: 0.75);
 					outline: 0;
         }
         
