@@ -40,10 +40,8 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
   }
 }
 
-.ms-next-step {
-  border-radius: 4px;
-  transition: all .3s;
-
+.ms-next-step,
+.ms-btn {
   &:focus {
     border-color: $accesibility-border-color;
     box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
