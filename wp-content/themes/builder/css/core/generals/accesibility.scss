@@ -3,11 +3,12 @@ $accesibility-box-shadow-color: rgba(0, 123, 255, 0.25);
 
 #header {
   .ms-wrap-header {
-    .ms-top-header {
+    .ms-top-header,
+    .ms-middle-header {
       a {
         border-radius: 4px;
         transition: all .3s;
-        
+
         &:focus {
           border-color: $accesibility-border-color;
           box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
