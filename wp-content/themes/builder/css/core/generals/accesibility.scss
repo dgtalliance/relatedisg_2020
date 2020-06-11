@@ -1,6 +1,27 @@
 $accesibility-border-color:  #0066ff;
 $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 
+.clidxboost-gs-wrapper-bullets {
+  .gs-bullet {
+    &:focus {
+      border-color: $accesibility-border-color;
+      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+      outline: 0;
+    }
+  }
+}
+
+.gs-wrapper-arrows {
+  .gs-prev-arrow,
+  .gs-next-arrow {
+    &:focus {
+      border-color: $accesibility-border-color;
+      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+      outline: 0;
+    }
+  }
+}
+
 #header {
   .ms-wrap-header {
     .ms-top-header,
@@ -16,5 +37,16 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
         }
       }
     }
+  }
+}
+
+.ms-next-step {
+  border-radius: 4px;
+  transition: all .3s;
+
+  &:focus {
+    border-color: $accesibility-border-color;
+    box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+    outline: 0;
   }
 }
