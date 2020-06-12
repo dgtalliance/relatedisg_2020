@@ -74,7 +74,7 @@
               </ul>
               <?php endif; ?>
             </div>
-            <a href="/search/" class="ms-link" title="Search">Search</a>
+            <a href="/search/" class="ms-link" title="<?php echo __('Search the best Property', IDXBOOST_DOMAIN_THEME_LANG); ?>">Search</a>
           </div>
         </div>
 
@@ -90,7 +90,7 @@
               Menu <span></span>
             </button>
 
-            <a class="ms-btn-search pc" href="/search" title="<?php echo __('Search a Property', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+            <a class="ms-btn-search pc" href="/search" title="<?php echo __('Search the best Property', IDXBOOST_DOMAIN_THEME_LANG); ?>">
               <span></span>
               <?php echo __('Search a Property', IDXBOOST_DOMAIN_THEME_LANG); ?>
             </a>
@@ -115,10 +115,10 @@
               <ul class="actions">
                 <li>
                   <a href="/login" class="btn-action js-btn-signup" title="Sign Up">Sign Up</button>
-                  <a href="/register" class="btn-action" title="Login">Login</button>
+                  <a href="/register" class="btn-action" title="Register">Register</button>
                 </li>
                 <li>
-                  <a class="btn-action btn-action-alt" href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" title="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
+                  <a class="btn-action btn-action-alt" href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" title="Contact phone number:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
                 </li>
               </ul>
               <ul class="social">
@@ -176,6 +176,5 @@
           </nav>
         </div>
       </div>
-
       <div class="ms-overlay r-overlay"></div>
     </header>

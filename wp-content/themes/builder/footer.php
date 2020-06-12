@@ -66,25 +66,25 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
           <nav class="ms-ft-menu-a">
             <ul>
               <li>
-                <a href="/" title="Home">Home</a>
+                <a href="/" title="Go to Home">Home</a>
               </li>
               <li>
-                <a href="/i-want-to-buy/" title="Buy">Buy</a>
+                <a href="/i-want-to-buy/" title="Go to Buy">Buy</a>
               </li>
               <li>
-                <a href="/i-want-to-rent/" title="Rent">Rent</a>
+                <a href="/i-want-to-rent/" title="Go to Rent">Rent</a>
               </li>
               <li>
-                <a href="/sell/" title="Sell">Sell</a>
+                <a href="/sell/" title="Go to Sell">Sell</a>
               </li>
               <li>
-                <a href="/neighborhoods/" title="Neighborhoods">Neighborhoods</a>
+                <a href="/neighborhoods/" title="Go to Neighborhoods">Neighborhoods</a>
               </li>
               <li>
-                <a href="/developments/" title="Developments">Developments</a>
+                <a href="/developments/" title="Go to Developments">Developments</a>
               </li>
               <li>
-                <a href="https://www.isgmiamireport.com/" title="Miami Report" target="_blank">Miami Report</a>
+                <a href="https://www.isgmiamireport.com/" title="Go to Miami Report" target="_blank">Miami Report</a>
               </li>
               <!--<li>
                 <a href="/agents/" title="Agents">Agents</a>
@@ -95,13 +95,13 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
           <nav class="ms-ft-menu-b">
             <ul>
               <li>
-                <a href="/search/" title="Search">Search</a>
+                <a href="/search/" title="Go to Search">Search</a>
               </li>
               <li>
-                <a href="/about/" title="About Us">About Us</a>
+                <a href="/about/" title="Go to About Us">About Us</a>
               </li>
               <li>
-                <a href="/offices/" title="Offices">Offices</a>
+                <a href="/offices/" title="Go to Offices">Offices</a>
               </li>
               <li>
                 <a href="/login" title="Login" class="ms-lg-btn" data-login="login">Login</a>
@@ -110,10 +110,10 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
                 <a href="/register" title="Register" class="ms-lg-btn" data-login="register">Register</a>
               </li>
               <li>
-                <a href="/contact/" title="Contact">Contact</a>
+                <a href="/contact/" title="Go to Contact">Contact</a>
               </li>
               <li>
-                <a href="/broker-dashboard/" title="Broker Dashboard">Broker Dashboard</a>
+                <a href="/broker-dashboard/" title="Go to Broker Dashboard">Broker Dashboard</a>
               </li>
             </ul>
           </nav>
@@ -129,9 +129,9 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
         <div class="ms-bottom-footer">
           <div class="ms-footer-section">
             <ul class="ms-sub-menu-footer">
-              <li><a href="/terms-and-conditions/" title="Privacy" target="_blank">Privacy</a></li>
-              <li><a href="/terms-and-conditions/#atospp-privacy" title="Terms of Service" target="_blank">Terms and Conditions</a></li>
-              <li><a href="/accessibility/" title="Terms of Service" target="_blank">Accessibility</a></li>
+              <li><a href="/terms-and-conditions/" title="Go to Privacy" target="_blank">Privacy</a></li>
+              <li><a href="/terms-and-conditions/#atospp-privacy" title="Go to Terms of Service" target="_blank">Terms and Conditions</a></li>
+              <li><a href="/accessibility/" title="Go to Terms of Service" target="_blank">Accessibility</a></li>
             </ul>
             <p class="ms-copyright">© <?php echo date('Y'); ?> RELATEDISG. ALL RIGHTS RESERVED</p>
             <div class="ms-trem">
