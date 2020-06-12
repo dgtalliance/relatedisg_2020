@@ -1,4 +1,16 @@
-$accesibility-border-color:  #0066ff;
+:focus {
+  /* You can remove this to use the browser's defaults */
+  outline-style: solid !important;
+  outline-color: #3887fd !important;
+  outline-width: medium !important;
+}
+
+body.using-mouse :focus {
+  outline: none !important;
+}
+
+
+/*$accesibility-border-color:  #0066ff;
 $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 
 a,
@@ -20,7 +32,7 @@ textarea{
   }
 }
 
-/*
+
 .clidxboost-gs-wrapper-bullets {
   .gs-bullet {
     &:focus {
