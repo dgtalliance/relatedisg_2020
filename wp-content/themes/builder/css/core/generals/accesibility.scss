@@ -55,6 +55,13 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
       outline: 0;
     }
   }
+
+  #email-newsletter {
+    &:focus {
+      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+      outline: 0;
+    }
+  }
 }
 
 .ms-next-step,
