@@ -110,16 +110,17 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
   a,
   button {
     &:focus {
-      border-color: $accesibility-border-color;
-      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+      border-color: $accesibility-border-color !important;
+      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color !important;
       outline: 0;
     }
   }
 }
 
 .moptions {
-  .option-switch,
-  .full-screen {
+  #show-gallery,
+  #show-map,
+  #clidxboost-btn-flight {
     &:focus {
       border-color: $accesibility-border-color;
       box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
