@@ -3001,11 +3001,9 @@ body {
     color: #333 !important; }
   .headerColor #header .ms-wrap-header .ms-middle-header .ms-item .ms-btn-menu span {
     background-color: #333 !important; }
-  .headerColor #header .ms-wrap-header .ms-top-header {
-    background-color: transparent; }
-    .headerColor #header .ms-wrap-header .ms-top-header .ms-login-access .item-lo-hea .login:after,
-    .headerColor #header .ms-wrap-header .ms-top-header .ms-login-access .item-no-hea .login:after {
-      background-color: #333 !important; }
+  .headerColor #header .ms-wrap-header .ms-top-header .ms-login-access .item-lo-hea .login:after,
+  .headerColor #header .ms-wrap-header .ms-top-header .ms-login-access .item-no-hea .login:after {
+    background-color: #333 !important; }
 
 #welcome .ms-wrap-btn .ms-btn {
   background-color: transparent !important;
