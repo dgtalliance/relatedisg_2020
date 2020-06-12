@@ -22,20 +22,37 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
   }
 }
 
+#clidxboost-btn-search {
+  &:focus {
+    border-color: $accesibility-border-color;
+    box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+    outline: 0;
+  }
+}
+
 #header {
   .ms-wrap-header {
     .ms-top-header,
     .ms-middle-header {
       a {
-        border-radius: 4px;
-        transition: all .3s;
-
         &:focus {
           border-color: $accesibility-border-color;
           box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
           outline: 0;
         }
       }
+    }
+  }
+}
+
+#footer {
+  a,
+  input,
+  button {
+    &:focus {
+      border-color: $accesibility-border-color;
+      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+      outline: 0;
     }
   }
 }
@@ -51,9 +68,6 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 
 #developments-slider {
   a {
-    border-radius: 4px;
-    transition: all .3s;
-
     &:focus {
       border-color: $accesibility-border-color;
       box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
@@ -63,13 +77,16 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 }
 
 #contactUs {
-  input,
-  textarea,
-  button {
-    &:focus {
-      border-color: $accesibility-border-color;
-      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
-      outline: 0;
+  .flex-content-form {
+    input,
+    textarea,
+    button,
+    .clidxboost-btn-link {
+      &:focus {
+        border-color: $accesibility-border-color;
+        box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+        outline: 0;
+      }
     }
   }
 }
