@@ -220,7 +220,8 @@
             background-color: #333;
             display: block;
 
-            &:focus {
+            &:focus,
+            &:focus-within {
               &::before {
                 opacity: 1;
               }
