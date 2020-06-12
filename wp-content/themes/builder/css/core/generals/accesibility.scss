@@ -67,7 +67,8 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
   }
 }
 
-#developments-slider {
+#developments-slider,
+#list-agents {
   a {
     &:focus {
       border-color: $accesibility-border-color;
@@ -77,7 +78,8 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
   }
 }
 
-#contactUs {
+#contactUs,
+#contact-form {
   .flex-content-form {
     input,
     textarea,
