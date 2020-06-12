@@ -35,8 +35,9 @@
       <div class="ms-wrap-header">
         <div class="ms-top-header">
           <div class="ms-item ms-wp-login">
-            <a href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" class="ms-btn-phone" title="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>">
-              <?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $idx_contact_phone; ?>
+            <a href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" 
+            class="ms-btn-phone" 
+            title="Contact phone:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?> <?php echo $idx_contact_phone; ?>
             </a>
 
             <div class="ms-login-access">
