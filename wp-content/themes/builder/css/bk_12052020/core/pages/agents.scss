@@ -290,7 +290,8 @@
           text-transform: capitalize;
         }
 
-        &:hover {
+        &:hover,
+        .ms-wrap-img:focus {
           .ms-wrap-img {
             &::before {
               opacity: 1;
