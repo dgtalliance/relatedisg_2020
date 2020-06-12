@@ -413,6 +413,21 @@
 		}
 	}
 
+	a {
+		display: block;
+		&:hover,
+		&:focus {
+			.ms-wrap-img {
+				&::before {
+					opacity: 1;
+				}
+				img {
+					transform: scale(1.125);
+				}
+			}
+		}
+	}
+
 	.ms-wrap-img {
 		display: block;
 		line-height: 0;
@@ -449,16 +464,6 @@
 			transform: scale(1);
 			transition: all .4s;
 			width: 100%;
-		}
-
-		&:hover,
-		&:focus {
-			&::before {
-				opacity: 1;
-			}
-			img {
-				transform: scale(1.125);
-			}
 		}
 	}
 
