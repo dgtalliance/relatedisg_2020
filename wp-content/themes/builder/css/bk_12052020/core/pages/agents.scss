@@ -290,8 +290,7 @@
           text-transform: capitalize;
         }
 
-        &:hover,
-        .ms-wrap-img:focus {
+        &:hover {
           .ms-wrap-img {
             &::before {
               opacity: 1;
@@ -300,6 +299,19 @@
           .ms-min-info {
             transform: translateY(0px);
             opacity: 1;
+          }
+        }
+
+        .ms-wrap-img {
+          &:focus {
+            &::before {
+              opacity: 1;
+            }
+
+            & + .ms-min-info {
+              transform: translateY(0px);
+              opacity: 1;
+            }
           }
         }
       }
