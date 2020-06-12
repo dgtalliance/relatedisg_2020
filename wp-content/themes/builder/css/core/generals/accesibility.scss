@@ -135,15 +135,13 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 
 #full-main {
   .moptions {
-    .slider-option {
-      #show-gallery,
-      #show-map,
-      #clidxboost-btn-flight {
-        &:focus {
-          border-color: $accesibility-border-color;
-          box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
-          outline: 0;
-        }
+    .slider-option #show-gallery,
+    .slider-option #show-map,
+    #clidxboost-btn-flight {
+      &:focus {
+        border-color: $accesibility-border-color;
+        box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+        outline: 0;
       }
     }
   } 
