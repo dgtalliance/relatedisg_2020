@@ -105,10 +105,21 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 }
 
 .breadcrumb-options,
-.slider-option,
-.property-information {
+.options-list,
+.actions-list {
   a,
   button {
+    &:focus {
+      border-color: $accesibility-border-color;
+      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+      outline: 0;
+    }
+  }
+}
+
+.moptions {
+  .option-switch,
+  .full-screen {
     &:focus {
       border-color: $accesibility-border-color;
       box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
