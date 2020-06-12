@@ -786,8 +786,8 @@
 					z-index: 2;
 
 					&:focus {
-						border-color: #80bdff;
-						box-shadow: 0 0 0 3.2px rgba(0,123,255,.25);
+						border-color: #0066ff;
+						box-shadow: 0 0 0 3.2px rgba(0,102,255,0.75);
 						outline: 0;
 					}
 					span{
@@ -833,7 +833,8 @@
           transition: all .6s ease;
           text-transform: uppercase;
           letter-spacing: 1px;
-          padding-left: 45px;
+					padding-left: 45px;
+					padding-right: 5px;
           position: relative;
           margin-left: 10px;
 					display: block;
