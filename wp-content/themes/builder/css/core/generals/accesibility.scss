@@ -72,7 +72,8 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 #list-agents,
 #list-agent,
 #profile,
-#leadership {
+#leadership,
+#broker-page {
   a {
     &:focus {
       border-color: $accesibility-border-color;
