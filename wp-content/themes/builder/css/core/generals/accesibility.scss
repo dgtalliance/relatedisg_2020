@@ -77,7 +77,8 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 #leadership,
 #broker-page,
 .ib-wpagination,
-.info-content {
+.info-content,
+.avatar-information {
   a {
     &:focus {
       border-color: $accesibility-border-color;
@@ -105,6 +106,20 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
   }
 }
 
+#flex-idx-property-form {
+  input,
+  textarea,
+  select,
+  button,
+  .clidxboost-btn-link {
+    &:focus {
+      border-color: $accesibility-border-color;
+      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+      outline: 0;
+    }
+  }
+}
+
 .breadcrumb-options,
 .options-list,
 .actions-list {
@@ -118,14 +133,18 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
   }
 }
 
-.moptions {
-  #show-gallery,
-  #show-map,
-  #clidxboost-btn-flight {
-    &:focus {
-      border-color: $accesibility-border-color;
-      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
-      outline: 0;
+#full-main {
+  .moptions {
+    .slider-options {
+      #show-gallery,
+      #show-map,
+      #clidxboost-btn-flight {
+        &:focus {
+          border-color: $accesibility-border-color;
+          box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
+          outline: 0;
+        }
+      }
     }
-  }
+  } 
 }
