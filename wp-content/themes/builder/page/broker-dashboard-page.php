@@ -12,12 +12,12 @@ while ( have_posts() ) : the_post(); ?>
     <p>All your real estate and marketing <span>apps on one platform</span></p>
 
     <div class="ms-wrap-items">
-      <div class="ms-item">
-        <a href="https://www.brokersumo.com/login" class="ms-bt-item" target="_blank">
+      <a href="https://www.brokersumo.com/login" class="ms-item" target="_blank">
+        <div class="ms-bt-item">
           <span class="ms-icon-item ms-icon-sumo"></span>
           <h2 class="ms-item-title">Broker <span>Sumo</span></h2>
-        </a>
-      </div>
+        </div>
+      </a>
       <a class="ms-item show-modal" href="javascript:void(0)" data-modal="comming_soon" rel="nofollow">
         <div class="ms-bt-item">
           <span class="ms-icon-item ms-icon-app"></span>
