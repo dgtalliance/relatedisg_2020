@@ -48,16 +48,10 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 #footer {
   a,
   input,
-  button {
-    &:focus {
-      border-color: $accesibility-border-color;
-      box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
-      outline: 0;
-    }
-  }
-
+  button,
   #email-newsletter {
     &:focus {
+      border-color: $accesibility-border-color;
       box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color;
       outline: 0;
     }
