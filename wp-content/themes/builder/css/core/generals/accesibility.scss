@@ -79,10 +79,12 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 }
 
 #contactUs,
-#contact-form {
+#contact-form,
+#find-agent {
   .flex-content-form {
     input,
     textarea,
+    select,
     button,
     .clidxboost-btn-link {
       &:focus {
