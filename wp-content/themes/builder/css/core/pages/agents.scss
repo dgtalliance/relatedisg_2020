@@ -220,18 +220,6 @@
             background-color: #333;
             display: block;
 
-            &:focus,
-            &:focus-within {
-              &::before {
-                opacity: 1;
-              }
-
-              & + .ms-min-info {
-                transform: translateY(0px);
-                opacity: 1;
-              }
-            }
-
             &::before {
               background-color: rgba(0,0,0,0.75);
               content: "";
@@ -303,7 +291,8 @@
           text-transform: capitalize;
         }
 
-        &:hover {
+        &:hover,
+        &:focus-within {
           .ms-wrap-img {
             &::before {
               opacity: 1;
