@@ -1,6 +1,26 @@
 $accesibility-border-color:  #0066ff;
 $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 
+a,
+button,
+input,
+optgroup,
+select,
+textarea{
+  &:focus {
+    border-color: $accesibility-border-color !important;
+    box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color !important;
+    outline: 0 !important;
+  }
+
+  &:active{
+    border-color: none !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+}
+
+/*
 .clidxboost-gs-wrapper-bullets {
   .gs-bullet {
     &:focus {
@@ -146,4 +166,4 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
       }
     }
   } 
-}
+}*/
