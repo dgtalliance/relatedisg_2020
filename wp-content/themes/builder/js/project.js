@@ -5,7 +5,9 @@
 	/*-----------------------------------------------------------------------------------------------------*/
 	var $selectSellRent = $("#flex_ac_rental_slug");
 	var $mainSliderBullet = $(".clidxboost-main-slider .gs-bullet");
-	$selectSellRent.attr('tabIndex', '-1');
+	$selectSellRent.ready(function() {
+		$selectSellRent.attr('tabIndex', '-1');
+	});
 	$mainSliderBullet.attr('tabIndex', '-1');
 
 	/*-----------------------------------------------------------------------------------------------------*/
