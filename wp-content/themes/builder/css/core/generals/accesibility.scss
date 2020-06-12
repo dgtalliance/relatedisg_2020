@@ -68,7 +68,8 @@ $accesibility-box-shadow-color: rgba($color: #0066ff, $alpha: 0.75);
 }
 
 #developments-slider,
-#list-agents {
+#list-agents,
+#list-agent {
   a {
     &:focus {
       border-color: $accesibility-border-color;
