@@ -175,5 +175,16 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
     <script src="<?php echo get_template_directory_uri(); ?>/js/webfont.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/js/project.min.js"></script>
     <script data-account="3JesWDGb4y" src="https://cdn.userway.org/widget.js"></script>
+
+    <script>
+    
+    document.body.addEventListener('mousedown', function() {
+      document.body.classList.add('using-mouse');
+    });
+
+    document.body.addEventListener('keydown', function() {
+      document.body.classList.remove('using-mouse');
+    });
+    </script>
   </body>
 </html>

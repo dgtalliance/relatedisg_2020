@@ -27,7 +27,7 @@
   </head>
   <?php $listclass = "";$bodyclasses = get_body_class();foreach ($bodyclasses as $class){$listclass = $listclass." ".$class;}?>
 
-  <body class="<?php echo $listclass; ?> ib-wrap-full-width">
+  <body class="<?php echo $listclass; ?> ib-wrap-full-width using-mouse">
     <!-- GTM scripts inside body -->
     <?php do_action('idx_gtm_body'); ?>
 
