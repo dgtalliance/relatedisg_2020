@@ -219,6 +219,18 @@
             position: relative;
             background-color: #333;
             display: block;
+
+            &:focus {
+              &::before {
+                opacity: 1;
+              }
+
+              & + .ms-min-info {
+                transform: translateY(0px);
+                opacity: 1;
+              }
+            }
+
             &::before {
               background-color: rgba(0,0,0,0.75);
               content: "";

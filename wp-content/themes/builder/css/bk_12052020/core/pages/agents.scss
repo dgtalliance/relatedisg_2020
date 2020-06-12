@@ -219,6 +219,7 @@
             position: relative;
             background-color: #333;
             display: block;
+
             &::before {
               background-color: rgba(0,0,0,0.75);
               content: "";
@@ -233,7 +234,7 @@
               z-index: 1;
             }
 
-            &:after {
+            &::after {
               content: "";
               display: block;
               padding-bottom: 112.5%;
@@ -299,19 +300,6 @@
           .ms-min-info {
             transform: translateY(0px);
             opacity: 1;
-          }
-        }
-
-        .ms-wrap-img {
-          &:focus {
-            &::before {
-              opacity: 1;
-            }
-
-            & + .ms-min-info {
-              transform: translateY(0px);
-              opacity: 1;
-            }
           }
         }
       }
