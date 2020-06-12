@@ -1,14 +1,14 @@
 (function($) {
-
-	/*-----------------------------------------------------------------------------------------------------*/
-	/* Cambiando el tabIndex
-	/*-----------------------------------------------------------------------------------------------------*/
-	var $selectSellRent = $("#flex_ac_rental_slug");
-	var $mainSliderBullet = $(".clidxboost-main-slider .gs-bullet");
-	$selectSellRent.ready(function() {
+	$(document).ready(function() {
+		/*-----------------------------------------------------------------------------------------------------*/
+		/* Cambiando el tabIndex
+		/*-----------------------------------------------------------------------------------------------------*/
+		var $selectSellRent = $("#flex_ac_rental_slug");
+		var $mainSliderBullet = $(".clidxboost-main-slider .gs-bullet");
 		$selectSellRent.attr('tabIndex', '-1');
+		$mainSliderBullet.attr('tabIndex', '-1');
 	});
-	$mainSliderBullet.attr('tabIndex', '-1');
+	
 
 	/*-----------------------------------------------------------------------------------------------------*/
 	/* Cambiando el placeholder del input de autocomplete
@@ -16,6 +16,7 @@
 	$("#flex_idx_single_autocomplete_input").attr('placeholder','City, Neighborhood, Address, ZIP, MLS#');
 
 	var $btnSellRent = $(".js-btn-sell-rent");	
+	var $selectSellRent = $("#flex_ac_rental_slug");
 	if($btnSellRent.length) {
 		$btnSellRent.on('click', function () {
 			var typeOfSearch = $(this).attr('data-value');
