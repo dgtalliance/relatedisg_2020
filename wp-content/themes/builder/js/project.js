@@ -5,8 +5,14 @@
 		/*-----------------------------------------------------------------------------------------------------*/
 		var $selectSellRent = $("#flex_ac_rental_slug");
 		var $mainSliderBullet = $(".clidxboost-main-slider .gs-bullet");
+		var $btnPrev = $("#featured-section .flex-slider-prev");
+		var $btnNext = $("#featured-section .flex-slider-next");
+		var $btnIconHeart = $("#featured-section .clidxboost-icon-heart");
 		$selectSellRent.attr('tabIndex', '-1');
 		$mainSliderBullet.attr('tabIndex', '-1');
+		$btnPrev.attr('tabIndex', '-1');
+		$btnNext.attr('tabIndex', '-1');
+		$btnIconHeart.attr('tabIndex', '-1');
 	});
 	
 
