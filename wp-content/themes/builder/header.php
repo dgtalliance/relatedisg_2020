@@ -59,12 +59,12 @@
               <ul class="item-lo-hea item-header" id="user-options">
                 <?php $lead_name_exp = explode(' ', esc_attr($flex_idx_lead['lead_info']['first_name']));?>
                 <li class="login show_modal_login_active">
-                  <a href="javascript:void(0)" rel="nofollow" title="<?php echo $lead_name_exp[0]; ?>"><?php echo $lead_name_exp[0]; ?></a>
+                  <a href="javascript:void(0)" rel="nofollow" title="Welcome <?php echo $lead_name_exp[0]; ?>"><?php echo $lead_name_exp[0]; ?></a>
                   <div class="menu_login_active disable_login">
                   <?php if (!empty($my_flex_pages)): ?>
                   <ul>
                     <?php foreach ($my_flex_pages as $my_flex_page): ?>
-                    <li><a href="<?php echo $my_flex_page['permalink']; ?>" title="<?php echo $my_flex_page['post_title']; ?>"><?php echo $my_flex_page['post_title']; ?></a></li>
+                    <li><a href="<?php echo $my_flex_page['permalink']; ?>" title="Go to <?php echo $my_flex_page['post_title']; ?>"><?php echo $my_flex_page['post_title']; ?></a></li>
                     <?php endforeach; ?>
                     <li><a href="#" class="flex-logout-link" id="flex-logout-link" title="<?php echo __('Logout', IDXBOOST_DOMAIN_THEME_LANG); ?>"><?php echo __('Logout', IDXBOOST_DOMAIN_THEME_LANG); ?></a></li>
                   </ul>
