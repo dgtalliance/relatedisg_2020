@@ -44,22 +44,22 @@
               <?php if (false === $flex_idx_lead): ?>
               <ul class="item-no-hea item-header" id="user-options">
                 <li class="login" data-modal="modal_login" data-tab="tabLogin">
-                  <a href="javascript:void(0)" class="lg-login ms-btn-login" rel="nofollow" title="<?php echo __('Login', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+                  <button class="lg-login ms-btn-login" rel="nofollow" aria-label="<?php echo __('Login', IDXBOOST_DOMAIN_THEME_LANG); ?>">
                     <span class="ms-icon-login"></span>
                     <span class="ms-text"><?php echo __('Login', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  </a>
+                  </button>
                 </li>
                 <li class="register" data-modal="modal_login" data-tab="tabRegister">
-                  <a href="javascript:void(0)" class="lg-register ms-btn-login ms-register" rel="nofollow" title="<?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+                  <button class="lg-register ms-btn-login ms-register" rel="nofollow" aria-label="<?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?>">
                     <span class="ms-text"><?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
-                  </a>
+                  </button>
                 </li>
               </ul>
               <?php else: $my_flex_pages = flex_user_list_pages(); ?>
               <ul class="item-lo-hea item-header" id="user-options">
                 <?php $lead_name_exp = explode(' ', esc_attr($flex_idx_lead['lead_info']['first_name']));?>
                 <li class="login show_modal_login_active">
-                  <a href="javascript:void(0)" rel="nofollow" title="Welcome <?php echo $lead_name_exp[0]; ?>"><?php echo $lead_name_exp[0]; ?></a>
+                  <button rel="nofollow" aria-label="Welcome <?php echo $lead_name_exp[0]; ?>"><?php echo $lead_name_exp[0]; ?></button>
                   <div class="menu_login_active disable_login">
                   <?php if (!empty($my_flex_pages)): ?>
                   <ul>
