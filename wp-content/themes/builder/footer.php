@@ -135,7 +135,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
             </ul>
             <p class="ms-copyright">© <?php echo date('Y'); ?> RELATEDISG. ALL RIGHTS RESERVED</p>
             <div class="ms-trem">
-              DESIGN BY RELATEDISG MARKETING; DEVELOPED + POWERED BY <a href="http://www.tremgroup.com/" target="_blank" title="TREMGROUP"><span>TREM</span>GROUP</a>
+              DESIGN BY RELATEDISG MARKETING; DEVELOPED + POWERED BY <a href="http://www.tremgroup.com/" target="_blank" title="Visit TREM Group The Real Estate Marketing Group"><span>TREM</span>GROUP</a>
             </div>
           </div>
         </div>

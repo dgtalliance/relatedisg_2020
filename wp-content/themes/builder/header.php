@@ -44,13 +44,13 @@
               <?php if (false === $flex_idx_lead): ?>
               <ul class="item-no-hea item-header" id="user-options">
                 <li class="login" data-modal="modal_login" data-tab="tabLogin">
-                  <button class="lg-login ms-btn-login" rel="nofollow" aria-label="<?php echo __('Login', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+                  <button class="lg-login ms-btn-login" rel="nofollow" aria-label="<?php echo __('Login', IDXBOOST_DOMAIN_THEME_LANG); ?>" title="Login">
                     <span class="ms-icon-login"></span>
                     <span class="ms-text"><?php echo __('Login', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                   </button>
                 </li>
                 <li class="register" data-modal="modal_login" data-tab="tabRegister">
-                  <button class="lg-register ms-btn-login ms-register" rel="nofollow" aria-label="<?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?>">
+                  <button class="lg-register ms-btn-login ms-register" rel="nofollow" aria-label="<?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?>" title="register">
                     <span class="ms-text"><?php echo __('Register', IDXBOOST_DOMAIN_THEME_LANG); ?></span>
                   </button>
                 </li>
@@ -59,7 +59,7 @@
               <ul class="item-lo-hea item-header" id="user-options">
                 <?php $lead_name_exp = explode(' ', esc_attr($flex_idx_lead['lead_info']['first_name']));?>
                 <li class="login show_modal_login_active">
-                  <button rel="nofollow" aria-label="Welcome <?php echo $lead_name_exp[0]; ?>"><?php echo $lead_name_exp[0]; ?></button>
+                  <button rel="nofollow" aria-label="Welcome <?php echo $lead_name_exp[0]; ?>" title="Welcome <?php echo $lead_name_exp[0]; ?>"><?php echo $lead_name_exp[0]; ?></button>
                   <div class="menu_login_active disable_login">
                   <?php if (!empty($my_flex_pages)): ?>
                   <ul>

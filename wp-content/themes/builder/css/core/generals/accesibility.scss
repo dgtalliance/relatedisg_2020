@@ -1,12 +1,181 @@
-:focus {
-  /* You can remove this to use the browser's defaults */
-  outline-style: solid !important;
-  outline-color: #3887fd !important;
-  outline-width: medium !important;
+$accesibility-border-color:  #3887fd;
+$accesibility-box-shadow-color: rgba($color: #3887fd, $alpha: 1);
+
+.ms-focus{
+  border: 3px solid transparent;
+  &:focus{
+    box-shadow: none !important;
+  }
 }
 
-body.using-mouse :focus {
-  outline: none !important;
+.ms-focus-none{
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+:focus {
+  /*outline-style: solid !important;
+  outline-color: #3887fd !important;
+  outline-width: medium !important;*/
+  border-color: $accesibility-border-color !important;
+  box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color !important;
+  outline: 0 !important;
+}
+
+#welcome{
+  .ms-wrap-btn{
+    .ms-btn{
+      @extend .ms-focus;
+    }
+  }
+
+  #flex-bubble-search{
+    .content-flex-bubble-search{
+      input{
+        @extend .ms-focus;
+      }
+    }
+  }
+
+  .ms-slider{
+    .gs-wrapper-arrows{
+      .gs-next-arrow,
+      .gs-prev-arrow{
+        &:focus{
+          opacity: 1;
+          &:before{
+            color: #000;
+          }
+          &:after{
+            background-color: #FFF;
+          }
+        }
+      }
+    }
+  }
+
+  .ms-next-step{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    &:focus{
+      background-color: #FFF;
+      .chevron {
+        top: -7px;
+        &:after,
+        &:before{
+          background-color: #000;
+        }
+      }
+    }
+  }
+}
+
+.wrap-result,
+#wrap-result{
+  .result-search,
+  #result-search{
+    >li{
+      .wrap-slider{
+        .clidxboost-btn-check{
+          border-radius: 100%;
+        }
+      }
+    }
+  }
+} 
+
+.flex-block-description{
+  .ib-view-detailt{
+    border: 3px solid transparent;
+    &:focus{
+      box-shadow: none !important;
+    }
+  }
+}
+
+body.using-mouse{
+  :focus {
+    //outline: none !important;
+    border-color: none !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+
+  #welcome{
+    .ms-wrap-btn{
+      .ms-btn{
+        &:focus{
+          @extend .ms-focus-none;
+        }
+      }
+    }
+ 
+    #flex-bubble-search{
+      .content-flex-bubble-search{
+        input{
+          @extend .ms-focus-none;
+        }
+      }
+    }
+
+    .ms-slider{
+      .gs-wrapper-arrows{
+        .gs-next-arrow,
+        .gs-prev-arrow{
+          &:focus{
+            opacity: 0.85;
+          }
+        }
+      }
+    }
+
+    .ms-next-step{
+      background-color: transparent;
+      &:focus{
+        .chevron {
+          &:after,
+          &:before{
+            background-color: #FFF;
+          }
+        }
+      }
+    }
+  }
+
+  .flex-block-description{
+    .ib-view-detailt{
+      border-color: transparent !important;
+      &:focus{
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+/*RESETEANDO ESTILOS CHOTOS*/
+
+#welcome{
+  .ms-slider{
+    .gs-wrapper-arrows{
+      .gs-next-arrow, 
+      .gs-prev-arrow{
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+      }
+
+      .gs-next-arrow{
+        right: 40px;
+      }
+
+      .gs-prev-arrow{
+        left: 40px;
+      }
+    }
+  }
 }
 
 
