@@ -162,7 +162,15 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
+					});
+	    	}
+			},onResized: function(){
+	    	var $temporalImage = $condoAreaSlider.find("img");
+	    	if($temporalImage.length){
+					$temporalImage.each(function() {
+						var urlIamge = $(this).attr("data-img");
+						$(this).attr("src",urlIamge);
 					});
 	    	}
 	    }
