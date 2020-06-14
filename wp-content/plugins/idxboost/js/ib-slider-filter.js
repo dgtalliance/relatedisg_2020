@@ -80,7 +80,7 @@ function genMultiSlider(element){
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $multiSlider.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;

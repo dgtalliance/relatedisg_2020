@@ -87,7 +87,7 @@
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $sliderNeighborhoodsGM.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -131,7 +131,7 @@
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $mainSlider.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -223,7 +223,7 @@
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $propertiesSlider.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -264,7 +264,7 @@
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $testimonialSlider.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -326,7 +326,7 @@
 		    },
 				onResized: function(){
 					var $a = 0;
-					var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+					var $bulletBtn = $fullSlider.find(".gs-bullet");
 					if($bulletBtn.length){
 						$bulletBtn.each(function() {
 							$a += 1;
@@ -396,7 +396,7 @@
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $developmentSlider.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -441,7 +441,7 @@
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $neighborhoodSlider.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -484,7 +484,7 @@ function idxloadSliderneighborhoods(elemento){
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $sliderNeigh.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -541,7 +541,7 @@ function loadFullSlider(elemento){
 	    },
 			onResized: function(){
 	    	var $a = 0;
-	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	var $bulletBtn = $fullSliderModal.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
