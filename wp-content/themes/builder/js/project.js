@@ -170,7 +170,8 @@
 	    	if($temporalImage.length){
 					$temporalImage.each(function() {
 						var urlIamge = $(this).attr("data-img");
-						$(this).attr("src",urlIamge).css({'opacity':'1 !important'}).fadeIn();
+						$(this).attr("src",urlIamge);
+						$(this).removeClass();
 					});
 	    	}
 	    }
