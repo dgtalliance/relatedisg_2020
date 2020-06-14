@@ -30,6 +30,16 @@
 						$(this).text('View Slide '+$a);
 					});
 	    	}
+			},
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -74,6 +84,16 @@
 						$(this).text('View Slide '+$a);
 					});
 	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -106,6 +126,16 @@
 					$bulletBtn.each(function() {
 						$a += 1;
 						$(this).text('View slide '+$a);
+					});
+	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -190,6 +220,16 @@
 						$(this).text('View Slide '+$a);
 					});
 	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -215,6 +255,16 @@
 	    onInited: function(){
 	    	var $a = 0;
 	    	var $bulletBtn = $testimonialSlider.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -274,6 +324,16 @@
 						});
 		    	}
 		    },
+				onResized: function(){
+					var $a = 0;
+					var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+					if($bulletBtn.length){
+						$bulletBtn.each(function() {
+							$a += 1;
+							$(this).text('View Slide '+$a);
+						});
+					}
+				},
 		    onFullscreenIn: ()=> {
 				// creando el título en FS
 				const $ibmpTitle = $fullSlider.find('.ib-pvsititle');
@@ -333,6 +393,16 @@
 						$(this).text('View Slide '+$a);
 					});
 	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -368,6 +438,16 @@
 						$(this).text('View Slide '+$a);
 					});
 	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
 	    }
 		});
 	}
@@ -395,6 +475,16 @@ function idxloadSliderneighborhoods(elemento){
 	    onInited: function(){
 	    	var $a = 0;
 	    	var $bulletBtn = $sliderNeigh.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
@@ -442,6 +532,16 @@ function loadFullSlider(elemento){
 
 	    	var $a = 0;
 	    	var $bulletBtn = $fullSliderModal.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;

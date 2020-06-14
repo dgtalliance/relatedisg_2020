@@ -77,6 +77,16 @@ function genMultiSlider(element){
 						$(this).text('View Slide '+$a);
 					});
 	    	}
+	    },
+			onResized: function(){
+	    	var $a = 0;
+	    	var $bulletBtn = $sliderNeighborhoods.find(".gs-bullet");
+	    	if($bulletBtn.length){
+					$bulletBtn.each(function() {
+						$a += 1;
+						$(this).text('View Slide '+$a);
+					});
+	    	}
 	    }
     });
   }
