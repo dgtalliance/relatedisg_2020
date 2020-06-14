@@ -27,7 +27,7 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -71,7 +71,7 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -105,7 +105,7 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View slide '+$a);
 					});
 	    	}
 	    }
@@ -187,7 +187,7 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -218,7 +218,7 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -270,7 +270,7 @@
 		    	if($bulletBtn.length){
 						$bulletBtn.each(function() {
 							$a += 1;
-							$(this).text($a);
+							$(this).text('View Slide '+$a);
 						});
 		    	}
 		    },
@@ -330,7 +330,7 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -365,7 +365,7 @@
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -398,7 +398,7 @@ function idxloadSliderneighborhoods(elemento){
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -445,7 +445,7 @@ function loadFullSlider(elemento){
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }

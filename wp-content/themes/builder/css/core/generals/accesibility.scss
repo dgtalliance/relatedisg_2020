@@ -1,6 +1,12 @@
 $accesibility-border-color:  #3887fd;
 $accesibility-box-shadow-color: rgba($color: #3887fd, $alpha: 1);
 
+:focus {
+  border-color: $accesibility-border-color !important;
+  box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color !important;
+  outline: 0 !important;
+}
+
 .ms-focus{
   border: 3px solid transparent;
   &:focus{
@@ -11,15 +17,6 @@ $accesibility-box-shadow-color: rgba($color: #3887fd, $alpha: 1);
 .ms-focus-none{
   box-shadow: none !important;
   border-color: transparent !important;
-}
-
-:focus {
-  /*outline-style: solid !important;
-  outline-color: #3887fd !important;
-  outline-width: medium !important;*/
-  border-color: $accesibility-border-color !important;
-  box-shadow: 0 0 0 3.2px $accesibility-box-shadow-color !important;
-  outline: 0 !important;
 }
 
 #welcome{
@@ -81,6 +78,10 @@ $accesibility-box-shadow-color: rgba($color: #3887fd, $alpha: 1);
       .wrap-slider{
         .clidxboost-btn-check{
           border-radius: 100%;
+        }
+        .next,
+        .prev{
+          display: none;
         }
       }
     }
@@ -153,6 +154,21 @@ body.using-mouse{
       }
     }
   }
+
+  .wrap-result,
+  #wrap-result{
+    .result-search,
+    #result-search{
+      >li{
+        .wrap-slider{
+          .next,
+          .prev{
+            display: block;
+          }
+        }
+      }
+    }
+  } 
 }
 
 /*RESETEANDO ESTILOS CHOTOS*/

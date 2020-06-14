@@ -74,7 +74,7 @@ function genMultiSlider(element){
 	    	if($bulletBtn.length){
 					$bulletBtn.each(function() {
 						$a += 1;
-						$(this).text($a);
+						$(this).text('View Slide '+$a);
 					});
 	    	}
 	    }
@@ -182,20 +182,20 @@ function idx_slider_html(info_item,type){
                 html_response.push('</ul>');
 
                 if (info_item.gallery.length>1){
-	                html_response.push('<button class="prev flex-slider-prev" aria-label="Next"><span class="clidxboost-icon-arrow-select"></span></button>');
-	                html_response.push('<button class="next flex-slider-next" aria-label="Prev"><span class="clidxboost-icon-arrow-select"></span></button>');
+	                html_response.push('<button class="prev flex-slider-prev" aria-label="Next" tab-index="-1"><span class="clidxboost-icon-arrow-select"></span></button>');
+	                html_response.push('<button class="next flex-slider-next" aria-label="Prev" tab-index="-1"><span class="clidxboost-icon-arrow-select"></span></button>');
                 }
 
                 if (info_item.status!='2') {
 	                if (info_item.is_favorite==1){
-	                	html_response.push('<button class="clidxboost-btn-check" aria-label="Remove Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="'+info_item.token_alert+'"></span></button>');
+	                	html_response.push('<button class="clidxboost-btn-check" aria-label="Remove '+info_item.address_short+' of Favorites"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list active" data-alert-token="'+info_item.token_alert+'"></span></button>');
 	                }else{
-	                	html_response.push('<button class="clidxboost-btn-check" aria-label="Add Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>');
+	                	html_response.push('<button class="clidxboost-btn-check" aria-label="Add '+info_item.address_short+' to Favorite"><span class="flex-favorite-btn clidxboost-icon-check clidxboost-icon-check-list"></span></button>');
 	                }
                 }
-
+                
               html_response.push('</div>');
-              html_response.push('<a class="ib-view-detailt" href="'+slug_post+'" rel="nofollow">'+word_translate.details+'</a>');
+              html_response.push('<a class="ib-view-detailt" href="'+slug_post+'" rel="nofollow">'+word_translate.details+' of '+info_item.address_short+'</a>');
             html_response.push('</li>');
           html_response.push('</ul>');
           return html_response.join('');
