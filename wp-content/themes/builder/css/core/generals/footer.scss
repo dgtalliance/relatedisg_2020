@@ -31,8 +31,13 @@
         transition: all .4s;
         background-color: #a1a1a1;
         border-radius: 3px;
+        text-indent: -999999px;
         span{
           display: none;
+        }
+
+        &:before{
+          text-indent: 0;
         }
   
         &:hover,

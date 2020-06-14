@@ -16,38 +16,38 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
           <div class="ms-social">
             <?php if (!empty($flex_idx_info["social"]["facebook_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["facebook_social_url"]; ?>"
-                class="ms-link idx-icon-facebook" title="Navigate to Facebook" target="_blank" 
-                rel="nofollow"><span>Facebook</span></a>
+                class="ms-link idx-icon-facebook" title="Facebook" target="_blank" 
+                rel="nofollow">Navigate to Facebook</span></a>
             <?php endif; ?>
             <?php if (!empty($flex_idx_info["social"]["twitter_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["twitter_social_url"]; ?>"
-                class="ms-link idx-icon-twitter" title="Navigate to Twitter" target="_blank"
-                rel="nofollow"><span>Twitter</span></a>
+                class="ms-link idx-icon-twitter" title="Twitter" target="_blank"
+                rel="nofollow">Navigate to Twitter</a>
             <?php endif; ?>
             <?php if (!empty($flex_idx_info["social"]["gplus_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["gplus_social_url"]; ?>"
-                class="ms-link idx-icon-google-plus" title="Navigate to Google+" target="_blank"
-                rel="nofollow"><span>Google+</span></a>
+                class="ms-link idx-icon-google-plus" title="Google+" target="_blank"
+                rel="nofollow">Navigate to Google+</a>
             <?php endif; ?>
             <?php if (!empty($flex_idx_info["social"]["youtube_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["youtube_social_url"]; ?>"
-                class="ms-link idx-icon-youtube-logo" title="Navigate to Youtube" target="_blank"
-                rel="nofollow"><span>YouTube</span></a>
+                class="ms-link idx-icon-youtube-logo" title="Youtube" target="_blank"
+                rel="nofollow">Navigate to Youtube</a>
             <?php endif; ?>
             <?php if (!empty($flex_idx_info["social"]["instagram_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["instagram_social_url"]; ?>"
-                class="ms-link idx-icon-instagram" title="Navigate to Instagram" target="_blank"
-                rel="nofollow"><span>Instagram</span></a>
+                class="ms-link idx-icon-instagram" title="Instagram" target="_blank"
+                rel="nofollow">Navigate to Instagram</a>
             <?php endif; ?>
             <?php if (!empty($flex_idx_info["social"]["linkedin_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["linkedin_social_url"]; ?>"
-                class="ms-link idx-icon-linkedin2" title="Navigate to Linked In" target="_blank"
-                rel="nofollow"><span>Linked In</span></a>
+                class="ms-link idx-icon-linkedin2" title="Linked In" target="_blank"
+                rel="nofollow">Navigate to Linked In</a>
             <?php endif; ?>
             <?php if (!empty($flex_idx_info["social"]["pinterest_social_url"])): ?>
               <a href="<?php echo $flex_idx_info["social"]["pinterest_social_url"]; ?>"
-                class="ms-link idx-icon-pinterest-p" title="Navigate to Pinterest" target="_blank"
-                rel="nofollow"><span>Pinterest</span></a>
+                class="ms-link idx-icon-pinterest-p" title="Pinterest" target="_blank"
+                rel="nofollow">Navigate to Pinterest</a>
             <?php endif; ?>
           </div>
           
