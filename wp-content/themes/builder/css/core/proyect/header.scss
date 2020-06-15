@@ -94,6 +94,16 @@
     letter-spacing: 1px;
     position: relative;
     display: block;
-    width: auto;
+		width: auto;
+		background-color: transparent;
+		&:after{
+			content: "\e90c";
+			font-family: "idx-icons"!important;
+			font-size: 8px;
+			display: inline-block;
+			margin-left: 8px;
+			position: relative;
+			top: -2px;
+		}
 	}
 }
