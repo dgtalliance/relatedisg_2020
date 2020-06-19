@@ -752,48 +752,93 @@ global $flex_idx_info, $flex_idx_lead;
           </p>
           <div class="form_content">
             <form id="form-email-friend" class="iboost-secured-recaptcha-form" method="post">
-              <?php if (isset($_GET['ibref']) && !empty($_GET['ibref'])) : ?>
+              <?php 
+              $is_agent=false;
+              if (isset($_GET['ibref']) && !empty($_GET['ibref'])) : 
+                $is_agent=true; ?>
                 <input type="hidden" name="registration_key" value="<?php echo strip_tags($_GET['ibref']); ?>" />
               <?php endif; ?>
               <?php
               global $wp, $post;
               $wp_request = $wp->request;
               $wp_request_exp = explode('/', $wp_request);
-              ?>
-              <input type="hidden" name="share_permalink" value="<?php echo $flex_idx_info["website_url"]; ?>/<?php echo $wp_request; ?>">
-              <?php if (isset($wp_request_exp[0]) && $wp_request_exp[0] === 'building') : ?>
-                <input type="hidden" name="share_type" value="building">
-                <input type="hidden" name="building_ID" value="<?php echo get_post_meta(get_the_ID(), '_flex_building_page_id', true); ?>">
-              <?php elseif (isset($wp_request_exp[0]) && $wp_request_exp[0] === 'property') :
-                list($page, $slug) = $wp_request_exp;
 
-                if (strstr($slug, '-rx-')) {
-                  $exp_slug = explode('-', $slug);
-                  $mls_num  = 'rx-' . end($exp_slug);
-                } else {
-                  $exp_slug = explode('-', $slug);
-                  $mls_num  = end($exp_slug);
-                }
+              if($is_agent){ ?>
 
-                $type_lookup = 'active';
+                  <input type="hidden" name="share_permalink" value="<?php echo $flex_idx_info["website_url"]; ?>/<?php echo $wp_request; ?>">
+                  <?php if (isset($wp_request_exp[1]) && $wp_request_exp[1] === 'building') { ?>
+                    <input type="hidden" name="share_type" value="building">
+                    <input type="hidden" name="building_ID" value="<?php echo get_post_meta(get_the_ID(), '_flex_building_page_id', true); ?>">
+                  <?php }elseif (isset($wp_request_exp[1]) && $wp_request_exp[1] === 'property') {
+                    list($path_agent, $page, $slug) = $wp_request_exp;
 
-                if (preg_match('/^[sold\-(.*)]+/', $slug)) {
-                  $type_lookup = 'sold';
-                } else if (preg_match('/^[rent\-(.*)]+/', $slug)) {
-                  $type_lookup = 'rent';
-                } else if (preg_match('/^[pending\-(.*)]+/', $slug)) {
-                  $type_lookup = 'pending';
-                } else {
-                  $type_lookup = 'active';
-                }
-              ?>
-<fieldset>
-                <legend><?php echo __('Email to a friend', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
-                <input type="hidden" name="share_type" value="property">
-                <input type="hidden" name="mls_number" value="<?php echo $mls_num; ?>">
-                <input type="hidden" name="status" value="">
-                <input type="hidden" name="type_property" value="<?php echo $type_lookup; ?>">
-              <?php endif; ?>
+                    if (strstr($slug, '-rx-')) {
+                      $exp_slug = explode('-', $slug);
+                      $mls_num  = 'rx-' . end($exp_slug);
+                    } else {
+                      $exp_slug = explode('-', $slug);
+                      $mls_num  = end($exp_slug);
+                    }
+
+                    $type_lookup = 'active';
+
+                    if (preg_match('/^[sold\-(.*)]+/', $slug)) {
+                      $type_lookup = 'sold';
+                    } else if (preg_match('/^[rent\-(.*)]+/', $slug)) {
+                      $type_lookup = 'rent';
+                    } else if (preg_match('/^[pending\-(.*)]+/', $slug)) {
+                      $type_lookup = 'pending';
+                    } else {
+                      $type_lookup = 'active';
+                    }
+                  ?>
+                  <fieldset>
+                    <legend><?php echo __('Email to a friend', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
+                    <input type="hidden" name="share_type" value="property">
+                    <input type="hidden" name="mls_number" value="<?php echo $mls_num; ?>">
+                    <input type="hidden" name="status" value="">
+                    <input type="hidden" name="type_property" value="<?php echo $type_lookup; ?>">
+                  <?php }
+
+              }else{ ?>
+
+                  <input type="hidden" name="share_permalink" value="<?php echo $flex_idx_info["website_url"]; ?>/<?php echo $wp_request; ?>">
+                  <?php if (isset($wp_request_exp[0]) && $wp_request_exp[0] === 'building') { ?>
+                    <input type="hidden" name="share_type" value="building">
+                    <input type="hidden" name="building_ID" value="<?php echo get_post_meta(get_the_ID(), '_flex_building_page_id', true); ?>">
+                  <?php }elseif (isset($wp_request_exp[0]) && $wp_request_exp[0] === 'property') {
+                    list($page, $slug) = $wp_request_exp;
+
+                    if (strstr($slug, '-rx-')) {
+                      $exp_slug = explode('-', $slug);
+                      $mls_num  = 'rx-' . end($exp_slug);
+                    } else {
+                      $exp_slug = explode('-', $slug);
+                      $mls_num  = end($exp_slug);
+                    }
+
+                    $type_lookup = 'active';
+
+                    if (preg_match('/^[sold\-(.*)]+/', $slug)) {
+                      $type_lookup = 'sold';
+                    } else if (preg_match('/^[rent\-(.*)]+/', $slug)) {
+                      $type_lookup = 'rent';
+                    } else if (preg_match('/^[pending\-(.*)]+/', $slug)) {
+                      $type_lookup = 'pending';
+                    } else {
+                      $type_lookup = 'active';
+                    }
+                  ?>
+                  <fieldset>
+                    <legend><?php echo __('Email to a friend', IDXBOOST_DOMAIN_THEME_LANG); ?></legend>
+                    <input type="hidden" name="share_type" value="property">
+                    <input type="hidden" name="mls_number" value="<?php echo $mls_num; ?>">
+                    <input type="hidden" name="status" value="">
+                    <input type="hidden" name="type_property" value="<?php echo $type_lookup; ?>">
+                  <?php }
+              
+              } ?>
+
               <input type="hidden" name="action" value="flex_share_with_friend">
               <div class="gform_body">
                 <ul class="gform_fields">

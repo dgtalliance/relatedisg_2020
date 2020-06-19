@@ -181,7 +181,8 @@ if (!function_exists("ib_lead_submission_buy_xhr_fn")) {
     {
         $response = [];
         $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        // $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
@@ -220,7 +221,8 @@ if (!function_exists("ib_lead_submission_rent_xhr_fn")) {
     {
         $response = [];
         $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        // $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
@@ -259,7 +261,8 @@ if (!function_exists("ib_lead_submission_sell_xhr_fn")) {
     {
         $response = [];
         $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        // $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
@@ -909,7 +912,7 @@ if (!function_exists('flex_share_with_friend_xhr_fn')) {
         $access_token = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $permalink     = isset($_POST['share_permalink']) ? trim(strip_tags($_POST['share_permalink'])) : '';
-        $share_type    = isset($_POST['share_type']) ? trim(strip_tags($_POST['share_type'])) : null;
+        $share_type    = isset($_POST['share_type']) ? trim(strip_tags($_POST['share_type'])) : 'property';
         $building_ID   = isset($_POST['building_ID']) ? trim(strip_tags($_POST['building_ID'])) : null;
         $mls_num       = isset($_POST['mls_num']) ? trim(strip_tags($_POST['mls_num'])) : null;
         $type_property = isset($_POST['type_property']) ? trim(strip_tags($_POST['type_property'])) : null;
@@ -987,7 +990,7 @@ if (!function_exists('flex_idx_get_alert_lead_xhr_fn')) {
         $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
-        $token_alert = isset($_POST["token_alert"]) ?  $_POST["token_alert"] : '';       
+        $token_alert = isset($_POST["token_alert"]) ?  $_POST["token_alert"] : '';
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
         $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
         $agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
@@ -995,13 +998,13 @@ if (!function_exists('flex_idx_get_alert_lead_xhr_fn')) {
         $params = [
             "access_token" => $access_token,
             "lead_token" => $lead_token,
-            "token_alert" => $token_alert,           
+            "token_alert" => $token_alert,
             "client_ip" => $client_ip,
             "url_referer" => $referer,
             "url_origin" => $origin,
             "user_agent" => $agent
         ];
-        
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_VERIFY_CREDENTIALS_ALERT);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -1011,17 +1014,15 @@ if (!function_exists('flex_idx_get_alert_lead_xhr_fn')) {
 
         $output = curl_exec($ch);
         curl_close($ch);
-        
+
         $response = @json_decode($output, true);
 
-        if ( empty($response) || !is_array($response) ) {
-            $response= ['status'=> false ];
+        if (empty($response) || !is_array($response)) {
+            $response = ['status' => false];
         }
 
         wp_send_json($response);
         exit;
-
-
     }
 }
 
@@ -1035,7 +1036,7 @@ if (!function_exists('alert_lead_update_preference_xhr_fn')) {
         $access_token = flex_idx_get_access_token();
         $lead_token = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $client_ip = get_client_ip_server();
-        
+
         $referer    = isset($_SERVER['HTTP_REFERER']) ? trim(strip_tags($_SERVER['HTTP_REFERER'])) : '';
         $origin     = isset($_SERVER['HTTP_HOST']) ? trim(strip_tags($_SERVER['HTTP_HOST'])) : '';
         $agent = isset($_SERVER['HTTP_USER_AGENT']) ? trim(strip_tags($_SERVER['HTTP_USER_AGENT'])) : '';
@@ -1069,7 +1070,7 @@ if (!function_exists('alert_lead_update_preference_xhr_fn')) {
             "search_filter_ID" => $search_filter_ID,
 
         ];
-        
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, FLEX_IDX_API_ALERT_UPDATE_LEAD);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -1079,13 +1080,11 @@ if (!function_exists('alert_lead_update_preference_xhr_fn')) {
 
         $output = curl_exec($ch);
         curl_close($ch);
-        
+
         $response = json_decode($output, true);
 
         wp_send_json($response);
         exit;
-
-
     }
 }
 
@@ -1617,7 +1616,7 @@ if (!function_exists('is_agent_custompage')) {
         $agent_custompage = null;
 
         if (count($current_path_exp) >= 2) {
-            if (in_array($current_path_exp[1], ['search','listings','sold-listings'], true)) {
+            if (in_array($current_path_exp[1], ['search', 'listings', 'sold-listings'], true)) {
                 $agent_custompage = $current_path_exp[0];
             }
         }
@@ -1734,12 +1733,12 @@ if (!function_exists('flex_idx_get_info')) {
                 }
                 */
 
-                if ( ! is_wp_error($request) &&  (200 === wp_remote_retrieve_response_code($request)) ) {
-                    $response = wp_remote_retrieve_body( $request );
+                if (!is_wp_error($request) &&  (200 === wp_remote_retrieve_response_code($request))) {
+                    $response = wp_remote_retrieve_body($request);
                     $response = empty($response) ? [] : json_decode($response, true);
 
                     $output['agent']['force_registration'] = isset($response['force_registration']) ? (int) $response['force_registration'] : 0;
-                    $output['agent']['force_registration_forced'] = isset($response['force_registration_forced']) ? (boolean) $response['force_registration_forced'] : false;
+                    $output['agent']['force_registration_forced'] = isset($response['force_registration_forced']) ? (bool) $response['force_registration_forced'] : false;
                     $output['agent']['signup_left_clicks'] = isset($response['signup_left_clicks']) ? $response['signup_left_clicks'] : null;
                 }
             }
@@ -3093,9 +3092,9 @@ if (!function_exists('flex_idx_connect_fn')) {
 
             foreach ($response['active_agents'] as $idx_agent) {
                 if (in_array($idx_agent['id'], $wp_agents)) { // trigger to update agent info
-                   $fetch_post_ID = (int) $wpdb->get_var(sprintf("select post_id from {$wpdb->postmeta} where meta_key = '_flex_agent_id' AND meta_value = %d LIMIT 1", $idx_agent['id']));
+                    $fetch_post_ID = (int) $wpdb->get_var(sprintf("select post_id from {$wpdb->postmeta} where meta_key = '_flex_agent_id' AND meta_value = %d LIMIT 1", $idx_agent['id']));
 
-                   if ($fetch_post_ID > 0) {
+                    if ($fetch_post_ID > 0) {
                         wp_update_post([
                             'ID' => $fetch_post_ID,
                             'post_title' => $idx_agent['full_name'],
@@ -3121,11 +3120,11 @@ if (!function_exists('flex_idx_connect_fn')) {
                         update_post_meta($fetch_post_ID, '_flex_agent_email', $idx_agent['contact_email']);
                         update_post_meta($fetch_post_ID, '_flex_agent_registration_key', $idx_agent['registration_key']);
                         update_post_meta($fetch_post_ID, '_flex_agent_modified_in', $idx_agent['modified_in']);
-                   }
+                    }
 
                     continue;
                 }
-                
+
                 // trigger to insert new agent
                 $wp_idx_agent = wp_insert_post(array(
                     'post_title' => $idx_agent['full_name'],
@@ -4480,7 +4479,8 @@ if (!function_exists('flex_idx_favorite_xhr_fn')) {
         global $wpdb, $flex_idx_info, $flex_idx_lead;
         $response = array();
         $has_registration_key = isset($_POST['ibref']) ? trim(strip_tags($_POST['ibref'])) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        // $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $type_action    = isset($_POST['type_action']) ? trim(strip_tags($_POST['type_action'])) : '';
         $mls_num        = isset($_POST['mls_num']) ? trim(strip_tags($_POST['mls_num'])) : null;
@@ -4534,6 +4534,7 @@ if (!function_exists('flex_idx_favorite_xhr_fn')) {
                         'type_property' => 1,
                         'token_alert'   => $response_alerts['token_wp_user_client'],
                     ),
+                    'has_registration_key' => $has_registration_key
                 );
                 $sendParams['data']['type'] = 'add';
                 $ch = curl_init();
@@ -4712,7 +4713,8 @@ if (!function_exists('idxboost_contact_inquiry_fn')) {
         $url_origin = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field($_SERVER['HTTP_HOST']) : '';
         $user_agent          = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field($_SERVER['HTTP_USER_AGENT']) : '';
         $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-        $access_token = flex_idx_get_access_token($has_registration_key);
+        // $access_token = flex_idx_get_access_token($has_registration_key);
+        $access_token = flex_idx_get_access_token();
         $lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
         $tags = isset($_POST["ib_tags"]) ? trim(strip_tags($_POST["ib_tags"])) : "";
         $recaptcha_response = isset($_POST["recaptcha_response"]) ? trim(strip_tags($_POST["recaptcha_response"])) : "";
@@ -4887,7 +4889,8 @@ function filter_search_recent_sales_xhr_fn()
     if (!empty($_POST['limit'])) $limit    = $_POST['limit'];
     else     $limit    = 'default';
     $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-    $access_token = flex_idx_get_access_token($has_registration_key);
+    // $access_token = flex_idx_get_access_token($has_registration_key);
+    $access_token = flex_idx_get_access_token();
     $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
     $flex_credentials_exp  = explode('|', $flex_lead_credentials);
     $ip_address          = get_client_ip_server();
@@ -5014,7 +5017,7 @@ if (!function_exists('ib_slider_filter_regular_xhr_fn')) {
             'flex_credentials' => $flex_lead_credentials
         );
 
-        $endpointFilter = FLEX_IDX_API_MARKET;
+        $endpointFilter = FLEX_IDX_API_MARKET_v2;
         if ($type_filter == '2') {
             $endpointFilter = FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
         } elseif ($type_filter == '1') {
@@ -5143,7 +5146,7 @@ if (!function_exists('idx_exclusive_operation_slider_xhr_fn')) {
             'flex_credentials' => $flex_lead_credentials
         );
 
-        $endpointFilter = FLEX_IDX_API_MARKET;
+        $endpointFilter = FLEX_IDX_API_MARKET_v2;
         if ($type == '2') {
             $endpointFilter = FLEX_IDX_API_MARKET_EXCLUSIVE_LISTINGS;
         } elseif ($$type == '1') {
@@ -5170,7 +5173,8 @@ function filter_search_exclusive_listing_xhr_fn()
     if (!empty($_POST['limit'])) $limit    = $_POST['limit'];
     else     $limit    = 'default';
     $has_registration_key = isset($_POST['registration_key']) ? sanitize_text_field($_POST['registration_key']) : null;
-    $access_token = flex_idx_get_access_token($has_registration_key);
+    // $access_token = flex_idx_get_access_token($has_registration_key);
+    $access_token = flex_idx_get_access_token();
     $flex_lead_credentials = isset($_COOKIE['ib_lead_token']) ? ($_COOKIE['ib_lead_token']) : '';
     $flex_credentials_exp  = explode('|', $flex_lead_credentials);
     $ip_address          = get_client_ip_server();
@@ -5299,7 +5303,7 @@ function flex_idx_filter_page_xhr_fn()
         $enpoint = FLEX_IDX_API_TRACK_PROPERTY_AGENT_OR_OFFICE;
         $filter_listing_type = $_POST['filter_panel_type_a'];
     } else {
-        $enpoint = FLEX_IDX_API_MARKET;
+        $enpoint = FLEX_IDX_API_MARKET_v2;
     }
     if ('' != $filter_token_ID) {
         $filter_listing_type = 0;
