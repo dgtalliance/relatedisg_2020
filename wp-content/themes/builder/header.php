@@ -114,8 +114,8 @@
             <div class="ms-menu-responsive-bottom">
               <ul class="actions">
                 <li>
-                  <a href="/login" class="btn-action js-btn-signup" title="Sign Up">Sign Up</a>
-                  <a href="/register" class="btn-action" title="Register">Register</a>
+                  <a href="javascript:void(0)" class="btn-action js-btn-signup" title="Sign Up">Sign Up</a>
+                  <a href="javascript:void(0)" class="btn-action" title="Register">Register</a>
                 </li>
                 <li>
                   <a class="btn-action btn-action-alt" href="tel:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>" title="Contact phone number:<?php echo preg_replace('/[^\d+]/', '', $flex_idx_info['agent']['agent_contact_phone_number']); ?>"><?php echo __('CALL US', IDXBOOST_DOMAIN_THEME_LANG); ?></a>
