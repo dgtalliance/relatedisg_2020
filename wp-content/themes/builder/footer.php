@@ -174,7 +174,7 @@ $idx_contact_phone = isset($flex_idx_info['agent']['agent_contact_phone_number']
     <script src="<?php echo get_template_directory_uri(); ?>/js/dgt/dgt-project-master.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/js/webfont.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/js/project.min.js"></script>
-    <script data-account="3JesWDGb4y" src="https://cdn.userway.org/widget.js"></script>
+    <script data-account="hzfouiAjm9" src="https://cdn.userway.org/widget.js"></script>
 
     <script>
     

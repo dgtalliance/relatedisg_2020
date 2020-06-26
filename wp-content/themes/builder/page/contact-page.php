@@ -92,7 +92,7 @@ while ( have_posts() ) : the_post(); ?>
           <address class="ms-address">2875 NE 191st Street <span>Suite 200</span> Aventura, FL 33180</address>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3059326365">305.932.6365</a></span>
-          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/2875+NE+191st+St,+Aventura,+FL+33180,+EE.+UU./@25.9528206,-80.1455824,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9ac5802f39751:0x63ed2f69411892ab!8m2!3d25.9528158!4d-80.1433937" class="ms-link" target="_blank">View on map</a></div>
+          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty+-+Aventura/@25.9528388,-80.1456437,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9ac5802e96c31:0x3a93fe660acdb9b0!8m2!3d25.952834!4d-80.143455" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
 
@@ -102,7 +102,7 @@ while ( have_posts() ) : the_post(); ?>
           <address class="ms-address">75 SE 6th Street <span>Suite 101</span> Miami, FL 33131</address>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3053511818">305.351.1818</a></span>
-          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/75+SE+6th+St+Ste+101,+Miami,+FL+33131,+EE.+UU./@25.7685451,-80.1935038,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b68333642001:0x28d2ef373eee5e00!8m2!3d25.7685403!4d-80.1913151" class="ms-link" target="_blank">View on map</a></div>
+          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty/@25.7683552,-80.1934321,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b68333c3d3b3:0x43c0031dc9de9bc9!8m2!3d25.7683504!4d-80.1912434" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
 
@@ -112,7 +112,7 @@ while ( have_posts() ) : the_post(); ?>
           <address class="ms-address">178 Giralda Avenue <span>2nd Floor</span> Coral Gables, FL 33134</address>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3057749522">305.774.9522</a></span>
-          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/178+Giralda+Ave+2nd+Floor,+Coral+Gables,+FL+33134,+EE.+UU./@25.7511757,-80.2605766,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b799c09a1ff3:0x31b6fa7819117572!8m2!3d25.7511709!4d-80.2583879" class="ms-link" target="_blank">View on map</a></div>
+          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/178+Giralda+Ave,+Coral+Gables,+FL+33134/@25.7511709,-80.2605766,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b799c09a1ff3:0x53d2cdf8e8b103e1!8m2!3d25.7511709!4d-80.2583879" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
 
@@ -122,17 +122,17 @@ while ( have_posts() ) : the_post(); ?>
           <address class="ms-address">350 NE 24th Street <span>Suite 103</span> Miami, FL 33137</address>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3053774500">305.377.4500</a></span>
-          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/350+NE+24th+St+%23103,+Miami,+FL+33137,+EE.+UU./@25.7999208,-80.1910465,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b6aa6862cfff:0x6d76cab6d06bd6b0!8m2!3d25.799916!4d-80.1888578" class="ms-link" target="_blank">View on map</a></div>
+          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/Related+ISG+International+Realty/@25.8000568,-80.1908347,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b6aa5d64d8a3:0xf9a790cf2e45074e!8m2!3d25.800052!4d-80.188646" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
 
       <div class="ms-item">
         <div class="ms-info">
           <h2 class="ms-item-title">Fort Lauderdale</h2>
-          <address class="ms-address">123 Main Street <span>Suite 103</span> Fort Lauderdale, FL 33137</address>
+          <address class="ms-address">701 E Broward Blvd Suite B</span> Fort Lauderdale, FL 33137</address>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3059326365">305.932.6365</a></span>
-          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/Miami,+Florida+33137,+EE.+UU./@25.8140836,-80.1955645,14z/data=!3m1!4b1!4m8!1m2!2m1!1s123+Main+Street+Suite+103+Fort+Lauderdale,+FL+33137!3m4!1s0x88d9b1583facb0b7:0x2550135a862edc1d!8m2!3d25.8207159!4d-80.1819268" class="ms-link" target="_blank">View on map</a></div>
+          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty+-+Aventura/@25.9528388,-80.1456437,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9ac5802e96c31:0x3a93fe660acdb9b0!8m2!3d25.952834!4d-80.143455" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
 
@@ -143,7 +143,7 @@ while ( have_posts() ) : the_post(); ?>
           <span class="ms-temporal-br"></span>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3059085550">305.908.5550</a></span>
-          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/1528+Weston+Rd,+Weston,+FL+33326,+EE.+UU./@26.0997045,-80.3682624,17z/data=!3m1!4b1!4m5!3m4!1s0x88d90a01ca08a101:0x3bb39e8143bcc83f!8m2!3d26.0996997!4d-80.3660737" class="ms-link" target="_blank">View on map</a></div>
+          <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty+-+Weston/@26.0997477,-80.3682697,17z/data=!3m2!4b1!5s0x88d90a01d67ef9b5:0x99e993fd1fc953a!4m5!3m4!1s0x88d90a01d400ef0f:0x59cd5b025485f1dc!8m2!3d26.0997429!4d-80.366081" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
     </div>

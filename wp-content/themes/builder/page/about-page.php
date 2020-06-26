@@ -117,15 +117,6 @@ while ( have_posts() ) : the_post(); ?>
         <h4 class="ms-agent-stattus">Principal</h4>
       </li>
       <li>
-          <a href="<?php bloginfo('url');?>/leadership/alex-vidal/">
-            <div class="ms-wrap-img">
-                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_04-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Alex Vidal">
-            </div>
-          </a>
-        <h3 class="ms-agent-title">Alex Vidal</h3>
-        <h4 class="ms-agent-stattus">President</h4>
-      </li>
-      <li>
           <a href="<?php bloginfo('url');?>/leadership/alberto-carrillo/">
             <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_05-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Vice-President">
