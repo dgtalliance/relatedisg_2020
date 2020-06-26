@@ -123,7 +123,7 @@ while ( have_posts() ) : the_post(); ?>
             </div>
           </a>
         <h3 class="ms-agent-title">Alberto Carrillo</h3>
-        <h4 class="ms-agent-stattus">Vice President, RelatedISG International Realty</h4>
+        <h4 class="ms-agent-stattus">Vice President</h4>
       </li>
       <li>
           <a href="<?php bloginfo('url');?>/leadership/veronica-gorson/">
@@ -141,7 +141,7 @@ while ( have_posts() ) : the_post(); ?>
             </div>
           </a>
         <h3 class="ms-agent-title">Carolina Gerdts</h3>
-        <h4 class="ms-agent-stattus">Executive Vice President, RelatedISG International Realty</h4>
+        <h4 class="ms-agent-stattus">Executive Vice President</h4>
       </li>
       <li>
           <a href="<?php bloginfo('url');?>/leadership/liz-lopez/">
