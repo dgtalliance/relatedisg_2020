@@ -129,7 +129,7 @@ while ( have_posts() ) : the_post(); ?>
       <div class="ms-item">
         <div class="ms-info">
           <h2 class="ms-item-title">Fort Lauderdale</h2>
-          <address class="ms-address">701 E Broward Blvd <span>Suite B</span> <span>Fort Lauderdale,</span> FL 33137</address>
+          <address class="ms-address">701 E Broward Blvd <span>Suite B</span> Ft Lauderdale, FL 33137</address>
           <span class="ms-separator"></span>
           <span class="ms-phone">Phone <a href="tel:3059326365">305.932.6365</a></span>
           <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty+-+Aventura/@25.9528388,-80.1456437,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9ac5802e96c31:0x3a93fe660acdb9b0!8m2!3d25.952834!4d-80.143455" class="ms-link" target="_blank">View on map</a></div>
