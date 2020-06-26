@@ -19,7 +19,7 @@ get_header();
             Auberge <span>Fort Lauderdale</span>
           </h1>
           <img class="ms-img ms-lazy" alt="" data-real-type="image" 
-            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-03-compressor.jpg" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-01.jpg" 
             src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
         </div>
 
@@ -29,7 +29,7 @@ get_header();
             Hyde Beach House <span>Hollywood</span>
           </h1>
           <img class="ms-img ms-lazy" alt="" data-real-type="image" 
-            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-01-compressor.jpg" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-02.jpg" 
             src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
         </div>
 
@@ -40,7 +40,7 @@ get_header();
             <span>Miami</span>
           </h1>
           <img class="ms-img ms-lazy" alt="" data-real-type="image" 
-            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-01-compressor.jpg" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-03.jpg" 
             src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
         </div>
 
@@ -51,7 +51,7 @@ get_header();
             <span>Sunny Isles</span>
           </h1>
           <img class="ms-img ms-lazy" alt="" data-real-type="image" 
-            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-02-compressor.jpg" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-04.jpg" 
             src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
         </div>
 
@@ -61,7 +61,7 @@ get_header();
             W Residences <span>Fort Lauderdale</span>
           </h1>
           <img class="ms-img ms-lazy" alt="" data-real-type="image" 
-            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-04-compressor.jpg" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-05.jpg" 
             src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
         </div>
       </div>      
