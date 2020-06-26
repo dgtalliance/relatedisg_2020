@@ -12,27 +12,6 @@ get_header();
   <section class="ms-section ms-animate" id="welcome">    
     <div class="ms-slider">
       <div class="gs-container-slider" id="developments-welcome-slider">
-        <div class="ms-item">
-          <h2 class="ms-st-title">Exclusive Developments</h2>
-          <h1 class="ms-title">
-            Reach & Rise, <i>Residences at Brickell City Centre</i>
-            <span>Miami</span>
-          </h1>
-          <img class="ms-img ms-lazy" alt="" data-real-type="image" 
-            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-01-compressor.jpg" 
-            src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
-        </div>
-
-        <div class="ms-item">
-          <h2 class="ms-st-title">Exclusive Developments</h2>
-          <h1 class="ms-title">
-            Armani <i>Casa</i>
-            <span>Sunny Isles</span>
-          </h1>
-          <img class="ms-img ms-lazy" alt="" data-real-type="image" 
-            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-02-compressor.jpg" 
-            src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
-        </div>
 
         <div class="ms-item">
           <h2 class="ms-st-title">Exclusive Developments</h2>
@@ -47,7 +26,39 @@ get_header();
         <div class="ms-item">
           <h2 class="ms-st-title">Exclusive Developments</h2>
           <h1 class="ms-title">
-            Auberge <span>Fort Lauderdale</span>
+            Hyde Beach House <span>Hollywood</span>
+          </h1>
+          <img class="ms-img ms-lazy" alt="" data-real-type="image" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-01-compressor.jpg" 
+            src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
+        </div>
+
+        <div class="ms-item">
+          <h2 class="ms-st-title">Exclusive Developments</h2>
+          <h1 class="ms-title">
+            Reach & Rise, <i>Residences at Brickell City Centre</i>
+            <span>Miami</span>
+          </h1>
+          <img class="ms-img ms-lazy" alt="" data-real-type="image" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-01-compressor.jpg" 
+            src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
+        </div>
+
+        <div class="ms-item">
+          <h2 class="ms-st-title">Exclusive Developments</h2>
+          <h1 class="ms-title">
+            Armani/Casa
+            <span>Sunny Isles</span>
+          </h1>
+          <img class="ms-img ms-lazy" alt="" data-real-type="image" 
+            data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-02-compressor.jpg" 
+            src="<?php echo get_template_directory_uri(); ?>/images/temp.png">          
+        </div>
+
+        <div class="ms-item">
+          <h2 class="ms-st-title">Exclusive Developments</h2>
+          <h1 class="ms-title">
+            W Residences <span>Fort Lauderdale</span>
           </h1>
           <img class="ms-img ms-lazy" alt="" data-real-type="image" 
             data-img="<?php echo get_template_directory_uri(); ?>/images/developments/developments-banner-04-compressor.jpg" 
