@@ -16,9 +16,20 @@ while ( have_posts() ) : the_post(); ?>
 
   <section class="ms-section ms-animate" id="about-us">
     <h2 class="ms-st-title">About Us</h2>
-    <p>RelatedISG International Realty was founded in 2011 by International Sales Group owner Craig Studnicky, along with Jorge Perez, Chairman and CEO of Related Group.</p>
-    <p>The general realty group is represented by top-producing agents and is headed by Alex Vidal, president, and a 21-year industry leader. Growing quickly and now encompassing six offices across Miami-Dade and Broward counties, RelatedISG is an expanding leader in residential and developer sales, and has come into the forefront of the development world as well.</p>
-    <p>With extensive knowledge in every aspect of the field, the RelatedISG team has an outstanding track record of providing clients with exceptional and rewarding real estate experiences.</p>
+    <p>RelatedISG International Realty was founded in 2011 by International
+    Sales Group owner Craig Studnicky, along with Jorge Perez, Chairman and
+    CEO of Related Group.</p>
+
+    <p>The general realty group is represented by top-producing agents and is
+    headed by Craig Studnicky, CEO and president, and a 25-year industry
+    leader. Growing quickly and now encompassing six offices across Miami-
+    Dade and Broward counties, RelatedISG is an expanding leader in
+    residential and developer sales, and has come into the forefront of the
+    development world as well.</p>
+
+    <p>With extensive knowledge in every aspect of the field, the RelatedISG team
+    has an outstanding track record of providing clients with exceptional and
+    rewarding real estate experiences.</p>
   </section>
 
   <div class="ms-section ms-animate" id="time-line">
