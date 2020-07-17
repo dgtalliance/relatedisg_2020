@@ -68,12 +68,12 @@ while ( have_posts() ) : the_post(); ?>
             <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty/@25.7683552,-80.1934321,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b68333c3d3b3:0x43c0031dc9de9bc9!8m2!3d25.7683504!4d-80.1912434" class="ms-link" target="_blank">View on map</a></div>
             <div class="ms-agent-detail">
               <div class="ms-wrap-img">
-                <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_05-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-lazy" alt="Brickell">
+                <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_07-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-lazy" alt="Coral Gables">
               </div>
               <div class="ms-min-info">
-                <h3 class="ms-sb-title">Alberto Carrillo <span>Sales Manager</span></h3>
-                <a href="tel:3059754909" class="ms-phone">C 305.975.4909</a>
-                <a href="mailto:albert@relatedisg.com" class="ms-email">albert@relatedisg.com</a>
+                <h3 class="ms-sb-title">Liz Lopez <span>Sales Manager</span></h3>
+                <a href="tel:3057675589" class="ms-phone">C 305.767.5589</a>
+                <a href="mailto:liz@relatedisg.com" class="ms-email">liz@relatedisg.com</a>
               </div>
             </div>
           </div>
@@ -114,12 +114,12 @@ while ( have_posts() ) : the_post(); ?>
             <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/Related+ISG+International+Realty/@25.8000568,-80.1908347,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b6aa5d64d8a3:0xf9a790cf2e45074e!8m2!3d25.800052!4d-80.188646" class="ms-link" target="_blank">View on map</a></div>
             <div class="ms-agent-detail">
               <div class="ms-wrap-img">
-                <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_05-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-lazy" alt="Edgewater">
+                <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_07-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-lazy" alt="Coral Gables">
               </div>
               <div class="ms-min-info">
-                <h3 class="ms-sb-title">Alberto Carrillo <span>Sales Manager</span></h3>
-                <a href="tel:3059754909" class="ms-phone">C 305.975.4909</a>
-                <a href="mailto:albert@relatedisg.com" class="ms-email">albert@relatedisg.com</a>
+                <h3 class="ms-sb-title">Liz Lopez <span>Sales Manager</span></h3>
+                <a href="tel:3057675589" class="ms-phone">C 305.767.5589</a>
+                <a href="mailto:liz@relatedisg.com" class="ms-email">liz@relatedisg.com</a>
               </div>
             </div>
           </div>
