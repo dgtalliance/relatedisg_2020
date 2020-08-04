@@ -162,7 +162,7 @@ if ("idx-agents" === $post->post_type) {
     <div class="ms-wrap-section">
       <div class="ms-wrap-detail">
         <h2 class="ms-title">Sign up and power <span>your next move</span></h2>
-        <p>Claim your free RelatedISG account to save your favorite listings and searches, access listing details, and work with <?php echo $agent_full_info['info']['first_name'];?>.</p>
+        <p>Claim your free RelatedISG account to save your favorite listings and searches, access listing details, and work with <?php echo $agent_full_info['info']['first_name']; ?> <?php echo $agent_full_info['info']['last_name']; ?>.</p>
         <button class="ms-btn" aria-label="Sign Up">
           <span>Sign Up</span>
         </button>
