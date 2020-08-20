@@ -131,7 +131,7 @@ while ( have_posts() ) : the_post(); ?>
           </div>
           <div class="ms-info">
             <h2 class="ms-item-title">Fort Lauderdale</h2>
-            <address class="ms-address">701 E Broward Blvd • Suite B <span>Fort Lauderdale, FL 33137</span></address>
+            <address class="ms-address">701 E Broward Blvd • Suite B <span>Fort Lauderdale, FL 33301</span></address>
             <span class="ms-separator"></span>
             <span class="ms-phone">Phone • <a href="tel:3059326365">305.932.6365</a></span>
             <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/701+E+Broward+Blvd,+Fort+Lauderdale,+FL+33301/@26.1228086,-80.1381846,17z/data=!3m1!4b1!4m5!3m4!1s0x88d90053e9b11d41:0xf1bb125ff3b4f750!8m2!3d26.1228038!4d-80.1359959" class="ms-link" target="_blank">View on map</a></div>
