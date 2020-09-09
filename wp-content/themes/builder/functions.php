@@ -1990,3 +1990,51 @@ add_filter('wpe_heartbeat_allowed_pages', function ($pages) {
   $pages[] =  $pagenow;
   return $pages;
 });
+
+
+if (!function_exists('sc_lazy_videos')){
+  function sc_lazy_videos($atts) {
+    global $wpdb;
+
+        ob_start();
+        $list_pages=[];
+
+        $list_pages = $wpdb->get_results("SELECT post.ID,post.post_title,post.post_content FROM {$wpdb->posts} as post WHERE post.post_type='idx-videos' and post.post_status='publish' order by post.post_title asc;", ARRAY_A);
+        
+        if (!empty($list_pages) && is_array($list_pages) &&  count($list_pages)>0) {
+            $orderdvideos = array();
+            foreach ($list_pages as $temlist){
+                $temparray=array();
+                $datepub = get_post_meta($temlist['ID'],'idx_videopubdate',true);
+                $datepub1 = explode('-',$datepub);
+                // var_dump($datepub1);
+
+                $temparray[0] = $temlist;
+                $temparray[1] = mktime(0, 0, 0, (int)$datepub1[1], (int)$datepub1[2], (int)$datepub1[0]);
+                array_push($orderdvideos,$temparray);
+            }
+            $nueworder = usort($orderdvideos, function($a, $b) {
+                return $b[1] - $a[1];
+            });
+            ?>
+            
+              <div class="ms-slider ms-load-img" id="ms-video-page-slider">
+              <?php foreach ($orderdvideos as $value) {
+                  $value = $value[0];
+                  if (!empty($value['post_content']) && filter_var($value['post_content'], FILTER_VALIDATE_URL) != false ) { ?>
+                      <div class="ms-item">
+                          <div class="ms-wrap-img" data-real-type="youtube" data-img="<?php echo $value['post_content']; ?>"></div>
+                          <div class="ms-wrap-tit" style="height: 115px"><?php echo $value['post_title']; ?></div>
+                      </div>
+                  <?php
+                  }
+              } ?>
+              </div>
+
+        <?php } 
+
+    return ob_get_clean();
+
+  }
+  add_shortcode('lazy_videos', 'sc_lazy_videos' );
+}
