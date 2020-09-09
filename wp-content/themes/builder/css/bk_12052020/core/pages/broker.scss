@@ -114,13 +114,9 @@
       z-index: 2;
       position: relative;
 
-      @media screen and (max-width: 768px) {
-        flex-wrap: wrap;
-      }
-
       .ms-item{
-        padding: 0 7px 25px 7px;
-        width: 25.5%;
+        padding: 0 5px;
+        width: 25%;
         .ms-bt-item{
           width: 100%;
           .ms-icon-item{
@@ -206,19 +202,6 @@
               }
             }
 
-            &.ms-icon-crm-tutorial {              
-              &:before {
-                background-position: 0px -121px;
-                height: 40px;
-                width: 48px;
-                @media screen and (min-width: 1024px) {
-                  background-position: 0 -212px;
-                  height: 72px;
-                  width: 84px;
-                }
-              }
-            }
-
           }
         }
         
@@ -240,7 +223,7 @@
       }
 
       @media screen and (min-width: 640px) {
-        max-width: 570px;
+        max-width: 500px;
         margin: 0 -15px;
         .ms-item{
           padding: 0 15px;
@@ -263,7 +246,7 @@
       }
 
       @media screen and (min-width: 1024px) {
-        max-width: 800px;
+        max-width: 670px;
         .ms-item{
           .ms-bt-item{
             .ms-icon-item{
