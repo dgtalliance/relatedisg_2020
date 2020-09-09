@@ -3,7 +3,7 @@
 /*----------------------------------------------------------------------------------*/
 #broker-page{
   #welcome{
-    padding: 70px 0;
+    padding: 70px 0 50px;
     height: auto;
     min-height: auto;
     @media screen and (min-width: 640px) {
@@ -108,16 +108,17 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      max-width: 330px;
+      max-width: 380px;
       margin: 0 -5px;
-      width: 90%;
+      width: 100%;
       z-index: 2;
       position: relative;
       @media screen and (max-width: 639px) {
         flex-wrap: wrap;
+        padding-top: 20px;
       }
       .ms-item{
-        padding: 0 7px 25px 7px;
+        padding: 0 14px 25px 14px;
         width: 25.5%;
         .ms-bt-item{
           display: block;
@@ -166,7 +167,7 @@
 
             &.ms-icon-sumo {
               &:before {
-                background-position: 4px 6px;
+                background-position: 4px 7px;
                 @media screen and (min-width: 1024px) {
                   background-position: 4px 5px;
                 }
