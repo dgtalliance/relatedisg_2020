@@ -2000,7 +2000,7 @@ if (!function_exists('sc_lazy_videos')){
         $list_pages=[];
 
         $list_pages = $wpdb->get_results("SELECT post.ID,post.post_title,post.post_content FROM {$wpdb->posts} as post WHERE post.post_type='idx-videos' and post.post_status='publish' order by post.post_title asc;", ARRAY_A);
-        var_dump(list_pages);
+        var_dump($list_pages);
 
         if (!empty($list_pages) && is_array($list_pages) &&  count($list_pages)>0) {
             $orderdvideos = array();
