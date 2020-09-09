@@ -113,7 +113,7 @@
       width: 90%;
       z-index: 2;
       position: relative;
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 639px) {
         flex-wrap: wrap;
       }
       .ms-item{
@@ -208,11 +208,11 @@
 
             &.ms-icon-crm-tutorial {              
               &:before {
-                background-position: 0px -198px;
+                background-position: 0px -164px;
                 height: 40px;
                 width: 48px;
                 @media screen and (min-width: 1024px) {
-                  background-position: 0 -280px;
+                  background-position: 0 -285px;
                   height: 72px;
                   width: 84px;
                 }
