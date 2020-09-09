@@ -2007,9 +2007,10 @@ if (!function_exists('sc_lazy_videos')){
             foreach ($list_pages as $temlist){
                 $temparray=array();
                 $datepub = get_post_meta($temlist['ID'],'idx_videopubdate',true);
+                $videourl = get_post_meta($temlist['ID'],'idx-videos_video',true);
                 $datepub1 = explode('-',$datepub);
                 // var_dump($datepub1);
-
+                
                 $temparray[0] = $temlist;
                 $temparray[1] = mktime(0, 0, 0, (int)$datepub1[1], (int)$datepub1[2], (int)$datepub1[0]);
                 array_push($orderdvideos,$temparray);
@@ -2022,9 +2023,9 @@ if (!function_exists('sc_lazy_videos')){
               <div class="ms-slider ms-load-img" id="ms-video-page-slider">
               <?php foreach ($orderdvideos as $value) {
                   $value = $value[0];
-                  if (!empty($value['post_content']) && filter_var($value['post_content'], FILTER_VALIDATE_URL) != false ) { ?>
+                  if (!empty($videourl)) { ?>
                       <div class="ms-item">
-                          <div class="ms-wrap-img" data-real-type="youtube" data-img="<?php echo $value['post_content']; ?>"></div>
+                          <div class="ms-wrap-img" data-real-type="youtube" data-img="<?php echo $videourl; ?>"></div>
                           <div class="ms-wrap-tit" style="height: 115px"><?php echo $value['post_title']; ?></div>
                       </div>
                   <?php
