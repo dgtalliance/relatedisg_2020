@@ -2016,7 +2016,7 @@ if (!function_exists('sc_lazy_videos')){
                   if (!empty($value['post_content']) && filter_var($value['post_content'], FILTER_VALIDATE_URL) != false ) { ?>
                       <div class="ms-item">
                           <div class="ms-wrap-img" data-real-type="youtube" data-img="<?php echo $value['post_content']; ?>"></div>
-                          <div class="ms-wrap-tit" style="height: 80px"><?php echo $value['post_title']; ?></div>
+                          <div class="ms-wrap-tit" ><?php echo $value['post_title']; ?></div>
                       </div>
                   <?php
                   }
