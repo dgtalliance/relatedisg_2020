@@ -33,6 +33,8 @@
 	.ms-slider {
 	  position: relative;
 	  margin: 0 -10px;
+	  display: flex;
+    	flex-wrap: wrap;
 	  &:after {
 		content: '';
 		display: block;

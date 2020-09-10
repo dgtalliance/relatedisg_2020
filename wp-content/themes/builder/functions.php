@@ -1999,7 +1999,7 @@ if (!function_exists('sc_lazy_videos')){
         ob_start();
         $list_pages=[];
 
-        $list_pages = $wpdb->get_results("SELECT post.ID,post.post_title,post.post_content FROM {$wpdb->posts} as post WHERE post.post_type='idx-videos' and post.post_status='publish' order by post.post_title asc;", ARRAY_A);
+        $list_pages = $wpdb->get_results("SELECT post.ID,post.post_title,post.post_content,post.idx-videos_video,post.menu_order FROM {$wpdb->posts} as post WHERE post.post_type='idx-videos' and post.post_status='publish' order by post.menu_order asc;", ARRAY_A);
 
         if (!empty($list_pages) && is_array($list_pages) &&  count($list_pages)>0) {
             $orderdvideos = array();
@@ -2024,7 +2024,7 @@ if (!function_exists('sc_lazy_videos')){
                   $value = $value[0];
                   if (!empty($videourl)) { ?>
                       <div class="ms-item">
-                          <div class="ms-wrap-img" data-real-type="youtube" data-img="<?php echo $videourl; ?>"></div>
+                          <div class="ms-wrap-img" data-real-type="youtube" data-img="<?php echo $value['idx-videos_video']; ?>"></div>
                           <div class="ms-wrap-tit" style="height: 115px"><?php echo $value['post_title']; ?></div>
                       </div>
                   <?php
