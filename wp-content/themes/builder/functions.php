@@ -2000,23 +2000,16 @@ if (!function_exists('sc_lazy_videos')){
         $list_pages=[];
 
         $list_pages = $wpdb->get_results("SELECT post.ID,post.post_title,post.post_content,post.menu_order FROM {$wpdb->posts} as post WHERE post.post_type='idx-videos' and post.post_status='publish' order by post.menu_order asc;", ARRAY_A);
-        var_dump($list_pages);
+        /* var_dump($list_pages); */
+
+        
         if (!empty($list_pages) && is_array($list_pages) &&  count($list_pages)>0) {
             $orderdvideos = array();
             foreach ($list_pages as $temlist){
                 $temparray=array();
-                $datepub = get_post_meta($temlist['ID'],'idx_videopubdate',true);
-                $datepub1 = explode('-',$datepub);
-                // var_dump($datepub1);
-
                 $temparray[0] = $temlist;
-                $temparray[1] = mktime(0, 0, 0, (int)$datepub1[1], (int)$datepub1[2], (int)$datepub1[0]);
                 array_push($orderdvideos,$temparray);
-            }
-            $nueworder = usort($orderdvideos, function($a, $b) {
-                return $b[1] - $a[1];
-            });
-            ?>
+            }?>
             
               <div class="ms-slider ms-load-img" id="ms-video-page-slider">
               <?php foreach ($orderdvideos as $value) {
