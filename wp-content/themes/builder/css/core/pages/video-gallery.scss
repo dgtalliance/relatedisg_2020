@@ -17,6 +17,13 @@
 	  text-align: left;
 	  margin-bottom: 30px;
 	  text-align: center;
+	  font-weight: 600;
+	  font-family: "Tiempos Headline";
+	  span{
+		display: block;
+		font-weight: 300;
+    	font-style: italic;
+	  }
 	  @media screen and (min-width: 640px) {
 		font-size: 20px;
 	  }
