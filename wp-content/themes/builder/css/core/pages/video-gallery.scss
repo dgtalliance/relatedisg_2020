@@ -6,7 +6,7 @@
 	width: 90%;
 	max-width: 1530px;
 	.ms-title {
-	  font-size: 18px;
+	  font-size: 22px;
 	  font-weight: 100;
 	  width: 100%;
 	  display: block;
@@ -22,19 +22,24 @@
 	  span{
 		display: block;
 		font-weight: 300;
-    	font-style: italic;
+		font-style: italic;
+		padding: 12px;
 	  }
 	  @media screen and (min-width: 640px) {
-		font-size: 20px;
+		font-size: 28px;
+		padding-bottom: 35px;
 	  }
 	  @media screen and (min-width: 991px) {
 		font-size: 24px;
+		padding-bottom: 35px;
 	  }
 	  @media screen and (min-width: 1024px) {
 		font-size: 28px;
+		padding-bottom: 40px;
 	  }
 	  @media screen and (min-width: 1440px) {
 		font-size: 32px;
+		padding-bottom: 50px;
 	  }
 	}
 	.ms-slider {
