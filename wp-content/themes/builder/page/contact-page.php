@@ -101,7 +101,7 @@ while ( have_posts() ) : the_post(); ?>
           <h2 class="ms-item-title">Brickell</h2>
           <address class="ms-address">75 SE 6th Street <span>Suite 101</span> Miami, FL 33131</address>
           <span class="ms-separator"></span>
-          <span class="ms-phone">Phone <a href="tel:3053511818">305.351.1818</a></span>
+          <span class="ms-phone">Phone <a href="tel:7862207651">786.220.7651</a></span>
           <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty/@25.7683552,-80.1934321,17z/data=!3m1!4b1!4m5!3m4!1s0x88d9b68333c3d3b3:0x43c0031dc9de9bc9!8m2!3d25.7683504!4d-80.1912434" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
