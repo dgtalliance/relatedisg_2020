@@ -39,7 +39,7 @@ while ( have_posts() ) : the_post(); ?>
       <a href="/relatedisg-video-website-crm-tutorials/" class="ms-item" target="_blank">
         <div class="ms-bt-item">
           <span class="ms-icon-item ms-icon-crm-tutorial"></span>
-          <h2 class="ms-item-title">RelatedISG <span>CRM Tutorials</span></h2>
+          <h2 class="ms-item-title">RelatedISG <span>Website/CRM Tutorials</span></h2>
         </div>
       </a>
     </div>
