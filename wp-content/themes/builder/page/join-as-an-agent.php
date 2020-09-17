@@ -122,40 +122,40 @@ get_header();
             <p>RelatedISG offers all of your real estate and marketing apps in one place — the Broker Dashboard. From easy-to-use transaction coordination software and a custom marketing collateral platform, to an all-in-one CRM program, the Broker Dashboard is a one-stop-shop for the tech tools you need to succeed.</p>
           
 
-            <div class="ms-wrap-items">
-              <a href="https://www.brokersumo.com/login" class="ms-item" target="_blank">
+            <div class="ms-list-bs ms-img-xk">
+              <a href="https://www.brokersumo.com/login" class="ms-sb-item" target="_blank">
                 <div class="ms-bt-item">
                   <span class="ms-icon-item ms-icon-sumo"></span>
-                  <h2 class="ms-item-title">Broker <span>Sumo</span></h2>
+                  <h2 class="ms-bs-title">Broker <span>Sumo</span></h2>
                 </div>
               </a>
-              <a class="ms-item show-modal" href="javascript:void(0)" data-modal="comming_soon" rel="nofollow">
+              <a class="ms-sb-item show-modal" href="javascript:void(0)" data-modal="comming_soon" rel="nofollow">
                 <div class="ms-bt-item">
                   <span class="ms-icon-item ms-icon-app"></span>
-                  <h2 class="ms-item-title">RelatedISG <span>Mobile App</span></h2>
+                  <h2 class="ms-bs-title">RelatedISG <span>Mobile App</span></h2>
                 </div>
               </a>
-              <a href="https://relatedisgdesignstudio.com/" class="ms-item" target="_blank">
+              <a href="https://relatedisgdesignstudio.com/" class="ms-sb-item" target="_blank">
                 <div class="ms-bt-item">
                   <span class="ms-icon-item ms-icon-studio"></span>
-                  <h2 class="ms-item-title">RelatedISG <span>Design Studio</span></h2>
+                  <h2 class="ms-bs-title">RelatedISG <span>Design Studio</span></h2>
                 </div>
               </a>  
-              <a href="http://cpanel.staging.idxboost.com/" class="ms-item" target="_blank">
+              <a href="http://cpanel.staging.idxboost.com/" class="ms-sb-item" target="_blank">
                 <div class="ms-bt-item">
                   <span class="ms-icon-item ms-icon-crm"></span>
-                  <h2 class="ms-item-title">RelatedISG <span>CRM</span></h2>
+                  <h2 class="ms-bs-title">RelatedISG <span>CRM</span></h2>
                 </div>
               </a>
-              <a href="/relatedisg-video-website-crm-tutorials/" class="ms-item" target="_blank">
+              <a href="/relatedisg-video-website-crm-tutorials/" class="ms-sb-item" target="_blank">
                 <div class="ms-bt-item">
                   <span class="ms-icon-item ms-icon-crm-tutorial"></span>
-                  <h2 class="ms-item-title">RelatedISG <span>Website/CRM Tutorials</span></h2>
+                  <h2 class="ms-bs-title">RelatedISG <span>CRM</span></h2>
                 </div>
               </a>
-            </div>
-                  
-          
+
+            </div>   
+
           </div>
         </div>
       </div>
