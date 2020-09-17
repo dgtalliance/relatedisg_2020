@@ -212,6 +212,16 @@ get_header();
   </section>
 </main>
 
+<div class="overlay_modal ms-animate" id="comming_soon">
+  <div class="modal_cm">
+    <button data-id="comming_soon" class="close close-modal ib-close-mproperty" data-frame="modal_mobile">Close <span></span></button>
+    <div class="ms-wrap-message">
+      <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/logo_white.png" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-lazy" alt="Broker Dashboard">
+      <span class="ms-title">Comming Soon</span>
+    </div>
+  </div>
+  <div class="overlay_modal_closer" data-frame="modal_mobile" data-id="comming_soon"></div>
+</div>
 <?php endwhile; ?>
 
 <?php get_footer(); ?>
