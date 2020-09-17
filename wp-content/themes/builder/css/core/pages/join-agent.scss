@@ -8,15 +8,15 @@
     max-width: 100%;
     justify-content: center;
     flex-wrap: wrap;
-  }
-  @media screen and (min-width: 1024px) {
-    flex-wrap: initial;
+    @media screen and (min-width: 998px) {
+      flex-wrap: initial;
+    }
   }
 
   .ms-list-bs{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     margin-bottom: 20px;
     .ms-sb-item{
       margin-right: 14px;
