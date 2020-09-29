@@ -155,15 +155,6 @@ while ( have_posts() ) : the_post(); ?>
         <h4 class="ms-agent-stattus">Sales Manager</h4>
       </li>
       <li>
-          <a href="<?php bloginfo('url');?>/leadership/rowena-luna/">
-            <div class="ms-wrap-img">
-                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_08-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
-            </div>
-          </a>
-        <h3 class="ms-agent-title">Rowena Luna</h3>
-        <h4 class="ms-agent-stattus">Marketing Director</h4>
-      </li>
-      <li>
           <a href="<?php bloginfo('url');?>/leadership/tomas-sulichin/">
             <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/Tomas_Sulichin_Headshot.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
@@ -180,6 +171,15 @@ while ( have_posts() ) : the_post(); ?>
           </a>
         <h3 class="ms-agent-title">JC Caceres</h3>
         <h4 class="ms-agent-stattus"></h4>
+      </li>
+      <li>
+          <a href="<?php bloginfo('url');?>/leadership/rowena-luna/">
+            <div class="ms-wrap-img">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_08-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
+            </div>
+          </a>
+        <h3 class="ms-agent-title">Rowena Luna</h3>
+        <h4 class="ms-agent-stattus">Marketing Director</h4>
       </li>
     </ul>
   </section>
