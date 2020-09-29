@@ -161,7 +161,7 @@ while ( have_posts() ) : the_post(); ?>
             </div>
           </a>
         <h3 class="ms-agent-title">Tomas Sulichin</h3>
-        <h4 class="ms-agent-stattus"></h4>
+        <h4 class="ms-agent-stattus">President of the Commercial Division</h4>
       </li>
       <li>
           <a href="<?php bloginfo('url');?>/leadership/jc-caceres/">
@@ -170,7 +170,7 @@ while ( have_posts() ) : the_post(); ?>
             </div>
           </a>
         <h3 class="ms-agent-title">JC Caceres</h3>
-        <h4 class="ms-agent-stattus"></h4>
+        <h4 class="ms-agent-stattus">V.P. of Luxury, Sports & Entertainment Division</h4>
       </li>
       <li>
           <a href="<?php bloginfo('url');?>/leadership/rowena-luna/">
