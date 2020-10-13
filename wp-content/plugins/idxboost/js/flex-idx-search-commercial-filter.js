@@ -8085,7 +8085,7 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
 
   // Fixed filter in scroll
   var lastScroll = 0;
-  $(window).scroll(function () {
+  /*$(window).scroll(function () {
     let $currentScroll = $(this).scrollTop() + 86;
     if ($currentScroll > lastScroll) {
       if ($currentScroll >= $ibFilterContainer.position().top) {
@@ -8099,7 +8099,7 @@ if ("undefined" !== typeof style_map_idxboost && "" !== style_map_idxboost) {
       }
     }
     lastScroll = $currentScroll;
-  });
+  });*/
 
   // Close All filters with Matching BTN
   $ibMatchingbtn.on("click", function () {
