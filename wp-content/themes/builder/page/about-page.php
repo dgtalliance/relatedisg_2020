@@ -152,7 +152,7 @@ while ( have_posts() ) : the_post(); ?>
             </div>
           </a>
         <h3 class="ms-agent-title">Liz Lopez</h3>
-        <h4 class="ms-agent-stattus">Sales Manager</h4>
+        <h4 class="ms-agent-stattus">Vice President</h4>
       </li>
       <li>
           <a href="<?php bloginfo('url');?>/leadership/tomas-sulichin/">
