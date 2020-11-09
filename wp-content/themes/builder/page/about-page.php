@@ -172,17 +172,15 @@ while ( have_posts() ) : the_post(); ?>
         <h3 class="ms-agent-title">JC Caceres</h3>
         <h4 class="ms-agent-stattus">V.P. of Luxury, Sports & Entertainment Division</h4>
       </li>
-      <?php /*
       <li>
-          <a href="<?php bloginfo('url');?>/leadership/rowena-luna/">
+          <a href="<?php bloginfo('url');?>/leadership/sandra-arguello/">
             <div class="ms-wrap-img">
-                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/agent_08-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
+                <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/Sandra-Arguello.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Sandra Arguello">
             </div>
           </a>
-        <h3 class="ms-agent-title">Rowena Luna</h3>
-        <h4 class="ms-agent-stattus">Marketing Director</h4>
+        <h3 class="ms-agent-title">Sandra Arguello</h3>
+        <h4 class="ms-agent-stattus">Sr. Director of Marketing</h4>
       </li>
-      */ ?>
     </ul>
   </section>
 </main>
