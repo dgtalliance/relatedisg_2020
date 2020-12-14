@@ -37,7 +37,7 @@ while ( have_posts() ) : the_post(); ?>
           </div>
           <div class="ms-info">
             <h2 class="ms-item-title">Aventura</h2>
-            <address class="ms-address">2875 NE 191st Street • Suite 103 <span>Aventura, FL 33180</span></address>
+            <address class="ms-address">2875 NE 191st Street • Suite 200 <span>Aventura, FL 33180</span></address>
             <span class="ms-separator"></span>
             <span class="ms-phone">Phone • <a href="tel:3059326365">305.932.6365</a></span>
             <div class="ms-wrap-btn">
