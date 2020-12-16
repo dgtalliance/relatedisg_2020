@@ -56,7 +56,7 @@ while ( have_posts() ) : the_post(); ?>
           </div>
         </div>
 
-        <div class="ms-item">
+<!--         <div class="ms-item">
           <div class="ms-wrap-img">
             <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/offices/02-compressor.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" class="ms-lazy" alt="Brickell">
           </div>
@@ -77,7 +77,7 @@ while ( have_posts() ) : the_post(); ?>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="ms-item">
           <div class="ms-wrap-img">
