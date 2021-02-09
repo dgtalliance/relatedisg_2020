@@ -142,7 +142,7 @@ while ( have_posts() ) : the_post(); ?>
           <address class="ms-address">1528 Weston Road <span>Weston, FL 33326</span></address>
           <span class="ms-temporal-br"></span>
           <span class="ms-separator"></span>
-          <span class="ms-phone">Phone <a href="tel:3059085550">305.908.5550</a></span>
+          <span class="ms-phone">Phone <a href="tel:3059085550">954.908.5550</a></span>
           <div class="ms-wrap-btn"><a href="https://www.google.com/maps/place/RelatedISG+International+Realty+-+Weston/@26.0997477,-80.3682697,17z/data=!3m2!4b1!5s0x88d90a01d67ef9b5:0x99e993fd1fc953a!4m5!3m4!1s0x88d90a01d400ef0f:0x59cd5b025485f1dc!8m2!3d26.0997429!4d-80.366081" class="ms-link" target="_blank">View on map</a></div>
         </div>
       </div>
