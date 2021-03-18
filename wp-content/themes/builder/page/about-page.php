@@ -163,7 +163,7 @@ while ( have_posts() ) : the_post(); ?>
         <h3 class="ms-agent-title">Tomas Sulichin</h3>
         <h4 class="ms-agent-stattus">President of the Commercial Division</h4>
       </li>
-      <li>
+<!--       <li>
           <a href="<?php bloginfo('url');?>/leadership/jc-caceres/">
             <div class="ms-wrap-img">
                 <img class="ms-lazy" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/images/about/JC_Caceres_Headshot.jpg" src="<?php echo get_template_directory_uri(); ?>/images/temp.png" alt="Rowena Luna">
@@ -171,7 +171,7 @@ while ( have_posts() ) : the_post(); ?>
           </a>
         <h3 class="ms-agent-title">JC Caceres</h3>
         <h4 class="ms-agent-stattus">V.P. of Luxury, Sports & Entertainment Division</h4>
-      </li>
+      </li> -->
       <li>
           <a href="<?php bloginfo('url');?>/leadership/sandra-arguello/">
             <div class="ms-wrap-img">
